@@ -7,19 +7,24 @@ also it makes a new type object.
  */
 
 public class Game {
-    int howManyPlayers=0;
-    int howManyRounds=0;
-    ArrayList <Player> playerList;
-    Type type;
-
+    private int howManyPlayers;
+    private int howManyRounds;
+    private ArrayList <Player> playerList;
+    private Type type;
+/**
+ * Constructor
+ */
     public Game(){
         UserInteraction a = new UserInteraction();
-        if(howManyPlayers>0 && howManyPlayers<=2) {
-            playerList=new ArrayList<>();
-            for (int i = howManyPlayers; i > 0; i--) {
-                playerList.add(a.God());
-            }
+        howManyPlayers = a.HowManyOfYou();
+        howManyRounds = a.HowManyRounds();
+        String nameOfType = a.TypeOfGame();
+
+        playerList=new ArrayList<>();
+        for (int i = howManyPlayers; i > 0; i--) {
+            playerList.add(a.God());
         }
+        type = new Type(nameOfType);
     }
 
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * This class is the parent of the game types that are available.
  * It has an int that refers to the points that need to be added to the winner and it also has
@@ -6,7 +8,7 @@
 
 public class Type {
     int points;//xreiazetai;
-    Player winner;
+    ArrayList<Player> winners;
 
     public  Type(){
         //να προστεθει κωδικας!!
@@ -27,7 +29,7 @@ public class Type {
         }else if(nameOfGame == "Thermometer"){
             Thermometer thermometer = new Thermometer();
         }else{
-            runTimeError();
+            runTimeError(); //mhpws afth tha mpei sthn error pou tha einai kai gia tous elegxous?
         }
     }
 

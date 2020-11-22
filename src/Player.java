@@ -33,5 +33,9 @@ public class Player {
         return this.score;
     }
 
+    public void increaseScoreBy(int newPoints){
+        this.score+=newPoints;
+    }
+
 
 }

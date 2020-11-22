@@ -1,13 +1,18 @@
+/**
+ * This class represents a player and it stores his name and total score.
+ */
+
+
 public class Player {
     String nickname;
     int score;
 
-    private Player(String nickname){
+    public Player(String nickname){
         this.nickname=nickname;
         score=0;
     }
 
-    private Player(){
+    public Player(){
         this.nickname="phantomMan, he doesn't exist";
         score=0;
     }

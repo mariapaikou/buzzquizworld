@@ -1,15 +1,20 @@
+/**
+ * This class is the parent of the game types that are available.
+ * It has an int that refers to the points that need to be added to the winner and it also has
+ * a variable to save the winner of the round.
+ */
 
 public class Type {
     int points;//xreiazetai;
     Player winner;
 
-    protected  Type(){
+    public  Type(){
         //να προστεθει κωδικας!!
 
     }
 
 
-    private Type(String nameOfGame){
+    public Type(String nameOfGame){
         points=0;
         if(nameOfGame=="Right Answer"){
             RightAnswer rightAnswer = new RightAnswer();

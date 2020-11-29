@@ -83,6 +83,27 @@ public class UserInteraction {
 
     }
 
+    /**
+     * This function receives the game of choise and creates the object
+     * @param nameOfGame
+     */
+
+    public void Choise(String nameOfGame){
+        if(nameOfGame=="Right Answer"){
+            RightAnswer rightAnswer = new RightAnswer();
+        }else if(nameOfGame=="Timer"){
+            Timer timer= new Timer();
+        }else if(nameOfGame=="Bet"){
+            Bet bet = new Bet();
+        }else if(nameOfGame == "Quick Answer"){
+            QuickAnswer quickAnswer = new QuickAnswer();
+        }else if(nameOfGame == "Thermometer"){
+            Thermometer thermometer = new Thermometer();
+        }else{
+            runTimeError(); //mhpws afth tha mpei sthn error pou tha einai kai gia tous elegxous?
+        }
+    }
+
 
 
 

@@ -11,20 +11,45 @@ public class Game {
     private int howManyRounds;
     private ArrayList <Player> playerList;
     private Type type;
+
 /**
  * Constructor
  */
     public Game(){
+
         UserInteraction a = new UserInteraction();
         howManyPlayers = a.HowManyOfYou();
         howManyRounds = a.HowManyRounds();
         String nameOfType = a.TypeOfGame();
 
+
         playerList=new ArrayList<>();
         for (int i = howManyPlayers; i > 0; i--) {
             playerList.add(a.God());
         }
-        type = new Type(nameOfType);
+
+        if(nameOfType == "RightAnswer"){
+            type = new RightAnswer();
+        }else if(nameOfType == "Bet"){
+            type = new Bet();
+        }
+
     }
+
+    public void PlayTheGame(){
+        while(howManyRounds > 0){
+
+
+
+
+
+
+
+            howManyRounds--;
+        }
+    }
+
+
+
 
 }

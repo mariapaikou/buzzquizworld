@@ -8,15 +8,17 @@
 public class RightAnswer extends Type{
 
     public  RightAnswer(){
-        points = 1000;
+
     }
 
     /**
      * Function addPoints checks for winners in the current round and increases there points by 1000
      */
     private void addPoints(){
-        for(Player a : winners){
-            a.increaseScoreBy(points);
+        for(Player a : players){
+            if(a.getStatus() == 1){
+                a.increaseScoreBy(1000);
+            }
         }
     }
 

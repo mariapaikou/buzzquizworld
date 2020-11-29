@@ -7,18 +7,16 @@ import java.util.ArrayList;
  */
 
 public class Type {
-    int points;//xreiazetai;
-    ArrayList<Player> winners;
+    ArrayList<Player> players;
 
-    public  Type(){
-        //να προστεθει κωδικας!!
+    public Type(){
+        //empty constructor
+    }
+    public  Type(ArrayList<Player> players){
+        this.players=players;
 
     }
 
-
-    public Type(String nameOfGame){
-
-    }
 
     private void runTimeError(){
         //κλαση που δεν φτιαχνει αντικείμενο???

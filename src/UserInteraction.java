@@ -82,12 +82,12 @@ public class UserInteraction {
         return player;
 
     }
-
+/*
     /**
      * This function receives the game of choise and creates the object
      * @param nameOfGame
      */
-
+/*
     public void Choise(String nameOfGame){
         if(nameOfGame=="Right Answer"){
             RightAnswer rightAnswer = new RightAnswer();
@@ -104,7 +104,7 @@ public class UserInteraction {
         }
     }
 
-
+*/
 
 
 }

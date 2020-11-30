@@ -5,13 +5,28 @@ public class Bet extends Type {
         betPoints=0;
     }
 
-    private void changePoints(int pointsBetted){
+
+    private void changePoints(){
         for(Player a: players){
-            if(a.getStatus() == 1){
-                a.setScore(pointsBetted);
-            }else if(a.getStatus() == 0){
-                a.setScore(-pointsBetted);
+            if(a.getStatus()){
+                a.increaseScoreBy(betPoints);
+            }else if(a.getStatus() && (a.getScore()-betPoints > 0)){
+                a.increaseScoreBy(-betPoints);
+            }else{
+                a.setScore(0);
             }
         }
     }
+
+    public boolean setPoints(int betPoints){
+        if(betPoints == 250 || betPoints == 500 || betPoints == 750 || betPoints == 1000){
+            this.betPoints=betPoints;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+
 }

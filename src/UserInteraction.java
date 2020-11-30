@@ -15,10 +15,11 @@ public class UserInteraction {
         //not needed
     }
 
-    /**
-     * Function HowManyOfYou, asks the user for the number of players.
-     * @return int
-     */
+//    /**
+//     * Function HowManyOfYou, asks the user for the number of players.
+//     * @return int
+//     */
+/*
     public int HowManyOfYou(){
         int howMany;
         System.out.println("Oh I didn't see you there. Did you bring a friend?\n");
@@ -33,11 +34,13 @@ public class UserInteraction {
         return howMany;
     }
 
-    /**
-     * Function HowManyOfYou, asks the user for the number of rounds (5 or 10 rounds available).
-     * @return int
-     */
+ */
 
+//    /**
+//     * Function HowManyOfYou, asks the user for the number of rounds (5 or 10 rounds available).
+//     * @return int
+//     */
+/*
     public int HowManyRounds(){
         int howMany;
         System.out.println("Now, tell me how many rounds do you want to play?\n");
@@ -51,10 +54,13 @@ public class UserInteraction {
         return howMany;
     }
 
-    /**
-     * Function TypeOfGame, asks the user the type of game they want to play (RightAnswer and Bet available).
-     * @return String
-     */
+ */
+
+//    /**
+//     * Function TypeOfGame, asks the user the type of game they want to play (RightAnswer and Bet available).
+//     * @return String
+//     */
+/*
     public String TypeOfGame(){
         String type;
         System.out.println("Pick a game, don't be a chicken!");
@@ -68,11 +74,13 @@ public class UserInteraction {
         return type;
     }
 
+ */
+
     /**
      * Function God, creates the human beings of this game. Asks for the name
      * of the player, creates a Player object with that name that is going
      * to be added to the playerList.
-     * @return Player
+     * @return A Player object that is name player
      */
     public Player God(){
         System.out.println("You mortal man, name yourself! \n");

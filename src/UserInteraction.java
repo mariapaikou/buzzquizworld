@@ -7,6 +7,7 @@ import java.util.Scanner;
  * players.
  *
  */
+
 public class UserInteraction {
     Scanner input = new Scanner(System.in);
 

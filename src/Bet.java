@@ -1,7 +1,6 @@
 public class Bet extends Type {
     int betPoints;
 
-
     public Bet(){
         betPoints=0;
     }

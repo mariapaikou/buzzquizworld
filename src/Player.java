@@ -68,6 +68,7 @@ public class Player {
     public void increaseScoreBy(int newPoints){
         this.score+=newPoints;
     }
+    public void defaultfyStatus(){this.status=false;}
 
 
 }

@@ -1,5 +1,5 @@
 public class Bet extends Type {
-    int betPoints;
+    int betPoints; //auto sto mellon tha ginei eite 2 metablhtes, eite kapoia domh pou tha apothhkeuei ta bet twn paiktwn
 
     public Bet(){
         betPoints=0;

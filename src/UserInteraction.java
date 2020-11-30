@@ -85,11 +85,24 @@ public class UserInteraction {
     public Player God(){
         System.out.println("You mortal man, name yourself! \n");
         System.out.println("Name: ");
-        String name=input.nextLine();
+        String name = input.nextLine();
         Player player = new Player();
         player.setNickname(name);
         return player;
 
+    }
+
+    /**
+     *
+     * @return
+     */
+
+    public int BetPoints(){
+        System.out.println("Now tell me how risky are you?");
+        System.out.println("Type how many points you bet(250, 500, 750, 1000):");
+        String points = input.nextLine();
+        int betPoints = Integer.valueOf(points);
+        return betPoints;
     }
 /*
     /**

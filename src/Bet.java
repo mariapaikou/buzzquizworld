@@ -6,7 +6,7 @@ public class Bet extends Type {
     }
 
 
-    private void changePoints(){
+    public void changePoints(){
         for(Player a: players){
             if(a.getStatus()){
                 a.increaseScoreBy(betPoints);
@@ -19,6 +19,7 @@ public class Bet extends Type {
     }
 
     public boolean setPoints(int betPoints){
+
         if(betPoints == 250 || betPoints == 500 || betPoints == 750 || betPoints == 1000){
             this.betPoints=betPoints;
             return true;

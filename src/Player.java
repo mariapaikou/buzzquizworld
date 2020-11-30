@@ -47,6 +47,7 @@ public class Player {
 
     }
 
+
     public String getNickname(){
         return this.nickname;
     }
@@ -55,7 +56,7 @@ public class Player {
         return this.score;
     }
 
-    public int getStatus(){
+    public boolean getStatus(){
         return status;
     }
 

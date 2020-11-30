@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * a variable to save the winner of the round.
  */
 
-public class Type {
+public abstract class Type {
     ArrayList<Player> players;
 
     public Type(){
@@ -17,6 +17,7 @@ public class Type {
 
     }
 
+    public abstract void  changePoints();
 
     private void runTimeError(){
         //κλαση που δεν φτιαχνει αντικείμενο???

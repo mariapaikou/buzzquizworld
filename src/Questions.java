@@ -5,6 +5,7 @@ import java.util.ArrayList;
  */
 public class Questions {
     String[][] a;
+
     public Questions() {
 
         a = new String[1][5];

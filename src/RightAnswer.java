@@ -12,7 +12,7 @@ public class RightAnswer extends Type{
     }
 
     /**
-     * Function addPoints checks for winners in the current round and increases there points by 1000
+     * Function changePoints checks for winners in the current round and increases their points by 1000
      */
     public void changePoints(){
         for(Player a : players){

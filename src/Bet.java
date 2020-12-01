@@ -7,7 +7,7 @@ public class Bet extends Type {
 
     /**
      * Function changePoints, adds or removes the bet points from the player's score depending on whether he has answered
-     * correctly or not. This can be determined checking the status variable.
+     * the question correctly or not. This can be determined by checking the status variable.
      */
 
     public void changePoints(){

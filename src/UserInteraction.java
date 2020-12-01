@@ -1,4 +1,5 @@
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
@@ -14,6 +15,51 @@ public class UserInteraction {
     public UserInteraction(){
         //not needed
     }
+
+    /**
+     * Function God, creates the human beings of this game. Asks for the name
+     * of the player, creates a Player object with that name that is going
+     * to be added to the playerList.
+     * @return A Player object that is name player
+     */
+    public Player God(){
+        System.out.println("You mortal man, name yourself! \n");
+        System.out.println("Name: ");
+        String name = input.nextLine();
+        Player player = new Player();
+        player.setNickname(name);
+        return player;
+
+    }
+
+    /**
+     *
+     * @return
+     */
+
+    public int BetPoints() {
+        System.out.println("Now tell me how risky are you?");
+        System.out.println("Type how many points you bet(250, 500, 750, 1000):");
+        String points = input.nextLine();
+        int betPoints = Integer.valueOf(points);
+        return betPoints;
+    }
+
+    public void announcingTheType(String typeName){
+        System.out.println("For this round, you are playing " + typeName);
+        if(typeName == "RightAnswer"){
+            System.out.println("How to play RightAnswer: Choose the answer you believe is correct and if you are right you win 1000 points.");
+        }
+        else if(typeName == "Bet"){
+            System.out.println("How to play Bet: You choose a bet amount (250/500/750/1000). " +
+                    "If you answer the question correctly you get the points you bet. " +
+                    "If you answer wrong you lose the bet amount from your points. ");
+        }
+    }
+
+
+
+    //PROSOXH SKOYPIDIA - KATEBEITE ME DIKH SAS EY8YNH
 
 //    /**
 //     * Function HowManyOfYou, asks the user for the number of players.
@@ -76,34 +122,6 @@ public class UserInteraction {
 
  */
 
-    /**
-     * Function God, creates the human beings of this game. Asks for the name
-     * of the player, creates a Player object with that name that is going
-     * to be added to the playerList.
-     * @return A Player object that is name player
-     */
-    public Player God(){
-        System.out.println("You mortal man, name yourself! \n");
-        System.out.println("Name: ");
-        String name = input.nextLine();
-        Player player = new Player();
-        player.setNickname(name);
-        return player;
-
-    }
-
-    /**
-     *
-     * @return
-     */
-
-    public int BetPoints(){
-        System.out.println("Now tell me how risky are you?");
-        System.out.println("Type how many points you bet(250, 500, 750, 1000):");
-        String points = input.nextLine();
-        int betPoints = Integer.valueOf(points);
-        return betPoints;
-    }
 /*
     /**
      * This function receives the game of choise and creates the object

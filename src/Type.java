@@ -19,7 +19,7 @@ public abstract class Type {
 
     public abstract void  changePoints();
 
-    private void runTimeError(){
+    private void runTimeError() {
         //κλαση που δεν φτιαχνει αντικείμενο???
         //void?
     }

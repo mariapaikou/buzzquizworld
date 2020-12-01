@@ -68,6 +68,11 @@ public class Player {
     public void increaseScoreBy(int newPoints){
         this.score+=newPoints;
     }
+
+    /**
+     * Function defaultfyStatus sets players status to false.
+     */
+
     public void defaultfyStatus(){this.status=false;}
 
 

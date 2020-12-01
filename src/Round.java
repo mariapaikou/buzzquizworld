@@ -17,7 +17,9 @@ public class Round {
             //tha prepei na rwtaei mesw ths UserInteractions to stoixhma, auto tha apothhkeuetai sthn bet
             //kai meta tha allazei to status twn nikhtwn kai tha epistrefei th lista me tous paiktes
         }
-        for(int i = 0; i < numberOfQuestions; i++)
+        for(int i = 0; i < numberOfQuestions; i++){
+
+        }
            // questions.keySet() RandomQuestions[i] asto ligo etsi tha to dw aurio
     }
 

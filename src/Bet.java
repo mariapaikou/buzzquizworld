@@ -18,6 +18,14 @@ public class Bet extends Type {
         }
     }
 
+    /**
+     * setPoints is a boolean function that checks if the given bet amount is acceptable and
+     * if so, sets the user's bet to that amount.
+     * @param betPoints is a variable that contains the points that the user bets
+     * @return If the action is successful, the function returns true. If the betPoints are a
+     * not acceptable amount and therefore the action is not successful, it returns false.
+     */
+
     public boolean setPoints(int betPoints){
 
         if(betPoints == 250 || betPoints == 500 || betPoints == 750 || betPoints == 1000){

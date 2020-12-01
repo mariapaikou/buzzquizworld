@@ -11,6 +11,7 @@ public abstract class Type {
 
     public Type(){
         //empty constructor
+
     }
     public  Type(ArrayList<Player> players) {
         this.players=players;

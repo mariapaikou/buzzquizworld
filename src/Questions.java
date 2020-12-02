@@ -46,10 +46,6 @@ public class Questions {
 
     public String getAnswerD(){ return answerD; }
 
-    public String getAllAnswers(){
-        //do we need this???
-    }
-
     public String getCorrectAnswer(){
         return correctAnswer;
     }

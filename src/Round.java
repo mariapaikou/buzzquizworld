@@ -36,10 +36,11 @@ public class Round {
      * @return
      */
 
-    public int  getRandomQuestrion(ArrayList<String[]> questions){
+    public int  getRandomQuestion(ArrayList<String[]> questions){
+        int randomQuestionSpot=0;
         //xreiazetai?
 
-
+        return randomQuestionSpot;
     }
 
 

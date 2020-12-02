@@ -2,8 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 /**
- * This contains a small sample of questions for testing purposes
+ * Class Questions contains a question, the answers for the question and the right answer.
+ * It also contains a boolean variable that stores either the question has already been asked or not.
+ * this class will be used to create Questions objects with the data from the file that then will be stored
+ * in an ArrayList, so that they can be randomly asked.
  */
+
 public class Questions {
     String question;
     String answerA;
@@ -40,8 +44,10 @@ public class Questions {
         return answerC;
     }
 
-    public String getAnswerD(){
-        return answerD;
+    public String getAnswerD(){ return answerD; }
+
+    public String getAllAnswers(){
+        //do we need this???
     }
 
     public String getCorrectAnswer(){

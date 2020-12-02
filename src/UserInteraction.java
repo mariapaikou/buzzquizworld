@@ -33,17 +33,23 @@ public class UserInteraction {
     }
 
     /**
-     *
-     * @return
+     * BetPoints function, asks the player to bet and saves the amount in an int variable.
+     * @return the betPoints variable, which contains the points bet by the player.
      */
 
     public int BetPoints() {
         System.out.println("Now tell me how risky are you?");
-        System.out.println("Type how many points you bet(250, 500, 750, 1000):");
+        System.out.println("Type how many points you bet(250 / 500 / 750 / 1000):");
         String points = input.nextLine();
         int betPoints = Integer.valueOf(points);
         return betPoints;
     }
+
+    /**
+     * Function announcingTheType accepts a variable typeName and prints a message that announces the type
+     * of the game and explains the way you play the game.
+     * @param typeName is a string with the name of the type of game that is randomly chosen.
+     */
 
     public void announcingTheType(String typeName){
         System.out.println("For this round, you are playing " + typeName);
@@ -57,7 +63,23 @@ public class UserInteraction {
         }
     }
 
+    /**
+     * This function accepts a Questions type object and prints the question and the four possible answers.
+     * @param question is a Questions object
+     */
+    public void askTheQuestion(Questions question){
+        System.out.println(question.getQuestion());
+        System.out.println(question.getAnswerA() + question.getAnswerB());  //prepei na skeftoume tropo kai pou tha kanei randomize thn seira twn erwthsewn
+        System.out.println(question.getAnswerC() + question.getAnswerD());
+    }
 
+    /**
+     * This function prints the correct answer to the question asked previously.
+     * @param question is a Questions object
+     */
+    public void correctAnswer(Questions question){
+        System.out.println("The correct answer is: " + question.getCorrectAnswer());
+    }
 
     //PROSOXH SKOYPIDIA - KATEBEITE ME DIKH SAS EY8YNH
 

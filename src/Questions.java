@@ -9,13 +9,13 @@ import java.util.HashMap;
  */
 
 public class Questions {
-    String question;
-    String answerA;
-    String answerB;
-    String answerC;
-    String answerD;
-    String correctAnswer;
-    boolean used;
+    private String question;
+    private String answerA;
+    private String answerB;
+    private String answerC;
+    private String answerD;
+    private String correctAnswer;
+    private boolean used;
 
 
     public Questions(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer) {

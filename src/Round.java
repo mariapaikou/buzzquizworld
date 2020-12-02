@@ -36,11 +36,11 @@ public class Round {
      * @return
      */
 
-    public int  getRandomQuestion(ArrayList<String[]> questions){
-        int randomQuestionSpot=0;
+    public int  getRandomQuestion(ArrayList<Questions> questions){
+        int randomQuestion=0; //afto to ebala prosorina gia na mhn bgazei error
         //xreiazetai?
 
-        return randomQuestionSpot;
+        return randomQuestion;
     }
 
 

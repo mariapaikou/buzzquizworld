@@ -34,10 +34,14 @@ public class Game {
         randomQuestions = new ArrayList<>();
     }
 
+
     public ArrayList<Player> getPlayerList() {
         return playerList;
     }
 
+    /**
+     * Function PlayTheGame
+     */
     public void PlayTheGame(){
         while(howManyRounds > 0){
 
@@ -50,7 +54,9 @@ public class Game {
     }
 
     public static void main(String [] args){
-
+        Game b = new Game();
+        b.PlayTheGame();
+        System.out.println("the end!!");
     }
 
 

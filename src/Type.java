@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 public abstract class Type {
-    ArrayList<Player> players;
+    protected ArrayList<Player> players;
 
     public Type(){
         // empty construstor

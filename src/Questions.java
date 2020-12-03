@@ -56,7 +56,7 @@ public class Questions {
 
     public void setUsed(boolean used){
         if(used){
-            this.used=used;
+            this.used = used;
         }
 
     }

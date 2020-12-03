@@ -36,7 +36,7 @@ public class Round {
      */
 
     public int  getRandomQuestion(ArrayList<Questions> questions){
-        int randomQuestion=0; //afto to ebala prosorina gia na mhn bgazei error
+        int randomQuestion = 0; //afto to ebala prosorina gia na mhn bgazei error
         //xreiazetai?
 
         return randomQuestion;

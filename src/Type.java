@@ -15,14 +15,14 @@ public abstract class Type {
     }
 
     public Type(ArrayList<Player> players) {
-        this.players=players;
+        this.players = players;
 
     }
 
     public abstract void  changePoints();
 
     public void SetPlayersList(ArrayList<Player> players){
-        this.players=players;
+        this.players = players;
     }
 
     private void runTimeError() {

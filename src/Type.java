@@ -10,15 +10,20 @@ public abstract class Type {
     ArrayList<Player> players;
 
     public Type(){
-        //empty constructor
+        // empty construstor
 
     }
+
     public Type(ArrayList<Player> players) {
         this.players=players;
 
     }
 
     public abstract void  changePoints();
+
+    public void SetPlayersList(ArrayList<Player> players){
+        this.players=players;
+    }
 
     private void runTimeError() {
         //κλαση που δεν φτιαχνει αντικείμενο???

@@ -1,10 +1,17 @@
+import java.util.ArrayList;
+
 public class Bet extends Type {
     int betPoints; //auto sto mellon tha ginei eite 2 metablhtes, eite kapoia domh pou tha apothhkeuei ta bet twn paiktwn
 
     public Bet(){
+        super();
         betPoints=0;
     }
 
+    public Bet(ArrayList<Player> players){
+        super(players);
+        betPoints = 0;
+    }
     /**
      * Function changePoints, adds or removes the bet points from the player's score depending on whether he has answered
      * the question correctly or not. This can be determined by checking the status variable.

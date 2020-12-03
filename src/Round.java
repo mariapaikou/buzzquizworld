@@ -10,7 +10,6 @@ public class Round {
     Random random;
 
     public Round() {
-
         random = new Random();
     }
 

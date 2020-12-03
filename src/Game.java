@@ -40,6 +40,10 @@ public class Game {
 */
     }
 
+    public ArrayList<Player> getPlayerList() {
+        return playerList;
+    }
+
     public void PlayTheGame(){
         while(howManyRounds > 0){
 

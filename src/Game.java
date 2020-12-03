@@ -12,6 +12,7 @@ public class Game {
      */
     //private int howManyPlayers;
     private ArrayList <Player> playerList;
+    private ArrayList<Questions> allQuestions;
     private ArrayList<Questions> randomQuestions;
     private static int howManyRounds = 5;
     private UserInteraction display;
@@ -32,25 +33,67 @@ public class Game {
        // }
 
         randomQuestions = new ArrayList<>();
+
+        allQuestions = new ArrayList<>();
     }
 
 
-    public ArrayList<Player> getPlayerList() {
-        return playerList;
-    }
+    public ArrayList<Player> getPlayerList() { return playerList; }
 
     /**
-     * Function PlayTheGame
+     * Function PlayTheGame starts off by calling the fillAllQuestions method which fills the ArrayList with
+     * Questions objects. It has a while loop that controls the number of rounds. Each time it creates a Round object
+     * and a type that is randomly chosen by the Round objects method, getRandomType. Then it sets the type objects player
+     * list to the list that Game has.
      */
     public void PlayTheGame(){
-        while(howManyRounds > 0){
+        fillAllQuestions();
 
-        Round round = new Round();
-        Type type = round.getRandomType();
-        type.SetPlayersList(playerList);
+        while(howManyRounds > 0){
+            Round round = new Round();
+            Type type = round.getRandomType();
+            type.SetPlayersList(playerList);
 
             howManyRounds--;
         }
+    }
+
+    /**
+     * Temporary method fillAllQuestions that creates Questions objects and adds them to the ArrayList.
+     */
+
+    public void fillAllQuestions(){
+        Questions a = new Questions();
+        Questions b = new Questions();
+        Questions c = new Questions();
+
+        a.setQuestion("Which nut is used to make dynamite?");
+        a.setAnswerA("Peanuts");
+        a.setAnswerB("Walnuts");
+        a.setAnswerC("Pine nuts");
+        a.setAnswerD("Almonds");
+        a.setCorrectAnswer("Peanuts");
+        a.setCategory("Food");
+        allQuestions.add(a);
+
+        b.setQuestion("When was the band System of a Down formed?");
+        b.setAnswerA("1988");
+        b.setAnswerB("1987");
+        b.setAnswerC("1990");
+        b.setAnswerD("1992");
+        b.setCorrectAnswer("1988");
+        b.setCategory("Music");
+        allQuestions.add(b);
+
+        c.setQuestion("How many films have Al Pacino and Robert De Niro starred in together?");
+        c.setAnswerA("10");
+        c.setAnswerB("6");
+        c.setAnswerC("2");
+        c.setAnswerD("4");
+        c.setCorrectAnswer("4");
+        c.setCategory("Films");
+        allQuestions.add(c);
+
     }
 
     public static void main(String [] args){
@@ -61,3 +104,4 @@ public class Game {
 
 
 }
+

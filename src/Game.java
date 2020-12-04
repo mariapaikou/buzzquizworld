@@ -1,3 +1,5 @@
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.util.ArrayList;
 
 /**
@@ -18,7 +20,7 @@ public class Game {
     private ArrayList <Player> playerList;
     private ArrayList<Questions> allQuestions;
     private ArrayList<Questions> randomQuestions;
-    private static int howManyRounds = 5;
+    private static int howManyRounds = 3;
     private static int numberOfQuestions = 1; //gia twra
     private UserInteraction display;
 
@@ -70,7 +72,7 @@ public class Game {
                 round.getRandomQuestion(allQuestions, randomQuestions);
                 numberOfQuestions--;
             }
-            for (int i=0; i > randomQuestions.size(); i++) {
+            for (int i=0; i < randomQuestions.size(); i++) {
 
                 display.askTheQuestion(randomQuestions.get(i));
 

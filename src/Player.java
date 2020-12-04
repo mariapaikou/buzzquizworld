@@ -33,29 +33,18 @@ public class Player {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-
-    public void setScore(int score){
-        this.score=score;
-    }
-
-    public void setStatus(boolean status){
-        if(status == true || status == false){
-            this.status=status;
-        }else{
-            System.out.println("wrong!!");/////error class???????
-        }
-
-    }
-
-
     public String getNickname(){
         return this.nickname;
     }
 
+    public void setScore(int score){
+        this.score=score;
+    }
     public int getScore(){
         return this.score;
     }
 
+    public void setStatus(boolean status){ this.status = status; }
     public boolean getStatus(){
         return status;
     }

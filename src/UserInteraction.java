@@ -70,8 +70,8 @@ public class UserInteraction {
      */
     public void askTheQuestion(Questions question){
         System.out.println(question.getQuestion());
-        System.out.println(question.getAnswerA() + question.getAnswerB());  //prepei na skeftoume tropo kai pou tha kanei randomize thn seira twn erwthsewn
-        System.out.println(question.getAnswerC() + question.getAnswerD());
+        System.out.println(question.getAnswerA() + "    " + question.getAnswerB());  //prepei na skeftoume tropo kai pou tha kanei randomize thn seira twn erwthsewn
+        System.out.println(question.getAnswerC() + "    " + question.getAnswerD());
     }
 
     /**
@@ -101,10 +101,10 @@ public class UserInteraction {
     public void whoWon(ArrayList<Player> players){
         for (Player player : players){
             if(player.getStatus() == true){
-                System.out.println(player + " won!");
+                System.out.println(player.getNickname() + " won!");
             }
             else if(player.getStatus() == false){
-                System.out.println(player + " maybe next time!");
+                System.out.println(player.getNickname() + " maybe next time!");
             }
         }
     }
@@ -115,7 +115,7 @@ public class UserInteraction {
     public void showRoundScores(ArrayList<Player> players){
         System.out.println("The scores for this round are:");
         for (Player player : players){
-            System.out.println(player.getNickname() + player.getScore());
+            System.out.println(player.getNickname() + " = " + player.getScore());
         }
     }
 

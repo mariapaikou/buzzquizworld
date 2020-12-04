@@ -63,7 +63,7 @@ public class Questions {
     public void setCategory(String category) { this.category = category; }
 
     public boolean getUsed(){
-        return getUsed();
+        return used;
     }
     public void setUsed(boolean used){ if(used){ this.used = used; } }
     public void initializeUsed(){

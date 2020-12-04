@@ -101,10 +101,10 @@ public class UserInteraction {
     public void whoWon(ArrayList<Player> players){
         for (Player player : players){
             if(player.getStatus() == true){
-                System.out.println(player.getNickname() + " won!");
+                System.out.println(player.getNickname() + ", you won!");
             }
             else if(player.getStatus() == false){
-                System.out.println(player.getNickname() + " maybe next time!");
+                System.out.println(player.getNickname() + ", maybe next time!");
             }
         }
     }

@@ -10,9 +10,9 @@ public class Player {
  * @param status is a boolean variable that indicates the state in which the player is at the given moment. When false, the player has not answered
  *               correctly, when true, the player has answered correctly.
  */
-    String nickname;
-    int score;
-    boolean status;//0 if answered correctly, 1 if not
+    private String nickname;
+    private int score;
+    private boolean status;//0 if answered correctly, 1 if not
 
 
     public Player(String nickname){

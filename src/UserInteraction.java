@@ -1,5 +1,6 @@
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -73,12 +74,36 @@ public class UserInteraction {
         System.out.println(question.getAnswerC() + question.getAnswerD());
     }
 
+    public String getAnAnswer(Player player){
+        System.out.println(player.getNickname() + ", which answer do you think is correct?");
+        String answer = input.nextLine();
+        return answer;
+    }
+
     /**
      * This function prints the correct answer to the question asked previously.
      * @param question is a Questions object
      */
     public void correctAnswer(Questions question){
         System.out.println("The correct answer is: " + question.getCorrectAnswer());
+    }
+
+    public void whoWon(ArrayList<Player> players){
+        for (Player player : players){
+            if(player.getStatus() == true){
+                System.out.println(player + " won!");
+            }
+            else if(player.getStatus() == false){
+                System.out.println(player + " maybe next time!");
+            }
+        }
+    }
+
+    public void showRoundScores(ArrayList<Player> players){
+        System.out.println("The scores for this round are:");
+        for (Player player : players){
+            System.out.println(player.getNickname() + player.getScore());
+        }
     }
 
     //PROSOXH SKOYPIDIA - KATEBEITE ME DIKH SAS EY8YNH

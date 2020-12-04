@@ -19,7 +19,7 @@ public class Round {
      * Creates a Type object.
      * @return Type
      */
-    public Type getRandomType(){
+    public Type getRandomType() {
         Type type;
         int r = random.nextInt(2);
         if(r == 1){
@@ -34,12 +34,22 @@ public class Round {
      *
      * @return
      */
-
-    public int  getRandomQuestion(ArrayList<Questions> questions){
-        int randomQuestion = 0; //afto to ebala prosorina gia na mhn bgazei error
-        //xreiazetai?
-
-        return randomQuestion;
+    //prospa8hsa na thn kanw na epistrefei Questions alla meta eksw apo thn if den eixe return statement
+    //prospa8hsa na thn kanw boolean alla den mou bghke
+    //den kserw an xreiazetai h used telika giati apla afairw to antikeimeno apo thn lista alla gia twra thn afhnw
+    public void getRandomQuestion(ArrayList<Questions> allQuestions, ArrayList<Questions> randomQuestions){
+        int r = random.nextInt(allQuestions.size());
+        if (allQuestions.get(r).getUsed() == false) {
+            randomQuestions.add(allQuestions.get(r));
+            allQuestions.get(r).setUsed(true);
+            allQuestions.remove(allQuestions.get(r));
+        }
+        else if (allQuestions.get(r).getUsed() == true && allQuestions.size()>0) {
+            getRandomQuestion(allQuestions, randomQuestions);
+        }
+        else {
+            System.out.println("Error, no available questions left.");
+        }
     }
 
 

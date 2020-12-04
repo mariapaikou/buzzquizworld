@@ -13,7 +13,7 @@ public class Questions {
     private String answerA;
     private String answerB;
     private String answerC;
-    private String answerD;
+    private String answerD; //sto mellon aftin tha thn svisoyme kai apla tha exoume thn correctAnswer
     private String correctAnswer;
     private String category;
     private boolean used;

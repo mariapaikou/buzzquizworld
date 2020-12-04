@@ -15,6 +15,7 @@ public class Game {
     private ArrayList<Questions> allQuestions;
     private ArrayList<Questions> randomQuestions;
     private static int howManyRounds = 5;
+    private static int numberOfQuestions = 1; //gia twra
     private UserInteraction display;
 
 
@@ -50,9 +51,35 @@ public class Game {
         fillAllQuestions();
 
         while(howManyRounds > 0){
+
             Round round = new Round();
             Type type = round.getRandomType();
             type.SetPlayersList(playerList);
+
+            while (numberOfQuestions>0 && randomQuestions.size() < numberOfQuestions) {
+
+                round.getRandomQuestion(allQuestions, randomQuestions);
+                numberOfQuestions--;
+            }
+            for (int i=0; i > randomQuestions.size(); i++) {
+
+                display.askTheQuestion(randomQuestions.get(i));
+
+                for (Player player : playerList){
+
+                    String answer = display.getAnAnswer(player);;
+
+                    if (answer == randomQuestions.get(i).getCorrectAnswer()){
+                        player.setStatus(true);
+                    }
+
+                }
+                display.correctAnswer(randomQuestions.get(i));
+                display.whoWon(playerList);
+                type.changePoints();
+
+            }
+            display.showRoundScores(playerList);
 
             howManyRounds--;
         }

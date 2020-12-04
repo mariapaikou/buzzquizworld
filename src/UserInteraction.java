@@ -47,17 +47,17 @@ public class UserInteraction {
     }
 
     /**
-     * Function announcingTheType accepts a variable typeName and prints a message that announces the type
-     * of the game and explains the way you play the game.
-     * @param typeName is a string with the name of the type of game that is randomly chosen.
+     * Function announcingTheType accepts a Type object and prints a message that announces the type name
+     * through the getName method. Then it explains the way you play the game.
+     * @param type is a Type of game that is randomly chosen.
      */
 
-    public void announcingTheType(String typeName){
-        System.out.println("For this round, you are playing " + typeName);
-        if(typeName == "RightAnswer"){
+    public void announcingTheType(Type type){
+        System.out.println("For this round, you are playing " + type.getName());
+        if(type.getName() == "RightAnswer"){
             System.out.println("How to play RightAnswer: Choose the answer you believe is correct and if you are right you win 1000 points.");
         }
-        else if(typeName == "Bet"){
+        else if(type.getName() == "Bet"){
             System.out.println("How to play Bet: You choose a bet amount (250/500/750/1000). " +
                     "If you answer the question correctly you get the points you bet. " +
                     "If you answer wrong you lose the bet amount from your points. ");
@@ -74,6 +74,11 @@ public class UserInteraction {
         System.out.println(question.getAnswerC() + question.getAnswerD());
     }
 
+    /**
+     * This method accepts a Player object, asks the player for an answer and returns the input.
+     * @param player a Player object that is playing the game
+     * @return String variable that contains the answer.
+     */
     public String getAnAnswer(Player player){
         System.out.println(player.getNickname() + ", which answer do you think is correct?");
         String answer = input.nextLine();
@@ -88,6 +93,11 @@ public class UserInteraction {
         System.out.println("The correct answer is: " + question.getCorrectAnswer());
     }
 
+    /**
+     * whoWon is a void function that is called after each question and it announces who
+     * answered correctly and who didn't by checking their status.
+     * @param players is the ArrayList that contains all the players that are playing.
+     */
     public void whoWon(ArrayList<Player> players){
         for (Player player : players){
             if(player.getStatus() == true){
@@ -99,6 +109,9 @@ public class UserInteraction {
         }
     }
 
+    /**
+     * The function showRoundScores is called at the end of each round, to show the current score of the players.
+     */
     public void showRoundScores(ArrayList<Player> players){
         System.out.println("The scores for this round are:");
         for (Player player : players){

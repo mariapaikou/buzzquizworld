@@ -52,6 +52,8 @@ public class Bet extends Type {
         return false;
     }
 
-
+    public String getName(){
+        return "Bet";
+    }
 
 }

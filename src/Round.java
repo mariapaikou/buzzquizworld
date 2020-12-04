@@ -5,8 +5,7 @@ import java.util.Random;
  * for the round and the randomized questions.
  */
 public class Round {
-    //private static int numberOfQuestions = 3;
-    private static int numberOfQuestions = 1;
+
     Random random;
 
     public Round() {
@@ -31,8 +30,9 @@ public class Round {
     }
 
     /**
-     *
-     * @return
+     * Function getRandomQuestion, accepts the ArrayList the contains all the questions and the ArrayList that
+     * will hold the random questions selected for the round. It chooses a random number, checks if that question has been used before
+     * and if not it adds it to the randomQuestions ArrayList.
      */
     //prospa8hsa na thn kanw na epistrefei Questions alla meta eksw apo thn if den eixe return statement
     //prospa8hsa na thn kanw boolean alla den mou bghke
@@ -50,7 +50,8 @@ public class Round {
         else {
             System.out.println("Error, no available questions left.");
         }
-    }
+    } //thn etrexa kai den paizei :'( alla thn krataw giati einai kalo to skeptiko apla prepei na to koitakseis ki esu
+    //nomizw to thema ths einai to used
 
 
 

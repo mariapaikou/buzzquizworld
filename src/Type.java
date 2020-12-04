@@ -21,6 +21,8 @@ public abstract class Type {
 
     public abstract void  changePoints();
 
+    public abstract String getName();
+
     public void SetPlayersList(ArrayList<Player> players){
         this.players = players;
     }

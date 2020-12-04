@@ -6,9 +6,13 @@ import java.util.ArrayList;
 
 public class Game {
     /**
-     * @param playerList is an ArrayList that stores Player objects
-     * @param randomQuestions is an Arraylist that stores the three Questions objects that are
+     * @param playerList is an ArrayList that stores Player objects.
+     * @param randomQuestions is an Arraylist that stores the (three) Questions objects that are
      *                        randomly selected by a Round method.
+     * @param allQuestions is an ArrayList that contains all of the questions read from the file.
+     * @param howManyRounds is a static int that indicates the preferable number of rounds.
+     * @param numberOfQuestions is a static int that indicates the number of questions for each round.
+     * @param display is a UserInteraction object that is used to display messages to the user and receive information from him.
      */
     //private int howManyPlayers;
     private ArrayList <Player> playerList;
@@ -44,8 +48,11 @@ public class Game {
     /**
      * Function PlayTheGame starts off by calling the fillAllQuestions method which fills the ArrayList with
      * Questions objects. It has a while loop that controls the number of rounds. Each time it creates a Round object
-     * and a type that is randomly chosen by the Round objects method, getRandomType. Then it sets the type objects player
-     * list to the list that Game has.
+     * and a type that is randomly chosen by the Round objects method, getRandomType. Then it sets the type object's player
+     * list to the list that Game has. A while loop is used to control the amount of questions that will be asked for the round.
+     * It calls the getRandomQuestion from round and a for loop it asks the questions one by one, accepts the answers from the
+     * players and checks if they are correct. Then is adjusts the status of the players, displays the correct answer and the winners
+     * and changes their points.
      */
     public void PlayTheGame(){
         fillAllQuestions();
@@ -55,6 +62,8 @@ public class Game {
             Round round = new Round();
             Type type = round.getRandomType();
             type.SetPlayersList(playerList);
+
+            display.announcingTheType(type);
 
             while (numberOfQuestions>0 && randomQuestions.size() < numberOfQuestions) {
 
@@ -77,6 +86,10 @@ public class Game {
                 display.correctAnswer(randomQuestions.get(i));
                 display.whoWon(playerList);
                 type.changePoints();
+
+                for (Player player : playerList){
+                    player.defaultfyStatus();
+                }
 
             }
             display.showRoundScores(playerList);

@@ -26,6 +26,8 @@ public class RightAnswer extends Type{
         }
     }
 
-
+    public String getName(){
+        return "RightAnswer";
+    }
 
 }

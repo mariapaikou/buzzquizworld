@@ -77,9 +77,14 @@ public class Game {
                 display.askTheQuestion(randomQuestions.get(i));
 
                 for (Player player : playerList){
+                    String answer = display.getAnAnswer(player);
 
-                    String answer = display.getAnAnswer(player);;
+                    boolean correct = !randomQuestions.get(i).acceptableAnswer(answer);
 
+                    while (correct){
+                        answer = display.getNewAnswer(player);
+                        correct = !randomQuestions.get(i).acceptableAnswer(answer);
+                    }
                     if (answer == randomQuestions.get(i).getCorrectAnswer()){
                         player.setStatus(true);
                     }

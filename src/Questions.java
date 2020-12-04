@@ -69,4 +69,12 @@ public class Questions {
     public void initializeUsed(){
         used = false;
     }
+
+    public boolean acceptableAnswer(String givenAnswer){
+        if(givenAnswer == answerA || givenAnswer == answerB || givenAnswer == answerC || givenAnswer == answerD){
+            return true;
+        }
+        else
+            return false;
+    }
 }

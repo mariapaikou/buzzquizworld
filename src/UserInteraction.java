@@ -85,6 +85,12 @@ public class UserInteraction {
         return answer;
     }
 
+    public String getNewAnswer(Player player){
+        System.out.println(player.getNickname() + " this is not an option! Guess again.");
+        String answer = input.nextLine();
+        return answer;
+    }
+
     /**
      * This function prints the correct answer to the question asked previously.
      * @param question is a Questions object

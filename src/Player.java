@@ -1,5 +1,5 @@
 /**
- * This class represents a player and it stores his name and total score.
+ * This class represents a player and it stores his nickname,the score and the status.
  */
 
 
@@ -24,7 +24,7 @@ public class Player {
 */
 
     /**
-     * Constructor with no given variable for damage control
+     * Constructor with no given variable for damage control, it initializes the variables.
      */
     public Player(){
         this.nickname="phantomMan, he doesn't exist";
@@ -60,13 +60,16 @@ public class Player {
         this.score+=newPoints;
     }
 
+    /**
+     * initializeScore sets the score to 0.
+     */
     public  void initializeScore(){
         this.score = 0;
     }
+
     /**
      * Function defaultfyStatus sets players status to false.
      */
-
     public void defaultfyStatus(){this.status=false;}
 
 

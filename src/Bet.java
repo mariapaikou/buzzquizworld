@@ -1,11 +1,17 @@
-import java.util.ArrayList;
-
+/**
+ * Bet is a class that extends the Type class, it adds a new variable named betPoints and
+ * is used to change the points correctly for this type of game. This game is played by
+ * betting an amount before answering, if the answer is correct then the bet is added to the score
+ * else it is subtracted.
+ */
 public class Bet extends Type {
     /**
-     * betOptions is a static array of integers, and stores the acceptable choices for the player to bet.
+     * @value betPoints is a integer array that is used to store the points that each player bets.
+     * @value position is an integer variable that makes sure that the points bet by a user will be stored in the
+     * correct order.
      */
-    private int [] betPoints; //auto sto mellon tha ginei eite 2 metablhtes, eite kapoia domh pou tha apothhkeuei ta bet twn paiktwn
-    private static  int[] betOptions = {250, 500, 750, 1000};
+    private final int [] betPoints;
+    //private static  int[] betOptions = {250, 500, 750, 1000};
     private int position;
 
     public Bet(){
@@ -26,7 +32,6 @@ public class Bet extends Type {
      * Function changePoints, adds or removes the bet points from the player's score depending on whether he has answered
      * the question correctly or not. This can be determined by checking the status variable.
      */
-
     public void changePoints(){
 
         for(int i = 0 ; i < players.size(); i++){
@@ -41,12 +46,9 @@ public class Bet extends Type {
     }
 
     /**
-     * setPoints is a boolean function that checks if the given bet amount is acceptable and
-     * if so, sets the user's bet to that amount.
-     * @value betPoints is a variable that contains the points that the user bets.
-     * not acceptable amount and therefore the action is not successful, it returns false.
+     * setPoints is a void function that accepts an integer variable which contains the points bet
+     * and adds it to the betPoints array. Then it increases the position by 1.
      */
-
     public void setPoints(int betPoints){
         this.betPoints[position]= betPoints;
         position++;

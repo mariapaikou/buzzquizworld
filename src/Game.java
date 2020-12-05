@@ -2,10 +2,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-
 /**
- * This class is initializing the players of the game also it makes a new round object.
+ * This class stores the list with the players, the questions and controls the whole game.
+ * @author Theodora-Sofia Tsochataridou
+ * @author Maria Paikou
+ * @version 1.0
+ * @since 05 - December - 2020
  */
+
 
 public class Game {
     /**
@@ -18,16 +22,17 @@ public class Game {
      * @value display is a UserInteraction object that is used to display messages to the user and receive information from him.
      */
     //private int howManyPlayers;
-    private ArrayList <Player> playerList;
-    private ArrayList<Questions> allQuestions;
+    private final ArrayList <Player> playerList;
+    private final ArrayList<Questions> allQuestions;
    // private ArrayList<Questions> randomQuestions;
     private static int howManyRounds = 3;
-    private static int numberOfQuestions = 1; //gia twra
-    private UserInteraction display;
+    private final static int numberOfQuestions = 1; //gia twra
+    private final UserInteraction display;
 
 
 /**
- * Constructor
+ * The constructor initializes the UserInteraction object and the two ArrayLists, one for the
+ * players and one for the questions. For the players, it calls the God method from UserInteraction.
  */
     public Game(){
 
@@ -49,14 +54,13 @@ public class Game {
     public ArrayList<Player> getPlayerList() { return playerList; }
  */
 
-
     /**
      * Function PlayTheGame starts off by calling the fillAllQuestions method which fills the ArrayList with
-     * Questions objects. It has a while loop that controls the number of rounds. Each time it creates a Round object
-     * and a type that is randomly chosen by the Round objects method, getRandomType. Then it sets the type object's player
-     * list to the list that Game has. A while loop is used to control the amount of questions that will be asked for the round.
-     * It calls the getRandomQuestion from round and a for loop it asks the questions one by one, accepts the answers from the
-     * players and checks if they are correct. Then is adjusts the status of the players, displays the correct answer and the winners
+     * Questions objects which then randomizes with the randomizeQuestions method. It has a while loop that controls
+     * the number of rounds. Each time it creates a Round object and a type that is randomly chosen by the Round objects method,
+     * getRandomType. Then it sets the type object's player list to the list that Game has. A while loop is used to control the amount
+     * of questions that will be asked for the round. It prints the questions one by one, accepts the answers from the
+     * players and checks if they are correct. Then it adjusts the status of the players, displays the correct answer and the winners
      * and changes their points.
      */
     public void PlayTheGame(){
@@ -119,6 +123,7 @@ public class Game {
             display.showRoundScores(playerList);
             howManyRounds--;
         }
+        display.finalScores(playerList);
         howManyRounds = 3;
         for(Player player : playerList){
             player.initializeScore();
@@ -128,7 +133,6 @@ public class Game {
     /**
      * Temporary method fillAllQuestions that creates Questions objects and adds them to the ArrayList.
      */
-
     private void fillAllQuestions(){
         Questions a = new Questions("Which nut is used to make dynamite?", "Peanuts", "Walnuts", "Pine nuts", "Almonds", "Peanuts", "Food");
         allQuestions.add(a);
@@ -162,15 +166,19 @@ public class Game {
     }
 
     /**
-     * Function randomizeQuestions accepts allQuestions and randomly arranges the ArrayList
-     * @param allQuestions is the ArrayList that contains all the Questions objects available
+     * Function randomizeQuestions accepts allQuestions and shuffles the ArrayList.
+     * @value allQuestions is the ArrayList that contains all the Questions objects available.
      */
     private void randomizeQuestions(ArrayList<Questions> allQuestions){
         Collections.shuffle(allQuestions);
     }
 
 
-
+    /**
+     *The man, the myth, the legend ... the main.
+     * It creates the Game object which contains the whole game and asks
+     * the player after the game is done if he wants to play again.
+     */
     public static void main(String [] args){
 
         boolean play = true;
@@ -181,12 +189,12 @@ public class Game {
 
             b.PlayTheGame();
 
-            System.out.println("the end!!");
+            System.out.println("THE END");
             System.out.println("Play again? (yes or no)");
             String answer = input.nextLine();
 
             while (!answer.equals("yes")  && !answer.equals("no")){
-                System.out.println("Sorry tell me again!");
+                System.out.println("Sorry, tell me again!");
                 System.out.println("Play again? (yes or no)");
                 answer = input.nextLine();
                 System.out.println("New answer is " + answer);
@@ -197,7 +205,6 @@ public class Game {
         }
 
     }
-
 
 }
 

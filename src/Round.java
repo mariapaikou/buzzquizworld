@@ -1,7 +1,7 @@
 import java.util.Random;
 /**
- * Class Round symbolizes a round of the game, which consists of 3 questions. It selects a type of game
- * for the round and the randomized questions.
+ * Class Round symbolizes a round of the game, which consists of a number of questions. It selects a type of game
+ * for the round.
  */
 public class Round {
 
@@ -12,10 +12,10 @@ public class Round {
     }
 
     /**
-     * Function getRandomType selects the type of game of the next round. Uses  Random class to get randomly
+     * Function getRandomType selects the type of game for the next round. Uses Random class to get randomly
      * 0 for RightAnswer and 1 for Bet.
      * Creates a Type object.
-     * @return Type
+     * @return Type object that contains the type chosen.
      */
     public Type getRandomType() {
         Type type;

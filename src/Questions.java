@@ -9,18 +9,18 @@ import java.util.Collections;
  */
 
 public class Questions {
-    private String question;
+    private final String question;
    /* private String answerA;
     private String answerB;
     private String answerC;
     private String answerD; //sto mellon aftin tha thn svisoyme kai apla tha exoume thn correctAnswer
     */
-    private String correctAnswer;
-    private String category;
-    private ArrayList<String> answers;
+    private final String correctAnswer;
+    private final String category;
+    private final ArrayList<String> answers;
   //  private boolean used;
 
-    public Questions(){ }
+  //  public Questions(){ }
 
     public Questions(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String category) {
         this.question = question;
@@ -37,7 +37,7 @@ public class Questions {
     public String getQuestion(){
         return question;
     }
-    public void setQuestion(String question) { this.question = question; }
+   // public void setQuestion(String question) { this.question = question; }
 /*
     public String getAnswerA() {
         return answerA;
@@ -62,10 +62,10 @@ public class Questions {
     public String getCorrectAnswer(){
         return correctAnswer;
     }
-    public void setCorrectAnswer(String correctAnswer){ this.correctAnswer = correctAnswer; }
+   // public void setCorrectAnswer(String correctAnswer){ this.correctAnswer = correctAnswer; }
 
     public String getCategory(){ return category;}
-    public void setCategory(String category) { this.category = category; }
+  //  public void setCategory(String category) { this.category = category; }
 /*
     public boolean getUsed(){
         return used;
@@ -78,11 +78,7 @@ public class Questions {
  */
 
     public boolean acceptableAnswer(String givenAnswer){
-        if(givenAnswer.equals(answers.get(0))  || givenAnswer.equals(answers.get(1)) || givenAnswer.equals(answers.get(2)) || givenAnswer.equals(answers.get(3))){
-            return true;
-        }
-        else
-            return false;
+        return givenAnswer.equals(answers.get(0)) || givenAnswer.equals(answers.get(1)) || givenAnswer.equals(answers.get(2)) || givenAnswer.equals(answers.get(3));
     }
 
     public ArrayList<String> getAnswers(){

@@ -1,6 +1,5 @@
 /**
- * This class adds 1000 points to every player that answers correctly.
- * It will receive the list with the players that answered correctly and it will add the points
+ * This class extends Type and  adds 1000 points to every player that answers correctly.
  */
 
 public class RightAnswer extends Type{
@@ -23,11 +22,9 @@ public class RightAnswer extends Type{
 
  */
 
-
-
-
     /**
-     * Function changePoints checks for winners in the current round and increases their points by 1000
+     * Function changePoints checks for winners in the current round and increases their points by 1000 by
+     * checking if their status is true.
      */
     @Override
     public void changePoints(){

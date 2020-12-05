@@ -1,13 +1,9 @@
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * This class contains all the interactions with the user,
- * asks all the questions and collects the data that are used to create the
- * players.
- *
+ * This class contains all the interactions with the user, asks all the questions, prints all
+ * the messages and collects the data that we need from the users.
  */
 
 public class UserInteraction {
@@ -21,7 +17,7 @@ public class UserInteraction {
      * Function God, creates the human beings of this game. Asks for the name
      * of the player, creates a Player object with that name that is going
      * to be added to the playerList.
-     * @return A Player object that is name player
+     * @return A Player object
      */
     public Player God(){
         System.out.println("You mortal man, name yourself!");
@@ -44,7 +40,6 @@ public class UserInteraction {
      * BetPoints function, asks the player to bet and saves the amount in an int variable.
      * @return the betPoints variable, which contains the points bet by the player.
      */
-
     public int betPoints() {
         int betPoints = 0;
         String points;
@@ -74,6 +69,11 @@ public class UserInteraction {
         return betPoints;
     }
 
+    /**
+     * newBetPoints is a function that is called when the player types a non acceptable amount to bet.
+     * It informs the user about their mistake and asks for a new bet.
+     * @return the new bet which is an integer.
+     */
     public int newBetPoints(){
         int betPonits = 0;
         String points;
@@ -105,10 +105,9 @@ public class UserInteraction {
 
     /**
      * Function announcingTheType accepts a Type object and prints a message that announces the type name
-     * through the getName method. Then it explains the way you play the game.
-     * @value type is a Type of game that is randomly chosen.
+     * through the getName method. Then it explains the way you play the game depending on the type.
+     * @value type is a Type of game that is randomly chosen in an other class.
      */
-
     public void announcingTheType(Type type){
         System.out.println("\nNEW ROUND");
             try {
@@ -135,8 +134,7 @@ public class UserInteraction {
     }
 
     /**
-     * This function accepts a Questions type object and prints the question and the four possible answers.
-     * @value question is a Questions object
+     * This void function accepts a Questions type object and prints the question and the four possible answers.
      */
     public void askTheQuestion(Questions question){
         System.out.println("\nQUESTION");
@@ -164,7 +162,6 @@ public class UserInteraction {
 
     /**
      * This method accepts a Player object, asks the player for an answer and returns the input.
-     * @value player a Player object that is playing the game
      * @return String variable that contains the answer.
      */
     public String getAnAnswer(Player player){
@@ -179,6 +176,10 @@ public class UserInteraction {
         return input.nextLine();
     }
 
+    /**
+     * getNewAnswer is called when the player types an answer that does not exist and asks for a new input.
+     * @return String that contains the new answer.
+     */
     public String getNewAnswer(Player player){
         System.out.println("\n");
         System.out.println(player.getNickname() + " this is not an option! Guess again.");
@@ -187,7 +188,6 @@ public class UserInteraction {
 
     /**
      * This function prints the correct answer to the question asked previously.
-     * @value question is a Questions object
      */
     public void correctAnswer(Questions question){
         System.out.println("The correct answer is: ");
@@ -253,6 +253,36 @@ public class UserInteraction {
             }
             System.out.println(player.getNickname() + " = " + player.getScore());
         }
+    }
+
+    /**
+     * finalScores prints the scores of each player at the end of the game
+     * @param players is the ArrayList with all the players.
+     */
+    public void finalScores(ArrayList<Player> players){
+        try {
+        Thread.sleep(2000);
+    } catch(InterruptedException e) {
+        System.out.println("got interrupted!");
+    }
+        System.out.println("\nNow, for the grand reveal");
+
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
+
+        System.out.println("\nThe final scores are:");
+        for (Player player : players){
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                System.out.print("got interrupted!");
+            }
+            System.out.println(player.getNickname() + " = " + player.getScore());
+        }
+
     }
 
     //PROSOXH SKOYPIDIA - KATEBEITE ME DIKH SAS EY8YNH

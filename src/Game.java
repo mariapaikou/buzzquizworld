@@ -1,7 +1,9 @@
 
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 
 /**
@@ -59,6 +61,8 @@ public class Game {
      * and changes their points.
      */
     public void PlayTheGame(){
+        System.out.println("inside play the game!");
+
         fillAllQuestions();
         randomizeQuestions(allQuestions);
         int questionsAskedAlready = 0;
@@ -117,6 +121,10 @@ public class Game {
             display.showRoundScores(playerList);
             howManyRounds--;
         }
+        howManyRounds = 3;
+        for(Player player : playerList){
+            player.initializeScore();
+        }
     }
 
     /**
@@ -166,9 +174,30 @@ public class Game {
 
 
     public static void main(String [] args){
+
+        boolean play = true;
+        Scanner input = new Scanner(System.in);
         Game b = new Game();
-        b.PlayTheGame();
-        System.out.println("the end!!");
+
+        while(play){
+
+            b.PlayTheGame();
+
+            System.out.println("the end!!");
+            System.out.println("Play again? (yes or no)");
+            String answer = input.nextLine();
+
+            while (!answer.equals("yes")  && !answer.equals("no")){
+                System.out.println("Sorry tell me again!");
+                System.out.println("Play again? (yes or no)");
+                answer = input.nextLine();
+                System.out.println("New answer is " + answer);
+            }
+            if(answer.equals("no")) {
+                play = false;
+            }
+        }
+
     }
 
 

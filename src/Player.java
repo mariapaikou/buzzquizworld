@@ -58,6 +58,9 @@ public class Player {
         this.score+=newPoints;
     }
 
+    public  void initializeScore(){
+        this.score = 0;
+    }
     /**
      * Function defaultfyStatus sets players status to false.
      */

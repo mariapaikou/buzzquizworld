@@ -28,7 +28,6 @@ public class Bet extends Type {
     public void changePoints(){
 
         for(int i = 0 ; i < players.size(); i++){
-            System.out.println("Player score" + players.get(i).getScore());
             if(players.get(i).getStatus()){
                 players.get(i).increaseScoreBy(betPoints[i]);
             }else if( players.get(i).getStatus() == false && (players.get(i).getScore() - betPoints[i]) > 0){

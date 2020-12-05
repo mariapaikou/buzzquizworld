@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -38,18 +39,34 @@ public class UserInteraction {
      */
 
     public int betPoints() {
-        System.out.println("Now tell me how risky are you?");
-        System.out.println("Type how many points you bet(250 / 500 / 750 / 1000):");
-        String points = input.nextLine();
-        int betPoints = Integer.valueOf(points);
+        int betPoints = 0;
+        String points = null;
+
+        try{
+            System.out.println("Now tell me how risky are you?");
+            System.out.println("Type how many points you bet(250 / 500 / 750 / 1000):");
+            points = input.nextLine();
+            betPoints = Integer.valueOf(points);
+        }catch(NumberFormatException exception){
+            System.out.println("inside first catch");
+            newBetPoints();
+        }
         return betPoints;
     }
 
     public int newBetPoints(){
-        System.out.println("You can't bet this amount, bet again!");
-        System.out.println("Type how many points you bet(250 / 500 / 750 / 1000):");
-        String points = input.nextLine();
-        int betPonits = Integer.valueOf(points);
+        int betPonits = 0;
+        String points = null;
+
+        try{
+            System.out.println("You can't bet this amount, bet again!");
+            System.out.println("Type how many points you bet(250 / 500 / 750 / 1000):");
+            points = input.nextLine();
+            betPonits = Integer.valueOf(points);
+        }catch(NumberFormatException ex){
+            newBetPoints();
+        }
+
         return betPonits;
     }
 

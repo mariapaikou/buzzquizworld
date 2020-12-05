@@ -21,15 +21,10 @@ public abstract class Type {
 
     public abstract void  changePoints();
     public abstract String getName();
-   // public abstract void setPoints(int points);
+    // public abstract void setPoints(int points);
 
     public void SetPlayersList(ArrayList<Player> players){
         this.players = players;
-    }
-
-    private void runTimeError() {
-        //κλαση που δεν φτιαχνει αντικείμενο???
-        //void?
     }
 
 

@@ -14,12 +14,14 @@ public class Player {
     private int score;
     private boolean status;//0 if answered correctly, 1 if not
 
-
+/*
     public Player(String nickname){
         this.nickname = nickname;
         score = 0;
         status = false;
     }
+
+*/
 
     /**
      * Constructor with no given variable for damage control

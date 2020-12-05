@@ -1,6 +1,3 @@
-
-
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -48,8 +45,10 @@ public class Game {
         allQuestions = new ArrayList<>();
     }
 
-
+/*
     public ArrayList<Player> getPlayerList() { return playerList; }
+ */
+
 
     /**
      * Function PlayTheGame starts off by calling the fillAllQuestions method which fills the ArrayList with

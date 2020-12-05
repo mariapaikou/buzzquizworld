@@ -1,6 +1,4 @@
-
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -14,7 +12,7 @@ public class UserInteraction {
     Scanner input = new Scanner(System.in);
 
     public UserInteraction(){
-        //not needed
+        //empty constractor
     }
 
     /**
@@ -78,10 +76,10 @@ public class UserInteraction {
 
     public void announcingTheType(Type type){
         System.out.println("For this round, you are playing " + type.getName());
-        if(type.getName() == "RightAnswer"){
+        if(type.getName().equals("RightAnswer")){
             System.out.println("How to play RightAnswer: Choose the answer you believe is correct and if you are right you win 1000 points.");
         }
-        else if(type.getName() == "Bet"){
+        else if(type.getName().equals("Bet")){
             System.out.println("How to play Bet: You choose a bet amount (250/500/750/1000). " +
                     "If you answer the question correctly you get the points you bet. " +
                     "If you answer wrong you lose the bet amount from your points. ");
@@ -113,8 +111,8 @@ public class UserInteraction {
 
     public String getNewAnswer(Player player){
         System.out.println(player.getNickname() + " this is not an option! Guess again.");
-        String answer = input.nextLine();
-        return answer;
+        String newanswer = input.nextLine();
+        return newanswer;
     }
 
     /**
@@ -132,10 +130,10 @@ public class UserInteraction {
      */
     public void whoWon(ArrayList<Player> players){
         for (Player player : players){
-            if(player.getStatus() == true){
+            if(player.getStatus()){
                 System.out.println(player.getNickname() + ", you won!");
             }
-            else if(player.getStatus() == false){
+            else if(!player.getStatus()){
                 System.out.println(player.getNickname() + ", maybe next time!");
             }
         }

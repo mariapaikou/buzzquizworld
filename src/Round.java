@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Random;
 /**
  * Class Round symbolizes a round of the game, which consists of 3 questions. It selects a type of game

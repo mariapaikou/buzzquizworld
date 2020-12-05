@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * This class adds 1000 points to every player that answers correctly.
  * It will receive the list with the players that answered correctly and it will add the points
@@ -13,14 +11,20 @@ public class RightAnswer extends Type{
         points = 1000;
     }
 
+/*
     public  RightAnswer(ArrayList<Player> players){
         super(players);
         points = 1000;
     }
+     public void setPoints(int points){
 
-    public void setPoints(int points){
         points = 1000;
     }
+
+ */
+
+
+
 
     /**
      * Function changePoints checks for winners in the current round and increases their points by 1000
@@ -33,12 +37,6 @@ public class RightAnswer extends Type{
             }
         }
     }
-
-
-    public void setPoints(){
-        points = 1000;
-    }
-
 
     public String getName(){
         return "RightAnswer";

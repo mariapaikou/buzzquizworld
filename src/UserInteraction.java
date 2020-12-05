@@ -145,7 +145,7 @@ public class UserInteraction {
         } catch(InterruptedException e) {
             System.out.println("got interrupted!");
         }
-        System.out.println("\nQuestion Category: " + question.getCategory());
+        System.out.println("\nCategory: " + question.getCategory());
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {

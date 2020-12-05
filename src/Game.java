@@ -9,13 +9,13 @@ import java.util.Scanner;
 
 public class Game {
     /**
-     * @param playerList is an ArrayList that stores Player objects.
-     * @param randomQuestions is an Arraylist that stores the (three) Questions objects that are
+     * @value playerList is an ArrayList that stores Player objects.
+     * @value randomQuestions is an Arraylist that stores the (three) Questions objects that are
      *                        randomly selected by a Round method.
-     * @param allQuestions is an ArrayList that contains all of the questions read from the file.
-     * @param howManyRounds is a static int that indicates the preferable number of rounds.
-     * @param numberOfQuestions is a static int that indicates the number of questions for each round.
-     * @param display is a UserInteraction object that is used to display messages to the user and receive information from him.
+     * @value allQuestions is an ArrayList that contains all of the questions read from the file.
+     * @value howManyRounds is a static int that indicates the preferable number of rounds.
+     * @value numberOfQuestions is a static int that indicates the number of questions for each round.
+     * @value display is a UserInteraction object that is used to display messages to the user and receive information from him.
      */
     //private int howManyPlayers;
     private ArrayList <Player> playerList;

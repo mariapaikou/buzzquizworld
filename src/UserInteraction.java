@@ -38,7 +38,7 @@ public class UserInteraction {
 
     public int betPoints() {
         int betPoints = 0;
-        String points = null;
+        String points;
 
         try{
             System.out.println("Now tell me how risky are you?");
@@ -54,7 +54,7 @@ public class UserInteraction {
 
     public int newBetPoints(){
         int betPonits = 0;
-        String points = null;
+        String points;
 
         try{
             System.out.println("You can't bet this amount, bet again!");
@@ -71,7 +71,7 @@ public class UserInteraction {
     /**
      * Function announcingTheType accepts a Type object and prints a message that announces the type name
      * through the getName method. Then it explains the way you play the game.
-     * @param type is a Type of game that is randomly chosen.
+     * @value type is a Type of game that is randomly chosen.
      */
 
     public void announcingTheType(Type type){
@@ -88,7 +88,7 @@ public class UserInteraction {
 
     /**
      * This function accepts a Questions type object and prints the question and the four possible answers.
-     * @param question is a Questions object
+     * @value question is a Questions object
      */
     public void askTheQuestion(Questions question){
         System.out.println("Question Category: " + question.getCategory());
@@ -100,7 +100,7 @@ public class UserInteraction {
 
     /**
      * This method accepts a Player object, asks the player for an answer and returns the input.
-     * @param player a Player object that is playing the game
+     * @value player a Player object that is playing the game
      * @return String variable that contains the answer.
      */
     public String getAnAnswer(Player player){
@@ -117,7 +117,7 @@ public class UserInteraction {
 
     /**
      * This function prints the correct answer to the question asked previously.
-     * @param question is a Questions object
+     * @value question is a Questions object
      */
     public void correctAnswer(Questions question){
         System.out.println("The correct answer is: " + question.getCorrectAnswer());
@@ -126,7 +126,7 @@ public class UserInteraction {
     /**
      * whoWon is a void function that is called after each question and it announces who
      * answered correctly and who didn't by checking their status.
-     * @param players is the ArrayList that contains all the players that are playing.
+     * @value players is the ArrayList that contains all the players that are playing.
      */
     public void whoWon(ArrayList<Player> players){
         for (Player player : players){

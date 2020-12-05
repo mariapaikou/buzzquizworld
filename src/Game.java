@@ -60,7 +60,6 @@ public class Game {
      * and changes their points.
      */
     public void PlayTheGame(){
-        System.out.println("inside play the game!");
 
         fillAllQuestions();
         randomizeQuestions(allQuestions);

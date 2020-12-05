@@ -1,3 +1,5 @@
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,7 +24,14 @@ public class UserInteraction {
      * @return A Player object that is name player
      */
     public Player God(){
-        System.out.println("You mortal man, name yourself! \n");
+        System.out.println("You mortal man, name yourself!");
+
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
+
         System.out.println("Name: ");
         String name = input.nextLine();
         Player player = new Player();
@@ -40,9 +49,22 @@ public class UserInteraction {
         int betPoints = 0;
         String points;
 
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
+
         try{
-            System.out.println("Now tell me how risky are you?");
-            System.out.println("Type how many points you bet(250 / 500 / 750 / 1000):");
+            System.out.println("\nNow tell me how risky are you?");
+
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+
+            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
             points = input.nextLine();
             betPoints = Integer.valueOf(points);
         }catch(NumberFormatException exception){
@@ -56,9 +78,22 @@ public class UserInteraction {
         int betPonits = 0;
         String points;
 
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
+
         try{
-            System.out.println("You can't bet this amount, bet again!");
-            System.out.println("Type how many points you bet(250 / 500 / 750 / 1000):");
+            System.out.println("\nYou can't bet this amount, bet again!");
+
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+
+            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
             points = input.nextLine();
             betPonits = Integer.valueOf(points);
         }catch(NumberFormatException ex){
@@ -75,12 +110,25 @@ public class UserInteraction {
      */
 
     public void announcingTheType(Type type){
-        System.out.println("For this round, you are playing " + type.getName());
+        System.out.println("\nNEW ROUND");
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+        System.out.println("\nFor this round, you are playing " + type.getName());
+
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
+
         if(type.getName().equals("RightAnswer")){
-            System.out.println("How to play RightAnswer: Choose the answer you believe is correct and if you are right you win 1000 points.");
+            System.out.println("\nHow to play RightAnswer: Choose the answer you believe is correct and if you are right you win 1000 points.");
         }
         else if(type.getName().equals("Bet")){
-            System.out.println("How to play Bet: You choose a bet amount (250/500/750/1000). " +
+            System.out.println("\nHow to play Bet: You choose a bet amount (250/500/750/1000). " +
                     "If you answer the question correctly you get the points you bet. " +
                     "If you answer wrong you lose the bet amount from your points. ");
         }
@@ -91,8 +139,24 @@ public class UserInteraction {
      * @value question is a Questions object
      */
     public void askTheQuestion(Questions question){
-        System.out.println("Question Category: " + question.getCategory());
+        System.out.println("\nQUESTION");
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
+        System.out.println("\nQuestion Category: " + question.getCategory());
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
         System.out.println(question.getQuestion());
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
         ArrayList<String> answers = question.getAnswers();
         System.out.println(answers.get(0) + "     " + answers.get(1));
         System.out.println(answers.get(2) + "     " + answers.get(3));
@@ -104,15 +168,21 @@ public class UserInteraction {
      * @return String variable that contains the answer.
      */
     public String getAnAnswer(Player player){
+
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
+
         System.out.println(player.getNickname() + ", which answer do you think is correct?");
-        String answer = input.nextLine();
-        return answer;
+        return input.nextLine();
     }
 
     public String getNewAnswer(Player player){
+        System.out.println("\n");
         System.out.println(player.getNickname() + " this is not an option! Guess again.");
-        String newanswer = input.nextLine();
-        return newanswer;
+        return input.nextLine();
     }
 
     /**
@@ -120,7 +190,21 @@ public class UserInteraction {
      * @value question is a Questions object
      */
     public void correctAnswer(Questions question){
-        System.out.println("The correct answer is: " + question.getCorrectAnswer());
+        System.out.println("The correct answer is: ");
+        for (int i = 0; i < 3; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.print("got interrupted!");
+            }
+            System.out.print(". ");
+        }
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
+        System.out.print(question.getCorrectAnswer());
     }
 
     /**
@@ -131,9 +215,21 @@ public class UserInteraction {
     public void whoWon(ArrayList<Player> players){
         for (Player player : players){
             if(player.getStatus()){
+                try {
+                    Thread.sleep(1000);
+                } catch(InterruptedException e) {
+                    System.out.println("got interrupted!");
+                }
+                System.out.println("\n");
                 System.out.println(player.getNickname() + ", you won!");
             }
             else if(!player.getStatus()){
+                try {
+                    Thread.sleep(1000);
+                } catch(InterruptedException e) {
+                    System.out.println("got interrupted!");
+                }
+                System.out.println("\n");
                 System.out.println(player.getNickname() + ", maybe next time!");
             }
         }
@@ -143,8 +239,18 @@ public class UserInteraction {
      * The function showRoundScores is called at the end of each round, to show the current score of the players.
      */
     public void showRoundScores(ArrayList<Player> players){
-        System.out.println("The scores for this round are:");
+        try {
+            Thread.sleep(2000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
+        System.out.println("\nThe scores for this round are:");
         for (Player player : players){
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
             System.out.println(player.getNickname() + " = " + player.getScore());
         }
     }

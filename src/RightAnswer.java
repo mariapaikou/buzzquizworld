@@ -18,6 +18,7 @@ public class RightAnswer extends Type{
     /**
      * Function changePoints checks for winners in the current round and increases their points by 1000
      */
+    @Override
     public void changePoints(){
         for(Player a : players){
             if(a.getStatus()){

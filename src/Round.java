@@ -42,9 +42,8 @@ public class Round {
         if (allQuestions.get(r).getUsed() == false) {
             randomQuestions.add(allQuestions.get(r));
             allQuestions.get(r).setUsed(true);
-            allQuestions.remove(allQuestions.get(r));
         }
-        else if (allQuestions.get(r).getUsed() == true && allQuestions.size()>0) {
+        else if (allQuestions.get(r).getUsed() == true) {
             getRandomQuestion(allQuestions, randomQuestions);
         }
         else {

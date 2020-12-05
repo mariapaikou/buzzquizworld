@@ -65,9 +65,10 @@ public class Game {
             Type type = round.getRandomType();
             type.SetPlayersList(playerList);
 
+
             display.announcingTheType(type);
 
-            while (numberOfQuestions>0 && randomQuestions.size() < numberOfQuestions) {
+            while (numberOfQuestions > 0 && randomQuestions.size() < numberOfQuestions) {
 
                 round.getRandomQuestion(allQuestions, randomQuestions);
                 numberOfQuestions--;
@@ -83,9 +84,10 @@ public class Game {
 
                     while (correct){
                         answer = display.getNewAnswer(player);
+
                         correct = !randomQuestions.get(i).acceptableAnswer(answer);
                     }
-                    if (answer == randomQuestions.get(i).getCorrectAnswer()){
+                    if (answer.equals(randomQuestions.get(i).getCorrectAnswer())){
                         player.setStatus(true);
                     }
 

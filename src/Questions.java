@@ -71,7 +71,7 @@ public class Questions {
     }
 
     public boolean acceptableAnswer(String givenAnswer){
-        if(givenAnswer == answerA || givenAnswer == answerB || givenAnswer == answerC || givenAnswer == answerD){
+        if(givenAnswer.equals(answerA)  || givenAnswer.equals(answerB) || givenAnswer.equals(answerC) || givenAnswer.equals(answerD)){
             return true;
         }
         else

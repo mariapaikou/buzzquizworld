@@ -20,8 +20,8 @@ public abstract class Type {
     }
 
     public abstract void  changePoints();
-
     public abstract String getName();
+    public abstract void setPoints(int betPoints,int potision);
 
     public void SetPlayersList(ArrayList<Player> players){
         this.players = players;

@@ -38,7 +38,7 @@ public class UserInteraction {
      * @return the betPoints variable, which contains the points bet by the player.
      */
 
-    public int BetPoints() {
+    public int betPoints() {
         System.out.println("Now tell me how risky are you?");
         System.out.println("Type how many points you bet(250 / 500 / 750 / 1000):");
         String points = input.nextLine();
@@ -69,9 +69,11 @@ public class UserInteraction {
      * @param question is a Questions object
      */
     public void askTheQuestion(Questions question){
+        System.out.println("Question Category: " + question.getCategory());
         System.out.println(question.getQuestion());
-        System.out.println(question.getAnswerA() + "    " + question.getAnswerB());  //prepei na skeftoume tropo kai pou tha kanei randomize thn seira twn erwthsewn
-        System.out.println(question.getAnswerC() + "    " + question.getAnswerD());
+        ArrayList<String> answers = question.getAnswers();
+        System.out.println(answers.get(0) + "     " + answers.get(1));
+        System.out.println(answers.get(2) + "     " + answers.get(3));
     }
 
     /**

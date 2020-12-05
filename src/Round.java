@@ -28,29 +28,34 @@ public class Round {
         }
         return type;
     }
-
+/*
     /**
      * Function getRandomQuestion, accepts the ArrayList the contains all the questions and the ArrayList that
      * will hold the random questions selected for the round. It chooses a random number, checks if that question has been used before
      * and if not it adds it to the randomQuestions ArrayList.
-     */
-    //prospa8hsa na thn kanw na epistrefei Questions alla meta eksw apo thn if den eixe return statement
-    //prospa8hsa na thn kanw boolean alla den mou bghke
-    //den kserw an xreiazetai h used telika giati apla afairw to antikeimeno apo thn lista alla gia twra thn afhnw
-    public void getRandomQuestion(ArrayList<Questions> allQuestions, ArrayList<Questions> randomQuestions){
-        int r = random.nextInt(allQuestions.size());
-        if (allQuestions.get(r).getUsed() == false) {
-            randomQuestions.add(allQuestions.get(r));
-            allQuestions.get(r).setUsed(true);
-        }
-        else if (allQuestions.get(r).getUsed() == true) {
-            getRandomQuestion(allQuestions, randomQuestions);
-        }
-        else {
-            System.out.println("Error, no available questions left.");
-        }
-    } //thn etrexa kai den paizei :'( alla thn krataw giati einai kalo to skeptiko apla prepei na to koitakseis ki esu
+     *
+//prospa8hsa na thn kanw na epistrefei Questions alla meta eksw apo thn if den eixe return statement
+//prospa8hsa na thn kanw boolean alla den mou bghke
+//den kserw an xreiazetai h used telika giati apla afairw to antikeimeno apo thn lista alla gia twra thn afhnw
+public void getRandomQuestion(ArrayList<Questions> allQuestions, ArrayList<Questions> randomQuestions){
+    System.out.println("inside getrandomquestrion!!!!!!!!!!!!!!!!!!!!!!!!");
+    int r = random.nextInt(allQuestions.size());
+    System.out.println("R now is"+r+"!!!!!!!!!!!!");
+    // System.out.println("r is "+ r +"!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    if (allQuestions.get(r).getUsed() == false) {
+        randomQuestions.add(allQuestions.get(r));
+        allQuestions.get(r).setUsed(true);
+    }
+    else if (allQuestions.get(r).getUsed() == true) {
+        getRandomQuestion(allQuestions, randomQuestions);
+    }
+    else {
+        System.out.println("Error, no available questions left.");
+    }
+} //thn etrexa kai den paizei :'( alla thn krataw giati einai kalo to skeptiko apla prepei na to koitakseis ki esu
     //nomizw to thema ths einai to used
+
+ */
 
 
 

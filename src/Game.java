@@ -1,6 +1,8 @@
-import jdk.swing.interop.SwingInterOpUtils;
+
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 /**
  * This class is initializing the players of the game also it makes a new round object.
@@ -19,7 +21,7 @@ public class Game {
     //private int howManyPlayers;
     private ArrayList <Player> playerList;
     private ArrayList<Questions> allQuestions;
-    private ArrayList<Questions> randomQuestions;
+   // private ArrayList<Questions> randomQuestions;
     private static int howManyRounds = 3;
     private static int numberOfQuestions = 1; //gia twra
     private UserInteraction display;
@@ -39,7 +41,7 @@ public class Game {
             playerList.add(display.God());
        // }
 
-        randomQuestions = new ArrayList<>();
+        //randomQuestions = new ArrayList<>();
 
         allQuestions = new ArrayList<>();
     }
@@ -58,51 +60,53 @@ public class Game {
      */
     public void PlayTheGame(){
         fillAllQuestions();
+        randomizeQuestions(allQuestions);
+        int questionsAskedAlready = 0;
 
         while(howManyRounds > 0){
 
+            int num = numberOfQuestions;
             Round round = new Round();
             Type type = round.getRandomType();
             type.SetPlayersList(playerList);
 
-
             display.announcingTheType(type);
 
-            while (numberOfQuestions > 0 && randomQuestions.size() < numberOfQuestions) {
 
-                round.getRandomQuestion(allQuestions, randomQuestions);
-                numberOfQuestions--;
-            }
-            for (int i=0; i < randomQuestions.size(); i++) {
+           while (num > 0){
 
-                display.askTheQuestion(randomQuestions.get(i));
-
+                display.askTheQuestion(allQuestions.get(questionsAskedAlready));
+                int position = 0;
                 for (Player player : playerList){
+
+                    if(type instanceof Bet){
+                        type.setPoints(display.betPoints(), position) ;
+                    }
+
                     String answer = display.getAnAnswer(player);
 
-                    boolean correct = !randomQuestions.get(i).acceptableAnswer(answer);
+                    boolean correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);
 
-                    while (correct){
+                    while (!correct){
                         answer = display.getNewAnswer(player);
-
-                        correct = !randomQuestions.get(i).acceptableAnswer(answer);
+                        correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);
                     }
-                    if (answer.equals(randomQuestions.get(i).getCorrectAnswer())){
+                    if (answer.equals(allQuestions.get(questionsAskedAlready).getCorrectAnswer())){
                         player.setStatus(true);
                     }
 
                 }
-                display.correctAnswer(randomQuestions.get(i));
+                display.correctAnswer(allQuestions.get(questionsAskedAlready));
                 display.whoWon(playerList);
                 type.changePoints();
 
                 for (Player player : playerList){
                     player.defaultfyStatus();
                 }
-
+                questionsAskedAlready++;
+                num--;
             }
             display.showRoundScores(playerList);
-
             howManyRounds--;
         }
     }
@@ -111,39 +115,26 @@ public class Game {
      * Temporary method fillAllQuestions that creates Questions objects and adds them to the ArrayList.
      */
 
-    public void fillAllQuestions(){
-        Questions a = new Questions();
-        Questions b = new Questions();
-        Questions c = new Questions();
-
-        a.setQuestion("Which nut is used to make dynamite?");
-        a.setAnswerA("Peanuts");
-        a.setAnswerB("Walnuts");
-        a.setAnswerC("Pine nuts");
-        a.setAnswerD("Almonds");
-        a.setCorrectAnswer("Peanuts");
-        a.setCategory("Food");
+    private void fillAllQuestions(){
+        Questions a = new Questions("Which nut is used to make dynamite?", "Peanuts", "Walnuts", "Pine nuts", "Almonds", "Peanuts", "Food");
         allQuestions.add(a);
 
-        b.setQuestion("When was the band System of a Down formed?");
-        b.setAnswerA("1988");
-        b.setAnswerB("1987");
-        b.setAnswerC("1990");
-        b.setAnswerD("1992");
-        b.setCorrectAnswer("1988");
-        b.setCategory("Music");
+        Questions b = new Questions("When was the band System of a Down formed?", "1988", "1987", "1990", "1992", "1988", "Music");
         allQuestions.add(b);
 
-        c.setQuestion("How many films have Al Pacino and Robert De Niro starred in together?");
-        c.setAnswerA("10");
-        c.setAnswerB("6");
-        c.setAnswerC("2");
-        c.setAnswerD("4");
-        c.setCorrectAnswer("4");
-        c.setCategory("Films");
+        Questions c = new Questions("How many films have Al Pacino and Robert De Niro starred in together?", "10", "6", "2", "4", "4", "Films");
         allQuestions.add(c);
-
     }
+
+    /**
+     * Function randomizeQuestions accepts allQuestions and randomly arranges the ArrayList
+     * @param allQuestions is the ArrayList that contains all the Questions objects available
+     */
+    private void randomizeQuestions(ArrayList<Questions> allQuestions){
+        Collections.shuffle(allQuestions);
+    }
+
+
 
     public static void main(String [] args){
         Game b = new Game();

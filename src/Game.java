@@ -76,11 +76,15 @@ public class Game {
            while (num > 0){
 
                 display.askTheQuestion(allQuestions.get(questionsAskedAlready));
-                int position = 0;
+
                 for (Player player : playerList){
 
                     if(type instanceof Bet){
-                        type.setPoints(display.betPoints(), position) ;
+                        int points = display.betPoints();
+                        while(points != 250 && points != 500 && points != 750 && points != 1000){
+                            points = display.newBetPoints();
+                        }
+                        ((Bet) type).setPoints(points);
                     }
 
                     String answer = display.getAnAnswer(player);
@@ -99,6 +103,10 @@ public class Game {
                 display.correctAnswer(allQuestions.get(questionsAskedAlready));
                 display.whoWon(playerList);
                 type.changePoints();
+                if(type instanceof Bet){
+                    ((Bet) type).initializePositions();
+                }
+
 
                 for (Player player : playerList){
                     player.defaultfyStatus();
@@ -124,6 +132,7 @@ public class Game {
 
         Questions c = new Questions("How many films have Al Pacino and Robert De Niro starred in together?", "10", "6", "2", "4", "4", "Films");
         allQuestions.add(c);
+
     }
 
     /**

@@ -1,5 +1,4 @@
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,6 +43,14 @@ public class UserInteraction {
         String points = input.nextLine();
         int betPoints = Integer.valueOf(points);
         return betPoints;
+    }
+
+    public int newBetPoints(){
+        System.out.println("You can't bet this amount, bet again!");
+        System.out.println("Type how many points you bet(250 / 500 / 750 / 1000):");
+        String points = input.nextLine();
+        int betPonits = Integer.valueOf(points);
+        return betPonits;
     }
 
     /**

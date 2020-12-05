@@ -7,12 +7,19 @@ import java.util.ArrayList;
 
 public class RightAnswer extends Type{
 
+    int points;
     public RightAnswer(){
         super();
+        points = 1000;
     }
 
     public  RightAnswer(ArrayList<Player> players){
-       super(players);
+        super(players);
+        points = 1000;
+    }
+
+    public void setPoints(int points){
+        points = 1000;
     }
 
     /**
@@ -22,9 +29,14 @@ public class RightAnswer extends Type{
     public void changePoints(){
         for(Player a : players){
             if(a.getStatus()){
-                a.increaseScoreBy(1000);
+                a.increaseScoreBy(points);
             }
         }
+    }
+
+
+    public void setPoints(){
+        points = 1000;
     }
 
 

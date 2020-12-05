@@ -10,7 +10,7 @@ public abstract class Type {
     protected ArrayList<Player> players;
 
     public Type(){
-        // empty construstor
+        this.players = new ArrayList<>();
 
     }
 
@@ -21,7 +21,7 @@ public abstract class Type {
 
     public abstract void  changePoints();
     public abstract String getName();
-    public abstract void setPoints(int betPoints,int potision);
+   // public abstract void setPoints(int points);
 
     public void SetPlayersList(ArrayList<Player> players){
         this.players = players;

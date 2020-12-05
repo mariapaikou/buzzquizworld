@@ -13,11 +13,12 @@ public abstract class Type {
         this.players = new ArrayList<>();
 
     }
-
+/*
     public Type(ArrayList<Player> players) {
         this.players = players;
-
     }
+ */
+
 
     public abstract void  changePoints();
     public abstract String getName();

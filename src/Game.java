@@ -133,6 +133,26 @@ public class Game {
         Questions c = new Questions("How many films have Al Pacino and Robert De Niro starred in together?", "10", "6", "2", "4", "4", "Films");
         allQuestions.add(c);
 
+        Questions d = new Questions("Who invented Coca-Cola?", "John Pemberton", "Asa Griggs Candler", "Charles Elmer Hires", "John Matthews", "John Pemberton", "Food");
+        allQuestions.add(d);
+
+        Questions e = new Questions("On an email, what does \"CC\" stand for?", "Carbon Copy", "Course Corrected", "Check Core", "Can't Complete", "Carbon Copy", "Technology");
+        allQuestions.add(e);
+
+        Questions f = new Questions("Which of these social media platforms was launched in 2010? ", "Twitter", "Myspace", "Facebook", "Instagram", "Instagram", "Technology");
+        allQuestions.add(f);
+
+        Questions g = new Questions("What year was the first Toy Story film released in cinemas?", "1995", "1999", "2001", "1992", "1995", "Films");
+        allQuestions.add(g);
+
+        Questions h = new Questions("Which computer programming language was known for its \"turtle graphics\"?", "Logo", "Python", "COBOL", "C++", "Logo","Technology");
+        allQuestions.add(h);
+
+        Questions i = new Questions("How many moons does Mars have in all?", "0", "5", "8", "2", "2","Science");
+        allQuestions.add(i);
+
+        Questions j = new Questions("What is the largest organ in the human body?", "Heart", "Large Intestine", "Lungs", "Skin", "Skin", "Science");
+        allQuestions.add(j);
     }
 
     /**

@@ -76,8 +76,6 @@ public class Game {
             Type type = round.getRandomType();
             type.SetPlayersList(playerList);
 
-            //display.announcingTheType(type);
-
 
            while (num > 0){
                 display.announcingTheType(type);

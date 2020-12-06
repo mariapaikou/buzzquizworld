@@ -103,6 +103,11 @@ public class UserInteraction {
         return betPonits;
     }
 
+    /**
+     * Function announcingCategory accepts a Questions type object and announces the category of the question
+     * to the player.
+     * @param question the question about to be asked
+     */
     public void announcingCategory(Questions question){
         try {
             Thread.sleep(1000);

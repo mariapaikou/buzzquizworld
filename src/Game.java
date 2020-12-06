@@ -76,23 +76,23 @@ public class Game {
             Type type = round.getRandomType();
             type.SetPlayersList(playerList);
 
-            display.announcingTheType(type);
+            //display.announcingTheType(type);
 
 
            while (num > 0){
-
-                display.askTheQuestion(allQuestions.get(questionsAskedAlready));
+                display.announcingTheType(type);
 
                 for (Player player : playerList){
-
+                    display.announcingCategory(allQuestions.get(questionsAskedAlready));
                     if(type instanceof Bet){
                         int points = display.betPoints();
+
                         while(points != 250 && points != 500 && points != 750 && points != 1000){
                             points = display.newBetPoints();
                         }
                         ((Bet) type).setPoints(points);
                     }
-
+                    display.askTheQuestion(allQuestions.get(questionsAskedAlready));
                     String answer = display.getAnAnswer(player);
 
                     boolean correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);

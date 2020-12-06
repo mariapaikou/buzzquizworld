@@ -103,6 +103,15 @@ public class UserInteraction {
         return betPonits;
     }
 
+    public void announcingCategory(Questions question){
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
+        System.out.println("\nCategory: " + question.getCategory());
+    }
+
     /**
      * Function announcingTheType accepts a Type object and prints a message that announces the type name
      * through the getName method. Then it explains the way you play the game depending on the type.
@@ -110,19 +119,17 @@ public class UserInteraction {
      */
     public void announcingTheType(Type type){
         System.out.println("\nNEW ROUND");
-            try {
-                Thread.sleep(1000);
-            } catch(InterruptedException e) {
-                System.out.println("got interrupted!");
-            }
-        System.out.println("\nFor this round, you are playing " + type.getName());
-
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             System.out.println("got interrupted!");
         }
-
+        System.out.println("\nFor this round, you are playing " + type.getName());
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
         if(type.getName().equals("RightAnswer")){
             System.out.println("\nHow to play RightAnswer: Choose the answer you believe is correct and if you are right you win 1000 points.");
         }
@@ -138,12 +145,6 @@ public class UserInteraction {
      */
     public void askTheQuestion(Questions question){
         System.out.println("\nQUESTION");
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
-        System.out.println("\nCategory: " + question.getCategory());
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {

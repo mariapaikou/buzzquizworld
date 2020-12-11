@@ -81,18 +81,12 @@ public class Game {
                 display.announcingTheType(type);
 
                 for (Player player : playerList){
+
                     display.announcingCategory(allQuestions.get(questionsAskedAlready));
-                    if(type instanceof Bet){
-                        int points = display.betPoints();
-
-                        while(points != 250 && points != 500 && points != 750 && points != 1000){
-                            points = display.newBetPoints();
-                        }
-                        ((Bet) type).setPoints(points);
-                    }
+                    setTypesInitialBehaviour(type);
                     display.askTheQuestion(allQuestions.get(questionsAskedAlready));
-                    String answer = display.getAnAnswer(player);
 
+                    String answer = display.getAnAnswer(player);
                     boolean correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);
 
                     while (!correct){
@@ -111,10 +105,8 @@ public class Game {
                     ((Bet) type).initializePositions();
                 }
 
+                defaultfyPlayersStatus();
 
-                for (Player player : playerList){
-                    player.defaultfyStatus();
-                }
                 questionsAskedAlready++;
                 num--;
             }
@@ -123,8 +115,58 @@ public class Game {
         }
         display.finalScores(playerList);
         howManyRounds = 3;
+        initializePlayersScore();
+    }
+
+/*
+     private String getPlayersAnswer(){
+
+        return answer;
+    }
+ */
+
+
+
+
+
+    /**
+     * Function setTypesInitialBehaviour gets as parameter a Type object and checks if it is an instance of Bet/........
+     * Then it sets the initialBehaviour for each type of game.
+     * For Bet it calls UserInteraction method betPoints to get betPoints from the player and then it calls Bet's method
+     * setPoints to initialize player's betpoints for this question.
+     * @param type
+     */
+    private void setTypesInitialBehaviour(Type type){
+        if(type instanceof Bet){
+            int points = display.betPoints();
+
+            while(points != 250 && points != 500 && points != 750 && points != 1000){
+                points = display.newBetPoints();
+            }
+            ((Bet) type).setPoints(points);
+        }
+    }
+
+    /**
+     * Function initializePlayersScore is a void function that sets every players score back to 0 by calling Player's
+     * method initializePlayersScore.
+     */
+    private void initializePlayersScore(){
         for(Player player : playerList){
             player.initializeScore();
+        }
+    }
+
+
+
+
+    /**
+     * Function defaultfyPlayersStatus is a void function that sets players status back to false by calling Player's method
+     * defaultfyStatus
+     */
+    private void defaultfyPlayersStatus(){
+        for (Player player : playerList){
+            player.defaultfyStatus();
         }
     }
 

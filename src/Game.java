@@ -64,7 +64,6 @@ public class Game {
      * and changes their points.
      */
     public void PlayTheGame(){
-
         fillAllQuestions();
         randomizeQuestions(allQuestions);
         int questionsAskedAlready = 0;
@@ -76,8 +75,7 @@ public class Game {
             Type type = round.getRandomType();
             type.SetPlayersList(playerList);
 
-
-           while (num > 0){
+            while (num > 0){
                 display.announcingTheType(type);
 
                 for (Player player : playerList){
@@ -85,14 +83,8 @@ public class Game {
                     display.announcingCategory(allQuestions.get(questionsAskedAlready));
                     setTypesInitialBehaviour(type);
                     display.askTheQuestion(allQuestions.get(questionsAskedAlready));
+                    String answer = getPlayersAnswer(player,questionsAskedAlready);
 
-                    String answer = display.getAnAnswer(player);
-                    boolean correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);
-
-                    while (!correct){
-                        answer = display.getNewAnswer(player);
-                        correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);
-                    }
                     if (answer.equals(allQuestions.get(questionsAskedAlready).getCorrectAnswer())){
                         player.setStatus(true);
                     }
@@ -101,12 +93,10 @@ public class Game {
                 display.correctAnswer(allQuestions.get(questionsAskedAlready));
                 display.whoWon(playerList);
                 type.changePoints();
-                if(type instanceof Bet){
-                    ((Bet) type).initializePositions();
-                }
+
+                setTypeInitialStatus(type);
 
                 defaultfyPlayersStatus();
-
                 questionsAskedAlready++;
                 num--;
             }
@@ -118,12 +108,25 @@ public class Game {
         initializePlayersScore();
     }
 
-/*
-     private String getPlayersAnswer(){
+    /**
+     * Function getPlayersAnswer calls UserInteraction method getAnswer to get an answer to the question asked and checks
+     * if answer is an acceptable value by calling UserInteractions method acceptableAnswer.
+     * @param player
+     * @param questionsAskedAlready
+     * @return answer String value that contains player's answer to the question asked
+     */
 
+     private String getPlayersAnswer(Player player, int questionsAskedAlready){
+         String answer = display.getAnAnswer(player);
+         boolean correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);
+
+         while (!correct){
+             answer = display.getNewAnswer(player);
+             correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);
+         }
         return answer;
     }
- */
+
 
 
 
@@ -134,7 +137,7 @@ public class Game {
      * Then it sets the initialBehaviour for each type of game.
      * For Bet it calls UserInteraction method betPoints to get betPoints from the player and then it calls Bet's method
      * setPoints to initialize player's betpoints for this question.
-     * @param type
+     * @param type a type object created by playTheGame that represents the type of game being played at the moment.
      */
     private void setTypesInitialBehaviour(Type type){
         if(type instanceof Bet){
@@ -146,6 +149,21 @@ public class Game {
             ((Bet) type).setPoints(points);
         }
     }
+
+
+    /**
+     * Function setTypeInitialStatus gets as parameter a Type object and checks if it is an instance of Bet/..........
+     * Thet it sets the initialStatus for each type of game.
+     * For Bet it initialize position to 0
+     * @param type a type object created by playTheGame that represents the type of game being played at the moment.
+     */
+    private void setTypeInitialStatus(Type type){
+        if(type instanceof Bet){
+            ((Bet) type).initializePositions();
+        }
+    }
+
+
 
     /**
      * Function initializePlayersScore is a void function that sets every players score back to 0 by calling Player's

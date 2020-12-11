@@ -32,6 +32,7 @@ public class Bet extends Type {
      * Function changePoints, adds or removes the bet points from the player's score depending on whether he has answered
      * the question correctly or not. This can be determined by checking the status variable.
      */
+    @Override
     public void changePoints(){
 
         for(int i = 0 ; i < players.size(); i++){

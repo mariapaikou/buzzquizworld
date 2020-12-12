@@ -18,28 +18,8 @@ class BetTest {
         bet.SetPlayersList(array);
     }
 
-
-    @Test
+    @Test //ok!
     void changePoints() {
-        int points = 1000;
-        bet.setPoints(points);
-        bet.changePoints();
-
-        if(player1.getScore() == 1000){ // players status is false
-            System.out.println("problem in first if");
-        }else{
-            System.out.println("all well in first if");
-        }
-        bet.changePoints();
-        if(player1.getScore() == 2000){
-            System.out.println("problem in second if");
-        }else{
-            System.out.println("all well in second if");
-        }
-    }
-
-    @Test
-    void changePoints1() {
         int points = 1000;
         bet.setPoints(points);
         bet.setPoints(points);
@@ -59,53 +39,52 @@ class BetTest {
         }else{
             System.out.println("problem with player2 in first if");
         }
-        bet.initializePositions();
+
 
         player1.setStatus(false);
         bet.changePoints();
+
         if(player1.getScore() == 0){
             System.out.println("all well in second if");
         }else{
             System.out.println("problem in second if");
         }
-        bet.initializePositions();
+
+        if(player2.getScore() == 2000){
+            System.out.println("all well in second if for player2!");
+        }else{
+            System.out.println("problem in second if for player2!");
+        }
+
 
         player1.setStatus(true);
+        player2.setStatus((false));
         bet.changePoints();
+
         if(player1.getScore() == 1000){
             System.out.println("all well in third if");
         }else{
             System.out.println("problem in third if");
         }
-
-    }
-
-
-
-    @Test
-    void setPoints() {
-        int points = 550;
-        bet.setPoints(points);
-        bet.changePoints();
-        if(player1.getScore() == 550){
-            System.out.println("problem");
-        }else if(player1.getScore() == 0){
-            System.out.println("All well");
+        if(player2.getScore() == 1000){
+            System.out.println("all well in third if for player2");
+        }else{
+            System.out.println("problem in third if for player2");
         }
 
     }
 
-    @Test
-    void setPoints1(){
+
+    @Test //ok!
+    void setPoints(){
         int points = -1020;
-        bet.setPoints(points);
-        if(player1.getScore() == -1020){
-            System.out.println("problem");
-        }else if(player1.getScore() == 0){
-            System.out.println("All well");
-        }
+        bet.setPoints(points); // error message
+        bet.setPoints(1000);
+        bet.setPoints(1000);
+        bet.setPoints(1000); // error message
+
     }
-    @Test////// den eimai sugourh ama auto einai to katalhlo test
+    @Test//TODO den eimai sugourh ama auto einai to katalhlo test na to ksanadoume
     void initializePositions() {
        int points = 500;
        bet.setPoints(points);
@@ -123,7 +102,7 @@ class BetTest {
 
     }
 
-    @Test
+    @Test // ok!
     void getName() {
        String name = bet.getName();
         if(name.equals("Bet")){

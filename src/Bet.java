@@ -20,13 +20,14 @@ public class Bet extends Type {
         position = 0;
 
     }
-/*
+
+    /*
      public Bet(ArrayList<Player> players){
         super(players);
         betPoints = new int[this.players.size()];
         position = 0;
     }
- */
+    */
 
     /**
      * Function changePoints, adds or removes the bet points from the player's score depending on whether he has answered
@@ -51,12 +52,13 @@ public class Bet extends Type {
      * and adds it to the betPoints array. Then it increases the position by 1.
      */
     public void setPoints(int betPoints){
-
-        if(betPoints == 250 || betPoints == 500 || betPoints == 750 || betPoints == 1000){
+        //TODO h sygkrish na ginei mia metablhth boolean gia apolopoihsh if
+        if((betPoints == 250 || betPoints == 500 || betPoints == 750 || betPoints == 1000) && position <= 1){
             this.betPoints[position]= betPoints;
             position++;
         }else{
-            //////error????????????????????????????????????????????????????????????
+            //TODO pws xeirizomai to else se authn thn periptwsh? xreiazetai na exv print message?
+            System.out.println("error in setPoints!!!!!!!!!");
         }
 
         /*

@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public abstract class Type {
     protected ArrayList<Player> players;
 
-    public Type(){
-        this.players = new ArrayList<>();
 
+    public Type() {
+        this.players = new ArrayList<>();
     }
 /*
     public Type(ArrayList<Player> players) {
@@ -18,15 +18,14 @@ public abstract class Type {
     }
  */
 
-    public abstract void  changePoints();
+    public abstract void changePoints();
 
     public abstract String getName();
 
     // public abstract void setPoints(int points);
 
-    public void SetPlayersList(ArrayList<Player> players){
+    public void SetPlayersList(ArrayList<Player> players) {
         this.players = players;
     }
-
 
 }

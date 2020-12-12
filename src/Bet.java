@@ -51,8 +51,14 @@ public class Bet extends Type {
      * and adds it to the betPoints array. Then it increases the position by 1.
      */
     public void setPoints(int betPoints){
-        this.betPoints[position]= betPoints;
-        position++;
+
+        if(betPoints == 250 || betPoints == 500 || betPoints == 750 || betPoints == 1000){
+            this.betPoints[position]= betPoints;
+            position++;
+        }else{
+            //////error????????????????????????????????????????????????????????????
+        }
+
         /*
 
         for(int i = 0; i < betOptions.length; i++) {

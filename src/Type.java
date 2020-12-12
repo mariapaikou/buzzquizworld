@@ -25,6 +25,7 @@ public abstract class Type {
     // public abstract void setPoints(int points);
 
     public void SetPlayersList(ArrayList<Player> players) {
+
         this.players = players;
     }
 

@@ -24,6 +24,7 @@ class BetTest {
         int points = 1000;
         bet.setPoints(points);
         bet.changePoints();
+
         if(player1.getScore() == 1000){ // players status is false
             System.out.println("problem in first if");
         }else{
@@ -41,14 +42,22 @@ class BetTest {
     void changePoints1() {
         int points = 1000;
         bet.setPoints(points);
-
+        bet.setPoints(points);
         player1.setStatus(true);
         player2.setStatus(true);
         bet.changePoints();
+
+
         if(player1.getScore() == 1000){ // players status is false
-            System.out.println("all well in first if");
+            System.out.println("all well with player1 in first if");
         }else{
-            System.out.println("problem in second if");
+            System.out.println("problem with player2 in second if");
+        }
+
+        if(player2.getScore() == 1000){
+            System.out.println("all well for player2 in first if");
+        }else{
+            System.out.println("problem with player2 in first if");
         }
         bet.initializePositions();
 

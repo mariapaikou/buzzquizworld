@@ -39,14 +39,11 @@ public class Game {
         display = new UserInteraction();
        // howManyPlayers = a.HowManyOfYou();
        // howManyRounds = a.HowManyRounds();
-
         playerList = new ArrayList<>();
        // for (int i = howManyPlayers; i > 0; i--) {
-            playerList.add(display.God());
+        playerList.add(display.God());
        // }
-
         //randomQuestions = new ArrayList<>();
-
         allQuestions = new ArrayList<>();
 
     }

@@ -1,10 +1,8 @@
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 
-import java.sql.Time;
+import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 class TypeTest {
     private final Bet bet;
@@ -12,8 +10,8 @@ class TypeTest {
     private final Timer timer;
     private final QuickAnswer quickAnswer;
     private final Thermometer thermometer;
-    private Player player1;
-    private Player player2;
+    private final Player player1;
+    private final Player player2;
     private ArrayList<Player> array;
 
 

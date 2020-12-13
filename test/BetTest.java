@@ -15,7 +15,7 @@ class BetTest {
         array = new ArrayList<>();
         array.add(player1);
         array.add(player2);
-        bet.SetPlayersList(array);
+        bet.setPlayersList(array);
     }
 
     @Test //ok!

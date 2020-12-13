@@ -73,7 +73,7 @@ public class Game {
             int num = numberOfQuestions;
             Round round = new Round();
             Type type = round.getRandomType();
-            type.SetPlayersList(playerList);
+            type.setPlayersList(playerList);
 
             while (num > 0){
                 display.announcingTheType(type);

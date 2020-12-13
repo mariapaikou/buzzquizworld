@@ -24,9 +24,15 @@ public abstract class Type {
 
     // public abstract void setPoints(int points);
 
-    public void SetPlayersList(ArrayList<Player> players) {
-
+    public boolean setPlayersList(ArrayList<Player> players) {
+        //TODO mhpws prepei na thn kanoyme boolean gia na elegxoume oti ola phgan kala?
         this.players = players;
+        if(this.players == players){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
 }

@@ -48,6 +48,7 @@ public class Game {
         //randomQuestions = new ArrayList<>();
 
         allQuestions = new ArrayList<>();
+
     }
 
 /*
@@ -64,6 +65,7 @@ public class Game {
      * and changes their points.
      */
     public void PlayTheGame(){
+
         fillAllQuestions();
         randomizeQuestions(allQuestions);
         int questionsAskedAlready = 0;
@@ -76,6 +78,7 @@ public class Game {
             type.setPlayersList(playerList);
 
             while (num > 0){
+
                 display.announcingTheType(type);
 
                 for (Player player : playerList){
@@ -90,15 +93,15 @@ public class Game {
                     }
 
                 }
+
                 display.correctAnswer(allQuestions.get(questionsAskedAlready));
                 display.whoWon(playerList);
                 type.changePoints();
-
                 setTypeInitialStatus(type);
-
                 defaultfyPlayersStatus();
                 questionsAskedAlready++;
                 num--;
+
             }
             display.showRoundScores(playerList);
             howManyRounds--;
@@ -106,6 +109,7 @@ public class Game {
         display.finalScores(playerList);
         howManyRounds = 3;
         initializePlayersScore();
+
     }
 
     /**
@@ -117,6 +121,7 @@ public class Game {
      */
 
      private String getPlayersAnswer(Player player, int questionsAskedAlready){
+
          String answer = display.getAnAnswer(player);
          boolean correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);
 
@@ -125,6 +130,7 @@ public class Game {
              correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);
          }
         return answer;
+
     }
 
 
@@ -140,14 +146,18 @@ public class Game {
      * @param type a type object created by playTheGame that represents the type of game being played at the moment.
      */
     private void setTypesInitialBehaviour(Type type){
+
         if(type instanceof Bet){
+
             int points = display.betPoints();
 
             while(points != 250 && points != 500 && points != 750 && points != 1000){
                 points = display.newBetPoints();
             }
             ((Bet) type).setPoints(points);
+
         }
+
     }
 
 
@@ -158,9 +168,11 @@ public class Game {
      * @param type a type object created by playTheGame that represents the type of game being played at the moment.
      */
     private void setTypeInitialStatus(Type type){
+
         if(type instanceof Bet){
             ((Bet) type).initializePositions();
         }
+
     }
 
 
@@ -170,9 +182,11 @@ public class Game {
      * method initializePlayersScore.
      */
     private void initializePlayersScore(){
+
         for(Player player : playerList){
             player.initializeScore();
         }
+
     }
 
 
@@ -183,9 +197,11 @@ public class Game {
      * defaultfyStatus
      */
     private void defaultfyPlayersStatus(){
+
         for (Player player : playerList){
             player.defaultfyStatus();
         }
+
     }
 
 
@@ -193,6 +209,7 @@ public class Game {
      * Temporary method fillAllQuestions that creates Questions objects and adds them to the ArrayList.
      */
     private void fillAllQuestions(){
+
         Questions a = new Questions("Which nut is used to make dynamite?", "Peanuts", "Walnuts", "Pine nuts", "Almonds", "Peanuts", "Food");
         allQuestions.add(a);
 
@@ -222,6 +239,7 @@ public class Game {
 
         Questions j = new Questions("What is the largest organ in the human body?", "Heart", "Large Intestine", "Lungs", "Skin", "Skin", "Science");
         allQuestions.add(j);
+
     }
 
     /**
@@ -253,14 +271,18 @@ public class Game {
             String answer = input.nextLine();
 
             while (!answer.equals("yes")  && !answer.equals("no")){
+
                 System.out.println("Sorry, tell me again!");
                 System.out.println("Play again? (yes or no)");
                 answer = input.nextLine();
                 System.out.println("New answer is " + answer);
+
             }
+
             if(answer.equals("no")) {
                 play = false;
             }
+
         }
 
     }

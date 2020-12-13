@@ -6,11 +6,14 @@ import java.util.ArrayList;
  */
 
 public abstract class Type {
+
     protected ArrayList<Player> players;
 
 
     public Type() {
+
         this.players = new ArrayList<>();
+
     }
 /*
     public Type(ArrayList<Player> players) {
@@ -25,6 +28,7 @@ public abstract class Type {
     // public abstract void setPoints(int points);
 
     public boolean setPlayersList(ArrayList<Player> players) {
+
         //TODO mhpws prepei na thn kanoyme boolean gia na elegxoume oti ola phgan kala?
         this.players = players;
         if(this.players == players){

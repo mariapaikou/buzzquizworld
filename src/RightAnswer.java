@@ -28,11 +28,15 @@ public class RightAnswer extends Type{
      */
     @Override
     public void changePoints(){
+
         for(Player a : players){
+
             if(a.getStatus()){
                 a.increaseScoreBy(points);
             }
+
         }
+
     }
 
     public String getName(){

@@ -27,20 +27,27 @@ public class Player {
      * Constructor with no given variable for damage control, it initializes the variables.
      */
     public Player(){
+        //TODO mhpws prepei na dexetai to onoma san orisma gia na mhn xreiazetai o elegzos sthn set?
         this.nickname="phantomMan, he doesn't exist";
         score=0;
         status = false;
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        if(!nickname.equals("")){
+            this.nickname = nickname;
+        }
+
     }
     public String getNickname(){
         return this.nickname;
     }
 
     public void setScore(int score){
-        this.score=score;
+        if(score == 0){
+            this.score=score;
+        }
+
     }
     public int getScore(){
         return this.score;
@@ -57,7 +64,10 @@ public class Player {
      * and adds it to the existing counter of the score, a parameter named score.
      */
     public void increaseScoreBy(int newPoints){
-        this.score+=newPoints;
+        if(newPoints >= 0){
+            this.score+=newPoints;
+        }
+
     }
 
     /**

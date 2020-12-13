@@ -18,14 +18,17 @@ public class Round {
      * @return Type object that contains the type chosen.
      */
     public Type getRandomType() {
+
         Type type;
         int r = random.nextInt(2);
+
         if(r == 1){
             type = new RightAnswer();
         }else{
             type = new Bet();
         }
         return type;
+
     }
 /*
     /**

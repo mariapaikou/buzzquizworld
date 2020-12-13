@@ -15,6 +15,7 @@ public class Bet extends Type {
     private int position;
 
     public Bet(){
+
         super();
         betPoints = new int[2];
         position = 0;

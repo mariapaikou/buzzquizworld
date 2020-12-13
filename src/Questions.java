@@ -9,6 +9,7 @@ import java.util.Collections;
  */
 
 public class Questions {
+
     private final String question;
    /* private String answerA;
     private String answerB;
@@ -23,6 +24,7 @@ public class Questions {
   //  public Questions(){ }
 
     public Questions(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String category) {
+
         this.question = question;
         this.correctAnswer = correctAnswer;
         this.category = category;
@@ -32,11 +34,13 @@ public class Questions {
         answers.add(answerC);
         answers.add(answerD);
       //  used = false;
+
     }
 
     public String getQuestion(){
         return question;
     }
+
    // public void setQuestion(String question) { this.question = question; }
 /*
     public String getAnswerA() {
@@ -78,11 +82,15 @@ public class Questions {
  */
 
     public boolean acceptableAnswer(String givenAnswer){
+
         return givenAnswer.equals(answers.get(0)) || givenAnswer.equals(answers.get(1)) || givenAnswer.equals(answers.get(2)) || givenAnswer.equals(answers.get(3));
+
     }
 
     public ArrayList<String> getAnswers(){
+
         Collections.shuffle(answers);
         return answers;
+
     }
 }

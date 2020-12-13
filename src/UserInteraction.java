@@ -13,6 +13,7 @@ public class UserInteraction {
         //empty constractor
     }
 
+
     /**
      * Function God, creates the human beings of this game. Asks for the name
      * of the player, creates a Player object with that name that is going
@@ -20,6 +21,7 @@ public class UserInteraction {
      * @return A Player object
      */
     public Player God(){
+
         System.out.println("You mortal man, name yourself!");
 
         try {
@@ -31,7 +33,13 @@ public class UserInteraction {
         System.out.println("Name: ");
         String name = input.nextLine();
         Player player = new Player();
-        player.setNickname(name);
+        if(!name.equals("")){
+            player.setNickname(name);
+        }else{
+            System.out.println("You have to give a name!");
+            God();
+        }
+
         return player;
 
     }
@@ -41,6 +49,7 @@ public class UserInteraction {
      * @return the betPoints variable, which contains the points bet by the player.
      */
     public int betPoints() {
+
         int betPoints = 0;
         String points;
 
@@ -66,7 +75,9 @@ public class UserInteraction {
             System.out.println("inside first catch");
             newBetPoints();
         }
+
         return betPoints;
+
     }
 
     /**
@@ -75,6 +86,7 @@ public class UserInteraction {
      * @return the new bet which is an integer.
      */
     public int newBetPoints(){
+
         int betPonits = 0;
         String points;
 
@@ -101,6 +113,7 @@ public class UserInteraction {
         }
 
         return betPonits;
+
     }
 
     /**
@@ -109,12 +122,14 @@ public class UserInteraction {
      * @param question the question about to be asked
      */
     public void announcingCategory(Questions question){
+
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             System.out.println("got interrupted!");
         }
         System.out.println("\nCategory: " + question.getCategory());
+
     }
 
     /**
@@ -123,6 +138,7 @@ public class UserInteraction {
      * @value type is a Type of game that is randomly chosen in an other class.
      */
     public void announcingTheType(Type type){
+
         System.out.println("\nNEW ROUND");
         try {
             Thread.sleep(1000);
@@ -143,27 +159,34 @@ public class UserInteraction {
                     "If you answer the question correctly you get the points you bet. " +
                     "If you answer wrong you lose the bet amount from your points. ");
         }
+
     }
 
     /**
      * This void function accepts a Questions type object and prints the question and the four possible answers.
      */
     public void askTheQuestion(Questions question){
+
         System.out.println("\nQUESTION");
+
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             System.out.println("got interrupted!");
         }
+
         System.out.println(question.getQuestion());
+
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             System.out.println("got interrupted!");
         }
+
         ArrayList<String> answers = question.getAnswers();
         System.out.println(answers.get(0) + "     " + answers.get(1));
         System.out.println(answers.get(2) + "     " + answers.get(3));
+
     }
 
     /**
@@ -180,6 +203,7 @@ public class UserInteraction {
 
         System.out.println(player.getNickname() + ", which answer do you think is correct?");
         return input.nextLine();
+
     }
 
     /**
@@ -187,30 +211,40 @@ public class UserInteraction {
      * @return String that contains the new answer.
      */
     public String getNewAnswer(Player player){
+
         System.out.println("\n");
         System.out.println(player.getNickname() + " this is not an option! Guess again.");
         return input.nextLine();
+
     }
 
     /**
      * This function prints the correct answer to the question asked previously.
      */
     public void correctAnswer(Questions question){
+
         System.out.println("The correct answer is: ");
+
         for (int i = 0; i < 3; i++) {
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.print("got interrupted!");
             }
+
             System.out.print(". ");
+
         }
+
         try {
             Thread.sleep(1000);
         } catch(InterruptedException e) {
             System.out.println("got interrupted!");
         }
+
         System.out.print(question.getCorrectAnswer());
+
     }
 
     /**
@@ -219,46 +253,62 @@ public class UserInteraction {
      * @value players is the ArrayList that contains all the players that are playing.
      */
     public void whoWon(ArrayList<Player> players){
+
         for (Player player : players){
+
             if(player.getStatus()){
+
                 try {
                     Thread.sleep(1000);
                 } catch(InterruptedException e) {
                     System.out.println("got interrupted!");
                 }
+
                 System.out.println("\n");
                 System.out.println(player.getNickname() + ", you won!");
+
             }
             else if(!player.getStatus()){
+
                 try {
                     Thread.sleep(1000);
                 } catch(InterruptedException e) {
                     System.out.println("got interrupted!");
                 }
+
                 System.out.println("\n");
                 System.out.println(player.getNickname() + ", maybe next time!");
+
             }
         }
+
     }
 
     /**
      * The function showRoundScores is called at the end of each round, to show the current score of the players.
      */
     public void showRoundScores(ArrayList<Player> players){
+
         try {
             Thread.sleep(2000);
         } catch(InterruptedException e) {
             System.out.println("got interrupted!");
         }
+
         System.out.println("\nThe scores for this round are:");
+
         for (Player player : players){
+
             try {
                 Thread.sleep(1000);
             } catch(InterruptedException e) {
                 System.out.println("got interrupted!");
             }
+
             System.out.println(player.getNickname() + " = " + player.getScore());
+
         }
+
     }
 
     /**
@@ -266,11 +316,13 @@ public class UserInteraction {
      * @param players is the ArrayList with all the players.
      */
     public void finalScores(ArrayList<Player> players){
+
         try {
-        Thread.sleep(2000);
-    } catch(InterruptedException e) {
-        System.out.println("got interrupted!");
-    }
+             Thread.sleep(2000);
+        }catch(InterruptedException e) {
+             System.out.println("got interrupted!");
+        }
+
         System.out.println("\nNow, for the grand reveal");
 
         try {
@@ -280,13 +332,17 @@ public class UserInteraction {
         }
 
         System.out.println("\nThe final scores are:");
+
         for (Player player : players){
+
             try {
                 Thread.sleep(1000);
-            } catch(InterruptedException e) {
+            }catch(InterruptedException e) {
                 System.out.print("got interrupted!");
             }
+
             System.out.println(player.getNickname() + " = " + player.getScore());
+
         }
 
     }

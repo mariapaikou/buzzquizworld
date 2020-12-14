@@ -19,6 +19,7 @@ public class Player {
         this.nickname = nickname;
         score = 0;
         status = false;
+
     }
 
 */

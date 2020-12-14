@@ -23,6 +23,7 @@ public class Player {
     }
 
 
+
 */
     /**
      * Constructor with no given variable for damage control, it initializes the variables.

@@ -6,9 +6,10 @@ class BetTest {
     private final Bet bet;
     private final Player player1;
     private final Player player2;
-    private final ArrayList<Player> array;
+    final  ArrayList<Player> array;
 
     public BetTest(){
+
         bet = new Bet();
         player1 = new Player();
         player2 = new Player();
@@ -16,10 +17,12 @@ class BetTest {
         array.add(player1);
         array.add(player2);
         bet.setPlayersList(array);
+
     }
 
     @Test //ok!
     void changePoints() {
+
         int points = 1000;
         bet.setPoints(points);
         bet.setPoints(points);
@@ -66,6 +69,7 @@ class BetTest {
         }else{
             System.out.println("problem in third if");
         }
+
         if(player2.getScore() == 1000){
             System.out.println("all well in third if for player2");
         }else{
@@ -77,6 +81,7 @@ class BetTest {
 
     @Test //ok!
     void setPoints(){
+
         int points = -1020;
         bet.setPoints(points); // error message
         bet.setPoints(1000);
@@ -84,8 +89,11 @@ class BetTest {
         bet.setPoints(1000); // error message
 
     }
+
+
     @Test//TODO den eimai sugourh ama auto einai to katalhlo test na to ksanadoume
     void initializePositions() {
+
        int points = 500;
        bet.setPoints(points);
        player1.setStatus(true);
@@ -94,6 +102,7 @@ class BetTest {
        bet.setPoints(points);
        player1.setStatus(true);
        bet.changePoints();
+
        if(player1.getScore() == 1000){
            System.out.println("all well");
        }else{
@@ -104,11 +113,16 @@ class BetTest {
 
     @Test // ok!
     void getName() {
+
        String name = bet.getName();
+
         if(name.equals("Bet")){
             System.out.println("all well");
         }else{
             System.out.println("problem");
         }
+
     }
+
+
 }

@@ -28,7 +28,7 @@ public class Player {
      */
     public Player(){
         //TODO mhpws prepei na dexetai to onoma san orisma gia na mhn xreiazetai o elegzos sthn set?
-        this.nickname="phantomMan, he doesn't exist";
+        this.nickname="Randall Stephens!";
         score=0;
         status = false;
     }

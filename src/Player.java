@@ -33,6 +33,7 @@ public class Player {
         status = false;
     }
 
+
     public void setNickname(String nickname) {
         if(!nickname.equals("")){
             this.nickname = nickname;

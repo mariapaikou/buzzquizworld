@@ -25,20 +25,29 @@ public class UserInteraction {
         System.out.println("You mortal man, name yourself!");
 
         try {
+
             Thread.sleep(1000);
+
         } catch(InterruptedException e) {
+
             System.out.println("got interrupted!");
+
         }
 
         System.out.println("Name: ");
         String name = input.nextLine();
-        Player player = new Player();
-        if(!name.equals("")){
-            player.setNickname(name);
-        }else{
+
+        while (name.equals("") ) {
+
             System.out.println("You have to give a name!");
-            God();
+            System.out.println("Name: ");
+
+            name = input.nextLine();
+
         }
+
+        Player player = new Player( );
+        player.setNickname(name);
 
         return player;
 

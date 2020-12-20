@@ -65,7 +65,7 @@ public class Game {
 
         fillAllQuestions();
         randomizeQuestions(allQuestions);
-        int questionsAskedAlready = 0;
+        int questionNum = 0;
 
         while(howManyRounds > 0){
 
@@ -80,23 +80,23 @@ public class Game {
 
                 for (Player player : playerList){
 
-                    display.announcingCategory(allQuestions.get(questionsAskedAlready));
+                    display.announcingCategory(allQuestions.get(questionNum));
                     setTypesInitialBehaviour(type);
-                    display.askTheQuestion(allQuestions.get(questionsAskedAlready));
-                    String answer = getPlayersAnswer(player,questionsAskedAlready);
+                    display.askTheQuestion(allQuestions.get(questionNum));
+                    String answer = getPlayersAnswer(player,questionNum);
 
-                    if (answer.equals(allQuestions.get(questionsAskedAlready).getCorrectAnswer())){
+                    if (answer.equals(allQuestions.get(questionNum).getCorrectAnswer())){
                         player.setStatus(true);
                     }
 
                 }
 
-                display.correctAnswer(allQuestions.get(questionsAskedAlready));
+                display.correctAnswer(allQuestions.get(questionNum));
                 display.whoWon(playerList);
                 type.changePoints();
                 setTypeInitialStatus(type);
                 defaultfyPlayersStatus();
-                questionsAskedAlready++;
+                questionNum++;
                 num--;
 
             }
@@ -113,18 +113,18 @@ public class Game {
      * Function getPlayersAnswer calls UserInteraction method getAnswer to get an answer to the question asked and checks
      * if answer is an acceptable value by calling UserInteractions method acceptableAnswer.
      * @param player
-     * @param questionsAskedAlready
+     * @param questionNum
      * @return answer String value that contains player's answer to the question asked
      */
 
-     private String getPlayersAnswer(Player player, int questionsAskedAlready){
+     private String getPlayersAnswer(Player player, int questionNum){
 
          String answer = display.getAnAnswer(player);
-         boolean correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);
+         boolean correct = allQuestions.get(questionNum).acceptableAnswer(answer);
 
          while (!correct){
              answer = display.getNewAnswer(player);
-             correct = allQuestions.get(questionsAskedAlready).acceptableAnswer(answer);
+             correct = allQuestions.get(questionNum).acceptableAnswer(answer);
          }
         return answer;
 

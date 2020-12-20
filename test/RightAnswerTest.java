@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 
@@ -7,13 +7,14 @@ class RightAnswerTest {
     private final RightAnswer rightAnswer;
     private Player A;
     private Player B;
+    private Player C;
     private ArrayList<Player> players;
 
     public RightAnswerTest(){
         players = new ArrayList<>();
-        Player A = new Player();
-        Player B = new Player();
-        Player C = new Player();
+        A = new Player();
+        B = new Player();
+        C = new Player();
         players.add(A);
         players.add(B);
         players.add(C);

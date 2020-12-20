@@ -68,9 +68,9 @@ public class Player {
      * and adds it to the existing counter of the score, a parameter named score.
      */
     public void increaseScoreBy(int newPoints){
-        if(newPoints >= 0){
+
             this.score+=newPoints;
-        }
+
 
     }
 

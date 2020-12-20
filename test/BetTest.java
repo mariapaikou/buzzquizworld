@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 class BetTest {
@@ -26,55 +26,25 @@ class BetTest {
         int points = 1000;
         bet.setPoints(points);
         bet.setPoints(points);
+
         player1.setStatus(true);
         player2.setStatus(true);
         bet.changePoints();
-
-
-        if(player1.getScore() == 1000){ // players status is false
-            System.out.println("all well with player1 in first if");
-        }else{
-            System.out.println("problem with player2 in second if");
-        }
-
-        if(player2.getScore() == 1000){
-            System.out.println("all well for player2 in first if");
-        }else{
-            System.out.println("problem with player2 in first if");
-        }
+        assertEquals(points,player1.getScore());
 
 
         player1.setStatus(false);
         bet.changePoints();
-
-        if(player1.getScore() == 0){
-            System.out.println("all well in second if");
-        }else{
-            System.out.println("problem in second if");
-        }
-
-        if(player2.getScore() == 2000){
-            System.out.println("all well in second if for player2!");
-        }else{
-            System.out.println("problem in second if for player2!");
-        }
+        assertEquals(0,player1.getScore());
+        assertEquals(2000,player2.getScore());
 
 
         player1.setStatus(true);
         player2.setStatus((false));
         bet.changePoints();
+        assertEquals(1000,player1.getScore());
+        assertEquals(1000,player2.getScore());
 
-        if(player1.getScore() == 1000){
-            System.out.println("all well in third if");
-        }else{
-            System.out.println("problem in third if");
-        }
-
-        if(player2.getScore() == 1000){
-            System.out.println("all well in third if for player2");
-        }else{
-            System.out.println("problem in third if for player2");
-        }
 
     }
 
@@ -91,7 +61,7 @@ class BetTest {
     }
 
 
-    @Test//TODO den eimai sugourh ama auto einai to katalhlo test na to ksanadoume
+    @Test //ok!
     void initializePositions() {
 
        int points = 500;
@@ -103,11 +73,7 @@ class BetTest {
        player1.setStatus(true);
        bet.changePoints();
 
-       if(player1.getScore() == 1000){
-           System.out.println("all well");
-       }else{
-           System.out.println("problem");
-       }
+       assertEquals(1000,player1.getScore());
 
     }
 
@@ -115,12 +81,7 @@ class BetTest {
     void getName() {
 
        String name = bet.getName();
-
-        if(name.equals("Bet")){
-            System.out.println("all well");
-        }else{
-            System.out.println("problem");
-        }
+       assertEquals("Bet", bet.getName());
 
     }
 

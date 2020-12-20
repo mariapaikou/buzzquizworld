@@ -67,9 +67,10 @@ public class Player {
      * and adds it to the existing counter of the score, a parameter named score.
      */
     public void increaseScoreBy(int newPoints){
-        if(newPoints >= 0){
+        //TODO na doyme an yparxei periptvsh na paei meivn se kapoio shmeio allaghs tvn pontvn
+       // if(newPoints >= 0){
             this.score+=newPoints;
-        }
+      //  }
 
     }
 

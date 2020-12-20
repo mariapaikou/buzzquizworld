@@ -16,6 +16,7 @@ public class Bet extends Type {
 
     public Bet(){
 
+
         super();
         betPoints = new int[2];
         position = 0;
@@ -40,7 +41,7 @@ public class Bet extends Type {
         for(int i = 0 ; i < position; i++){
             if(players.get(i).getStatus()){
                 players.get(i).increaseScoreBy(betPoints[i]);
-            }else if( !players.get(i).getStatus() && (players.get(i).getScore() - betPoints[i]) > 0){
+            }else if( !players.get(i).getStatus() && (players.get(i).getScore() - betPoints[i]) >= 0){
                 players.get(i).increaseScoreBy(-betPoints[i]);
             }else{
                players.get(i).setScore(0);

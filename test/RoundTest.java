@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class RoundTest {
@@ -25,9 +25,7 @@ class RoundTest {
 
         }
 
-        if( betCounter >= 450 && betCounter <= 550 ){
-            System.out.println("all well " + betCounter);
-        }
+        assertEquals(true, betCounter >= 450 && betCounter <= 550);
 
     }
 }

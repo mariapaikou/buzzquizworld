@@ -48,6 +48,20 @@ class BetTest {
 
     }
 
+    @Test
+    void changePoints2(){
+
+        int points = 1000;
+        bet.setPoints(points);
+        bet.setPoints(points);
+        player1.setStatus(false);
+        player2.setStatus(false);
+        bet.changePoints();
+
+        assertEquals(-1000,player1.getScore());
+        assertEquals(-1000,player2.getScore());
+
+    }
 
     @Test //ok!
     void setPoints(){

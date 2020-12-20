@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlayerTest {
     private final Player player;
@@ -9,23 +10,17 @@ class PlayerTest {
 
     @Test //ok!
     void setNickname() {
+
         String nickname = "";
         player.setNickname(nickname);
 
-        if(! (player.getNickname().equals(nickname) )){
-            System.out.println("all well in first if of setNickname!");
-        }else{
-            System.out.println("problem in first if of setNickname");
-        }
+        assertEquals("Randall Stephens!",player.getNickname());
 
         nickname = "kalhmaera!";
         player.setNickname(nickname);
 
-        if(player.getNickname().equals(nickname)){
-            System.out.println("all well in second if of setNickname!");
-        }else{
-            System.out.println("problem in second if of setNickname!");
-        }
+        assertEquals(nickname,player.getNickname());
+
     }
 
     @Test //ok!
@@ -34,73 +29,39 @@ class PlayerTest {
         String nickname = "someone";
         player.setNickname(nickname);
 
-        if(player.getNickname().equals(nickname)){
-            System.out.println("all well in first if of getNickname!");
-        }else{
-            System.out.println("problem in first if of getNickname!");
-        }
+        assertEquals(nickname,player.getNickname());
+
     }
 
-    @Test // ok!
-    void setScore() {
-
-        int score = -1000;
-        player.setScore(score);
-
-        if(! (player.getScore() == score)){
-            System.out.println("all well in first if of setScore!");
-        }else{
-            System.out.println("problem in first if of setScore!");
-        }
-    }
 
     @Test //ok!
     void getScore() {
 
-        if(player.getScore() == 0){
-            System.out.println("all well in first if of getScore!");
-        }else{
-            System.out.println("problem in first if of getScore!");
-        }
+        assertEquals(0,player.getScore());
 
         int score = 1000;
-        player.setScore(score);
+        player.increaseScoreBy(score);
 
-        if(player.getScore() == score){
-            System.out.println("all well in second if of getScore!");
-        }else{
-            System.out.println("problem in second if of getScore!");
-        }
+        assertEquals(score,player.getScore());
+
     }
 
     @Test //ok!
     void setStatus() {
 
         player.setStatus(true);
-
-        if(player.getStatus()){
-            System.out.println("all well in first if of setStatus!");
-        }else{
-            System.out.println("problem in first if of setStatus!");
-        }
+        assertEquals(true,player.getStatus());
 
         player.setStatus(false);
+        assertEquals(false,player.getStatus());
 
-        if(!player.getStatus()){
-            System.out.println("all well in second if of setStatus");
-        }else{
-            System.out.println("problem in second if of setStatus");
-        }
     }
 
     @Test //ok!
     void getStatus() {
 
-        if(!player.getStatus()){
-            System.out.println("all well in first if of getStatus!");
-        }else{
-            System.out.println("problem in first if of getStatus!");
-        }
+        assertEquals(false,player.getStatus());
+
     }
 
     @Test //ok!
@@ -108,12 +69,8 @@ class PlayerTest {
 
         int score = -600;
         player.increaseScoreBy(score);
+        assertEquals(-600,player.getScore());
 
-        if(! (player.getScore() == score)){
-            System.out.println("all well in first if of increaseScoreBy!");
-        }else{
-            System.out.println("problem in first if of increaseScoreBy");
-        }
     }
 
     @Test //ok!
@@ -122,12 +79,8 @@ class PlayerTest {
         int score = 600;
         player.increaseScoreBy(score);
         player.initializeScore();
+        assertEquals(0,player.getScore());
 
-        if(player.getScore() == 0){
-            System.out.println("all well in first if of initializeScore!");
-        }else{
-            System.out.println("problem in first if of initializeScore!");
-        }
 
     }
 
@@ -136,11 +89,7 @@ class PlayerTest {
 
         player.setStatus(true);
         player.defaultfyStatus();
+        assertEquals(false,player.getStatus());
 
-        if(!player.getStatus()){
-            System.out.println("all well in first if of defaultfyStatus!");
-        }else{
-            System.out.println("problem in first if of defaultfyStatus");
-        }
     }
 }

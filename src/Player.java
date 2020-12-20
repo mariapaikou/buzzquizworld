@@ -46,12 +46,16 @@ public class Player {
         return this.nickname;
     }
 
+    //den xreiazetai alla tha to sbhsoyme meta
+    /*
     public void setScore(int score){
         if(score == 0){
             this.score=score;
         }
 
     }
+     */
+
     public int getScore(){
         return this.score;
     }

@@ -17,7 +17,7 @@ class QuickAnswerTest {
         quickAnswer = new QuickAnswer();
     }
 
-    @Test
+    @Test //ok!
     void changePoints() {
         player1.setStatus(true);
         player2.setStatus(true);
@@ -34,11 +34,41 @@ class QuickAnswerTest {
 
     }
 
-    @Test
-    void setPoints() {
+    @Test //ok!
+    void changePoints2(){
+        player1.setStatus(false);
+        player2.setStatus(true);
+
+        array.add(player1);
+        array.add(player2);
+
+        quickAnswer.setPlayersList(array);
+        quickAnswer.changePoints();
+
+
+        assertEquals(0,player1.getScore());
+        assertEquals(1000,player2.getScore());
     }
 
-    @Test
+    @Test //ok!
+    void changePoints3(){
+        player1.setStatus(false);
+        player2.setStatus(false);
+
+        array.add(player1);
+        array.add(player2);
+
+        quickAnswer.setPlayersList(array);
+        quickAnswer.changePoints();
+
+
+        assertEquals(0,player1.getScore());
+        assertEquals(0,player2.getScore());
+    }
+
+
+    @Test //ok!
     void getName() {
+        assertEquals("QuickAnswer",quickAnswer.getName());
     }
 }

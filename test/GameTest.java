@@ -1,9 +1,17 @@
+import com.google.inject.Inject;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
-class GameTest {
+
+
+class GameTest{
+
+
 
     private Game game;
     private Bet bet;
@@ -32,6 +40,11 @@ class GameTest {
 
     }
 
+   // @TestFactory
+   // InputStream inputSteamTest(){
+        
+
+
     @Test
     void getPlayersAnswer(){
 
@@ -45,6 +58,7 @@ class GameTest {
 
     @Test
     void setTypeInitialStatus(){
+
 
     }
 
@@ -65,5 +79,26 @@ class GameTest {
 
     @Test
     void playTheGame() {
+        /*
+        InputOutput inputOutput = new InputOutput();
+        String input = "maria";
+
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+
+        assertEquals("maria", inputOutput.getInput());
+         */
+
+
+
+
+
+    }
+
+   // @Inject private Rule
+
+    public void MyTest(){
+
     }
 }

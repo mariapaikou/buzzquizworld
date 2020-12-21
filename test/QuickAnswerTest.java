@@ -8,13 +8,13 @@ class QuickAnswerTest {
     private Player player1;
     private Player player2;
     private ArrayList<Player> array;
-    private RightAnswer rightAnswer;
+    private QuickAnswer quickAnswer;
 
     public QuickAnswerTest(){
         player1 = new Player();
         player2 = new Player();
         array = new ArrayList<>();
-        rightAnswer = new RightAnswer();
+        quickAnswer = new QuickAnswer();
     }
 
     @Test
@@ -25,8 +25,8 @@ class QuickAnswerTest {
         array.add(player2);
         array.add(player1);
 
-        rightAnswer.setPlayersList(array);
-        rightAnswer.changePoints();
+        quickAnswer.setPlayersList(array);
+        quickAnswer.changePoints();
 
         assertEquals(1000,player2.getScore());
         assertEquals(500,player1.getScore());

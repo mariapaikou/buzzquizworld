@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class QuickAnswer extends Type {
 
     int firstsPoints;
@@ -17,13 +19,13 @@ public class QuickAnswer extends Type {
      *
      */
     public void changePoints(){
-
+        System.out.println("");
         boolean firstToAnswerCorrectly = true;
 
         for(int i = 0; i<players.size(); i++){
 
-            if(firstToAnswerCorrectly && players.get(i).getStatus()){
-
+            if( firstToAnswerCorrectly && players.get(i).getStatus()){
+                //System.out.println("inside first if!");
                 players.get(i).increaseScoreBy(firstsPoints);
                 firstToAnswerCorrectly = false;
 
@@ -38,4 +40,8 @@ public class QuickAnswer extends Type {
     }
 
     public String getName(){return "QuickAnswer";}
+
+
+
+
 }

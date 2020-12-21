@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+/*import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;*/
 
 /**
  * This class contains all the interactions with the user, asks all the questions, prints all
@@ -8,9 +12,9 @@ import java.util.Scanner;
 
 public class UserInteraction {
     Scanner input = new Scanner(System.in);
-
+    //private JPanel panel;
     public UserInteraction(){
-        //empty constractor
+
     }
 
 
@@ -57,7 +61,7 @@ public class UserInteraction {
      * BetPoints function, asks the player to bet and saves the amount in an int variable.
      * @return the betPoints variable, which contains the points bet by the player.
      */
-    public int betPoints() {
+    public int betPoints(Player player) {
 
         int betPoints = 0;
         String points;
@@ -69,7 +73,7 @@ public class UserInteraction {
         }
 
         try{
-            System.out.println("\nNow tell me how risky are you?");
+            System.out.println("\nNow tell me, " + player.getNickname() + ", how risky are you?");
 
             try {
                 Thread.sleep(1000);
@@ -82,7 +86,7 @@ public class UserInteraction {
             betPoints = Integer.valueOf(points);
         }catch(NumberFormatException exception){
             System.out.println("inside first catch");
-            newBetPoints();
+            newBetPoints(player);
         }
 
         return betPoints;
@@ -94,7 +98,7 @@ public class UserInteraction {
      * It informs the user about their mistake and asks for a new bet.
      * @return the new bet which is an integer.
      */
-    public int newBetPoints(){
+    public int newBetPoints(Player player){
 
         int betPonits = 0;
         String points;
@@ -106,7 +110,7 @@ public class UserInteraction {
         }
 
         try{
-            System.out.println("\nYou can't bet this amount, bet again!");
+            System.out.println("\nYou can't bet this amount" + player.getNickname() +", bet again!");
 
             try {
                 Thread.sleep(1000);
@@ -118,7 +122,7 @@ public class UserInteraction {
             points = input.nextLine();
             betPonits = Integer.valueOf(points);
         }catch(NumberFormatException ex){
-            newBetPoints();
+            newBetPoints(player);
         }
 
         return betPonits;

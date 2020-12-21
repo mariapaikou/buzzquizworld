@@ -21,7 +21,7 @@ public class Game {
      * @value numberOfQuestions is a static int that indicates the number of questions for each round.
      * @value display is a UserInteraction object that is used to display messages to the user and receive information from him.
      */
-    //private int howManyPlayers;
+    private final int howManyPlayers = 2;
     private final ArrayList <Player> playerList;
     private final ArrayList<Questions> allQuestions;
    // private ArrayList<Questions> randomQuestions;
@@ -40,9 +40,9 @@ public class Game {
        // howManyPlayers = a.HowManyOfYou();
        // howManyRounds = a.HowManyRounds();
         playerList = new ArrayList<>();
-       // for (int i = howManyPlayers; i > 0; i--) {
+        for (int i = howManyPlayers; i > 0; i--) {
         playerList.add(display.God());
-       // }
+        }
         //randomQuestions = new ArrayList<>();
         allQuestions = new ArrayList<>();
 
@@ -77,12 +77,12 @@ public class Game {
             while (num > 0){
 
                 display.announcingTheType(type);
+                display.announcingCategory(allQuestions.get(questionNum));
+                setTypesInitialBehaviour(type);
+                display.askTheQuestion(allQuestions.get(questionNum));
 
                 for (Player player : playerList){
 
-                    display.announcingCategory(allQuestions.get(questionNum));
-                    setTypesInitialBehaviour(type);
-                    display.askTheQuestion(allQuestions.get(questionNum));
                     String answer = getPlayersAnswer(player,questionNum);
 
                     if (answer.equals(allQuestions.get(questionNum).getCorrectAnswer())){
@@ -131,10 +131,6 @@ public class Game {
     }
 
 
-
-
-
-
     /**
      * Function setTypesInitialBehaviour gets as parameter a Type object and checks if it is an instance of Bet/........
      * Then it sets the initialBehaviour for each type of game.
@@ -145,14 +141,14 @@ public class Game {
     private void setTypesInitialBehaviour(Type type){
 
         if(type instanceof Bet){
+        for(Player player : playerList) {
+            int points = display.betPoints(player);
 
-            int points = display.betPoints();
-
-            while(points != 250 && points != 500 && points != 750 && points != 1000){
-                points = display.newBetPoints();
+            while (points != 250 && points != 500 && points != 750 && points != 1000) {
+                points = display.newBetPoints(player);
             }
             ((Bet) type).setPoints(points);
-
+        }
         }
 
     }

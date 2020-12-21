@@ -1,8 +1,39 @@
 public class QuickAnswer extends Type {
-    public void changePoints(){
+
+    int firstsPoints;
+    int secondsPoints;
+
+    public QuickAnswer(){
+        super();
+        firstsPoints = 1000;
+        secondsPoints = 500;
 
     }
-    public void setPoints (int points){
+
+    /**
+     * Function changePoints checks the players ArrayList and increases the points of the first player who answers
+     * correctly by 1000. For every other player that answered correctly the function adds to the players score
+     * 500 points.
+     *
+     */
+    public void changePoints(){
+
+        boolean firstToAnswerCorrectly = true;
+
+        for(int i = 0; i<players.size(); i++){
+
+            if(firstToAnswerCorrectly && players.get(i).getStatus()){
+
+                players.get(i).increaseScoreBy(firstsPoints);
+                firstToAnswerCorrectly = false;
+
+            }else if(players.get(i).getStatus()){
+
+                players.get(i).increaseScoreBy(secondsPoints);
+
+            }
+
+        }
 
     }
 

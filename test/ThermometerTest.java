@@ -38,11 +38,15 @@ class ThermometerTest {
         assertEquals(5000,player1.getScore());
         assertEquals(0,player2.getScore());
     }
+    //  TODO KAINOYRIA CHANGEPOINTS GIA TIS YPOLOIPES PERIPTWSEIS!!
 
-    @Test
-    void setPlayersList(ArrayList<Player> players){
+    @Test //ok!
+    void setPlayersList(){
 
         assertEquals(false,thermometer.setPlayersList(array));
+        array.add(player2);
+        array.add(player1);
+        assertEquals(true,thermometer.setPlayersList(array));
 
     }
 

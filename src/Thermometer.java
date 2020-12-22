@@ -21,22 +21,16 @@ public class Thermometer extends Type {
     @Override
     public boolean setPlayersList(ArrayList<Player> players) {
 
-        if(players != null){
-            this.players = players;
-        }
-
-        if(this.players == players){
-
-            for(Player player:players){
-                correctAnswers.put(player.getNickname(),0);
+            if(super.setPlayersList(players)){
+                for(Player player:players){
+                    correctAnswers.put(player.getNickname(),0);
+                }
+                return true;
+            }else{
+                return false;
             }
-            return true;
 
-        }else{
 
-            return false;
-
-        }
 
     }
 

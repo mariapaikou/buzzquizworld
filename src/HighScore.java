@@ -12,33 +12,36 @@ public class HighScore {
         highestScores = new LinkedList<>();
     }
 
-    public void roundStart(ArrayList<Player> players){
+    public void gameStart(ArrayList<Player> players){
         if(players.size() > 1) {
+//            loadTotalWinsToFile();
             for (Player player : players) {
                 totalWins.put(player.getNickname(), 0);
             }
         }
     }
 
-    public void roundOver(ArrayList<Player> players){
-        if(players.size() == 1){
-            //nothing
-        }
-        else{
-            for(Player player : players){
-                if(player.getStatus()){
-                    totalWins.replace(player.getNickname(), totalWins.get(player.getNickname()+1));
-                }
-            }
-
-        }
-
-    }
+//    public void roundOver(ArrayList<Player> players){
+//        if(players.size() == 1){
+//            //nothing
+//        }
+//        else{
+//            for(Player player : players){
+//                if(player.getStatus()){
+//                    totalWins.replace(player.getNickname(), totalWins.get(player.getNickname()+1));
+//                }
+//            }
+//
+//        }
+//
+//    }
 
     public void gameOver(ArrayList<Player> players){
         boolean added = false;
         if(players.size() == 1){
+
             Player player = players.get(0);
+
             if(highestScores.size() < 5){
                 int i = 0;
                 while(i<5 && !added){
@@ -52,19 +55,25 @@ public class HighScore {
 
             } else{
                 int j = 0;
-                while(j<highestScores.size() && !added) {
+                while(j<5 && !added) {
                     if (player.getScore() >= highestScores.get(j).getScore()){
-                        highestScores.push(player);
+                        highestScores.add(j, player);
                         highestScores.removeLast();
                         added = true;
                     }
                     j++;
                 }
             }
+//            if(added){
+//            saveHighestScoresToFile();
+//            } //eleu8erwse otan ftiakseis to file
         }
         else{
-            //nothing
+            //save ta scores
+//            saveTotalWinsToFile();
         }
+
+
     }
 
     public void saveTotalWinsToFile(String file1){

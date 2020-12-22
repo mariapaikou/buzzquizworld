@@ -1,14 +1,14 @@
-import java.util.ArrayList;
+
 
 public class QuickAnswer extends Type {
 //TODO na ta baloume se array gia an sto mellon theloume perissoterous paiktes kai allous ba8mous
-    int firstsPoints;
-    int secondsPoints;
+    int [] points;
+
 
     public QuickAnswer(){
         super();
-        firstsPoints = 1000;
-        secondsPoints = 500;
+        points[0] = 1000;
+        points[1] = 500;
 
     }
 
@@ -26,12 +26,12 @@ public class QuickAnswer extends Type {
 
             if( firstToAnswerCorrectly && players.get(i).getStatus()){
 
-                players.get(i).increaseScoreBy(firstsPoints);
+                players.get(i).increaseScoreBy(points[0]);
                 firstToAnswerCorrectly = false;
 
             }else if(players.get(i).getStatus()){
 
-                players.get(i).increaseScoreBy(secondsPoints);
+                players.get(i).increaseScoreBy(points[1]);
 
             }
 

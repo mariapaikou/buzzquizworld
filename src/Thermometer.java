@@ -3,8 +3,5 @@ public class Thermometer extends Type {
 
     }
 
-    public void setPoints(int points){
-
-    }
     public String getName(){return "Thermometer";}
 }

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class QuickAnswer extends Type {
-
+//TODO na ta baloume se array gia an sto mellon theloume perissoterous paiktes kai allous ba8mous
     int firstsPoints;
     int secondsPoints;
 

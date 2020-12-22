@@ -11,7 +11,7 @@ public class Player {
  *               correctly, when true, the player has answered correctly.
  */
     private String nickname;
-    private double score;
+    private int score;
     private boolean status;//0 if answered correctly, 1 if not
 
 
@@ -53,7 +53,7 @@ public class Player {
     }
      */
 
-    public double getScore(){
+    public int getScore(){
         return this.score;
     }
 
@@ -67,7 +67,7 @@ public class Player {
      * @value newPoints, an integer that symbolizes a sum of new points
      * and adds it to the existing counter of the score, a parameter named score.
      */
-    public void increaseScoreBy(double newPoints){
+    public void increaseScoreBy(int newPoints){
 
             this.score+=newPoints;
 
@@ -77,7 +77,7 @@ public class Player {
     /**
      * initializeScore sets the score to 0.
      */
-    public  void initializeScore(){
+    public void initializeScore(){
         this.score = 0;
     }
 

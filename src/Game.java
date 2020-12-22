@@ -150,6 +150,9 @@ public class Game {
             ((Bet) type).setPoints(points);
         }
         }
+//        else if(type instanceof Timer){
+//
+//        }
 
     }
 

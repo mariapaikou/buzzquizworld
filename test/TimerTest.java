@@ -9,7 +9,7 @@ class TimerTest {
     private Player player2;
     private ArrayList<Player> players;
     private Timer timer;
-    private double[] times;
+    private int[] times;
 
     public TimerTest(){
         player1 = new Player();
@@ -19,7 +19,7 @@ class TimerTest {
 
         timer = new Timer();
 
-        times = new double[2];
+        times = new int[2];
     }
 
     @Test
@@ -33,7 +33,7 @@ class TimerTest {
         times[0] = 1200;
         times[1] = 2300;
 
-        setTimeLeft(times);
+        timer.setTimeLeft(times);
 
         timer.setPlayersList(players);
         timer.changePoints();
@@ -54,7 +54,7 @@ class TimerTest {
         times[0] = 2000;
         times[1] = 3000;
 
-        setTimeLeft(times);
+        timer.setTimeLeft(times);
 
         timer.setPlayersList(players);
         timer.changePoints();
@@ -73,7 +73,7 @@ class TimerTest {
         times[0] = 2500;
         times[1] = 2600;
 
-        setTimeLeft(times);
+        timer.setTimeLeft(times);
 
         timer.setPlayersList(players);
         timer.changePoints();
@@ -83,10 +83,7 @@ class TimerTest {
     }
 
     @Test
-    void setTimeLeft(double[] times) {
-    }
-
-    @Test
     void getName() {
+        assertEquals("Timer", timer.getName());
     }
 }

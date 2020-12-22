@@ -23,7 +23,6 @@ class TypeTest {
         array = new ArrayList<>();
         array.add(player1);
         array.add(player2);
-
         bet = new Bet();
         rightAnswer = new RightAnswer();
         timer = new Timer();
@@ -53,6 +52,8 @@ class TypeTest {
         assertEquals(true,thermometer.setPlayersList(array));
 
         assertEquals(true,quickAnswer.setPlayersList(array));
+
+        assertEquals(false,bet.setPlayersList(players));
 
     }
 

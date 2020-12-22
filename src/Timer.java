@@ -7,8 +7,11 @@ public class Timer extends Type {
     }
 
     public void changePoints() {
+
         for (int i=0; i<players.size(); i++){
+
             if (players.get(i).getStatus()){
+
                 players.get(i).increaseScoreBy((int)(timeLeft[i] * 0.2));
 
             }

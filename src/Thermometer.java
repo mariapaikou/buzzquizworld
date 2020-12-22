@@ -26,15 +26,18 @@ public class Thermometer extends Type {
 
             if(players.get(i).getStatus() && firstToAnswerCorrectly){
 
-                j = (int) correctAnswers.get(players.get(i).getNickname());
+                nameOfPlayer = players.get(i).getNickname();
+                j = (int) correctAnswers.get(nameOfPlayer);
                 correctAnswers.replace(players.get(i).getNickname(), j+1);
 
-                nameOfPlayer = players.get(i).getNickname();
+
                 if((int)correctAnswers.get(nameOfPlayer) == 5){
                     players.get(i).increaseScoreBy(points);
                 }
+                firstToAnswerCorrectly = false;
 
-            }if(players.get(i).getStatus()){
+
+            }else if(players.get(i).getStatus()){
 
                 j = (int) correctAnswers.get(players.get(i).getNickname());
                 correctAnswers.replace(players.get(i).getNickname(), j+1);

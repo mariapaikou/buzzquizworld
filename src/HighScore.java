@@ -1,22 +1,70 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class HighScore {
-    private ArrayList<Player> players;
     private HashMap totalWins;
-    private String[] highestScores;
+    private LinkedList<Player> highestScores;
 
     public HighScore(){
-        players = new ArrayList<>();
         totalWins = new HashMap();
-        highestScores = new String[5];
+        highestScores = new LinkedList<>();
     }
 
-    public HighScore(ArrayList<Player> players){
-        this.players = players;
-        totalWins = new HashMap();
-        highestScores = new String[5];
+    public void roundStart(ArrayList<Player> players){
+        if(players.size() > 1) {
+            for (Player player : players) {
+                totalWins.put(player.getNickname(), 0);
+            }
+        }
+    }
+
+    public void roundOver(ArrayList<Player> players){
+        if(players.size() == 1){
+            //nothing
+        }
+        else{
+            for(Player player : players){
+                if(player.getStatus()){
+                    totalWins.replace(player.getNickname(), totalWins.get(player.getNickname()+1));
+                }
+            }
+
+        }
+
+    }
+
+    public void gameOver(ArrayList<Player> players){
+        boolean added = false;
+        if(players.size() == 1){
+            Player player = players.get(0);
+            if(highestScores.size() < 5){
+                int i = 0;
+                while(i<5 && !added){
+
+                     if (player.getScore() >= highestScores.get(i).getScore()){
+                        highestScores.add(i, player);
+                        added = true;
+                     }
+                 i++;
+                }
+
+            } else{
+                int j = 0;
+                while(j<highestScores.size() && !added) {
+                    if (player.getScore() >= highestScores.get(j).getScore()){
+                        highestScores.push(player);
+                        highestScores.removeLast();
+                        added = true;
+                    }
+                    j++;
+                }
+            }
+        }
+        else{
+            //nothing
+        }
     }
 
     public void saveTotalWinsToFile(String file1){
@@ -53,7 +101,7 @@ public class HighScore {
 
     public void loadHighestScoresToFile(String file2){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file2))){
-            highestScores = (String[]) ois.readObject();
+            highestScores = (LinkedList<Player>) ois.readObject();
         }catch(FileNotFoundException e){
             e.printStackTrace();
         }catch(IOException e){

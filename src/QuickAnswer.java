@@ -7,6 +7,7 @@ public class QuickAnswer extends Type {
 
     public QuickAnswer(){
         super();
+        points = new int[2];
         points[0] = 1000;
         points[1] = 500;
 

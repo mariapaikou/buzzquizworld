@@ -19,15 +19,17 @@ public class Questions {
     private final String correctAnswer;
     private final String category;
     private final ArrayList<String> answers;
+    private String image;
   //  private boolean used;
 
   //  public Questions(){ }
 
-    public Questions(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String category) {
+    public Questions(String category, String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String image) {
 
         this.question = question;
         this.correctAnswer = correctAnswer;
         this.category = category;
+        this.image = image;
         answers = new ArrayList<>();
         answers.add(answerA);
         answers.add(answerB);
@@ -92,5 +94,9 @@ public class Questions {
         Collections.shuffle(answers);
         return answers;
 
+    }
+
+    public String getImageName(){
+        return image;
     }
 }

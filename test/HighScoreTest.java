@@ -1,5 +1,7 @@
+/*
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,6 +13,8 @@ class HighScoreTest {
     private Player player;
     private Player playerA;
     private Player playerB;
+    private File WINS;
+    private File HIGH;
 
     public HighScoreTest(){
         highScore = new HighScore();
@@ -31,10 +35,14 @@ class HighScoreTest {
 
         twoPlayersMode.add(playerA);
         twoPlayersMode.add(playerB);
+
+        WINS = new File("wins.dat");
+        HIGH = new File("high.dat");
     }
 
     @Test
     void gameStarted() {
+        highScore.gameStarted(twoPlayersMode);
 
     }
 
@@ -57,4 +65,4 @@ class HighScoreTest {
     @Test
     void loadHighestScoresFromFile() {
     }
-}
+}*/

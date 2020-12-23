@@ -6,6 +6,7 @@ import java.util.LinkedList;
 public class HighScore {
     private HashMap totalWins;
     private LinkedList<Player> highestScores;
+    private static int highScoresNumber = 5;
 
     public HighScore(){
         totalWins = new HashMap();
@@ -21,20 +22,6 @@ public class HighScore {
         }
     }
 
-//    public void roundOver(ArrayList<Player> players){
-//        if(players.size() == 1){
-//            //nothing
-//        }
-//        else{
-//            for(Player player : players){
-//                if(player.getStatus()){
-//                    totalWins.replace(player.getNickname(), totalWins.get(player.getNickname()+1));
-//                }
-//            }
-//
-//        }
-//
-//    }
 
     public void gameEnded(ArrayList<Player> players){
         boolean added = false;
@@ -43,9 +30,9 @@ public class HighScore {
 
             Player player = players.get(0);
 
-            if(highestScores.size() < 5){
+            if(highestScores.size() < highScoresNumber){
                 int i = 0;
-                while(i<5 && !added){
+                while(i<highScoresNumber && !added){
 
                      if (player.getScore() >= highestScores.get(i).getScore()){
                         highestScores.add(i, player);
@@ -56,7 +43,7 @@ public class HighScore {
 
             } else{
                 int j = 0;
-                while(j<5 && !added) {
+                while(j<highScoresNumber && !added) {
                     if (player.getScore() >= highestScores.get(j).getScore()){
                         highestScores.add(j, player);
                         highestScores.removeLast();
@@ -122,6 +109,20 @@ public class HighScore {
             e.printStackTrace();
         }
 
+//    public void roundOver(ArrayList<Player> players){
+//        if(players.size() == 1){
+//            //nothing
+//        }
+//        else{
+//            for(Player player : players){
+//                if(player.getStatus()){
+//                    totalWins.replace(player.getNickname(), totalWins.get(player.getNickname()+1));
+//                }
+//            }
+//
+//        }
+//
+//    }
     }
 
 

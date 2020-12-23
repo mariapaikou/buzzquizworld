@@ -12,9 +12,9 @@ public class HighScore {
         highestScores = new LinkedList<>();
     }
 
-    public void gameStart(ArrayList<Player> players){
+    public void gameStarted(ArrayList<Player> players){
         if(players.size() > 1) {
-//            loadTotalWinsToFile();
+            loadTotalWinsFromFile("totalwins.dat");
             for (Player player : players) {
                 totalWins.put(player.getNickname(), 0);
             }
@@ -36,9 +36,10 @@ public class HighScore {
 //
 //    }
 
-    public void gameOver(ArrayList<Player> players){
+    public void gameEnded(ArrayList<Player> players){
         boolean added = false;
         if(players.size() == 1){
+           loadHighestScoresFromFile("highscores.dat");
 
             Player player = players.get(0);
 
@@ -64,13 +65,15 @@ public class HighScore {
                     j++;
                 }
             }
-//            if(added){
-//            saveHighestScoresToFile();
-//            } //eleu8erwse otan ftiakseis to file
+            if(added){
+            saveHighestScoresToFile("highscores.dat");
+            }
         }
         else{
-            //save ta scores
-//            saveTotalWinsToFile();
+            for(Player player : players){
+                    totalWins.put(player.getNickname(), player.getScore());
+                }
+            saveTotalWinsToFile("totalwins.dat");
         }
 
 
@@ -86,7 +89,7 @@ public class HighScore {
         }
     }
 
-    public void loadTotalWinsToFile(String file1){
+    public void loadTotalWinsFromFile(String file1){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file1))){
             totalWins = (HashMap) ois.readObject();
         }catch(FileNotFoundException e){
@@ -108,7 +111,7 @@ public class HighScore {
         }
     }
 
-    public void loadHighestScoresToFile(String file2){
+    public void loadHighestScoresFromFile(String file2){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file2))){
             highestScores = (LinkedList<Player>) ois.readObject();
         }catch(FileNotFoundException e){

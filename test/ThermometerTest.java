@@ -38,7 +38,37 @@ class ThermometerTest {
         assertEquals(5000,player1.getScore());
         assertEquals(0,player2.getScore());
     }
+
+
     //  TODO KAINOYRIA CHANGEPOINTS GIA TIS YPOLOIPES PERIPTWSEIS!!
+
+    @Test
+    void changePoints2(){
+
+        player1.setStatus(true);
+        player2.setStatus(true);
+        array.add(player1);
+        array.add(player2);
+        thermometer.setPlayersList(array);
+
+        for(int i = 0; i<= 3; i++){
+            thermometer.changePoints();
+        }
+
+        player1.setStatus(false);
+        array.clear();
+        array.add(player1);
+        array.add(player2);
+        thermometer.setPlayersList(array);
+
+        for (int i = 0; i <= 3; i++){
+            thermometer.changePoints();
+        }
+
+        assertEquals(0,player1.getScore());
+        assertEquals(5000,player2.getScore());
+
+    }
 
     @Test //ok!
     void setPlayersList(){

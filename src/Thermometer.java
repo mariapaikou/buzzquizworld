@@ -46,9 +46,9 @@ public class Thermometer extends Type {
             if(players.get(i).getStatus() && firstToAnswerCorrectly){
 
                 nameOfPlayer = players.get(i).getNickname();
-               //j = (int) ;
+                j = (int) correctAnswers.get(nameOfPlayer) + 1;
                 if(correctAnswers.containsKey(nameOfPlayer)){
-                    correctAnswers.replace(players.get(i).getNickname(), (int)correctAnswers.get(nameOfPlayer)+1);
+                    correctAnswers.replace(players.get(i).getNickname(), j);
                 }else{
 
                 }
@@ -63,8 +63,8 @@ public class Thermometer extends Type {
 
             }else if(players.get(i).getStatus()){
 
-                j = (int) correctAnswers.get(players.get(i).getNickname());
-                correctAnswers.replace(players.get(i).getNickname(), j+1);
+                j = (int) correctAnswers.get(players.get(i).getNickname()) + 1;
+                correctAnswers.replace(players.get(i).getNickname(), j);
 
 
             }

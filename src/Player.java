@@ -61,8 +61,8 @@ public class Player {
     public boolean getStatus(){
         return status;
     }
-    public void setTime(int time){this.clickTime = time;}
-    public int getTime(){return clickTime;}
+    public void setClickTime(int time){this.clickTime = time;}
+    public int getClickTime(){return clickTime;}
 
 
     /**

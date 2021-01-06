@@ -22,8 +22,8 @@ class QuickAnswerTest {
         player1.setStatus(true);
         player2.setStatus(true);
 
-        player1.setTime(500);
-        player2.setTime(1000);
+        player1.setClickTime(500);
+        player2.setClickTime(1000);
 
 
         array.add(player1);
@@ -43,8 +43,8 @@ class QuickAnswerTest {
         player1.setStatus(false);
         player2.setStatus(true);
 
-        player1.setTime(500);
-        player2.setTime(1000);
+        player1.setClickTime(500);
+        player2.setClickTime(1000);
 
         array.add(player1);
         array.add(player2);
@@ -62,8 +62,8 @@ class QuickAnswerTest {
         player1.setStatus(false);
         player2.setStatus(false);
 
-        player1.setTime(50);
-        player2.setTime(50);
+        player1.setClickTime(50);
+        player2.setClickTime(50);
 
         array.add(player1);
         array.add(player2);

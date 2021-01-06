@@ -29,8 +29,8 @@ class TimerTest {
         players.add(player1);
         players.add(player2);
 
-        player1.setTime(1000);
-        player2.setTime(500);
+        player1.setClickTime(1000);
+        player2.setClickTime(500);
 
 
         timer.setPlayersList(players);
@@ -66,8 +66,8 @@ class TimerTest {
         players.add(player1);
         players.add(player2);
 
-        player1.setTime(3000);
-        player2.setTime(1000);
+        player1.setClickTime(3000);
+        player2.setClickTime(1000);
 
         timer.setPlayersList(players);
         timer.changePoints();

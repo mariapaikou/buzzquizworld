@@ -95,7 +95,7 @@ public class Game {
                 display.whoWon(playerList);
                 type.changePoints();
                 setTypeInitialStatus(type);
-                defaultfyPlayersStatus();
+               // defaultfyPlayersStatus(); ginetai mesa stis changePoints!
                 questionNum++;
                 num--;
 
@@ -187,18 +187,18 @@ public class Game {
 
 
 
-
-    /**
-     * Function defaultfyPlayersStatus is a void function that sets players status back to false by calling Player's method
-     * defaultfyStatus
-     */
-    private void defaultfyPlayersStatus(){
-
-        for (Player player : playerList){
-            player.defaultfyStatus();
-        }
-
-    }
+//
+//    /**
+//     * Function defaultfyPlayersStatus is a void function that sets players status back to false by calling Player's method
+//     * defaultfyStatus
+//     */
+//    private void defaultfyPlayersStatus(){
+//
+//        for (Player player : playerList){
+//            player.defaultfyStatus();
+//        }
+//
+//    }
 
 
     /**

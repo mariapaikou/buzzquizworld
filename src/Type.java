@@ -25,8 +25,6 @@ public abstract class Type {
 
     public abstract String getName();
 
-    // public abstract void setPoints(int points);
-
     public boolean setPlayersList(ArrayList<Player> players) {
 
         if(players.size() != 0){
@@ -39,6 +37,18 @@ public abstract class Type {
             return false;
         }
 
+    }
+
+    protected void defaultfyPlayers(){
+
+        for (Player player : players){
+
+            player.setStatus(false);
+            if(player.getClickTime() > -1){
+
+                player.setClickTime(-1);
+            }
+        }
     }
 
 }

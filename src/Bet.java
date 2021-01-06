@@ -46,6 +46,7 @@ public class Bet extends Type {
                 //edw esbhsa
             }
         }
+        defaultfyPlayers();
     }
 
     /**

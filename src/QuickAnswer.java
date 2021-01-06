@@ -26,7 +26,7 @@ public class QuickAnswer extends Type {
             int max = 99999999;
             for(int j=i; j < players.size(); j++){
 
-                if(players.get(j).getTime() < max){
+                if(players.get(j).getClickTime() < max){
 
                     max = j;
 
@@ -53,6 +53,11 @@ public class QuickAnswer extends Type {
 
         }
 
+        for(Player player : players){
+            player.setClickTime(-1);
+
+        }
+        defaultfyPlayers();
     }
 
     public String getName(){return "QuickAnswer";}

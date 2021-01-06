@@ -11,13 +11,14 @@ public class Timer extends Type {
 
             if (player.getStatus()) {
 
-                int timeLeft = player.getTime();
+                int timeLeft = player.getClickTime();
                 if (timeLeft != -1) {
                     player.increaseScoreBy((int) (timeLeft * 0.2));
                 }
 
             }
         }
+        defaultfyPlayers();
 
     }
 

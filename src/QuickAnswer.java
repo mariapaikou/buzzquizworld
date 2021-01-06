@@ -2,15 +2,15 @@ import java.util.ArrayList;
 
 public class QuickAnswer extends Type {
 
-    private int [] points;
-    private ArrayList<Player> sortedPlayers;
+    private final int [] points;
+    private final ArrayList<Player> sortedPlayers;
 
     public QuickAnswer(){
         super();
         points = new int[2];
         points[0] = 1000;
         points[1] = 500;
-        sortedPlayers = new ArrayList();
+        sortedPlayers = new ArrayList<>();
 
     }
 

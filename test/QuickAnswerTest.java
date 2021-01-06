@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class QuickAnswerTest {
-    private Player player1;
-    private Player player2;
-    private ArrayList<Player> array;
-    private QuickAnswer quickAnswer;
+    private final Player player1;
+    private final Player player2;
+    private final ArrayList<Player> array;
+    private final QuickAnswer quickAnswer;
 
     public QuickAnswerTest(){
         player1 = new Player();

@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 public class QuickAnswer extends Type {
-//TODO na ta baloume se array gia an sto mellon theloume perissoterous paiktes kai allous ba8mous
+
     private int [] points;
-    private ArrayList sortedPlayers;
+    private ArrayList<Player> sortedPlayers;
 
     public QuickAnswer(){
         super();
@@ -23,10 +23,10 @@ public class QuickAnswer extends Type {
     public void changePoints(){
 
         for(int i = 0; i<players.size(); i++){
-            int max = -1;
+            int max = 99999999;
             for(int j=i; j < players.size(); j++){
 
-                if(players.get(j).getTime() > max){
+                if(players.get(j).getTime() < max){
 
                     max = j;
 
@@ -41,7 +41,7 @@ public class QuickAnswer extends Type {
             }
         }
 
-        for (Player player : players) {
+        for (Player player : sortedPlayers) {
             if (player == sortedPlayers.get(0)) {
 
                 player.increaseScoreBy(points[0]);

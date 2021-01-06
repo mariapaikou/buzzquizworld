@@ -22,14 +22,18 @@ class QuickAnswerTest {
         player1.setStatus(true);
         player2.setStatus(true);
 
-        array.add(player2);
+        player1.setTime(500);
+        player2.setTime(1000);
+
+
         array.add(player1);
+        array.add(player2);
 
         quickAnswer.setPlayersList(array);
         quickAnswer.changePoints();
 
-        assertEquals(1000,player2.getScore());
-        assertEquals(500,player1.getScore());
+        assertEquals(1000,player1.getScore());
+        assertEquals(500,player2.getScore());
 
 
     }
@@ -38,6 +42,9 @@ class QuickAnswerTest {
     void changePoints2(){
         player1.setStatus(false);
         player2.setStatus(true);
+
+        player1.setTime(500);
+        player2.setTime(1000);
 
         array.add(player1);
         array.add(player2);
@@ -54,6 +61,9 @@ class QuickAnswerTest {
     void changePoints3(){
         player1.setStatus(false);
         player2.setStatus(false);
+
+        player1.setTime(50);
+        player2.setTime(50);
 
         array.add(player1);
         array.add(player2);

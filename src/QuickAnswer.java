@@ -53,8 +53,8 @@ public class QuickAnswer extends Type {
 
         }
 
-        for(Player player : players){
-            player.setClickTime(-1);
+        for(Player player : sortedPlayers){
+           sortedPlayers.remove(player);
 
         }
         defaultfyPlayers();

@@ -74,4 +74,28 @@ class TypeTest {
 
     }
 
+    @Test //ok!
+    void defaultfyPlayers(){
+         player1.setStatus(true);
+         player2.setStatus(true);
+
+         bet.setPlayersList(array);
+         bet.defaultfyPlayers();
+
+         assertEquals(false,player1.getStatus());
+         assertEquals(false,player2.getStatus());
+    }
+
+    @Test //ok!
+    void defaultfyPlayers2(){
+         player1.setClickTime(500);
+         player2.setClickTime(600);
+
+         quickAnswer.setPlayersList(array);
+         quickAnswer.defaultfyPlayers();
+
+         assertEquals(-1,player1.getClickTime());
+         assertEquals(-1,player2.getClickTime());
+
+    }
 }

@@ -13,7 +13,7 @@ class TypeTest {
     private final Thermometer thermometer;
     private final Player player1;
     private final Player player2;
-    private ArrayList<Player> array;
+    private final ArrayList<Player> array;
 
 
      public TypeTest() {
@@ -43,17 +43,17 @@ class TypeTest {
 
         ArrayList<Player> players = new ArrayList<>();
 
-        assertEquals(true,bet.setPlayersList(array));
+        assertTrue(bet.setPlayersList(array));
 
-        assertEquals(true,rightAnswer.setPlayersList(array));
+        assertTrue(rightAnswer.setPlayersList(array));
 
-        assertEquals(true,timer.setPlayersList(array));
+        assertTrue(timer.setPlayersList(array));
 
-        assertEquals(true,thermometer.setPlayersList(array));
+        assertTrue(thermometer.setPlayersList(array));
 
-        assertEquals(true,quickAnswer.setPlayersList(array));
+        assertTrue(quickAnswer.setPlayersList(array));
 
-        assertEquals(false,bet.setPlayersList(players));
+        assertFalse(bet.setPlayersList(players));
 
     }
 
@@ -82,8 +82,8 @@ class TypeTest {
          bet.setPlayersList(array);
          bet.defaultfyPlayers();
 
-         assertEquals(false,player1.getStatus());
-         assertEquals(false,player2.getStatus());
+        assertFalse(player1.getStatus());
+        assertFalse(player2.getStatus());
     }
 
     @Test //ok!

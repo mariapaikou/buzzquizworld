@@ -31,11 +31,7 @@ public abstract class Type {
             this.players = players;
         }
 
-        if(this.players == players){
-            return true;
-        }else{
-            return false;
-        }
+        return this.players == players;
 
     }
 

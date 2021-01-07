@@ -13,7 +13,7 @@ class TypeTest {
     private final Thermometer thermometer;
     private final Player player1;
     private final Player player2;
-    private ArrayList<Player> array;
+    private final ArrayList<Player> array;
 
 
      public TypeTest() {
@@ -43,17 +43,17 @@ class TypeTest {
 
         ArrayList<Player> players = new ArrayList<>();
 
-        assertEquals(true,bet.setPlayersList(array));
+        assertTrue(bet.setPlayersList(array));
 
-        assertEquals(true,rightAnswer.setPlayersList(array));
+        assertTrue(rightAnswer.setPlayersList(array));
 
-        assertEquals(true,timer.setPlayersList(array));
+        assertTrue(timer.setPlayersList(array));
 
-        assertEquals(true,thermometer.setPlayersList(array));
+        assertTrue(thermometer.setPlayersList(array));
 
-        assertEquals(true,quickAnswer.setPlayersList(array));
+        assertTrue(quickAnswer.setPlayersList(array));
 
-        assertEquals(false,bet.setPlayersList(players));
+        assertFalse(bet.setPlayersList(players));
 
     }
 
@@ -74,4 +74,28 @@ class TypeTest {
 
     }
 
+    @Test //ok!
+    void defaultfyPlayers(){
+         player1.setStatus(true);
+         player2.setStatus(true);
+
+         bet.setPlayersList(array);
+         bet.defaultfyPlayers();
+
+        assertFalse(player1.getStatus());
+        assertFalse(player2.getStatus());
+    }
+
+    @Test //ok!
+    void defaultfyPlayers2(){
+         player1.setClickTime(500);
+         player2.setClickTime(600);
+
+         quickAnswer.setPlayersList(array);
+         quickAnswer.defaultfyPlayers();
+
+         assertEquals(-1,player1.getClickTime());
+         assertEquals(-1,player2.getClickTime());
+
+    }
 }

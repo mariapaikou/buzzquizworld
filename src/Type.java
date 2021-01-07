@@ -25,20 +25,26 @@ public abstract class Type {
 
     public abstract String getName();
 
-    // public abstract void setPoints(int points);
-
     public boolean setPlayersList(ArrayList<Player> players) {
 
         if(players.size() != 0){
             this.players = players;
         }
 
-        if(this.players == players){
-            return true;
-        }else{
-            return false;
-        }
+        return this.players == players;
 
+    }
+
+    protected void defaultfyPlayers(){
+
+        for (Player player : players){
+
+            player.setStatus(false);
+            if(player.getClickTime() > -1){
+
+                player.setClickTime(-1);
+            }
+        }
     }
 
 }

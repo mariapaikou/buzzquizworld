@@ -12,22 +12,12 @@ import java.util.Scanner;
 
 
 public class Game {
-    /**
-     * @value playerList is an ArrayList that stores Player objects.
-     * @value randomQuestions is an Arraylist that stores the (three) Questions objects that are
-     *                        randomly selected by a Round method.
-     * @value allQuestions is an ArrayList that contains all of the questions read from the file.
-     * @value howManyRounds is a static int that indicates the preferable number of rounds.
-     * @value numberOfQuestions is a static int that indicates the number of questions for each round.
-     * @value display is a UserInteraction object that is used to display messages to the user and receive information from him.
-     */
-    private final int howManyPlayers = 2;
     private final ArrayList <Player> playerList;
     private final ArrayList<Questions> allQuestions;
-   // private ArrayList<Questions> randomQuestions;
     private static int howManyRounds = 3;
-    private final static int numberOfQuestions = 1; //gia twra
+    private final static int numberOfQuestions = 5; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
     private final UserInteraction display;
+    private Round round; // einai swsto to final???
 
 
 /**
@@ -37,15 +27,23 @@ public class Game {
     public Game(){
 
         display = new UserInteraction();
-       // howManyPlayers = a.HowManyOfYou();
-       // howManyRounds = a.HowManyRounds();
+        /**
+         * @value playerList is an ArrayList that stores Player objects.
+         * @value randomQuestions is an Arraylist that stores the (three) Questions objects that are
+         *                        randomly selected by a Round method.
+         * @value allQuestions is an ArrayList that contains all of the questions read from the file.
+         * @value howManyRounds is a static int that indicates the preferable number of rounds.
+         * @value numberOfQuestions is a static int that indicates the number of questions for each round.
+         * @value display is a UserInteraction object that is used to display messages to the user and receive information from him.
+         */
+        int howManyPlayers = display.HowManyOfYou();
         playerList = new ArrayList<>();
-        for (int i = howManyPlayers; i > 0; i--) {
-        playerList.add(display.God());
-        }
-        //randomQuestions = new ArrayList<>();
-        allQuestions = new ArrayList<>();
 
+        for (int i = howManyPlayers; i > 0; i--) {
+            playerList.add(display.God());
+        }
+        allQuestions = new ArrayList<>();
+        round = new Round();
     }
 
 /*
@@ -70,7 +68,8 @@ public class Game {
         while(howManyRounds > 0){
 
             int num = numberOfQuestions;
-            Round round = new Round();
+            //Round round = new Round(); // to ebala ston consturctor kai nomizw doyleysei swsta!
+
             Type type = round.getRandomType();
             type.setPlayersList(playerList);
 
@@ -95,7 +94,7 @@ public class Game {
                 display.whoWon(playerList);
                 type.changePoints();
                 setTypeInitialStatus(type);
-                defaultfyPlayersStatus();
+               // defaultfyPlayersStatus(); ginetai mesa stis changePoints!
                 questionNum++;
                 num--;
 
@@ -104,7 +103,7 @@ public class Game {
             howManyRounds--;
         }
         display.finalScores(playerList);
-        howManyRounds = 3;
+        howManyRounds = 3; //mhpws prepei na ginei stathera gia eykolia synthrhshs!
         initializePlayersScore();
 
     }
@@ -138,22 +137,21 @@ public class Game {
      * setPoints to initialize player's betpoints for this question.
      * @param type a type object created by playTheGame that represents the type of game being played at the moment.
      */
-    private void setTypesInitialBehaviour(Type type){
+    private void setTypesInitialBehaviour(Type type) {
 
-        if(type instanceof Bet){
-        for(Player player : playerList) {
-            int points = display.betPoints(player);
+        if (type instanceof Bet) {
+            for (Player player : playerList) {
+                int points = display.betPoints(player);
 
-            while (points != 250 && points != 500 && points != 750 && points != 1000) {
-                points = display.newBetPoints(player);
+                while (points != 250 && points != 500 && points != 750 && points != 1000) {
+                    points = display.newBetPoints(player);
+                }
+                ((Bet) type).setPoints(points);
             }
-            ((Bet) type).setPoints(points);
+        }else if (type instanceof Timer) {
+            // tha friaxnoyme to Timer antikeimeno!!!
+            //TODO mhpws prepei na einai mesa sthn Timer? h sthn UserIneraction!!!!
         }
-        }
-//        else if(type instanceof Timer){
-//
-//        }
-
     }
 
 
@@ -168,7 +166,7 @@ public class Game {
         if(type instanceof Bet){
             ((Bet) type).initializePositions();
         }
-
+        // TODO xreiazetai kati gia ta alla types???
     }
 
 
@@ -187,18 +185,6 @@ public class Game {
 
 
 
-
-    /**
-     * Function defaultfyPlayersStatus is a void function that sets players status back to false by calling Player's method
-     * defaultfyStatus
-     */
-    private void defaultfyPlayersStatus(){
-
-        for (Player player : playerList){
-            player.defaultfyStatus();
-        }
-
-    }
 
 
     /**
@@ -255,25 +241,16 @@ public class Game {
     public static void main(String [] args){
 
         boolean play = true;
-        Scanner input = new Scanner(System.in);
+       // Scanner input = new Scanner(System.in);
         Game b = new Game();
+        UserInteraction a = new UserInteraction();
+
 
         while(play){
 
             b.PlayTheGame();
-
-            System.out.println("THE END");
-            System.out.println("Play again? (yes or no)");
-            String answer = input.nextLine();
-
-            while (!answer.equals("yes")  && !answer.equals("no")){
-
-                System.out.println("Sorry, tell me again!");
-                System.out.println("Play again? (yes or no)");
-                answer = input.nextLine();
-                System.out.println("New answer is " + answer);
-
-            }
+            //TODO na baloyme na kaleitai h replay !!!!!
+            String answer = a.replay();
 
             if(answer.equals("no")) {
                 play = false;
@@ -284,4 +261,16 @@ public class Game {
     }
 
 }
-
+// SKOYPIDIA!!!!!!!!!!!!!!!!!
+//
+//    /**
+//     * Function defaultfyPlayersStatus is a void function that sets players status back to false by calling Player's method
+//     * defaultfyStatus
+//     */
+//    private void defaultfyPlayersStatus(){
+//
+//        for (Player player : playerList){
+//            player.defaultfyStatus();
+//        }
+//
+//    }

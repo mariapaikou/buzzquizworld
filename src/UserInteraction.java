@@ -11,12 +11,35 @@ import java.awt.event.ActionListener;*/
  */
 
 public class UserInteraction {
-    Scanner input = new Scanner(System.in);
+    Scanner input;
     //private JPanel panel;
+    Game game;
+
+    /**
+     * Constructor
+     */
     public UserInteraction(){
+
+        input = new Scanner(System.in);
+      //  game = new Game();
 
     }
 
+    public int HowManyOfYou(){
+
+        int howMany;
+        System.out.println("Oh I didn't see you there. Did you bring a friend?\n");
+        System.out.println("Number of players(1 or 2): ");
+        howMany = input.nextInt();
+
+        while(howMany<1 || howMany>2){
+            System.out.println("Oops! Give me a correct number!!1!\n");//maybe errorClass?
+            System.out.println("Number of players(1 or 2): ");
+            howMany = input.nextInt();
+        }
+        clearScanner();
+        return howMany;
+    }
 
     /**
      * Function God, creates the human beings of this game. Asks for the name
@@ -164,13 +187,24 @@ public class UserInteraction {
         } catch(InterruptedException e) {
             System.out.println("got interrupted!");
         }
+
+
         if(type.getName().equals("RightAnswer")){
+
             System.out.println("\nHow to play RightAnswer: Choose the answer you believe is correct and if you are right you win 1000 points.");
         }
         else if(type.getName().equals("Bet")){
+
             System.out.println("\nHow to play Bet: You choose a bet amount (250/500/750/1000). " +
                     "If you answer the question correctly you get the points you bet. " +
                     "If you answer wrong you lose the bet amount from your points. ");
+
+        }else if(type.getName().equals("Timer")){
+            //TODO na symplhrwthe
+        }else if(type.getName().equals("QuickAnswer")){
+            ////// TODO na symplhrvthei
+        }else { // Thermometer!
+            ///// TODO na symplhrwthei!
         }
 
     }
@@ -255,7 +289,7 @@ public class UserInteraction {
         } catch(InterruptedException e) {
             System.out.println("got interrupted!");
         }
-
+        //TODO na prasinizei thn swsth apanthsh anti na ektypvnei
         System.out.print(question.getCorrectAnswer());
 
     }
@@ -360,6 +394,33 @@ public class UserInteraction {
 
     }
 
+
+
+
+
+    public String replay(){
+
+        System.out.println("THE END");
+        System.out.println("Play again? (yes or no)");
+        String answer = input.nextLine();
+
+        while (!answer.equals("yes")  && !answer.equals("no")){
+
+            System.out.println("Sorry, tell me again!");
+            System.out.println("Play again? (yes or no)");
+            answer = input.nextLine();
+            System.out.println("New answer is " + answer);
+
+        }
+
+        return answer;
+    }
+
+
+
+    private void clearScanner(){
+        input.nextLine();
+    }
     //PROSOXH SKOYPIDIA - KATEBEITE ME DIKH SAS EY8YNH
 
 //    /**
@@ -367,19 +428,7 @@ public class UserInteraction {
 //     * @return int
 //     */
 /*
-    public int HowManyOfYou(){
-        int howMany;
-        System.out.println("Oh I didn't see you there. Did you bring a friend?\n");
-        System.out.println("Number of players(1 or 2): ");
-        howMany = input.nextInt();
 
-        while(howMany<1 || howMany>2){
-            System.out.println("Oops! Give me a correct number!!1!\n");//maybe errorClass?
-            System.out.println("Number of players(1 or 2): ");
-            howMany = input.nextInt();
-        }
-        return howMany;
-    }
 
  */
 

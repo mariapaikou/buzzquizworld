@@ -13,12 +13,13 @@ public class Player {
     private String nickname;
     private int score;
     private boolean status;//0 if answered correctly, 1 if not
-
+    private int clickTime; // int για να αποθηκευουμε κατευθιαν millisecond!  1 sec = 1000 millisecond!
 
     public Player(String nickname){
         this.nickname = nickname;
         score = 0;
         status = false;
+        clickTime = -1;
     }
 
 
@@ -56,11 +57,13 @@ public class Player {
     public int getScore(){
         return this.score;
     }
-
     public void setStatus(boolean status){ this.status = status; }
     public boolean getStatus(){
         return status;
     }
+    public void setClickTime(int time){this.clickTime = time;}
+    public int getClickTime(){return clickTime;}
+
 
     /**
      * Function increaseScoreBy accepts the

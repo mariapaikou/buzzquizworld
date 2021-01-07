@@ -1,27 +1,31 @@
 public class Timer extends Type {
-    private int[] timeLeft;
 
     public Timer(){
         super();
-        timeLeft = new int[players.size()];
+       // timeLeft = new int[players.size()]; // xreiazetai???
     }
 
     public void changePoints() {
 
-        for (int i=0; i<players.size(); i++){
+        for (Player player : players) {
 
-            if (players.get(i).getStatus()){
+            if (player.getStatus()) {
 
-                players.get(i).increaseScoreBy((int)(timeLeft[i] * 0.2));
+                int timeLeft = player.getClickTime();
+                if (timeLeft != -1) {
+                    player.increaseScoreBy((int) (timeLeft * 0.2));
+                }
 
             }
         }
+        defaultfyPlayers();
 
     }
 
-    public void setTimeLeft(int[] times) {
-        this.timeLeft = times;
-    }
+   // public void setTimeLeft(int[] times) {
+   //     this.timeLeft = times;
+  //  } //xreiazetai???
+
 
     public String getName(){return "Timer";}
 }

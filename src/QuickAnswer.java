@@ -1,15 +1,16 @@
-
+import java.util.ArrayList;
 
 public class QuickAnswer extends Type {
-//TODO na ta baloume se array gia an sto mellon theloume perissoterous paiktes kai allous ba8mous
-    int [] points;
 
+    private final int [] points;
+    private final ArrayList<Player> sortedPlayers;
 
     public QuickAnswer(){
         super();
         points = new int[2];
         points[0] = 1000;
         points[1] = 500;
+        sortedPlayers = new ArrayList<>();
 
     }
 
@@ -21,23 +22,42 @@ public class QuickAnswer extends Type {
      */
     public void changePoints(){
 
-        boolean firstToAnswerCorrectly = true;
-
         for(int i = 0; i<players.size(); i++){
+            int max = 99999999;
+            for(int j=i; j < players.size(); j++){
 
-            if( firstToAnswerCorrectly && players.get(i).getStatus()){
+                if(players.get(j).getClickTime() < max){
 
-                players.get(i).increaseScoreBy(points[0]);
-                firstToAnswerCorrectly = false;
+                    max = j;
 
-            }else if(players.get(i).getStatus()){
+                }
 
-                players.get(i).increaseScoreBy(points[1]);
+            }
+
+            if(players.get(max).getStatus()){
+
+                sortedPlayers.add(players.get(max));
+
+            }
+        }
+
+        for (Player player : sortedPlayers) {
+            if (player == sortedPlayers.get(0)) {
+
+                player.increaseScoreBy(points[0]);
+
+            } else  {
+                player.increaseScoreBy(points[1]);
 
             }
 
         }
 
+        for(Player player : sortedPlayers){
+           sortedPlayers.remove(player);
+
+        }
+        defaultfyPlayers();
     }
 
     public String getName(){return "QuickAnswer";}

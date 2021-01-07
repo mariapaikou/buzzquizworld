@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class QuickAnswerTest {
-    private Player player1;
-    private Player player2;
-    private ArrayList<Player> array;
-    private QuickAnswer quickAnswer;
+    private final Player player1;
+    private final Player player2;
+    private final ArrayList<Player> array;
+    private final QuickAnswer quickAnswer;
 
     public QuickAnswerTest(){
         player1 = new Player();
@@ -22,14 +22,18 @@ class QuickAnswerTest {
         player1.setStatus(true);
         player2.setStatus(true);
 
-        array.add(player2);
+        player1.setClickTime(500);
+        player2.setClickTime(1000);
+
+
         array.add(player1);
+        array.add(player2);
 
         quickAnswer.setPlayersList(array);
         quickAnswer.changePoints();
 
-        assertEquals(1000,player2.getScore());
-        assertEquals(500,player1.getScore());
+        assertEquals(1000,player1.getScore());
+        assertEquals(500,player2.getScore());
 
 
     }
@@ -38,6 +42,9 @@ class QuickAnswerTest {
     void changePoints2(){
         player1.setStatus(false);
         player2.setStatus(true);
+
+        player1.setClickTime(500);
+        player2.setClickTime(1000);
 
         array.add(player1);
         array.add(player2);
@@ -54,6 +61,9 @@ class QuickAnswerTest {
     void changePoints3(){
         player1.setStatus(false);
         player2.setStatus(false);
+
+        player1.setClickTime(50);
+        player2.setClickTime(50);
 
         array.add(player1);
         array.add(player2);

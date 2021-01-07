@@ -12,22 +12,12 @@ import java.util.Scanner;
 
 
 public class Game {
-    /**
-     * @value playerList is an ArrayList that stores Player objects.
-     * @value randomQuestions is an Arraylist that stores the (three) Questions objects that are
-     *                        randomly selected by a Round method.
-     * @value allQuestions is an ArrayList that contains all of the questions read from the file.
-     * @value howManyRounds is a static int that indicates the preferable number of rounds.
-     * @value numberOfQuestions is a static int that indicates the number of questions for each round.
-     * @value display is a UserInteraction object that is used to display messages to the user and receive information from him.
-     */
-    private final int howManyPlayers;
     private final ArrayList <Player> playerList;
     private final ArrayList<Questions> allQuestions;
     private static int howManyRounds = 3;
     private final static int numberOfQuestions = 5; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
     private final UserInteraction display;
-    private Round round;
+    private Round round; // einai swsto to final???
 
 
 /**
@@ -37,7 +27,16 @@ public class Game {
     public Game(){
 
         display = new UserInteraction();
-        howManyPlayers = display.HowManyOfYou();
+        /**
+         * @value playerList is an ArrayList that stores Player objects.
+         * @value randomQuestions is an Arraylist that stores the (three) Questions objects that are
+         *                        randomly selected by a Round method.
+         * @value allQuestions is an ArrayList that contains all of the questions read from the file.
+         * @value howManyRounds is a static int that indicates the preferable number of rounds.
+         * @value numberOfQuestions is a static int that indicates the number of questions for each round.
+         * @value display is a UserInteraction object that is used to display messages to the user and receive information from him.
+         */
+        int howManyPlayers = display.HowManyOfYou();
         playerList = new ArrayList<>();
 
         for (int i = howManyPlayers; i > 0; i--) {
@@ -242,7 +241,7 @@ public class Game {
     public static void main(String [] args){
 
         boolean play = true;
-        Scanner input = new Scanner(System.in);
+       // Scanner input = new Scanner(System.in);
         Game b = new Game();
         UserInteraction a = new UserInteraction();
 

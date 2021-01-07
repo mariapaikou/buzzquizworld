@@ -20,12 +20,18 @@ public class Round {
     public Type getRandomType() {
 
         Type type;
-        int r = random.nextInt(2);
+        int r = random.nextInt(5);
 
         if(r == 1){
             type = new RightAnswer();
-        }else{
+        }else if(r == 2){
             type = new Bet();
+        }else if(r == 3){
+            type = new QuickAnswer();
+        }else if(r == 4){
+            type = new Timer();
+        }else{
+            type = new Thermometer();
         }
         return type;
 

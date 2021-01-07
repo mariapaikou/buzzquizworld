@@ -1,7 +1,6 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+
 
 public class ReadQuestionsFile {
     private ArrayList<Questions> questions;
@@ -14,17 +13,19 @@ public class ReadQuestionsFile {
     private String correctAnswer;
     private String image;
 
+
     public ReadQuestionsFile(){
         questions = new ArrayList<>();
 
     }
 
     public ArrayList<Questions> loadQuestions(String file){
+
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
             String line = "";
-            String[] separated;
+
             while((line = br.readLine()) != null){
-                separated = line.split("    ");
+                String[] separated = line.split("@",8);
                 category = separated[0];
                 question = separated[1];
                 answerA = separated[2];
@@ -35,11 +36,12 @@ public class ReadQuestionsFile {
                 image = separated[7];
                 Questions q = new Questions(category, question, answerA, answerB, answerC, answerD, correctAnswer, image);
                 questions.add(q);
+
             }
 
         }catch (IOException e){
-            e.printStackTrace();
-        }
+           e.printStackTrace();
+       }
 
         return questions;
     }

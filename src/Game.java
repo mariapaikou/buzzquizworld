@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -18,32 +19,35 @@ public class Game {
     private final static int numberOfQuestions = 5; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
     private final UserInteraction display;
     private Round round; // einai swsto to final???
+    private ReadQuestionsFile readQuestionsFile;
 
 
 /**
  * The constructor initializes the UserInteraction object and the two ArrayLists, one for the
  * players and one for the questions. For the players, it calls the God method from UserInteraction.
+ * @value playerList is an ArrayList that stores Player objects.
+ * @value randomQuestions is an Arraylist that stores the (three) Questions objects that are
+ * randomly selected by a Round method.
+ * @value allQuestions is an ArrayList that contains all of the questions read from the file.
+ * @value howManyRounds is a static int that indicates the preferable number of rounds.
+ * @value numberOfQuestions is a static int that indicates the number of questions for each round.
+ * @value display is a UserInteraction object that is used to display messages to the user and receive information from him.
  */
+
     public Game(){
 
         display = new UserInteraction();
-        /**
-         * @value playerList is an ArrayList that stores Player objects.
-         * @value randomQuestions is an Arraylist that stores the (three) Questions objects that are
-         *                        randomly selected by a Round method.
-         * @value allQuestions is an ArrayList that contains all of the questions read from the file.
-         * @value howManyRounds is a static int that indicates the preferable number of rounds.
-         * @value numberOfQuestions is a static int that indicates the number of questions for each round.
-         * @value display is a UserInteraction object that is used to display messages to the user and receive information from him.
-         */
+
         int howManyPlayers = display.HowManyOfYou();
         playerList = new ArrayList<>();
 
         for (int i = howManyPlayers; i > 0; i--) {
             playerList.add(display.God());
         }
-        allQuestions = new ArrayList<>();
+        readQuestionsFile = new ReadQuestionsFile();
+        allQuestions = readQuestionsFile.loadQuestions("questions.text.txt");
         round = new Round();
+
     }
 
 /*
@@ -61,7 +65,8 @@ public class Game {
      */
     public void PlayTheGame(){
 
-        fillAllQuestions();
+
+       // fillAllQuestions();
         randomizeQuestions(allQuestions);
         int questionNum = 0;
 

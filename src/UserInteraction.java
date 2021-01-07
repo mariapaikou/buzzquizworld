@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;*/
 public class UserInteraction {
     Scanner input;
     //private JPanel panel;
-    Game game;
+    //Game game;
 
     /**
      * Constructor

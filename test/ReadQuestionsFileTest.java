@@ -20,14 +20,19 @@ class ReadQuestionsFileTest {
         ArrayList<String> answers = questions.get(0).getAnswers();
 
         for(String an : answers){
-            if(an.equals("Makaroni")){
-                i[0] = 1;
-            }else if(an.equals("Zeledakia")){
-                i[1] = 1;
-            }else if(an.equals("Mouuuzaka")){
-                i[2] = 1;
-            }else if(an.equals("Kafesssss!")){
-                i[3] = 1;
+            switch (an) {
+                case "Makaroni":
+                    i[0] = 1;
+                    break;
+                case "Zeledakia":
+                    i[1] = 1;
+                    break;
+                case "Mouuuzaka":
+                    i[2] = 1;
+                    break;
+                case "Kafesssss!":
+                    i[3] = 1;
+                    break;
             }
         }
 

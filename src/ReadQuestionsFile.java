@@ -1,18 +1,10 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
+
 public class ReadQuestionsFile {
-    private ArrayList<Questions> questions;
-    private String category;
-    private String question;
-    private String answerA;
-    private String answerB;
-    private String answerC;
-    private String answerD;
-    private String correctAnswer;
-    private String image;
+    private final ArrayList<Questions> questions;
+
 
     public ReadQuestionsFile(){
         questions = new ArrayList<>();
@@ -20,26 +12,28 @@ public class ReadQuestionsFile {
     }
 
     public ArrayList<Questions> loadQuestions(String file){
+
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
-            String line = "";
-            String[] separated;
+            String line;
+
             while((line = br.readLine()) != null){
-                separated = line.split("    ");
-                category = separated[0];
-                question = separated[1];
-                answerA = separated[2];
-                answerB = separated[3];
-                answerC = separated[4];
-                answerD = separated[5];
-                correctAnswer = separated[6];
-                image = separated[7];
+                String[] separated = line.split("@",8);
+                String category = separated[0];
+                String question = separated[1];
+                String answerA = separated[2];
+                String answerB = separated[3];
+                String answerC = separated[4];
+                String answerD = separated[5];
+                String correctAnswer = separated[6];
+                String image = separated[7];
                 Questions q = new Questions(category, question, answerA, answerB, answerC, answerD, correctAnswer, image);
                 questions.add(q);
+
             }
 
         }catch (IOException e){
-            e.printStackTrace();
-        }
+           e.printStackTrace();
+       }
 
         return questions;
     }

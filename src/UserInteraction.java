@@ -19,11 +19,15 @@ public class UserInteraction {
     private final Container con;
     private final JPanel startTextPanel, startButtonPanel;
     private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
+    private JPanel NamePanelTextOne,NamePanelOne, NamePanelTextTwo, NamePanelTwo;
 
     public UserInteraction(){
+        //The action for the start button
         ClickedOnStart click = new ClickedOnStart();
+
         //The basic frame
         JFrame frame = new JFrame("Buzz Quiz");
+        //Look & Layout
         frame.setSize(800, 500);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().setBackground(Color.BLACK);
@@ -34,6 +38,7 @@ public class UserInteraction {
 
         //The panel that contains the text
         startTextPanel = new JPanel();
+        //Look & Layout
         startTextPanel.setBounds(100, 100, 600, 140);
         startTextPanel.setLayout(new BorderLayout());
         startTextPanel.setBackground(Color.black);
@@ -42,6 +47,7 @@ public class UserInteraction {
 
         //Label with the text
         JLabel startText = new JLabel("Buzz Quiz!");
+        //Look & Layout
         startText.setFont(new Font("Carlito", Font.PLAIN, 90));
         startText.setForeground(Color.WHITE);
         startText.setHorizontalAlignment(JLabel.CENTER);
@@ -49,16 +55,19 @@ public class UserInteraction {
 
         //The panel that contains the button
         startButtonPanel = new JPanel();
+        //Look & Layout
         startButtonPanel.setBounds(300, 300, 200, 100);
         startButtonPanel.setBackground(Color.black);
         con.add(startButtonPanel);
 
         //The start button
         JButton startButton = new JButton("Start");
+        //Look & Layout
         startButton.setBackground(Color.BLACK);
         startButton.setForeground(Color.WHITE);
         startButton.setSize(200, 100);
         startButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        //Action
         startButton.addActionListener(click);
         startButtonPanel.add(startButton);
 
@@ -73,51 +82,66 @@ public class UserInteraction {
     }
 
     public int HowManyOfYou(){
+        //The actions for the buttons
+        ClickedOnONE one = new ClickedOnONE();
+        ClickedOnTWO two = new ClickedOnTWO();
+
         //turn off the previous panels
         startTextPanel.setVisible(false);
         startButtonPanel.setVisible(false);
 
         //The panel for the text
         HMPPanel = new JPanel();
+        //Look & Layout
         HMPPanel.setBounds(100, 100, 500, 250);
         HMPPanel.setBackground(Color.black);
         con.add(HMPPanel);
 
         //The area that holds the text
         JTextArea HMPText = new JTextArea("Welcome! Choose the number of players for this game.");
+        //Look & Layout
         HMPText.setBounds(100,100,500,250);
         HMPText.setBackground(Color.black);
         HMPText.setForeground(Color.WHITE);
         HMPText.setFont(new Font("Carlito", Font.PLAIN, 30));
         HMPText.setLineWrap(true);
+        HMPText.setEditable(false);
         HMPPanel.add(HMPText);
 
         //The left panel
         HMPLeftPanel = new JPanel();
+        //Look & Layout
         HMPLeftPanel.setBounds(0, 350, 400,150);
         HMPLeftPanel.setBackground(Color.black);
         con.add(HMPLeftPanel);
 
         //The right panel
         HMPRightPanel = new JPanel();
+        //Look & Layout
         HMPRightPanel.setBounds(400, 350, 400,150);
         HMPRightPanel.setBackground(Color.black);
         con.add(HMPRightPanel);
 
         //The button for 1 player
         JButton onePlayer = new JButton("1 Player");
+        //Look & Layout
         onePlayer.setBackground(Color.BLACK);
         onePlayer.setForeground(Color.WHITE);
         onePlayer.setSize(400, 150);
         onePlayer.setFont(new Font("Carlito", Font.PLAIN, 30));
+        //Action
+        onePlayer.addActionListener(one);
         HMPLeftPanel.add(onePlayer);
 
         //The button for 2 players
         JButton twoPlayers = new JButton("2 Players");
+        //Look & Layout
         twoPlayers.setBackground(Color.BLACK);
         twoPlayers.setForeground(Color.WHITE);
         twoPlayers.setSize(400, 150);
         twoPlayers.setFont(new Font("Carlito", Font.PLAIN, 30));
+        //Action
+        twoPlayers.addActionListener(two);
         HMPRightPanel.add(twoPlayers);
 
 //        int howMany;
@@ -134,10 +158,16 @@ public class UserInteraction {
         return 0;
     }
 
-    public class ClickedOnHMP implements ActionListener{
+    public class ClickedOnONE implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            God();
+            God(1);
+        }
+    }
+    public class ClickedOnTWO implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            God(2);
         }
     }
 
@@ -147,12 +177,53 @@ public class UserInteraction {
      * to be added to the playerList.
      * @return A Player object
      */
-    public Player God(){
+    public Player God(int numOfPlayers){
         //Turn off previous panels
         HMPPanel.setVisible(false);
         HMPLeftPanel.setVisible(false);
         HMPRightPanel.setVisible(false);
 
+        if(numOfPlayers==1){
+            //The panel for the text
+            NamePanelTextOne = new JPanel();
+            //Look & Layout
+            NamePanelTextOne.setBounds(100, 100, 500, 100);
+            NamePanelTextOne.setBackground(Color.black);
+            con.add(NamePanelTextOne);
+
+            //The area that holds the text
+            JTextArea NameText = new JTextArea("Choose a nickname:");
+            //Look & Layout
+            NameText.setBounds(100,100,500,250);
+            NameText.setBackground(Color.black);
+            NameText.setForeground(Color.WHITE);
+            NameText.setFont(new Font("Carlito", Font.PLAIN, 30));
+            NameText.setLineWrap(true);
+            NameText.setEditable(false);
+            NamePanelTextOne.add(NameText);
+
+            //The panel for the nickname input
+            NamePanelOne = new JPanel();
+            //Look & Layout
+            NamePanelOne.setBounds(100, 200, 500, 100);
+            NamePanelOne.setBackground(Color.black);
+            con.add(NamePanelOne);
+
+            //FormattedTextField for the nickname input
+            JFormattedTextField nickname = new JFormattedTextField();
+            //Look & Layout
+            nickname.setBounds(100,100,500,250);
+            nickname.setBackground(Color.WHITE);
+            nickname.setForeground(Color.black);
+            nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
+            NamePanelOne.add(nickname);
+
+
+        }
+        else{
+
+
+        }
 
 
 
@@ -183,8 +254,8 @@ public class UserInteraction {
 //        Player player = new Player( );
 //        player.setNickname(name);
 //
-//        return player;
-
+//       return player;
+        return null;
     }
 
     /**

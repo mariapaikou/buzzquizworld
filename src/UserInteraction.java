@@ -1,3 +1,7 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Scanner;
 /*import javax.swing.*;
@@ -11,34 +15,130 @@ import java.awt.event.ActionListener;*/
  */
 
 public class UserInteraction {
-    Scanner input;
-    //private JPanel panel;
-    //Game game;
+    Scanner input = new Scanner(System.in);
+    private final Container con;
+    private final JPanel startTextPanel, startButtonPanel;
+    private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
 
-    /**
-     * Constructor
-     */
     public UserInteraction(){
+        ClickedOnStart click = new ClickedOnStart();
+        //The basic frame
+        JFrame frame = new JFrame("Buzz Quiz");
+        frame.setSize(800, 500);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().setBackground(Color.BLACK);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(null); //bazei to frame sto kentro ths o8onhs
 
-        input = new Scanner(System.in);
-      //  game = new Game();
+        con = frame.getContentPane();
 
+        //The panel that contains the text
+        startTextPanel = new JPanel();
+        startTextPanel.setBounds(100, 100, 600, 140);
+        startTextPanel.setLayout(new BorderLayout());
+        startTextPanel.setBackground(Color.black);
+        //startPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        con.add(startTextPanel);
+
+        //Label with the text
+        JLabel startText = new JLabel("Buzz Quiz!");
+        startText.setFont(new Font("Carlito", Font.PLAIN, 90));
+        startText.setForeground(Color.WHITE);
+        startText.setHorizontalAlignment(JLabel.CENTER);
+        startTextPanel.add(startText);
+
+        //The panel that contains the button
+        startButtonPanel = new JPanel();
+        startButtonPanel.setBounds(300, 300, 200, 100);
+        startButtonPanel.setBackground(Color.black);
+        con.add(startButtonPanel);
+
+        //The start button
+        JButton startButton = new JButton("Start");
+        startButton.setBackground(Color.BLACK);
+        startButton.setForeground(Color.WHITE);
+        startButton.setSize(200, 100);
+        startButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        startButton.addActionListener(click);
+        startButtonPanel.add(startButton);
+
+        frame.setVisible(true);
+    }
+
+    public class ClickedOnStart implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            HowManyOfYou();
+        }
     }
 
     public int HowManyOfYou(){
+        //turn off the previous panels
+        startTextPanel.setVisible(false);
+        startButtonPanel.setVisible(false);
 
-        int howMany;
-        System.out.println("Oh I didn't see you there. Did you bring a friend?\n");
-        System.out.println("Number of players(1 or 2): ");
-        howMany = input.nextInt();
+        //The panel for the text
+        HMPPanel = new JPanel();
+        HMPPanel.setBounds(100, 100, 500, 250);
+        HMPPanel.setBackground(Color.black);
+        con.add(HMPPanel);
 
-        while(howMany<1 || howMany>2){
-            System.out.println("Oops! Give me a correct number!!1!\n");//maybe errorClass?
-            System.out.println("Number of players(1 or 2): ");
-            howMany = input.nextInt();
+        //The area that holds the text
+        JTextArea HMPText = new JTextArea("Welcome! Choose the number of players for this game.");
+        HMPText.setBounds(100,100,500,250);
+        HMPText.setBackground(Color.black);
+        HMPText.setForeground(Color.WHITE);
+        HMPText.setFont(new Font("Carlito", Font.PLAIN, 30));
+        HMPText.setLineWrap(true);
+        HMPPanel.add(HMPText);
+
+        //The left panel
+        HMPLeftPanel = new JPanel();
+        HMPLeftPanel.setBounds(0, 350, 400,150);
+        HMPLeftPanel.setBackground(Color.black);
+        con.add(HMPLeftPanel);
+
+        //The right panel
+        HMPRightPanel = new JPanel();
+        HMPRightPanel.setBounds(400, 350, 400,150);
+        HMPRightPanel.setBackground(Color.black);
+        con.add(HMPRightPanel);
+
+        //The button for 1 player
+        JButton onePlayer = new JButton("1 Player");
+        onePlayer.setBackground(Color.BLACK);
+        onePlayer.setForeground(Color.WHITE);
+        onePlayer.setSize(400, 150);
+        onePlayer.setFont(new Font("Carlito", Font.PLAIN, 30));
+        HMPLeftPanel.add(onePlayer);
+
+        //The button for 2 players
+        JButton twoPlayers = new JButton("2 Players");
+        twoPlayers.setBackground(Color.BLACK);
+        twoPlayers.setForeground(Color.WHITE);
+        twoPlayers.setSize(400, 150);
+        twoPlayers.setFont(new Font("Carlito", Font.PLAIN, 30));
+        HMPRightPanel.add(twoPlayers);
+
+//        int howMany;
+//        System.out.println("Oh I didn't see you there. Did you bring a friend?\n");
+//        System.out.println("Number of players(1 or 2): ");
+//        howMany = input.nextInt();
+//
+//        while(howMany<1 || howMany>2){
+//            System.out.println("Oops! Give me a correct number!!1!\n");//maybe errorClass?
+//            System.out.println("Number of players(1 or 2): ");
+//            howMany = input.nextInt();
+//        }
+//        return howMany;
+        return 0;
+    }
+
+    public class ClickedOnHMP implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            God();
         }
-        clearScanner();
-        return howMany;
     }
 
     /**
@@ -48,35 +148,42 @@ public class UserInteraction {
      * @return A Player object
      */
     public Player God(){
+        //Turn off previous panels
+        HMPPanel.setVisible(false);
+        HMPLeftPanel.setVisible(false);
+        HMPRightPanel.setVisible(false);
 
-        System.out.println("You mortal man, name yourself!");
 
-        try {
 
-            Thread.sleep(1000);
 
-        } catch(InterruptedException e) {
-
-            System.out.println("got interrupted!");
-
-        }
-
-        System.out.println("Name: ");
-        String name = input.nextLine();
-
-        while (name.equals("") ) {
-
-            System.out.println("You have to give a name!");
-            System.out.println("Name: ");
-
-            name = input.nextLine();
-
-        }
-
-        Player player = new Player( );
-        player.setNickname(name);
-
-        return player;
+//        System.out.println("You mortal man, name yourself!");
+//
+//        try {
+//
+//            Thread.sleep(1000);
+//
+//        } catch(InterruptedException e) {
+//
+//            System.out.println("got interrupted!");
+//
+//        }
+//
+//        System.out.println("Name: ");
+//        String name = input.nextLine();
+//
+//        while (name.equals("") ) {
+//
+//            System.out.println("You have to give a name!");
+//            System.out.println("Name: ");
+//
+//            name = input.nextLine();
+//
+//        }
+//
+//        Player player = new Player( );
+//        player.setNickname(name);
+//
+//        return player;
 
     }
 

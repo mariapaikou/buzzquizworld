@@ -1,4 +1,4 @@
-/*
+
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -16,7 +16,7 @@ class HighScoreTest {
     private File WINS;
     private File HIGH;
 
-    public HighScoreTest(){
+    public HighScoreTest() {
         highScore = new HighScore();
 
         onePlayerMode = new ArrayList<>();
@@ -40,7 +40,7 @@ class HighScoreTest {
         HIGH = new File("high.dat");
     }
 
-    @Test
+    @Test // for empty file!
     void gameStarted() {
         highScore.gameStarted(twoPlayersMode);
 
@@ -65,4 +65,5 @@ class HighScoreTest {
     @Test
     void loadHighestScoresFromFile() {
     }
-}*/
+
+}

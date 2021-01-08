@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class HighScore {
+
     private HashMap totalWins;
     private LinkedList<Player> highestScores;
-    private static int highScoresNumber = 5;
+    private static int highScoresNumber = 10;
 
     public HighScore(){
         totalWins = new HashMap();
@@ -17,7 +18,7 @@ public class HighScore {
         if(players.size() > 1) {
             loadTotalWinsFromFile("totalwins.dat");
             for (Player player : players) {
-                totalWins.put(player.getNickname(), 0);
+                totalWins.put(player.getNickname(), 0); // giati mhden?? den tha prepei na leei poio einai to skor toy paixth?
             }
         }
     }
@@ -58,7 +59,7 @@ public class HighScore {
         }
         else{
             for(Player player : players){
-                    totalWins.put(player.getNickname(), player.getScore());
+                    totalWins.put(player.getNickname(), player.getScore()); // mhpws thelei replace?
                 }
             saveTotalWinsToFile("totalwins.dat");
         }
@@ -76,24 +77,52 @@ public class HighScore {
         }
     }
 
-    public void loadTotalWinsFromFile(String file1){
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file1))){
-            totalWins = (HashMap) ois.readObject();
-        }catch(FileNotFoundException e){
+    public void loadTotalWinsFromFile(String file1) {
+        boolean empty = true;
+        try(BufferedReader br = new BufferedReader(new FileReader(file1))){
+            empty = br.readLine() == null;
+            if(!empty){
+                try{
+                    FileInputStream fis = new FileInputStream(file1);
+                    ObjectInputStream ois = new ObjectInputStream(fis);
+                    if((HashMap) ois.readObject() != null){
+                        totalWins = (HashMap) ois.readObject();
+                    }
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+
+        }catch (FileNotFoundException e){
             e.printStackTrace();
-        }catch(IOException e){
-            e.printStackTrace();
-        }catch (ClassNotFoundException e){
+        }catch (IOException e){
             e.printStackTrace();
         }
+
+
+
+//        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file1))){
+//            totalWins = (HashMap) ois.readObject();
+//        }catch(FileNotFoundException e){
+//            e.printStackTrace();
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }catch (ClassNotFoundException e){
+//            e.printStackTrace();
+//        }
     }
 
     public void saveHighestScoresToFile(String file2){
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file2))){
             oos.writeObject(highestScores);
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
-        }catch(IOException e){
+        } catch(IOException e){
             e.printStackTrace();
         }
     }

@@ -41,9 +41,9 @@ public class Game {
         int howManyPlayers = display.HowManyOfYou();
         playerList = new ArrayList<>();
 
-        for (int i = howManyPlayers; i > 0; i--) {
-            playerList.add(display.God());
-        }
+//        for (int i = howManyPlayers; i > 0; i--) {
+//            playerList.add(display.God());
+//        }
         readQuestionsFile = new ReadQuestionsFile();
         allQuestions = readQuestionsFile.loadQuestions("questions.text.txt");
         round = new Round();

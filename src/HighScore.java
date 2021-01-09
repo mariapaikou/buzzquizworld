@@ -6,13 +6,13 @@ import java.util.List;
 
 public class HighScore {
 
-    private HashMap totalWins;
+    private ArrayList<Player> totalWins;
     private LinkedList<Player> highestScores;
     private static int highScoresNumber = 10;
     private String onePlayerModeFile, twoPlayerModeFile;
 
     public HighScore(String onePlayerModeFile, String towPlayerModeFile){
-        totalWins = new HashMap();
+        totalWins = new ArrayList<>();
         highestScores = new LinkedList<>();
         this.onePlayerModeFile = onePlayerModeFile; //1 player
         this.twoPlayerModeFile = towPlayerModeFile; // 2 players
@@ -72,12 +72,11 @@ public class HighScore {
                     System.out.println(player1.getNickname());
                 }
                 System.out.println(".............................");
-                // saveHighestScoresToFile("highscores.dat");
             }
         }
         else{
             for(Player player : players){
-                    totalWins.put(player.getNickname(), player.getScore());
+                    totalWins.add(player);
                 }
             saveTotalWinsToFile(twoPlayerModeFile);
         }
@@ -98,9 +97,9 @@ public class HighScore {
     public void loadTotalWinsFromFile(String file1) {
         try(BufferedReader br = new BufferedReader(new FileReader(file1))){
 
-            if(!(br.readLine() == null)){
+
                 try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file1))){
-                     totalWins = (HashMap) ois.readObject();
+                     totalWins = (ArrayList<Player>) ois.readObject();
                 }catch(FileNotFoundException e){
                       e.printStackTrace();
                 }catch(IOException e){
@@ -109,7 +108,7 @@ public class HighScore {
                      e.printStackTrace();
                 }
 
-            }
+
 
 
 
@@ -164,7 +163,7 @@ public class HighScore {
 
 
 
-    public HashMap getTotalWins(){
+    public ArrayList<Player> getTotalWins(){
         return totalWins;
     }
 

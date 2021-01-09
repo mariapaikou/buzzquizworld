@@ -16,8 +16,7 @@ class HighScoreTest {
     private Player playerB;
     private File WINS;
     private File HIGH;
-    String wins;
-    String high;
+
 
 
     public HighScoreTest() {
@@ -59,38 +58,23 @@ class HighScoreTest {
 
     }
 
-    @Test
+    @Test //ok!
     void gameEnded()  {
 
         //one Player Mode
         player.increaseScoreBy(50);
+        //add bob one time
         highScore.gameEnded(onePlayerMode);
-        boolean flag = false;
-        for(Player wat : highScore.getHighestScores()){
-
-            System.out.println("first assertEquals" + wat.getNickname() + wat.getScore());
-            if(player.equals(wat)){
-                flag = true;
-
-            }
-        }
-        assertTrue(flag);
+        assertEquals(player.getNickname(),highScore.getHighestScores().get(0).getNickname());
 
 
         playerA.increaseScoreBy(999000);
         onePlayerMode.remove(0);
         onePlayerMode.add(playerA);
         highScore.gameEnded(onePlayerMode);
+        assertEquals(playerA.getNickname(),highScore.getHighestScores().get(0).getNickname());
+        assertEquals(player.getNickname(),highScore.getHighestScores().get(1).getNickname());
 
-        flag = false;
-        for(Player wat : highScore.getHighestScores()){
-            System.out.println("second assertEquals" + wat.getNickname() + wat.getScore());
-            if(player.equals(wat)){
-                flag = true;
-
-            }
-        }
-        assertTrue(flag);
         try(PrintWriter writer = new PrintWriter("high.dat")){
             writer.println("");
         }catch (FileNotFoundException e){
@@ -103,14 +87,15 @@ class HighScoreTest {
 
     }
 
-    @Test
+    @Test //ok!
     void gameEnded1(){
         // one player mode
         player.increaseScoreBy(5000);
+
         //add 10 times bob
         for(int i=0; i<10; i++){
             highScore.gameEnded(onePlayerMode);
-           // assertEquals(player.getNickname(),highScore.getHighestScores().get(i).getNickname());
+            assertEquals(player.getNickname(),highScore.getHighestScores().get(i).getNickname());
         }
 
         //add tom 1 time 1st place
@@ -118,7 +103,6 @@ class HighScoreTest {
         playerA.increaseScoreBy(10000);
         onePlayerMode.add(playerA);
         highScore.gameEnded(onePlayerMode);
-       // highScore.loadHighestScoresFromFile("high.dat");
         for(int i = 0; i<10; i++){
             System.out.println(highScore.getHighestScores().get(i).getNickname());
         }
@@ -168,22 +152,98 @@ class HighScoreTest {
     }
     @Test
     void gameEnded2(){
+        player.increaseScoreBy(5000);
 
+        //add 10 times bob
+        for(int i=0; i<10; i++){
+            highScore.gameEnded(onePlayerMode);
+            assertEquals(player.getNickname(),highScore.getHighestScores().get(i).getNickname());
+        }
+        playerA.increaseScoreBy(50);
+        onePlayerMode.remove(0);
+        onePlayerMode.add(playerA);
+        highScore.gameEnded(onePlayerMode);
+        for(int i=0; i<10; i++){
+            assertEquals(player.getNickname(),highScore.getHighestScores().get(i).getNickname());
+        }
+
+        try(PrintWriter writer = new PrintWriter("high.dat")){
+            writer.println("");
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
-    @Test
+    @Test // ok!
     void saveTotalWinsToFile() {
+        // when file is empty
         highScore.gameStarted(twoPlayersMode);
         highScore.saveTotalWinsToFile(WINS.getAbsolutePath()); // empty file
         assertFalse(WINS.getAbsolutePath().isEmpty());
+
+        try(PrintWriter writer = new PrintWriter("high.dat")){
+            writer.println("");
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test //ok!
+    void saveTotalWinsToFile1(){
+        //when file is not empty
+        highScore.gameStarted(twoPlayersMode);
+        highScore.gameEnded(twoPlayersMode);
+        highScore.saveTotalWinsToFile("wins.dat");
+        assertFalse(WINS.getAbsolutePath().isEmpty());
+
+        highScore.gameStarted(twoPlayersMode);
+        highScore.gameEnded(twoPlayersMode);
+        highScore.saveTotalWinsToFile("wins.dat");
+        assertFalse(WINS.getAbsolutePath().isEmpty());
+
+        try(PrintWriter writer = new PrintWriter("wins.dat")){
+            writer.println("");
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     @Test
     void loadTotalWinsFromFile() {
+        highScore.gameStarted(twoPlayersMode);
+        highScore.gameEnded(twoPlayersMode);
+        highScore.loadTotalWinsFromFile("wins.dat");
+
+        assertEquals(playerA.getNickname(),highScore.getTotalWins().get(0).getNickname());
+        assertEquals(playerB.getNickname(),highScore.getTotalWins().get(1).getNickname());
+
+
+        playerA.setNickname("maria");
+        playerB.setNickname("todorikooo!!");
+        playerA.increaseScoreBy(50);
+        playerB.increaseScoreBy(600);
+
+        highScore.gameStarted(twoPlayersMode);
+        highScore.gameEnded(twoPlayersMode);
+        highScore.loadTotalWinsFromFile("wins.dat");
+
+
+        assertEquals("TOM",highScore.getTotalWins().get(0).getNickname());
+        assertEquals("JERRY",highScore.getTotalWins().get(1).getNickname());
+        assertEquals(playerA.getNickname(),highScore.getTotalWins().get(2).getNickname());
+        assertEquals(playerB.getNickname(),highScore.getTotalWins().get(3).getNickname());
+
+        try(PrintWriter writer = new PrintWriter("wins.dat")){
+            writer.println("");
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+
     }
 
     @Test
     void saveHighestScoresToFile() {
+
     }
 
     @Test

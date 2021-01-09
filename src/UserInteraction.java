@@ -1,4 +1,7 @@
 import javax.swing.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -192,7 +195,7 @@ public class UserInteraction {
             con.add(NamePanelTextOne);
 
             //The area that holds the text
-            JTextArea NameText = new JTextArea("Choose a nickname:");
+            JTextArea NameText = new JTextArea("Choose a nickname (10 characters max):");
             //Look & Layout
             NameText.setBounds(100,100,500,250);
             NameText.setBackground(Color.black);
@@ -205,29 +208,20 @@ public class UserInteraction {
             //The panel for the nickname input
             NamePanelOne = new JPanel();
             //Look & Layout
-            NamePanelOne.setBounds(100, 200, 500, 100);
+            NamePanelOne.setBounds(100, 200, 400, 100);
             NamePanelOne.setBackground(Color.black);
             con.add(NamePanelOne);
 
             //TextField for the nickname input
             JTextField nickname = new JTextField();
             //Look & Layout
-            nickname.setBounds(100,100,500,250);
-            nickname.setBackground(Color.black);
-            nickname.setForeground(Color.WHITE);
-            nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
-            //Functionality
-            nickname.setInputVerifier(new InputVerifier() {
-                @Override
-                public boolean verify(JComponent input) {
-                    String text = ((JTextField) input).getText();
-                    if(text.matches("[a-zA-Z]+"))
-                        return true;
-                    return false;
-                }
-            });
+            nickname.setBounds(100,200,400,100);
             NamePanelOne.add(nickname);
-
+            nickname.setColumns(7);
+            nickname.setBackground(Color.white);
+            nickname.setForeground(Color.black);
+            nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
+            nickname.setDocument(new JTextFieldLimit(10));
 
         }
         else{
@@ -294,14 +288,7 @@ public class UserInteraction {
             NameLeftPanel.setBounds(650, 250, 50, 150);
             NameLeftPanel.setBackground(Color.black);
             con.add(NameLeftPanel);
-
-
-
-
         }
-
-
-
 //        System.out.println("You mortal man, name yourself!");
 //
 //        try {
@@ -331,6 +318,23 @@ public class UserInteraction {
 //
 //       return player;
         return null;
+    }
+
+    public class JTextFieldLimit extends PlainDocument {
+        private int limit;
+
+        JTextFieldLimit(int limit) {
+            super();
+            this.limit = limit;
+        }
+
+        public void insertString( int offset, String  str, AttributeSet attr ) throws BadLocationException {
+            if (str == null) return;
+
+            if ((getLength() + str.length()) <= limit) {
+                super.insertString(offset, str, attr);
+            }
+        }
     }
 
     /**

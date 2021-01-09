@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * This class represents a player and it stores his nickname,the score and the status.
  */
 
 
-public class Player {
+public class Player implements Serializable {
 /**
  * @value nickname is a string parameter that stores the name given by the user
  * @value score is an integer that stores the score of the player, this parameter changes after each question as it adds or subtracts new points
@@ -14,12 +16,14 @@ public class Player {
     private int score;
     private boolean status;//0 if answered correctly, 1 if not
     private int clickTime; // int για να αποθηκευουμε κατευθιαν millisecond!  1 sec = 1000 millisecond!
+    transient private Thread myThread;
 
     public Player(String nickname){
         this.nickname = nickname;
         score = 0;
         status = false;
         clickTime = -1;
+        this.myThread = new Thread();
     }
 
 

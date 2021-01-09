@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,13 +19,11 @@ public class HighScore {
     }
 
     public void gameStarted(ArrayList<Player> players){
+
         if(players.size() > 1) {
             loadTotalWinsFromFile(twoPlayerModeFile);
-           // loadTotalWinsFromFile("totalwins.dat");
-//            for (Player player : players) {
-//                totalWins.put(player.getNickname(), 0); // giati mhden?? den tha prepei na leei poio einai to skor toy paixth?
-//            }
         }
+
     }
 
 

@@ -19,7 +19,7 @@ public class UserInteraction {
     private final Container con;
     private final JPanel startTextPanel, startButtonPanel;
     private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
-    private JPanel NamePanelTextOne,NamePanelOne, NamePanelTextTwo, NamePanelTwo;
+    private JPanel NamePanelTextOne,NamePanelOne, outputOnePanel, outputTwoPanel, inputOnePanel, inputTwoPanel, NameLeftPanel, NameRightPanel;
 
     public UserInteraction(){
         //The action for the start button
@@ -209,18 +209,93 @@ public class UserInteraction {
             NamePanelOne.setBackground(Color.black);
             con.add(NamePanelOne);
 
-            //FormattedTextField for the nickname input
-            JFormattedTextField nickname = new JFormattedTextField();
+            //TextField for the nickname input
+            JTextField nickname = new JTextField();
             //Look & Layout
             nickname.setBounds(100,100,500,250);
-            nickname.setBackground(Color.WHITE);
-            nickname.setForeground(Color.black);
+            nickname.setBackground(Color.black);
+            nickname.setForeground(Color.WHITE);
             nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
+            //Functionality
+            nickname.setInputVerifier(new InputVerifier() {
+                @Override
+                public boolean verify(JComponent input) {
+                    String text = ((JTextField) input).getText();
+                    if(text.matches("[a-zA-Z]+"))
+                        return true;
+                    return false;
+                }
+            });
             NamePanelOne.add(nickname);
 
 
         }
         else{
+            //The panel for the left text
+            outputOnePanel = new JPanel();
+            //Look & Layout
+            outputOnePanel.setBounds(100, 100, 300, 150);
+            outputOnePanel.setBackground(Color.black);
+            con.add(outputOnePanel);
+
+            //The area that holds the left text
+            JTextArea NameTextLeft = new JTextArea("Choose a nickname:");
+            //Look & Layout
+            NameTextLeft.setBounds(100, 100, 300, 150);
+            NameTextLeft.setBackground(Color.black);
+            NameTextLeft.setForeground(Color.WHITE);
+            NameTextLeft.setFont(new Font("Carlito", Font.PLAIN, 20));
+            NameTextLeft.setLineWrap(true);
+            NameTextLeft.setEditable(false);
+            outputOnePanel.add(NameTextLeft);
+
+            //The panel for the right text
+            outputTwoPanel = new JPanel();
+            //Look & Layout
+            outputTwoPanel.setBounds(400, 100, 300, 150);
+            outputTwoPanel.setBackground(Color.black);
+            con.add(outputTwoPanel);
+
+            //The area that holds the right text
+            JTextArea NameTextRight = new JTextArea("Choose a nickname:");
+            //Look & Layout
+            NameTextRight.setBounds(400, 100, 300, 150);
+            NameTextRight.setBackground(Color.black);
+            NameTextRight.setForeground(Color.WHITE);
+            NameTextRight.setFont(new Font("Carlito", Font.PLAIN, 20));
+            NameTextRight.setLineWrap(true);
+            NameTextRight.setEditable(false);
+            outputTwoPanel.add(NameTextRight);
+
+            //The panel for the left input
+            inputOnePanel = new JPanel();
+            //Look & Layout
+            inputOnePanel.setBounds(100, 250, 250, 150);
+            inputOnePanel.setBackground(Color.black);
+            con.add(inputOnePanel);
+
+            //The panel for the right input
+            inputTwoPanel = new JPanel();
+            //Look & Layout
+            inputTwoPanel.setBounds(400, 250, 250, 150);
+            inputTwoPanel.setBackground(Color.black);
+            con.add(inputTwoPanel);
+
+            //The panel for the left okay button
+            NameLeftPanel = new JPanel();
+            //Look & Layout
+            NameLeftPanel.setBounds(350, 250, 50, 150);
+            NameLeftPanel.setBackground(Color.black);
+            con.add(NameLeftPanel);
+
+            //The panel for the right okay button
+            NameRightPanel = new JPanel();
+            //Look & Layout
+            NameLeftPanel.setBounds(650, 250, 50, 150);
+            NameLeftPanel.setBackground(Color.black);
+            con.add(NameLeftPanel);
+
+
 
 
         }

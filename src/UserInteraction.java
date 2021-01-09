@@ -1,4 +1,7 @@
 import javax.swing.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -192,9 +195,9 @@ public class UserInteraction {
             con.add(NamePanelTextOne);
 
             //The area that holds the text
-            JTextArea NameText = new JTextArea("Choose a nickname:");
+            JTextArea NameText = new JTextArea("Choose a nickname (10 characters max):");
             //Look & Layout
-            NameText.setBounds(100,100,500,250);
+            NameText.setBounds(100,100,500,100);
             NameText.setBackground(Color.black);
             NameText.setForeground(Color.WHITE);
             NameText.setFont(new Font("Carlito", Font.PLAIN, 30));
@@ -205,29 +208,36 @@ public class UserInteraction {
             //The panel for the nickname input
             NamePanelOne = new JPanel();
             //Look & Layout
-            NamePanelOne.setBounds(100, 200, 500, 100);
+            NamePanelOne.setBounds(100, 200, 400, 100);
             NamePanelOne.setBackground(Color.black);
             con.add(NamePanelOne);
 
             //TextField for the nickname input
             JTextField nickname = new JTextField();
             //Look & Layout
-            nickname.setBounds(100,100,500,250);
-            nickname.setBackground(Color.black);
-            nickname.setForeground(Color.WHITE);
-            nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
-            //Functionality
-            nickname.setInputVerifier(new InputVerifier() {
-                @Override
-                public boolean verify(JComponent input) {
-                    String text = ((JTextField) input).getText();
-                    if(text.matches("[a-zA-Z]+"))
-                        return true;
-                    return false;
-                }
-            });
+            nickname.setBounds(100,200,400,100);
             NamePanelOne.add(nickname);
+            nickname.setColumns(7);
+            nickname.setBackground(Color.white);
+            nickname.setForeground(Color.black);
+            nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
+            nickname.setDocument(new JTextFieldLimit(10));
 
+            //Panel for the button
+            JPanel readyPanel = new JPanel();
+            //Look & Layout
+            readyPanel.setBounds(500, 200, 100, 100);
+            readyPanel.setBackground(Color.black);
+            con.add(readyPanel);
+
+            //Button
+            JButton readyButton = new JButton("Ready");
+            readyButton.setBackground(Color.BLACK);
+            readyButton.setForeground(Color.WHITE);
+            readyButton.setSize(100, 100);
+            readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+            //BALE ACTION LISTENER
+            readyPanel.add(readyButton);
 
         }
         else{
@@ -239,7 +249,7 @@ public class UserInteraction {
             con.add(outputOnePanel);
 
             //The area that holds the left text
-            JTextArea NameTextLeft = new JTextArea("Choose a nickname:");
+            JTextArea NameTextLeft = new JTextArea("Player 1, choose a nickname            (10 characters max):");
             //Look & Layout
             NameTextLeft.setBounds(100, 100, 300, 150);
             NameTextLeft.setBackground(Color.black);
@@ -257,7 +267,7 @@ public class UserInteraction {
             con.add(outputTwoPanel);
 
             //The area that holds the right text
-            JTextArea NameTextRight = new JTextArea("Choose a nickname:");
+            JTextArea NameTextRight = new JTextArea("Player 2, choose a nickname            (10 characters max):");
             //Look & Layout
             NameTextRight.setBounds(400, 100, 300, 150);
             NameTextRight.setBackground(Color.black);
@@ -270,38 +280,71 @@ public class UserInteraction {
             //The panel for the left input
             inputOnePanel = new JPanel();
             //Look & Layout
-            inputOnePanel.setBounds(100, 250, 250, 150);
+            inputOnePanel.setBounds(100, 250, 200, 150);
             inputOnePanel.setBackground(Color.black);
             con.add(inputOnePanel);
+
+            //TextField for the left input
+            JTextField nicknameOne = new JTextField();
+            //Look & Layout
+            nicknameOne.setBounds(100, 250, 200, 150);
+            inputOnePanel.add(nicknameOne);
+            nicknameOne.setColumns(7);
+            nicknameOne.setBackground(Color.white);
+            nicknameOne.setForeground(Color.black);
+            nicknameOne.setFont(new Font("Carlito", Font.PLAIN, 30));
+            nicknameOne.setDocument(new JTextFieldLimit(10));
 
             //The panel for the right input
             inputTwoPanel = new JPanel();
             //Look & Layout
-            inputTwoPanel.setBounds(400, 250, 250, 150);
+            inputTwoPanel.setBounds(400, 250, 200, 150);
             inputTwoPanel.setBackground(Color.black);
             con.add(inputTwoPanel);
+
+            //TextField for the right input
+            JTextField nicknameTwo = new JTextField();
+            //Look & Layout
+            nicknameTwo.setBounds(400, 250, 200, 150);
+            inputTwoPanel.add(nicknameTwo);
+            nicknameTwo.setColumns(7);
+            nicknameTwo.setBackground(Color.white);
+            nicknameTwo.setForeground(Color.black);
+            nicknameTwo.setFont(new Font("Carlito", Font.PLAIN, 30));
+            nicknameTwo.setDocument(new JTextFieldLimit(10));
 
             //The panel for the left okay button
             NameLeftPanel = new JPanel();
             //Look & Layout
-            NameLeftPanel.setBounds(350, 250, 50, 150);
+            NameLeftPanel.setBounds(300, 250, 100, 150);
             NameLeftPanel.setBackground(Color.black);
             con.add(NameLeftPanel);
+
+            //Left button
+            JButton leftReadyButton = new JButton("Ready");
+            leftReadyButton.setBackground(Color.BLACK);
+            leftReadyButton.setForeground(Color.WHITE);
+            leftReadyButton.setSize(100, 100);
+            leftReadyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+            //BALE ACTION LISTENER
+            NameLeftPanel.add(leftReadyButton);
 
             //The panel for the right okay button
             NameRightPanel = new JPanel();
             //Look & Layout
-            NameLeftPanel.setBounds(650, 250, 50, 150);
+            NameLeftPanel.setBounds(600, 250, 100, 150);
             NameLeftPanel.setBackground(Color.black);
             con.add(NameLeftPanel);
 
-
-
-
+            //Right button
+            JButton rightReadyButton = new JButton("Ready");
+            rightReadyButton.setBackground(Color.BLACK);
+            rightReadyButton.setForeground(Color.WHITE);
+            rightReadyButton.setSize(100, 100);
+            rightReadyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+            //BALE ACTION LISTENER
+            NameRightPanel.add(rightReadyButton);
         }
-
-
-
 //        System.out.println("You mortal man, name yourself!");
 //
 //        try {
@@ -331,6 +374,22 @@ public class UserInteraction {
 //
 //       return player;
         return null;
+    }
+    //Class to limit the number of characters in a JText
+    public class JTextFieldLimit extends PlainDocument {
+        private int limit;
+
+        JTextFieldLimit(int limit) {
+            super();
+            this.limit = limit;
+        }
+        public void insertString(int offset, String  str, AttributeSet attr) throws BadLocationException {
+            if (str == null) return;
+
+            if ((getLength() + str.length()) <= limit) {
+                super.insertString(offset, str, attr);
+            }
+        }
     }
 
     /**

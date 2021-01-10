@@ -2,15 +2,16 @@ import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Scanner;
-/*import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;*/
+import java.lang.Object;
+import java.util.TimerTask;
+
+
 
 /**
  * This class contains all the interactions with the user, asks all the questions, prints all
@@ -22,7 +23,7 @@ public class UserInteraction {
     private final Container con;
     private final JPanel startTextPanel, startButtonPanel;
     private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
-    private JPanel NamePanelTextOne,NamePanelOne, outputOnePanel, outputTwoPanel, inputOnePanel, inputTwoPanel, NameLeftPanel, NameRightPanel;
+    private JPanel NamePanelText, NamePanel, readyPanel, letsGoPanel;
 
     public UserInteraction(){
         //The basic frame
@@ -177,11 +178,11 @@ public class UserInteraction {
         HMPRightPanel.setVisible(false);
 
         //The panel for the text
-        NamePanelTextOne = new JPanel();
+        NamePanelText = new JPanel();
         //Look & Layout
-        NamePanelTextOne.setBounds(100, 100, 500, 100);
-        NamePanelTextOne.setBackground(Color.black);
-        con.add(NamePanelTextOne);
+        NamePanelText.setBounds(100, 100, 500, 100);
+        NamePanelText.setBackground(Color.black);
+        con.add(NamePanelText);
 
         //The area that holds the text
         JTextArea NameText = new JTextArea("Choose a nickname (10 characters max):");
@@ -192,20 +193,20 @@ public class UserInteraction {
         NameText.setFont(new Font("Carlito", Font.PLAIN, 30));
         NameText.setLineWrap(true);
         NameText.setEditable(false);
-        NamePanelTextOne.add(NameText);
+        NamePanelText.add(NameText);
 
         //The panel for the nickname input
-        NamePanelOne = new JPanel();
+        NamePanel = new JPanel();
         //Look & Layout
-        NamePanelOne.setBounds(100, 200, 400, 100);
-        NamePanelOne.setBackground(Color.black);
-        con.add(NamePanelOne);
+        NamePanel.setBounds(100, 200, 400, 100);
+        NamePanel.setBackground(Color.black);
+        con.add(NamePanel);
 
         //TextField for the nickname input
         JTextField nickname = new JTextField();
         //Look & Layout
         nickname.setBounds(100,200,400,100);
-        NamePanelOne.add(nickname);
+        NamePanel.add(nickname);
         nickname.setText("");
         nickname.setColumns(7);
         nickname.setBackground(Color.white);
@@ -214,7 +215,7 @@ public class UserInteraction {
         nickname.setDocument(new JTextFieldLimit(10));
 
         //Panel for the button
-        JPanel readyPanel = new JPanel();
+        readyPanel = new JPanel();
         //Look & Layout
         readyPanel.setBounds(500, 200, 100, 100);
         readyPanel.setBackground(Color.black);
@@ -231,7 +232,11 @@ public class UserInteraction {
         if(numOfPlayers==1){
             readyButton.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    //next method
+                    try {
+                        LetsGo();
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
                 }
             });
         }
@@ -272,6 +277,79 @@ public class UserInteraction {
 //
 //       return player;
         return null;
+    }
+
+    public void LetsGo() throws InterruptedException {
+        //disable previous panels
+        NamePanelText.setVisible(false);
+        NamePanel.setVisible(false);
+        readyPanel.setVisible(false);
+
+        letsGoPanel = new JPanel();
+        letsGoPanel.setBounds(100, 100, 600, 300);
+        letsGoPanel.setBackground(Color.BLACK);
+        con.add(letsGoPanel);
+
+        JLabel text1 = new JLabel("LET");
+        text1.setBounds(100,100,600,300);
+        text1.setBackground(Color.black);
+        text1.setForeground(Color.WHITE);
+        text1.setFont(new Font("Carlito", Font.PLAIN, 300));
+        text1.setHorizontalAlignment(JLabel.CENTER);
+        letsGoPanel.add(text1);
+
+        JLabel text2 = new JLabel("THE");
+        text2.setBounds(100,100,600,300);
+        text2.setBackground(Color.black);
+        text2.setForeground(Color.WHITE);
+        text2.setFont(new Font("Carlito", Font.PLAIN, 300));
+        text2.setHorizontalAlignment(JLabel.CENTER);
+        letsGoPanel.add(text2);
+
+        JLabel text3 = new JLabel("GAME");
+        text3.setBounds(50,100,700,300);
+        text3.setBackground(Color.black);
+        text3.setForeground(Color.WHITE);
+        text3.setFont(new Font("Carlito", Font.PLAIN, 300));
+        text3.setHorizontalAlignment(JLabel.CENTER);
+        letsGoPanel.add(text3);
+
+        JLabel text4 = new JLabel("BEGIN");
+        text4.setBounds(50,100,700,200);
+        text4.setBackground(Color.black);
+        text4.setForeground(Color.WHITE);
+        text4.setFont(new Font("Carlito", Font.PLAIN, 200));
+        text4.setHorizontalAlignment(JLabel.CENTER);
+        letsGoPanel.add(text4);
+
+        text1.setVisible(false);
+        text2.setVisible(false);
+        text3.setVisible(false);
+        text4.setVisible(false);
+
+        Timer timer4 = new Timer(500, e -> {
+            text3.setVisible(false);
+            text4.setVisible(true);
+        });
+
+        Timer timer3 = new Timer(500, e -> {
+            text2.setVisible(false);
+            text3.setVisible(true);
+            timer4.start();
+
+        });
+
+        Timer timer2 = new Timer(500, e -> {
+            text1.setVisible(false);
+            text2.setVisible(true);
+            timer3.start();
+        });
+
+        Timer timer1 = new Timer(500, e -> {
+            text1.setVisible(true);
+            timer2.start();
+        });
+        timer1.start();
     }
 
     //Class to limit the number of characters in a JText

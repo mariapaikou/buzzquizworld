@@ -234,6 +234,14 @@ public class UserInteraction {
                     Player playerOne = new Player();
                     playerOne.setNickname(nickname.getText());
                     players.add(playerOne);
+                    game.setPlayerList(players);
+                    try{
+                        LetsGo();
+                    }catch(InterruptedException ie) {
+
+                    System.out.println("got interrupted!");
+
+                    }
                 }
             });
         }

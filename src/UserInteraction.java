@@ -502,6 +502,54 @@ public class UserInteraction {
      * This void function accepts a Questions type object and prints the question and the four possible answers.
      */
     public void askTheQuestion(Questions question){
+         JPanel  centerPanel , bottomPanel;
+         JLabel label;
+         JFrame frame;
+         String questionImageName= question.getImageName();
+
+        frame = new JFrame();
+        frame.setTitle("fashkahsk");
+        frame.setSize(800,500);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(new BorderLayout());
+        frame.setBackground(Color.BLACK);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        centerPanel = new JPanel();
+        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        centerPanel.setBackground(Color.BLACK);
+        centerPanel.setBounds(100,10,600,250);
+
+        label =new JLabel();
+
+        label.setLayout(new FlowLayout(FlowLayout.CENTER));
+        // elegxow gia to an h eikona einai yparkth
+        if(!(questionImageName.equals("null"))){
+            label.setIcon(new ImageIcon(questionImageName));
+        }
+        label.setVisible(true);
+
+        centerPanel.add(label);
+        centerPanel.setVisible(true);
+
+        frame.add(centerPanel, BorderLayout.CENTER);
+
+        bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setBounds(100,0,800,50);
+        bottomPanel.setBackground(Color.BLACK);
+        frame.add(bottomPanel);
+
+
+
+
+
+        frame.validate();//validate the image
+        frame.setVisible(true);
+
+
+
+
 
         System.out.println("\nQUESTION");
 

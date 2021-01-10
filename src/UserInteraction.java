@@ -19,6 +19,7 @@ import java.util.TimerTask;
  */
 
 public class UserInteraction {
+    private Game game;
     private ArrayList<Player> players;
     private int numberOfPlayers;
     Scanner input = new Scanner(System.in);
@@ -74,8 +75,7 @@ public class UserInteraction {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                startTextPanel.setVisible(false);
-                startButtonPanel.setVisible(false);
+                HowManyOfYou();
             }
         });
         startButtonPanel.add(startButton);
@@ -84,6 +84,8 @@ public class UserInteraction {
     }
 
     public int HowManyOfYou(){
+        startTextPanel.setVisible(false);
+        startButtonPanel.setVisible(false);
         //The panel for the text
         HMPPanel = new JPanel();
         //Look & Layout
@@ -128,9 +130,7 @@ public class UserInteraction {
             @Override
             public void actionPerformed(ActionEvent e) {
                 numberOfPlayers = 1;
-                HMPPanel.setVisible(false);
-                HMPLeftPanel.setVisible(false);
-                HMPRightPanel.setVisible(false);
+                God(1);
             }
         });
         HMPLeftPanel.add(onePlayer);
@@ -147,9 +147,7 @@ public class UserInteraction {
             @Override
             public void actionPerformed(ActionEvent e) {
                 numberOfPlayers = 2;
-                HMPPanel.setVisible(false);
-                HMPLeftPanel.setVisible(false);
-                HMPRightPanel.setVisible(false);
+                God(2);
             }
         });
         HMPRightPanel.add(twoPlayers);
@@ -175,6 +173,9 @@ public class UserInteraction {
      * @return A Player object
      */
     public ArrayList<Player> God(int numOfPlayers){
+        HMPPanel.setVisible(false);
+        HMPLeftPanel.setVisible(false);
+        HMPRightPanel.setVisible(false);
         //The panel for the text
         NamePanelText = new JPanel();
         //Look & Layout
@@ -275,11 +276,11 @@ public class UserInteraction {
 //        player.setNickname(name);
 //
 //       return player;
-        try{
-            LetsGo();
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
+//        try{
+//            LetsGo();
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
         return players;
     }
 

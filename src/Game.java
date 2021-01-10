@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 
 public class Game {
-    private final ArrayList <Player> playerList;
+    private ArrayList <Player> playerList;
     private final ArrayList<Questions> allQuestions;
     private static int howManyRounds = 3;
     private final static int numberOfQuestions = 5; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
@@ -21,6 +21,22 @@ public class Game {
     private Round round; // einai swsto to final???
     private ReadQuestionsFile readQuestionsFile;
 
+    /**
+     * SETTERS AND GETTERS FOR THE GUI
+     * @param playerList
+     */
+    public void setPlayerList(ArrayList <Player> playerList){
+        this.playerList = playerList;
+    }
+    public ArrayList <Player> getPlayerList(){
+        return playerList;
+    }
+    public int getHowManyRounds(){
+        return howManyRounds;
+    }
+    public int getNumberOfQuestions(){
+        return numberOfQuestions;
+    }
 
 /**
  * The constructor initializes the UserInteraction object and the two ArrayLists, one for the

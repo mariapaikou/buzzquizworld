@@ -17,7 +17,7 @@ public class Game {
     private final ArrayList<Questions> allQuestions;
     private static int howManyRounds = 3;
     private final static int numberOfQuestions = 5; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
-//    private final UserInteraction display;
+    private final UserInteraction display;
     private Round round; // einai swsto to final???
     private ReadQuestionsFile readQuestionsFile;
 
@@ -39,8 +39,8 @@ public class Game {
         display = new UserInteraction();
 
         int howManyPlayers = display.HowManyOfYou();
-        playerList = new ArrayList<>();
 
+        playerList = display.God(howManyPlayers);
 //        for (int i = howManyPlayers; i > 0; i--) {
 //            playerList.add(display.God());
 //        }
@@ -64,8 +64,11 @@ public class Game {
      * and changes their points.
      */
     public void PlayTheGame(){
-
-
+//       try {
+//           display.LetsGo();
+//       }catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//       }
        // fillAllQuestions();
         randomizeQuestions(allQuestions);
         int questionNum = 0;
@@ -86,8 +89,8 @@ public class Game {
                 display.askTheQuestion(allQuestions.get(questionNum));
 
                 for (Player player : playerList){
-
-                    String answer = getPlayersAnswer(player,questionNum);
+                    String answer = display.getAnAnswer(player);
+                    //String answer = getPlayersAnswer(player,questionNum);
 
                     if (answer.equals(allQuestions.get(questionNum).getCorrectAnswer())){
                         player.setStatus(true);
@@ -120,19 +123,19 @@ public class Game {
      * @param questionNum
      * @return answer String value that contains player's answer to the question asked
      */
-
-     private String getPlayersAnswer(Player player, int questionNum){
-
-         String answer = display.getAnAnswer(player);
-         boolean correct = allQuestions.get(questionNum).acceptableAnswer(answer);
-
-//         while (!correct){
-//             answer = display.getNewAnswer(player);
-//             correct = allQuestions.get(questionNum).acceptableAnswer(answer);
-//         }
-        return answer;
-
-    }
+// NO NEED
+//     private String getPlayersAnswer(Player player, int questionNum){
+//
+//         String answer = display.getAnAnswer(player);
+//         boolean correct = allQuestions.get(questionNum).acceptableAnswer(answer);
+//
+////         while (!correct){
+////             answer = display.getNewAnswer(player);
+////             correct = allQuestions.get(questionNum).acceptableAnswer(answer);
+////         }
+//        return answer;
+//
+//    }
 
 
     /**
@@ -248,20 +251,20 @@ public class Game {
         boolean play = true;
        // Scanner input = new Scanner(System.in);
         Game b = new Game();
-        UserInteraction a = new UserInteraction();
+//        UserInteraction a = new UserInteraction();
 
 
-        while(play){
+//        while(play){
 
             b.PlayTheGame();
             //TODO na baloyme na kaleitai h replay !!!!!
-            String answer = a.replay();
+//            String answer = a.replay();
 
-            if(answer.equals("no")) {
-                play = false;
-            }
+//            if(answer.equals("no")) {
+//                play = false;
+//            }
 
-        }
+//        }
 
     }
 

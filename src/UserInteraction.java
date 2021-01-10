@@ -20,7 +20,7 @@ import java.util.TimerTask;
 
 public class UserInteraction {
     private ArrayList<Player> players;
-    private int numberOfPlayers, playerID = 1;
+    private int numberOfPlayers;
     Scanner input = new Scanner(System.in);
     private final Container con;
     private final JPanel startTextPanel, startButtonPanel;
@@ -128,6 +128,9 @@ public class UserInteraction {
             @Override
             public void actionPerformed(ActionEvent e) {
                 numberOfPlayers = 1;
+                HMPPanel.setVisible(false);
+                HMPLeftPanel.setVisible(false);
+                HMPRightPanel.setVisible(false);
             }
         });
         HMPLeftPanel.add(onePlayer);
@@ -144,6 +147,9 @@ public class UserInteraction {
             @Override
             public void actionPerformed(ActionEvent e) {
                 numberOfPlayers = 2;
+                HMPPanel.setVisible(false);
+                HMPLeftPanel.setVisible(false);
+                HMPRightPanel.setVisible(false);
             }
         });
         HMPRightPanel.add(twoPlayers);
@@ -169,11 +175,6 @@ public class UserInteraction {
      * @return A Player object
      */
     public ArrayList<Player> God(int numOfPlayers){
-        //Turn off previous panels
-        HMPPanel.setVisible(false);
-        HMPLeftPanel.setVisible(false);
-        HMPRightPanel.setVisible(false);
-
         //The panel for the text
         NamePanelText = new JPanel();
         //Look & Layout
@@ -229,19 +230,19 @@ public class UserInteraction {
         if(numOfPlayers==1){
             readyButton.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    try {
-                        LetsGo();
-                    } catch (InterruptedException interruptedException) {
-                        interruptedException.printStackTrace();
-                    }
+                    Player playerOne = new Player();
+                    playerOne.setNickname(nickname.getText());
+                    players.add(playerOne);
                 }
             });
         }
         else{
             readyButton.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
+                    Player playerTwo = new Player();
+                    playerTwo.setNickname(nickname.getText());
+                    players.add(playerTwo);
                     nickname.setText("");
-                    playerID++;
                     God(1);
                 }
             });
@@ -274,6 +275,11 @@ public class UserInteraction {
 //        player.setNickname(name);
 //
 //       return player;
+        try{
+            LetsGo();
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
         return players;
     }
 
@@ -284,40 +290,44 @@ public class UserInteraction {
         readyPanel.setVisible(false);
 
         letsGoPanel = new JPanel();
-        letsGoPanel.setBounds(100, 100, 600, 300);
+        letsGoPanel.setBounds(0, 0, 800, 400);
         letsGoPanel.setBackground(Color.BLACK);
         con.add(letsGoPanel);
 
         JLabel text1 = new JLabel("LET");
-        text1.setBounds(100,100,600,300);
+        text1.setBounds(0, 0, 800, 400);
         text1.setBackground(Color.black);
         text1.setForeground(Color.WHITE);
         text1.setFont(new Font("Carlito", Font.PLAIN, 300));
         text1.setHorizontalAlignment(JLabel.CENTER);
+        text1.setVerticalAlignment(JLabel.CENTER);
         letsGoPanel.add(text1);
 
         JLabel text2 = new JLabel("THE");
-        text2.setBounds(100,100,600,300);
+        text2.setBounds(0, 0, 800, 400);
         text2.setBackground(Color.black);
         text2.setForeground(Color.WHITE);
         text2.setFont(new Font("Carlito", Font.PLAIN, 300));
         text2.setHorizontalAlignment(JLabel.CENTER);
+        text2.setVerticalAlignment(JLabel.CENTER);
         letsGoPanel.add(text2);
 
         JLabel text3 = new JLabel("GAME");
-        text3.setBounds(50,100,700,300);
+        text3.setBounds(0, 0, 800, 400);
         text3.setBackground(Color.black);
         text3.setForeground(Color.WHITE);
         text3.setFont(new Font("Carlito", Font.PLAIN, 300));
         text3.setHorizontalAlignment(JLabel.CENTER);
+        text3.setVerticalAlignment(JLabel.CENTER);
         letsGoPanel.add(text3);
 
         JLabel text4 = new JLabel("BEGIN");
-        text4.setBounds(50,100,700,200);
+        text4.setBounds(0, 0, 800, 400);
         text4.setBackground(Color.black);
         text4.setForeground(Color.WHITE);
         text4.setFont(new Font("Carlito", Font.PLAIN, 200));
         text4.setHorizontalAlignment(JLabel.CENTER);
+        text4.setVerticalAlignment(JLabel.CENTER);
         letsGoPanel.add(text4);
 
         text1.setVisible(false);

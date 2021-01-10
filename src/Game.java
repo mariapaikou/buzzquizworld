@@ -17,7 +17,7 @@ public class Game {
     private final ArrayList<Questions> allQuestions;
     private static int howManyRounds = 3;
     private final static int numberOfQuestions = 5; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
-    private final UserInteraction display;
+//    private final UserInteraction display;
     private Round round; // einai swsto to final???
     private ReadQuestionsFile readQuestionsFile;
 
@@ -126,10 +126,10 @@ public class Game {
          String answer = display.getAnAnswer(player);
          boolean correct = allQuestions.get(questionNum).acceptableAnswer(answer);
 
-         while (!correct){
-             answer = display.getNewAnswer(player);
-             correct = allQuestions.get(questionNum).acceptableAnswer(answer);
-         }
+//         while (!correct){
+//             answer = display.getNewAnswer(player);
+//             correct = allQuestions.get(questionNum).acceptableAnswer(answer);
+//         }
         return answer;
 
     }
@@ -148,9 +148,9 @@ public class Game {
             for (Player player : playerList) {
                 int points = display.betPoints(player);
 
-                while (points != 250 && points != 500 && points != 750 && points != 1000) {
-                    points = display.newBetPoints(player);
-                }
+//                while (points != 250 && points != 500 && points != 750 && points != 1000) {
+//                    points = display.newBetPoints(player);
+//                }
                 ((Bet) type).setPoints(points);
             }
         }else if (type instanceof Timer) {

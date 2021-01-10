@@ -19,6 +19,8 @@ import java.util.TimerTask;
  */
 
 public class UserInteraction {
+    private ArrayList<Player> players;
+    private int numberOfPlayers, playerID = 1;
     Scanner input = new Scanner(System.in);
     private final Container con;
     private final JPanel startTextPanel, startButtonPanel;
@@ -72,7 +74,8 @@ public class UserInteraction {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HowManyOfYou();
+                startTextPanel.setVisible(false);
+                startButtonPanel.setVisible(false);
             }
         });
         startButtonPanel.add(startButton);
@@ -81,12 +84,6 @@ public class UserInteraction {
     }
 
     public int HowManyOfYou(){
-        //The actions for the buttons
-
-        //turn off the previous panels
-        startTextPanel.setVisible(false);
-        startButtonPanel.setVisible(false);
-
         //The panel for the text
         HMPPanel = new JPanel();
         //Look & Layout
@@ -95,7 +92,7 @@ public class UserInteraction {
         con.add(HMPPanel);
 
         //The area that holds the text
-        JTextArea HMPText = new JTextArea("Welcome! Choose the number of players for this game.");
+        JTextArea HMPText = new JTextArea("Choose the number of players for this game:");
         //Look & Layout
         HMPText.setBounds(100,100,500,250);
         HMPText.setBackground(Color.black);
@@ -130,7 +127,7 @@ public class UserInteraction {
         onePlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                God(1);
+                numberOfPlayers = 1;
             }
         });
         HMPLeftPanel.add(onePlayer);
@@ -146,7 +143,7 @@ public class UserInteraction {
         twoPlayers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                God(2);
+                numberOfPlayers = 2;
             }
         });
         HMPRightPanel.add(twoPlayers);
@@ -162,7 +159,7 @@ public class UserInteraction {
 //            howMany = input.nextInt();
 //        }
 //        return howMany;
-        return 0;
+        return numberOfPlayers;
     }
 
     /**
@@ -171,7 +168,7 @@ public class UserInteraction {
      * to be added to the playerList.
      * @return A Player object
      */
-    public Player God(int numOfPlayers){
+    public ArrayList<Player> God(int numOfPlayers){
         //Turn off previous panels
         HMPPanel.setVisible(false);
         HMPLeftPanel.setVisible(false);
@@ -244,6 +241,7 @@ public class UserInteraction {
             readyButton.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     nickname.setText("");
+                    playerID++;
                     God(1);
                 }
             });
@@ -276,7 +274,7 @@ public class UserInteraction {
 //        player.setNickname(name);
 //
 //       return player;
-        return null;
+        return players;
     }
 
     public void LetsGo() throws InterruptedException {
@@ -398,48 +396,48 @@ public class UserInteraction {
             betPoints = Integer.valueOf(points);
         }catch(NumberFormatException exception){
             System.out.println("inside first catch");
-            newBetPoints(player);
+            //newBetPoints(player);
         }
 
         return betPoints;
 
     }
 
-    /**
-     * newBetPoints is a function that is called when the player types a non acceptable amount to bet.
-     * It informs the user about their mistake and asks for a new bet.
-     * @return the new bet which is an integer.
-     */
-    public int newBetPoints(Player player){
-
-        int betPonits = 0;
-        String points;
-
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
-
-        try{
-            System.out.println("\nYou can't bet this amount" + player.getNickname() +", bet again!");
-
-            try {
-                Thread.sleep(1000);
-            } catch(InterruptedException e) {
-                System.out.println("got interrupted!");
-            }
-
-            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
-            points = input.nextLine();
-            betPonits = Integer.valueOf(points);
-        }catch(NumberFormatException ex){
-            newBetPoints(player);
-        }
-
-        return betPonits;
-
-    }
+//    /** WE NO LONGER NEED THIS BECAUSE THE BETS WILL BE BUTTONS
+//     * newBetPoints is a function that is called when the player types a non acceptable amount to bet.
+//     * It informs the user about their mistake and asks for a new bet.
+//     * @return the new bet which is an integer.
+//     */
+//    public int newBetPoints(Player player){
+//
+//        int betPonits = 0;
+//        String points;
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
+//
+//        try{
+//            System.out.println("\nYou can't bet this amount" + player.getNickname() +", bet again!");
+//
+//            try {
+//                Thread.sleep(1000);
+//            } catch(InterruptedException e) {
+//                System.out.println("got interrupted!");
+//            }
+//
+//            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
+//            points = input.nextLine();
+//            betPonits = Integer.valueOf(points);
+//        }catch(NumberFormatException ex){
+//            newBetPoints(player);
+//        }
+//
+//        return betPonits;
+//
+//    }
 
     /**
      * Function announcingCategory accepts a Questions type object and announces the category of the question
@@ -590,17 +588,17 @@ public class UserInteraction {
 
     }
 
-    /**
-     * getNewAnswer is called when the player types an answer that does not exist and asks for a new input.
-     * @return String that contains the new answer.
-     */
-    public String getNewAnswer(Player player){
-
-        System.out.println("\n");
-        System.out.println(player.getNickname() + " this is not an option! Guess again.");
-        return input.nextLine();
-
-    }
+//    /** WE NO LONGER NEED THIS BECAUSE WE HAVE THE KEYLISTENER
+//     * getNewAnswer is called when the player types an answer that does not exist and asks for a new input.
+//     * @return String that contains the new answer.
+//     */
+//    public String getNewAnswer(Player player){
+//
+//        System.out.println("\n");
+//        System.out.println(player.getNickname() + " this is not an option! Guess again.");
+//        return input.nextLine();
+//
+//    }
 
     /**
      * This function prints the correct answer to the question asked previously.

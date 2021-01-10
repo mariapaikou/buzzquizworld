@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,8 +7,8 @@ public class HighScore {
 
     private ArrayList<Player> totalWins;
     private LinkedList<Player> highestScores;
-    private static int highScoresNumber = 10;
-    private String onePlayerModeFile, twoPlayerModeFile;
+    private final String onePlayerModeFile;
+    private final String twoPlayerModeFile;
 
     public HighScore(String onePlayerModeFile, String towPlayerModeFile){
         totalWins = new ArrayList<>();
@@ -20,30 +19,31 @@ public class HighScore {
     }
 
     public void gameStarted(ArrayList<Player> players){
+
         if(players.size() > 1) {
             loadTotalWinsFromFile(twoPlayerModeFile);
-           // loadTotalWinsFromFile("totalwins.dat");
-//            for (Player player : players) {
-//                totalWins.put(player.getNickname(), 0); // giati mhden?? den tha prepei na leei poio einai to skor toy paixth?
-//            }
+        }else if(players.size() == 1){
+            loadHighestScoresFromFile(onePlayerModeFile);
         }
+
     }
 
 
     public void gameEnded(ArrayList<Player> players){
         boolean added = false;
         if(players.size() == 1) {
-            loadHighestScoresFromFile(onePlayerModeFile);
+            //loadHighestScoresFromFile(onePlayerModeFile);
             //loadHighestScoresFromFile("highscores.dat");
 
             Player player = players.get(0);
+            int highScoresNumber = 10;
             if(highestScores.size() == 0){// kalyptei thn periptosh poy to arxeio einai adeio!
 
                 highestScores.add(players.get(0));
                 added = true;
             }else if(highestScores.size() < highScoresNumber){
                 int i = 0;
-                while(i<highScoresNumber && !added && i<highestScores.size()){
+                while(i< highScoresNumber && !added && i<highestScores.size()){
 
                      if (player.getScore() >= highestScores.get(i).getScore() ){ //&& player.getScore()>= 0
                         highestScores.add(i, player);
@@ -54,7 +54,7 @@ public class HighScore {
 
             } else{
                 int j = 0;
-                while(j<highScoresNumber && !added) {
+                while(j< highScoresNumber && !added) {
                     if (player.getScore() >= highestScores.get(j).getScore()){
                         highestScores.add(j, player);
                         highestScores.removeLast();
@@ -75,9 +75,7 @@ public class HighScore {
             }
         }
         else{
-            for(Player player : players){
-                    totalWins.add(player);
-                }
+            totalWins.addAll(players);
             saveTotalWinsToFile(twoPlayerModeFile);
         }
 
@@ -87,36 +85,18 @@ public class HighScore {
     public void saveTotalWinsToFile(String file1){
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file1))){
             oos.writeObject(totalWins);
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
-        }catch(IOException e){
+        } catch(IOException e){
             e.printStackTrace();
         }
     }
 
     public void loadTotalWinsFromFile(String file1) {
-        try(BufferedReader br = new BufferedReader(new FileReader(file1))){
-
 
                 try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file1))){
                      totalWins = (ArrayList<Player>) ois.readObject();
-                }catch(FileNotFoundException e){
+                } catch(IOException | ClassNotFoundException e){
                       e.printStackTrace();
-                }catch(IOException e){
-                      e.printStackTrace();
-                }catch (ClassNotFoundException e){
-                     e.printStackTrace();
                 }
-
-
-
-
-
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
 
     }
 
@@ -134,11 +114,7 @@ public class HighScore {
     public void loadHighestScoresFromFile(String file2)  {
                     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file2))) {
                         highestScores = (LinkedList<Player>) ois.readObject();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
+                    } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
 

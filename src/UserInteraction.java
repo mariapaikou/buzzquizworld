@@ -6,6 +6,8 @@ import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.Object;
@@ -18,7 +20,7 @@ import java.util.TimerTask;
  * the messages and collects the data that we need from the users.
  */
 
-public class UserInteraction {
+public class UserInteraction implements KeyListener {
     private Game game;
     private ArrayList<Player> players;
     private int numberOfPlayers;
@@ -27,8 +29,14 @@ public class UserInteraction {
     private final JPanel startTextPanel, startButtonPanel;
     private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
     private JPanel NamePanelText, NamePanel, readyPanel, letsGoPanel;
+    String answer1;
+    String answer2;
+    ArrayList<String> answers;
 
     public UserInteraction(){
+
+        answer1 = new String();
+        answer2 = new String();
         //The basic frame
         JFrame frame = new JFrame("Buzz Quiz");
         //Look & Layout
@@ -519,10 +527,11 @@ public class UserInteraction {
      * This void function accepts a Questions type object and prints the question and the four possible answers.
      */
     public void askTheQuestion(Questions question){
-         JPanel  centerPanel , bottomPanel;
-         JLabel label;
+         JPanel  centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
+         JLabel label,labelA, labelB, labelC, labelD, labelQ;
          JFrame frame;
          String questionImageName= question.getImageName();
+
 
         frame = new JFrame();
         frame.setTitle("fashkahsk");
@@ -551,42 +560,153 @@ public class UserInteraction {
 
         frame.add(centerPanel, BorderLayout.CENTER);
 
+
+        questionPanel = new JPanel();
+        questionPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        questionPanel.setBounds(100,260,600,50);
+        questionPanel.setBackground(Color.pink);
+
+        answers = question.getAnswers();
+
+        labelQ = new JLabel();
+        labelQ.setLayout(new FlowLayout(FlowLayout.CENTER));
+        labelQ.setHorizontalAlignment(JLabel.LEFT);
+        labelQ.setText(question.getQuestion());
+        labelQ.setFont(new Font("Carlito",Font.PLAIN,25));
+        labelQ.setVisible(true);
+        questionPanel.add(labelQ);
+
+        frame.add(questionPanel);
+
+        labelA = new JLabel();
+        labelA.setLayout(new FlowLayout(FlowLayout.CENTER));
+        labelA.setHorizontalAlignment(JLabel.LEFT);
+        labelA.setText("A: " + answers.get(0));
+        labelA.setFont(new Font("Carlito",Font.PLAIN,20));
+        labelA.setVisible(true);
+
+        answerPanelA = new JPanel();
+        answerPanelA.setLayout(new FlowLayout(FlowLayout.CENTER));
+        answerPanelA.setBounds(100,310,300,40);
+        answerPanelA.setBackground(Color.PINK);
+        answerPanelA.add(labelA);
+        frame.add(answerPanelA);
+
+
+        labelB = new JLabel();
+        labelB.setLayout(new FlowLayout(FlowLayout.CENTER));
+        labelB.setHorizontalAlignment(JLabel.RIGHT);
+        labelB.setText("B: " + answers.get(1));
+        labelB.setFont(new Font("Carlito",Font.PLAIN,20));
+        labelB.setVisible(true);
+
+        answerPanelB = new JPanel();
+        answerPanelB.setLayout(new FlowLayout(FlowLayout.CENTER));
+        answerPanelB.setBounds(400,310,300,40);
+        answerPanelB.setBackground(Color.PINK);
+        answerPanelB.add(labelB);
+        frame.add(answerPanelB);
+
+
+        labelC = new JLabel();
+        labelC.setLayout(new FlowLayout(FlowLayout.CENTER));
+        labelC.setHorizontalAlignment(JLabel.LEFT);
+        labelC.setText("C: " + answers.get(2));
+        labelC.setFont(new Font("Carlito",Font.PLAIN,20));
+        labelC.setVisible(true);
+
+        answerPanelC = new JPanel();
+        answerPanelC.setLayout(new FlowLayout(FlowLayout.CENTER));
+        answerPanelC.setBounds(100,350,300,40);
+        answerPanelC.setBackground(Color.PINK);
+        answerPanelC.add(labelC);
+        frame.add(answerPanelC);
+
+        labelD = new JLabel();
+        labelD.setLayout(new FlowLayout(FlowLayout.CENTER));
+        labelD.setHorizontalAlignment(JLabel.RIGHT);
+        labelD.setText("D: " + answers.get(3));
+        labelD.setFont(new Font("Carlito",Font.PLAIN,20));
+        labelD.setVisible(true);
+
+        answerPanelD = new JPanel();
+        answerPanelD.setLayout(new FlowLayout(FlowLayout.CENTER));
+        answerPanelD.setBounds(400,350,300,40);
+        answerPanelD.setBackground(Color.PINK);
+        answerPanelD.add(labelD);
+        frame.add(answerPanelD);
+
+
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.setBounds(100,0,800,50);
-        bottomPanel.setBackground(Color.BLACK);
+        bottomPanel.setBounds(100,0,800,110);
+        bottomPanel.setBackground(Color.PINK);
         frame.add(bottomPanel);
-
-
-
-
-
+        frame.addKeyListener(this);
         frame.validate();//validate the image
         frame.setVisible(true);
 
 
+//        System.out.println("\nQUESTION");
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
+//
+//        System.out.println(question.getQuestion());
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
+//
+//        ArrayList<String> answers = question.getAnswers();
+//        System.out.println(answers.get(0) + "     " + answers.get(1));
+//        System.out.println(answers.get(2) + "     " + answers.get(3));
 
+    }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
 
-        System.out.println("\nQUESTION");
+    }
 
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+        if(!answers.isEmpty()){
+            if(key == KeyEvent.VK_Q){
+                answer1 = answers.get(0);
+            }else if(key == KeyEvent.VK_W){
+                answer1 = answers.get(1);
+            }else if(key == KeyEvent.VK_E){
+                answer1 = answers.get(2);
+            }else if(key == KeyEvent.VK_R){
+                answer1 = answers.get(3);
+            }
+            if(game.getPlayerList().size() == 2){
+                if(key == KeyEvent.VK_U){
+                    answer2 = answers.get(0);
+                }else if(key == KeyEvent.VK_I){
+                    answer2 = answers.get(1);
+                }else if(key == KeyEvent.VK_O){
+                    answer2 = answers.get(2);
+                }else if(key == KeyEvent.VK_P){
+                    answer2 = answers.get(3);
+                }
+            }
         }
 
-        System.out.println(question.getQuestion());
 
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
+//        System.out.println(answer1);
+//        System.out.println(answer2);
+    }
 
-        ArrayList<String> answers = question.getAnswers();
-        System.out.println(answers.get(0) + "     " + answers.get(1));
-        System.out.println(answers.get(2) + "     " + answers.get(3));
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 
@@ -607,17 +727,17 @@ public class UserInteraction {
 
     }
 
-//    /** WE NO LONGER NEED THIS BECAUSE WE HAVE THE KEYLISTENER
-//     * getNewAnswer is called when the player types an answer that does not exist and asks for a new input.
-//     * @return String that contains the new answer.
-//     */
-//    public String getNewAnswer(Player player){
-//
-//        System.out.println("\n");
-//        System.out.println(player.getNickname() + " this is not an option! Guess again.");
-//        return input.nextLine();
-//
-//    }
+    /** WE NO LONGER NEED THIS BECAUSE WE HAVE THE KEYLISTENER
+     * getNewAnswer is called when the player types an answer that does not exist and asks for a new input.
+     * @return String that contains the new answer.
+     */
+    public String getNewAnswer(Player player){
+
+        System.out.println("\n");
+        System.out.println(player.getNickname() + " this is not an option! Guess again.");
+        return input.nextLine();
+
+    }
 
     /**
      * This function prints the correct answer to the question asked previously.

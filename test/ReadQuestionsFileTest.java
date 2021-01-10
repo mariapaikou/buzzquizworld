@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReadQuestionsFileTest {
 
-    @Test
+    @Test //ok!
     void loadQuestions() {
         ArrayList<Questions> questions;
         ReadQuestionsFile readQuestionsFile = new ReadQuestionsFile();
@@ -40,5 +40,15 @@ class ReadQuestionsFileTest {
         assertEquals(1,i[1]);
         assertEquals(1,i[2]);
         assertEquals(1,i[3]);
+    }
+
+    @Test
+    void loadQuestions1(){
+        ArrayList<Questions> questions;
+        ReadQuestionsFile readQuestionsFile = new ReadQuestionsFile();
+        questions = readQuestionsFile.loadQuestions("questions.text.txt");
+
+        assertEquals("John Pemberton",questions.get(2).getCorrectAnswer());
+        assertEquals("cocacola.jpg",questions.get(2).getImageName());
     }
 }

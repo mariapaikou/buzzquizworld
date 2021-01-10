@@ -1,6 +1,6 @@
 Food@Which nut is used to make dynamite?@Peanuts@Walnuts@Pine nuts@Almonds@Peanuts@null
 Food@What was the first cold breakfast cereal invented in 1863?@Granola@Corn flakes@Bran flakes@Cheerios@Granola@null
-Food@Who invented Coca-Cola?@John Pemberton@Asa Griggs Candler@Charles@Elmer Hires@John Matthews@John Pemberton@cocacola.jpg
+Food@Who invented Coca-Cola?@John Pemberton@Asa Griggs Candler@Charles Elmer Hires@John Matthews@John Pemberton@cocacola.jpg
 Food@How many calories per gram are stored in protein?@4@3@2@5@4@null
 Food@What is the only U.S. state to grow coffee beans?@Hawaii@California@Louisiana@Florida@Hawaii@null
 Food@What does the word “onion” mean in Latin?@Large pearl@Small oyster@White sphere@White oyster@Large pearl@null

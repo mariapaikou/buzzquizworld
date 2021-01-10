@@ -2,15 +2,16 @@ import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Scanner;
-/*import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;*/
+import java.lang.Object;
+import java.util.TimerTask;
+
+
 
 /**
  * This class contains all the interactions with the user, asks all the questions, prints all
@@ -22,12 +23,9 @@ public class UserInteraction {
     private final Container con;
     private final JPanel startTextPanel, startButtonPanel;
     private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
-    private JPanel NamePanelTextOne,NamePanelOne, outputOnePanel, outputTwoPanel, inputOnePanel, inputTwoPanel, NameLeftPanel, NameRightPanel;
+    private JPanel NamePanelText, NamePanel, readyPanel, letsGoPanel;
 
     public UserInteraction(){
-        //The action for the start button
-        ClickedOnStart click = new ClickedOnStart();
-
         //The basic frame
         JFrame frame = new JFrame("Buzz Quiz");
         //Look & Layout
@@ -71,23 +69,19 @@ public class UserInteraction {
         startButton.setSize(200, 100);
         startButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action
-        startButton.addActionListener(click);
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HowManyOfYou();
+            }
+        });
         startButtonPanel.add(startButton);
 
         frame.setVisible(true);
     }
 
-    public class ClickedOnStart implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            HowManyOfYou();
-        }
-    }
-
     public int HowManyOfYou(){
         //The actions for the buttons
-        ClickedOnONE one = new ClickedOnONE();
-        ClickedOnTWO two = new ClickedOnTWO();
 
         //turn off the previous panels
         startTextPanel.setVisible(false);
@@ -133,7 +127,12 @@ public class UserInteraction {
         onePlayer.setSize(400, 150);
         onePlayer.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action
-        onePlayer.addActionListener(one);
+        onePlayer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                God(1);
+            }
+        });
         HMPLeftPanel.add(onePlayer);
 
         //The button for 2 players
@@ -144,7 +143,12 @@ public class UserInteraction {
         twoPlayers.setSize(400, 150);
         twoPlayers.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action
-        twoPlayers.addActionListener(two);
+        twoPlayers.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                God(2);
+            }
+        });
         HMPRightPanel.add(twoPlayers);
 
 //        int howMany;
@@ -161,19 +165,6 @@ public class UserInteraction {
         return 0;
     }
 
-    public class ClickedOnONE implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            God(1);
-        }
-    }
-    public class ClickedOnTWO implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            God(2);
-        }
-    }
-
     /**
      * Function God, creates the human beings of this game. Asks for the name
      * of the player, creates a Player object with that name that is going
@@ -186,164 +177,76 @@ public class UserInteraction {
         HMPLeftPanel.setVisible(false);
         HMPRightPanel.setVisible(false);
 
+        //The panel for the text
+        NamePanelText = new JPanel();
+        //Look & Layout
+        NamePanelText.setBounds(100, 100, 500, 100);
+        NamePanelText.setBackground(Color.black);
+        con.add(NamePanelText);
+
+        //The area that holds the text
+        JTextArea NameText = new JTextArea("Choose a nickname (10 characters max):");
+        //Look & Layout
+        NameText.setBounds(100,100,500,100);
+        NameText.setBackground(Color.black);
+        NameText.setForeground(Color.WHITE);
+        NameText.setFont(new Font("Carlito", Font.PLAIN, 30));
+        NameText.setLineWrap(true);
+        NameText.setEditable(false);
+        NamePanelText.add(NameText);
+
+        //The panel for the nickname input
+        NamePanel = new JPanel();
+        //Look & Layout
+        NamePanel.setBounds(100, 200, 400, 100);
+        NamePanel.setBackground(Color.black);
+        con.add(NamePanel);
+
+        //TextField for the nickname input
+        JTextField nickname = new JTextField();
+        //Look & Layout
+        nickname.setBounds(100,200,400,100);
+        NamePanel.add(nickname);
+        nickname.setText("");
+        nickname.setColumns(7);
+        nickname.setBackground(Color.white);
+        nickname.setForeground(Color.black);
+        nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
+        nickname.setDocument(new JTextFieldLimit(10));
+
+        //Panel for the button
+        readyPanel = new JPanel();
+        //Look & Layout
+        readyPanel.setBounds(500, 200, 100, 100);
+        readyPanel.setBackground(Color.black);
+        con.add(readyPanel);
+
+        //Button
+        JButton readyButton = new JButton("Ready");
+        readyButton.setBackground(Color.BLACK);
+        readyButton.setForeground(Color.WHITE);
+        readyButton.setSize(100, 100);
+        readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        readyPanel.add(readyButton);
+
         if(numOfPlayers==1){
-            //The panel for the text
-            NamePanelTextOne = new JPanel();
-            //Look & Layout
-            NamePanelTextOne.setBounds(100, 100, 500, 100);
-            NamePanelTextOne.setBackground(Color.black);
-            con.add(NamePanelTextOne);
-
-            //The area that holds the text
-            JTextArea NameText = new JTextArea("Choose a nickname (10 characters max):");
-            //Look & Layout
-            NameText.setBounds(100,100,500,100);
-            NameText.setBackground(Color.black);
-            NameText.setForeground(Color.WHITE);
-            NameText.setFont(new Font("Carlito", Font.PLAIN, 30));
-            NameText.setLineWrap(true);
-            NameText.setEditable(false);
-            NamePanelTextOne.add(NameText);
-
-            //The panel for the nickname input
-            NamePanelOne = new JPanel();
-            //Look & Layout
-            NamePanelOne.setBounds(100, 200, 400, 100);
-            NamePanelOne.setBackground(Color.black);
-            con.add(NamePanelOne);
-
-            //TextField for the nickname input
-            JTextField nickname = new JTextField();
-            //Look & Layout
-            nickname.setBounds(100,200,400,100);
-            NamePanelOne.add(nickname);
-            nickname.setColumns(7);
-            nickname.setBackground(Color.white);
-            nickname.setForeground(Color.black);
-            nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
-            nickname.setDocument(new JTextFieldLimit(10));
-
-            //Panel for the button
-            JPanel readyPanel = new JPanel();
-            //Look & Layout
-            readyPanel.setBounds(500, 200, 100, 100);
-            readyPanel.setBackground(Color.black);
-            con.add(readyPanel);
-
-            //Button
-            JButton readyButton = new JButton("Ready");
-            readyButton.setBackground(Color.BLACK);
-            readyButton.setForeground(Color.WHITE);
-            readyButton.setSize(100, 100);
-            readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
-            //BALE ACTION LISTENER
-            readyPanel.add(readyButton);
-
+            readyButton.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    try {
+                        LetsGo();
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
+                }
+            });
         }
         else{
-            //The panel for the left text
-            outputOnePanel = new JPanel();
-            //Look & Layout
-            outputOnePanel.setBounds(100, 100, 300, 150);
-            outputOnePanel.setBackground(Color.black);
-            con.add(outputOnePanel);
-
-            //The area that holds the left text
-            JTextArea NameTextLeft = new JTextArea("Player 1, choose a nickname            (10 characters max):");
-            //Look & Layout
-            NameTextLeft.setBounds(100, 100, 300, 150);
-            NameTextLeft.setBackground(Color.black);
-            NameTextLeft.setForeground(Color.WHITE);
-            NameTextLeft.setFont(new Font("Carlito", Font.PLAIN, 20));
-            NameTextLeft.setLineWrap(true);
-            NameTextLeft.setEditable(false);
-            outputOnePanel.add(NameTextLeft);
-
-            //The panel for the right text
-            outputTwoPanel = new JPanel();
-            //Look & Layout
-            outputTwoPanel.setBounds(400, 100, 300, 150);
-            outputTwoPanel.setBackground(Color.black);
-            con.add(outputTwoPanel);
-
-            //The area that holds the right text
-            JTextArea NameTextRight = new JTextArea("Player 2, choose a nickname            (10 characters max):");
-            //Look & Layout
-            NameTextRight.setBounds(400, 100, 300, 150);
-            NameTextRight.setBackground(Color.black);
-            NameTextRight.setForeground(Color.WHITE);
-            NameTextRight.setFont(new Font("Carlito", Font.PLAIN, 20));
-            NameTextRight.setLineWrap(true);
-            NameTextRight.setEditable(false);
-            outputTwoPanel.add(NameTextRight);
-
-            //The panel for the left input
-            inputOnePanel = new JPanel();
-            //Look & Layout
-            inputOnePanel.setBounds(100, 250, 200, 150);
-            inputOnePanel.setBackground(Color.black);
-            con.add(inputOnePanel);
-
-            //TextField for the left input
-            JTextField nicknameOne = new JTextField();
-            //Look & Layout
-            nicknameOne.setBounds(100, 250, 200, 150);
-            inputOnePanel.add(nicknameOne);
-            nicknameOne.setColumns(7);
-            nicknameOne.setBackground(Color.white);
-            nicknameOne.setForeground(Color.black);
-            nicknameOne.setFont(new Font("Carlito", Font.PLAIN, 30));
-            nicknameOne.setDocument(new JTextFieldLimit(10));
-
-            //The panel for the right input
-            inputTwoPanel = new JPanel();
-            //Look & Layout
-            inputTwoPanel.setBounds(400, 250, 200, 150);
-            inputTwoPanel.setBackground(Color.black);
-            con.add(inputTwoPanel);
-
-            //TextField for the right input
-            JTextField nicknameTwo = new JTextField();
-            //Look & Layout
-            nicknameTwo.setBounds(400, 250, 200, 150);
-            inputTwoPanel.add(nicknameTwo);
-            nicknameTwo.setColumns(7);
-            nicknameTwo.setBackground(Color.white);
-            nicknameTwo.setForeground(Color.black);
-            nicknameTwo.setFont(new Font("Carlito", Font.PLAIN, 30));
-            nicknameTwo.setDocument(new JTextFieldLimit(10));
-
-            //The panel for the left okay button
-            NameLeftPanel = new JPanel();
-            //Look & Layout
-            NameLeftPanel.setBounds(300, 250, 100, 150);
-            NameLeftPanel.setBackground(Color.black);
-            con.add(NameLeftPanel);
-
-            //Left button
-            JButton leftReadyButton = new JButton("Ready");
-            leftReadyButton.setBackground(Color.BLACK);
-            leftReadyButton.setForeground(Color.WHITE);
-            leftReadyButton.setSize(100, 100);
-            leftReadyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
-            //BALE ACTION LISTENER
-            NameLeftPanel.add(leftReadyButton);
-
-            //The panel for the right okay button
-            NameRightPanel = new JPanel();
-            //Look & Layout
-            NameLeftPanel.setBounds(600, 250, 100, 150);
-            NameLeftPanel.setBackground(Color.black);
-            con.add(NameLeftPanel);
-
-            //Right button
-            JButton rightReadyButton = new JButton("Ready");
-            rightReadyButton.setBackground(Color.BLACK);
-            rightReadyButton.setForeground(Color.WHITE);
-            rightReadyButton.setSize(100, 100);
-            rightReadyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
-            //BALE ACTION LISTENER
-            NameRightPanel.add(rightReadyButton);
+            readyButton.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    nickname.setText("");
+                    God(1);
+                }
+            });
         }
 //        System.out.println("You mortal man, name yourself!");
 //
@@ -375,6 +278,80 @@ public class UserInteraction {
 //       return player;
         return null;
     }
+
+    public void LetsGo() throws InterruptedException {
+        //disable previous panels
+        NamePanelText.setVisible(false);
+        NamePanel.setVisible(false);
+        readyPanel.setVisible(false);
+
+        letsGoPanel = new JPanel();
+        letsGoPanel.setBounds(100, 100, 600, 300);
+        letsGoPanel.setBackground(Color.BLACK);
+        con.add(letsGoPanel);
+
+        JLabel text1 = new JLabel("LET");
+        text1.setBounds(100,100,600,300);
+        text1.setBackground(Color.black);
+        text1.setForeground(Color.WHITE);
+        text1.setFont(new Font("Carlito", Font.PLAIN, 300));
+        text1.setHorizontalAlignment(JLabel.CENTER);
+        letsGoPanel.add(text1);
+
+        JLabel text2 = new JLabel("THE");
+        text2.setBounds(100,100,600,300);
+        text2.setBackground(Color.black);
+        text2.setForeground(Color.WHITE);
+        text2.setFont(new Font("Carlito", Font.PLAIN, 300));
+        text2.setHorizontalAlignment(JLabel.CENTER);
+        letsGoPanel.add(text2);
+
+        JLabel text3 = new JLabel("GAME");
+        text3.setBounds(50,100,700,300);
+        text3.setBackground(Color.black);
+        text3.setForeground(Color.WHITE);
+        text3.setFont(new Font("Carlito", Font.PLAIN, 300));
+        text3.setHorizontalAlignment(JLabel.CENTER);
+        letsGoPanel.add(text3);
+
+        JLabel text4 = new JLabel("BEGIN");
+        text4.setBounds(50,100,700,200);
+        text4.setBackground(Color.black);
+        text4.setForeground(Color.WHITE);
+        text4.setFont(new Font("Carlito", Font.PLAIN, 200));
+        text4.setHorizontalAlignment(JLabel.CENTER);
+        letsGoPanel.add(text4);
+
+        text1.setVisible(false);
+        text2.setVisible(false);
+        text3.setVisible(false);
+        text4.setVisible(false);
+
+        Timer timer4 = new Timer(500, e -> {
+            text3.setVisible(false);
+            text4.setVisible(true);
+        });
+
+        Timer timer3 = new Timer(500, e -> {
+            text2.setVisible(false);
+            text3.setVisible(true);
+            timer4.start();
+
+        });
+
+        Timer timer2 = new Timer(500, e -> {
+            text1.setVisible(false);
+            text2.setVisible(true);
+            timer3.start();
+        });
+
+        Timer timer1 = new Timer(500, e -> {
+            text1.setVisible(true);
+            timer2.start();
+        });
+        timer1.start();
+    }
+
     //Class to limit the number of characters in a JText
     public class JTextFieldLimit extends PlainDocument {
         private int limit;

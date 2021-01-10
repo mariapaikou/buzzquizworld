@@ -699,6 +699,7 @@ public class UserInteraction implements KeyListener {
                 }
             }
         }
+        answers.clear();
 
 
 //        System.out.println(answer1);

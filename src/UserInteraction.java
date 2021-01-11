@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.event.AncestorListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -9,12 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.lang.Object;
-import java.util.TimerTask;
-
 
 
 /**
@@ -554,40 +549,16 @@ public class UserInteraction implements KeyListener {
         con.add(letsGoPanel);
 
         JLabel text1 = new JLabel("LET");
-        text1.setBounds(0, 100, 800, 400);
-        text1.setBackground(Color.black);
-        text1.setForeground(Color.WHITE);
-        text1.setFont(new Font("Carlito", Font.PLAIN, 300));
-        text1.setHorizontalAlignment(JLabel.CENTER);
-        text1.setVerticalAlignment(JLabel.CENTER);
-        letsGoPanel.add(text1);
+        setLabelFeatures(text1);
 
         JLabel text2 = new JLabel("THE");
-        text2.setBounds(0, 100, 800, 400);
-        text2.setBackground(Color.black);
-        text2.setForeground(Color.WHITE);
-        text2.setFont(new Font("Carlito", Font.PLAIN, 300));
-        text2.setHorizontalAlignment(JLabel.CENTER);
-        text2.setVerticalAlignment(JLabel.CENTER);
-        letsGoPanel.add(text2);
+        setLabelFeatures(text2);
 
         JLabel text3 = new JLabel("GAME");
-        text3.setBounds(0, 100, 800, 400);
-        text3.setBackground(Color.black);
-        text3.setForeground(Color.WHITE);
-        text3.setFont(new Font("Carlito", Font.PLAIN, 300));
-        text3.setHorizontalAlignment(JLabel.CENTER);
-        text3.setVerticalAlignment(JLabel.CENTER);
-        letsGoPanel.add(text3);
+        setLabelFeatures(text3);
 
         JLabel text4 = new JLabel("BEGIN");
-        text4.setBounds(0, 100, 800, 400);
-        text4.setBackground(Color.black);
-        text4.setForeground(Color.WHITE);
-        text4.setFont(new Font("Carlito", Font.PLAIN, 300));
-        text4.setHorizontalAlignment(JLabel.CENTER);
-        text4.setVerticalAlignment(JLabel.CENTER);
-        letsGoPanel.add(text4);
+        setLabelFeatures(text4);
 
         text1.setVisible(false);
         text2.setVisible(false);
@@ -632,6 +603,15 @@ public class UserInteraction implements KeyListener {
         timer1.start();
     }
 
+    private void setLabelFeatures(JLabel text) {
+        text.setBounds(0, 100, 800, 400);
+        text.setBackground(Color.black);
+        text.setForeground(Color.WHITE);
+        text.setFont(new Font("Carlito", Font.PLAIN, 300));
+        text.setHorizontalAlignment(JLabel.CENTER);
+        text.setVerticalAlignment(JLabel.CENTER);
+        letsGoPanel.add(text);
+    }
 
 
     //Class to limit the number of characters in a JText
@@ -1178,7 +1158,7 @@ public class UserInteraction implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        //no need to implement
     }
 
     @Override
@@ -1207,15 +1187,13 @@ public class UserInteraction implements KeyListener {
             }
         }
         answers.clear();
-
-
 //        System.out.println(answer1);
 //        System.out.println(answer2);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        //no need to implement
     }
 
     /**
@@ -1223,7 +1201,6 @@ public class UserInteraction implements KeyListener {
      */
     public void correctAnswer(){
         //Turn off previous panels
-
         correctAnswerTextPanel = new JPanel();
         correctAnswerTextPanel.setBackground(Color.BLACK);
         correctAnswerTextPanel.setBounds(50, 50, 700, 200);
@@ -1233,11 +1210,6 @@ public class UserInteraction implements KeyListener {
         correctAnswerPanel.setBackground(Color.black);
         correctAnswerPanel.setBounds(50, 250, 700, 200);
         con.add(correctAnswerPanel);
-
-//        nextQuestion = new JPanel();
-//        nextQuestion.setBackground(Color.BLACK);
-//        nextQuestion.setBounds(700, 400, 100, 100);
-//        con.add(nextQuestion);
 
         JLabel theCorrectAnswer = new JLabel("The correct answer is...");
         theCorrectAnswer.setBounds(50, 50, 700, 200);
@@ -1362,148 +1334,5 @@ public class UserInteraction implements KeyListener {
 
 
 
-    private void clearScanner(){
-        input.nextLine();
-    }
-    //PROSOXH SKOYPIDIA - KATEBEITE ME DIKH SAS EY8YNH
-
-//    /**
-//     * Function HowManyOfYou, asks the user for the number of players.
-//     * @return int
-//     */
-/*
-
-
- */
-
-//    /**
-//     * Function HowManyOfYou, asks the user for the number of rounds (5 or 10 rounds available).
-//     * @return int
-//     */
-/*
-    public int HowManyRounds(){
-        int howMany;
-        System.out.println("Now, tell me how many rounds do you want to play?\n");
-        System.out.println("Number of rounds(5 or 10):");
-        howMany= input.nextInt();
-        while (howMany!=5 || howMany!=10){
-            System.out.println("Oops! Give me a correct number!!1!\n");//maybe errorClass?
-            System.out.println("Number of rounds(5 or 10): ");
-            howMany= input.nextInt();
-        }
-        return howMany;
-    }
-
- */
-
-//    /**
-//     * Function TypeOfGame, asks the user the type of game they want to play (RightAnswer and Bet available).
-//     * @return String
-//     */
-/*
-    public String TypeOfGame(){
-        String type;
-        System.out.println("Pick a game, don't be a chicken!");
-        System.out.println("Game types: RightAnswer or Bet!! Your answer and spell it out:");
-        type = input.nextLine();
-        while (type!="RightAnswer" || type!="Bet"){
-            System.out.println("Oops! Give me a correct name!!1!\n");//maybe errorClass?
-            System.out.println("Game types: RightAnswer or Bet!! Your answer and spell it out:");
-            type = input.nextLine();
-        }
-        return type;
-    }
-
- */
-
-/*
-    /**
-     * This function receives the game of choise and creates the object
-     * @param nameOfGame
-     */
-/*
-    public void Choise(String nameOfGame){
-        if(nameOfGame=="Right Answer"){
-            RightAnswer rightAnswer = new RightAnswer();
-        }else if(nameOfGame=="StopTheTimer"){
-            StopTheTimer timer= new StopTheTimer();
-        }else if(nameOfGame=="Bet"){
-            Bet bet = new Bet();
-        }else if(nameOfGame == "Quick Answer"){
-            QuickAnswer quickAnswer = new QuickAnswer();
-        }else if(nameOfGame == "Thermometer"){
-            Thermometer thermometer = new Thermometer();
-        }else{
-            runTimeError(); //mhpws afth tha mpei sthn error pou tha einai kai gia tous elegxous?
-        }
-    }
-
-*/
-
-    //    /** WE NO LONGER NEED THIS BECAUSE THE BETS WILL BE BUTTONS
-//     * newBetPoints is a function that is called when the player types a non acceptable amount to bet.
-//     * It informs the user about their mistake and asks for a new bet.
-//     * @return the new bet which is an integer.
-//     */
-//    public int newBetPoints(Player player){
-//
-//        int betPonits = 0;
-//        String points;
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
-//
-//        try{
-//            System.out.println("\nYou can't bet this amount" + player.getNickname() +", bet again!");
-//
-//            try {
-//                Thread.sleep(1000);
-//            } catch(InterruptedException e) {
-//                System.out.println("got interrupted!");
-//            }
-//
-//            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
-//            points = input.nextLine();
-//            betPonits = Integer.valueOf(points);
-//        }catch(NumberFormatException ex){
-//            newBetPoints(player);
-//        }
-//
-//        return betPonits;
-//
-//    }
-
-    // WE DONT NEED THIS ANYMORE
-//    /**
-//     * This method accepts a Player object, asks the player for an answer and returns the input.
-//     * @return String variable that contains the answer.
-//     */
-//    public String getAnAnswer(Player player){
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
-//
-//        System.out.println(player.getNickname() + ", which answer do you think is correct?");
-//        return input.nextLine();
-//
-//    }
-//
-//    /** WE NO LONGER NEED THIS BECAUSE WE HAVE THE KEYLISTENER
-//     * getNewAnswer is called when the player types an answer that does not exist and asks for a new input.
-//     * @return String that contains the new answer.
-//     */
-//    public String getNewAnswer(Player player){
-//
-//        System.out.println("\n");
-//        System.out.println(player.getNickname() + " this is not an option! Guess again.");
-//        return input.nextLine();
-//
-//    }
 
 }

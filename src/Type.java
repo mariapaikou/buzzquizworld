@@ -44,7 +44,9 @@ public abstract class Type {
 
                 player.setClickTime(-1);
             }
-            player.defaultifyBet();
+            if(player.getBet() > 0){
+                player.defaultifyBet();
+            }
         }
     }
 

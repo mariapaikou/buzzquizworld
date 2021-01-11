@@ -107,40 +107,40 @@ public class Game {
         type.changePoints();
     }
 
-    /**
-     * Function setBetInitialBehaviour gets as parameter a Type object and checks if it is an instance of Bet/........
-     * Then it sets the initialBehaviour for each bet type.
-     * It calls Bet's method setPoints to initialize player's betPoints for this question.
-     * @param type a type object that represents the type of game being played at the moment.
-     * @param bets an int array that contains the players bet in the same order as they are placed in the playerList
-     */
-    public void setBetInitialBehaviour(Type type, int [] bets) {
-
-        if (type instanceof Bet) {
-            for (int i = 0; i < playerList.size(); i++) {
-
-                ((Bet) type).setPoints(bets[i]);
-            }
-//        }else if (type instanceof Timer) {
-//            // tha friaxnoyme to Timer antikeimeno!!!
-//            //TODO mhpws prepei na einai mesa sthn Timer? h sthn UserIneraction!!!!
+//    /**
+//     * Function setBetInitialBehaviour gets as parameter a Type object and checks if it is an instance of Bet/........
+//     * Then it sets the initialBehaviour for each bet type.
+//     * It calls Bet's method setPoints to initialize player's betPoints for this question.
+//     * @param type a type object that represents the type of game being played at the moment.
+//     * @param bets an int array that contains the players bet in the same order as they are placed in the playerList
+//     */
+//    public void setBetInitialBehaviour(Type type, int [] bets) {
+//
+//        if (type instanceof Bet) {
+//            for (int i = 0; i < playerList.size(); i++) {
+//
+//                ((Bet) type).setPoints(bets[i]);
+//            }
+////        }else if (type instanceof Timer) {
+////            // tha friaxnoyme to Timer antikeimeno!!!
+////            //TODO mhpws prepei na einai mesa sthn Timer? h sthn UserIneraction!!!!
+////        }
 //        }
-        }
-    }
+//    }
 
-    /**
-     * Function setTypeInitialStatus gets as parameter a Type object and checks if it is an instance of Bet/..........
-     * Thet it sets the initialStatus for each type of game.
-     * For Bet it initialize position to 0
-     * @param type a type object created by playTheGame that represents the type of game being played at the moment.
-     */
-    public void setTypeInitialStatus(Type type){
-
-        if(type instanceof Bet){
-            ((Bet) type).initializePositions();
-        }
-        // TODO xreiazetai kati gia ta alla types???
-    }
+//    /**
+//     * Function setTypeInitialStatus gets as parameter a Type object and checks if it is an instance of Bet/..........
+//     * Thet it sets the initialStatus for each type of game.
+//     * For Bet it initialize position to 0
+//     * @param type a type object created by playTheGame that represents the type of game being played at the moment.
+//     */
+//    public void setTypeInitialStatus(Type type){
+//
+//        if(type instanceof Bet){
+//            ((Bet) type).initializePositions();
+//        }
+//        // TODO xreiazetai kati gia ta alla types???
+//    }
 
 
 

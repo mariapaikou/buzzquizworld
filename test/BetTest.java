@@ -24,11 +24,15 @@ class BetTest {
     void changePoints() {
 
         int points = 1000;
-        bet.setPoints(points);
-        bet.setPoints(points);
+//        bet.setPoints(points);
+//        bet.setPoints(points);
 
         player1.setStatus(true);
         player2.setStatus(true);
+
+        player1.setBet(points);
+        player2.setBet(points);
+
         bet.changePoints();
         assertEquals(points,player1.getScore());
 
@@ -52,8 +56,9 @@ class BetTest {
     void changePoints2(){
 
         int points = 1000;
-        bet.setPoints(points);
-        bet.setPoints(points);
+        player1.setBet(points);
+        player2.setBet(points);
+
         player1.setStatus(false);
         player2.setStatus(false);
         bet.changePoints();
@@ -63,33 +68,33 @@ class BetTest {
 
     }
 
-    @Test //ok!
-    void setPoints(){
+//    @Test //ok!
+//    void setPoints(){
+//
+//        int points = -1020;
+//        bet.setPoints(points); // error message
+//        bet.setPoints(1000);
+//        bet.setPoints(1000);
+//        bet.setPoints(1000); // error message
+//
+//    }
 
-        int points = -1020;
-        bet.setPoints(points); // error message
-        bet.setPoints(1000);
-        bet.setPoints(1000);
-        bet.setPoints(1000); // error message
 
-    }
-
-
-    @Test //ok!
-    void initializePositions() {
-
-       int points = 500;
-       bet.setPoints(points);
-       player1.setStatus(true);
-       bet.changePoints();
-       bet.initializePositions();
-       bet.setPoints(points);
-       player1.setStatus(true);
-       bet.changePoints();
-
-       assertEquals(1000,player1.getScore());
-
-    }
+//    @Test //ok!
+//    void initializePositions() {
+//
+//       int points = 500;
+//       bet.setPoints(points);
+//       player1.setStatus(true);
+//       bet.changePoints();
+//       bet.initializePositions();
+//       bet.setPoints(points);
+//       player1.setStatus(true);
+//       bet.changePoints();
+//
+//       assertEquals(1000,player1.getScore());
+//
+//    }
 
     @Test // ok!
     void getName() {

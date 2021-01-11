@@ -51,6 +51,8 @@ public class UserInteraction implements KeyListener {
     private JPanel RoundNumberPanel, QuestionNumberPanel, RQOkayPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
     private JPanel announcingCategoryPanel;
     private JPanel betPointsPanel, bet250, bet500, bet750, bet1000;
+    private JPanel  centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
+    private JPanel correctAnswerTextPanel, correctAnswerPanel, nextQuestion, scoresPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
 
@@ -656,6 +658,8 @@ public class UserInteraction implements KeyListener {
 
     }
 
+
+    //PREPEI NA PROSTHESW TO PWS THA ERXESAI KAI THA FEYGEIS APO EDW
     /**
      * BetPoints function, asks the player to bet and saves the amount in an int variable.
      * @return the betPoints variable, which contains the points bet by the player.
@@ -713,7 +717,7 @@ public class UserInteraction implements KeyListener {
             bet250Button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    player.setBet(250);
                 }
             });
             bet250.add(bet250Button);
@@ -724,6 +728,12 @@ public class UserInteraction implements KeyListener {
             bet500Button.setForeground(Color.WHITE);
             bet500Button.setSize(100, 100);
             bet500Button.setFont(new Font("Carlito", Font.PLAIN, 50));
+            bet500Button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    player.setBet(500);
+                }
+            });
             bet500.add(bet500Button);
 
             //bet750 button
@@ -732,6 +742,12 @@ public class UserInteraction implements KeyListener {
             bet750Button.setForeground(Color.WHITE);
             bet750Button.setSize(100, 100);
             bet750Button.setFont(new Font("Carlito", Font.PLAIN, 50));
+            bet750Button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    player.setBet(750);
+                }
+            });
             bet750.add(bet750Button);
 
             //bet1000 button
@@ -740,6 +756,12 @@ public class UserInteraction implements KeyListener {
             bet1000Button.setForeground(Color.WHITE);
             bet1000Button.setSize(100, 100);
             bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 50));
+            bet1000Button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    player.setBet(1000);
+                }
+            });
             bet1000.add(bet1000Button);
 
         }
@@ -777,20 +799,9 @@ public class UserInteraction implements KeyListener {
     /**
      * This void function accepts a Questions type object and prints the question and the four possible answers.
      */
-    public void askTheQuestion(Questions question){
-         JPanel  centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
-         JLabel label,labelA, labelB, labelC, labelD, labelQ;
-         JFrame frame;
-         String questionImageName= question.getImageName();
-
-
-        frame = new JFrame();
-        frame.setTitle("fashkahsk");
-        frame.setSize(800,500);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(new BorderLayout());
-        frame.setBackground(Color.BLACK);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public void askTheQuestion(){
+        JLabel label,labelA, labelB, labelC, labelD, labelQ;
+        String questionImageName= question.getImageName();
 
         centerPanel = new JPanel();
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -809,7 +820,7 @@ public class UserInteraction implements KeyListener {
         centerPanel.add(label);
         centerPanel.setVisible(true);
 
-        frame.add(centerPanel, BorderLayout.CENTER);
+        con.add(centerPanel, BorderLayout.CENTER);
 
 
         questionPanel = new JPanel();
@@ -827,7 +838,7 @@ public class UserInteraction implements KeyListener {
         labelQ.setVisible(true);
         questionPanel.add(labelQ);
 
-        frame.add(questionPanel);
+        con.add(questionPanel);
 
         labelA = new JLabel();
         labelA.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -841,7 +852,7 @@ public class UserInteraction implements KeyListener {
         answerPanelA.setBounds(100,310,300,40);
         answerPanelA.setBackground(Color.PINK);
         answerPanelA.add(labelA);
-        frame.add(answerPanelA);
+        con.add(answerPanelA);
 
 
         labelB = new JLabel();
@@ -856,7 +867,7 @@ public class UserInteraction implements KeyListener {
         answerPanelB.setBounds(400,310,300,40);
         answerPanelB.setBackground(Color.PINK);
         answerPanelB.add(labelB);
-        frame.add(answerPanelB);
+        con.add(answerPanelB);
 
 
         labelC = new JLabel();
@@ -871,7 +882,7 @@ public class UserInteraction implements KeyListener {
         answerPanelC.setBounds(100,350,300,40);
         answerPanelC.setBackground(Color.PINK);
         answerPanelC.add(labelC);
-        frame.add(answerPanelC);
+        con.add(answerPanelC);
 
         labelD = new JLabel();
         labelD.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -885,17 +896,17 @@ public class UserInteraction implements KeyListener {
         answerPanelD.setBounds(400,350,300,40);
         answerPanelD.setBackground(Color.PINK);
         answerPanelD.add(labelD);
-        frame.add(answerPanelD);
+        con.add(answerPanelD);
 
 
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.setBounds(100,0,800,110);
         bottomPanel.setBackground(Color.PINK);
-        frame.add(bottomPanel);
-        frame.addKeyListener(this);
-        frame.validate();//validate the image
-        frame.setVisible(true);
+        con.add(bottomPanel);
+        con.addKeyListener(this);
+        con.validate();//validate the image
+        con.setVisible(true);
 
 
 //        System.out.println("\nQUESTION");
@@ -966,29 +977,115 @@ public class UserInteraction implements KeyListener {
     /**
      * This function prints the correct answer to the question asked previously.
      */
-    public void correctAnswer(Questions question){
+    public void correctAnswer(){
+        //change points
+        type.changePoints();
+        //Turn off previous panels
 
-        System.out.println("The correct answer is: ");
+        correctAnswerTextPanel = new JPanel();
+        correctAnswerTextPanel.setBackground(Color.BLACK);
+        correctAnswerTextPanel.setBounds(100, 100, 150, 150);
+        con.add(correctAnswerTextPanel);
 
-        for (int i = 0; i < 3; i++) {
+        correctAnswerPanel = new JPanel();
+        correctAnswerPanel.setBackground(Color.BLACK);
+        correctAnswerPanel.setBounds(400, 100, 150, 150);
+        con.add(correctAnswerPanel);
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.print("got interrupted!");
+        nextQuestion = new JPanel();
+        nextQuestion.setBackground(Color.BLACK);
+        nextQuestion.setBounds(700, 400, 100, 100);
+        con.add(nextQuestion);
+
+        scoresPanel = new JPanel();
+        scoresPanel.setBackground(Color.BLACK);
+        scoresPanel.setBounds(100, 250, 300, 150);
+        con.add(scoresPanel);
+
+        JLabel theCorrectAnswer = new JLabel("The correct answer is...");
+        theCorrectAnswer.setBounds(100, 100, 150, 150);
+        theCorrectAnswer.setBackground(Color.black);
+        theCorrectAnswer.setForeground(Color.WHITE);
+        theCorrectAnswer.setFont(new Font("Carlito", Font.PLAIN, 30));
+        theCorrectAnswer.setHorizontalAlignment(JLabel.CENTER);
+        theCorrectAnswer.setVerticalAlignment(JLabel.CENTER);
+        correctAnswerTextPanel.add(theCorrectAnswer);
+
+        JLabel is = new JLabel(question.getCorrectAnswer());
+        is.setBounds(400, 100, 150, 150);
+        is.setBackground(Color.black);
+        is.setForeground(Color.WHITE);
+        is.setFont(new Font("Carlito", Font.PLAIN, 30));
+        is.setHorizontalAlignment(JLabel.CENTER);
+        is.setVerticalAlignment(JLabel.CENTER);
+        correctAnswerPanel.add(is);
+
+        JButton next = new JButton("Next Question");
+        next.setBackground(Color.BLACK);
+        next.setForeground(Color.WHITE);
+        next.setSize(200, 100);
+        next.setFont(new Font("Carlito", Font.PLAIN, 30));
+        //Action
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RoundNumberQuestionNumber();
             }
+        });
+        nextQuestion.add(next);
 
-            System.out.print(". ");
-
+        String allScores = null;
+        for (Player player : players){
+            allScores = allScores + player.getNickname() + ": " + player.getScore() +"\n";
         }
 
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
-        //TODO na prasinizei thn swsth apanthsh anti na ektypvnei
-        System.out.print(question.getCorrectAnswer());
+        JLabel scores = new JLabel(allScores);
+        scores.setBounds(100, 250, 300, 150);
+        scores.setBackground(Color.black);
+        scores.setForeground(Color.WHITE);
+        scores.setFont(new Font("Carlito", Font.PLAIN, 30));
+        scores.setHorizontalAlignment(JLabel.CENTER);
+        scores.setVerticalAlignment(JLabel.CENTER);
+        scoresPanel.add(scores);
+
+        correctAnswerPanel.setVisible(false);
+        nextQuestion.setVisible(false);
+        scoresPanel.setVisible(false);
+
+        Timer timer2 = new Timer(2000, e -> {
+            scoresPanel.setVisible(true);
+            nextQuestion.setVisible(true);
+        });
+        Timer timer1 = new Timer(5000, e -> {
+            correctAnswerPanel.setVisible(true);
+            timer2.start();
+        });
+
+        timer1.start();
+
+        type.defaultifyPlayers();
+
+//        System.out.println("The correct answer is: ");
+//
+//        for (int i = 0; i < 3; i++) {
+//
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                System.out.print("got interrupted!");
+//            }
+//
+//            System.out.print(". ");
+//
+//        }
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
+//        //TODO na prasinizei thn swsth apanthsh anti na ektypvnei
+//        System.out.print(question.getCorrectAnswer());
 
     }
 

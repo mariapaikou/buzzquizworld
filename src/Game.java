@@ -31,7 +31,7 @@ public class Game {
      */
     public void setPlayerList(ArrayList<Player> playerList){
         this.playerList = playerList;
-        //scores.gameStarted();
+        scores.gameStarted();
     }
     public ArrayList <Player> getPlayerList(){
         return playerList;

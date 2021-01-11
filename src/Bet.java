@@ -84,4 +84,9 @@ public class Bet extends Type {
         return "Bet";
     }
 
+    public String getExplanation(){
+        String explanation = "The question category appears first. The player can bet 250, 500, 750 and 1000 points. Then the question appears and if he answers correctly he gains the points he bet, otherwise he loses them.";
+        return explanation;
+    }
+
 }

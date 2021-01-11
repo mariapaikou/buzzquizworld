@@ -84,4 +84,9 @@ public class Thermometer extends Type {
     }
 
     public String getName(){return "Thermometer";}
+
+    public String getExplanation(){
+        String explanation = "The first player to answer 5 questions correctly earns 5000 points.";
+        return explanation;
+    }
 }

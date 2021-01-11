@@ -93,7 +93,7 @@ public class UserInteraction implements KeyListener {
         frame.setVisible(true);
     }
 
-    public int HowManyOfYou(){
+    public void HowManyOfYou(){
         startTextPanel.setVisible(false);
         startButtonPanel.setVisible(false);
         //The panel for the text
@@ -173,7 +173,6 @@ public class UserInteraction implements KeyListener {
 //            howMany = input.nextInt();
 //        }
 //        return howMany;
-        return numberOfPlayers;
     }
 
     /**
@@ -182,7 +181,7 @@ public class UserInteraction implements KeyListener {
      * to be added to the playerList.
      * @return A Player object
      */
-    public ArrayList<Player> God(int numOfPlayers){
+    public void God(int numOfPlayers){
         HMPPanel.setVisible(false);
         HMPLeftPanel.setVisible(false);
         HMPRightPanel.setVisible(false);
@@ -299,7 +298,6 @@ public class UserInteraction implements KeyListener {
 //        } catch(InterruptedException e) {
 //            System.out.println("got interrupted!");
 //        }
-        return players;
     }
 
     public void LetsGo() throws InterruptedException {
@@ -466,7 +464,7 @@ public class UserInteraction implements KeyListener {
      * BetPoints function, asks the player to bet and saves the amount in an int variable.
      * @return the betPoints variable, which contains the points bet by the player.
      */
-    public int betPoints(Player player) {
+    public void betPoints(Player player) {
 
         int betPoints = 0;
         String points;
@@ -493,8 +491,6 @@ public class UserInteraction implements KeyListener {
             System.out.println("inside first catch");
             //newBetPoints(player);
         }
-
-        return betPoints;
 
     }
 
@@ -539,13 +535,13 @@ public class UserInteraction implements KeyListener {
      * through the getName method. Then it explains the way you play the game depending on the type.
      * @value type is a Type of game that is randomly chosen in an other class.
      */
-    public void announcingTheType(Type type){
+    public void announcingTheType(){
         //Turn off previous panels
         RoundNumberPanel.setVisible(false);
         QuestionNumberPanel.setVisible(false);
 
         //Get random type from game
-        Type type1;
+        Type type = game.getRandomType();
 
         //Panel for the type
         TypePanel = new JPanel();
@@ -554,7 +550,7 @@ public class UserInteraction implements KeyListener {
         con.add(TypePanel);
 
         //Label for the type
-        JLabel typeLabel = new JLabel(type1.getName());
+        JLabel typeLabel = new JLabel(type.getName());
         typeLabel.setBounds(0, 0, 800, 250);
         typeLabel.setBackground(Color.black);
         typeLabel.setForeground(Color.WHITE);
@@ -571,7 +567,7 @@ public class UserInteraction implements KeyListener {
         con.add(TypeExplanationPanel);
 
         //Label for the explanation
-        JLabel typeExplanationLabel = new JLabel(type1.getExplanation());
+        JLabel typeExplanationLabel = new JLabel(type.getExplanation());
         typeExplanationLabel.setBounds(50, 100, 700, 300);
         typeExplanationLabel.setBackground(Color.black);
         typeExplanationLabel.setForeground(Color.WHITE);
@@ -639,9 +635,8 @@ public class UserInteraction implements KeyListener {
     /**
      * Function announcingCategory accepts a Questions type object and announces the category of the question
      * to the player.
-     * @param question the question about to be asked
      */
-    public void announcingCategory(Questions question){
+    public void announcingCategory(){
         //Turn off previous panels
 
 
@@ -842,35 +837,35 @@ public class UserInteraction implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
-
-    /**
-     * This method accepts a Player object, asks the player for an answer and returns the input.
-     * @return String variable that contains the answer.
-     */
-    public String getAnAnswer(Player player){
-
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
-
-        System.out.println(player.getNickname() + ", which answer do you think is correct?");
-        return input.nextLine();
-
-    }
-
-    /** WE NO LONGER NEED THIS BECAUSE WE HAVE THE KEYLISTENER
-     * getNewAnswer is called when the player types an answer that does not exist and asks for a new input.
-     * @return String that contains the new answer.
-     */
-    public String getNewAnswer(Player player){
-
-        System.out.println("\n");
-        System.out.println(player.getNickname() + " this is not an option! Guess again.");
-        return input.nextLine();
-
-    }
+// WE DONT NEED THIS ANYMORE
+//    /**
+//     * This method accepts a Player object, asks the player for an answer and returns the input.
+//     * @return String variable that contains the answer.
+//     */
+//    public String getAnAnswer(Player player){
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
+//
+//        System.out.println(player.getNickname() + ", which answer do you think is correct?");
+//        return input.nextLine();
+//
+//    }
+//
+//    /** WE NO LONGER NEED THIS BECAUSE WE HAVE THE KEYLISTENER
+//     * getNewAnswer is called when the player types an answer that does not exist and asks for a new input.
+//     * @return String that contains the new answer.
+//     */
+//    public String getNewAnswer(Player player){
+//
+//        System.out.println("\n");
+//        System.out.println(player.getNickname() + " this is not an option! Guess again.");
+//        return input.nextLine();
+//
+//    }
 
     /**
      * This function prints the correct answer to the question asked previously.
@@ -906,7 +901,7 @@ public class UserInteraction implements KeyListener {
      * answered correctly and who didn't by checking their status.
      * @value players is the ArrayList that contains all the players that are playing.
      */
-    public void whoWon(ArrayList<Player> players){
+    public void whoWon(){
 
         for (Player player : players){
 
@@ -941,7 +936,7 @@ public class UserInteraction implements KeyListener {
     /**
      * The function showRoundScores is called at the end of each round, to show the current score of the players.
      */
-    public void showRoundScores(ArrayList<Player> players){
+    public void showRoundScores(){
 
         try {
             Thread.sleep(2000);
@@ -967,9 +962,8 @@ public class UserInteraction implements KeyListener {
 
     /**
      * finalScores prints the scores of each player at the end of the game
-     * @param players is the ArrayList with all the players.
      */
-    public void finalScores(ArrayList<Player> players){
+    public void finalScores(){
 
         try {
              Thread.sleep(2000);

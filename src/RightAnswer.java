@@ -43,4 +43,9 @@ public class RightAnswer extends Type{
         return "RightAnswer";
     }
 
+    public String getExplanation(){
+        String explanation = "Each player who answers correctly earns 1000 points.";
+        return explanation;
+    }
+
 }

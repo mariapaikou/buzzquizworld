@@ -62,7 +62,9 @@ public class QuickAnswer extends Type {
 
     public String getName(){return "QuickAnswer";}
 
-
-
+    public String getExplanation(){
+        String explanation = "The first player to answer correctly earns 1000 points and the second player 500 points";
+        return explanation;
+    }
 
 }

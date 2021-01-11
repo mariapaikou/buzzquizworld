@@ -17,7 +17,7 @@ public class Round {
      * Creates a Type object.
      * @return Type object that contains the type chosen.
      */
-    public Type getRandomType() {
+    public Type towPlayerMode() {
 
         Type type;
         int r = random.nextInt(5);
@@ -35,6 +35,21 @@ public class Round {
         }
         return type;
 
+    }
+
+    public Type onePlayerMode(){
+        Type type;
+        int r = random.nextInt(3);
+
+        if(r == 1){
+            type = new RightAnswer();
+        }else if(r == 2){
+            type = new Bet();
+        }else{
+            type = new Timer();
+        }
+
+        return type;
     }
 /*
     /**

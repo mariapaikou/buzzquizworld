@@ -23,6 +23,22 @@ import java.util.TimerTask;
 public class UserInteraction implements KeyListener {
     private Questions question;
     private Game game = new Game();
+    private Type type = new Type() {
+        @Override
+        public void changePoints() {
+
+        }
+
+        @Override
+        public String getName() {
+            return null;
+        }
+
+        @Override
+        public String getExplanation() {
+            return null;
+        }
+    };
     private ArrayList<Player> players = new ArrayList<>();
     private int numberOfPlayers = 0;
     private int rounds = 1;
@@ -34,6 +50,7 @@ public class UserInteraction implements KeyListener {
     private JPanel NamePanelText, NamePanel, readyPanel, letsGoPanel;
     private JPanel RoundNumberPanel, QuestionNumberPanel, RQOkayPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
     private JPanel announcingCategoryPanel;
+    private JPanel betPointsPanel, bet250, bet500, bet750, bet1000;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
 
@@ -506,7 +523,7 @@ public class UserInteraction implements KeyListener {
         RQOkayPanel.setVisible(false);
 
         //Get random type from game
-        Type type = game.getRandomType();
+        type = game.getRandomType();
 
         //Panel for the type
         TypePanel = new JPanel();
@@ -643,33 +660,116 @@ public class UserInteraction implements KeyListener {
      * BetPoints function, asks the player to bet and saves the amount in an int variable.
      * @return the betPoints variable, which contains the points bet by the player.
      */
-    public void betPoints(Player player) {
+    public void betPoints() {
+        //turn off previous panels
 
-        int betPoints = 0;
-        String points;
+        for(Player player : players){
+            //BetPoints panel
+            betPointsPanel = new JPanel();
+            betPointsPanel.setBounds(100, 100, 600, 200);
+            betPointsPanel.setBackground(Color.BLACK);
+            con.add(betPointsPanel);
 
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
+            //bet250 panel
+            bet250 = new JPanel();
+            bet250.setBounds(50, 350, 130, 100);
+            bet250.setBackground(Color.BLACK);
+            con.add(bet250);
+
+            //bet500 panel
+            bet500 = new JPanel();
+            bet500.setBounds(50, 350, 130, 100);
+            bet500.setBackground(Color.BLACK);
+            con.add(bet500);
+
+            //bet750 panel
+            bet750 = new JPanel();
+            bet750.setBounds(50, 350, 130, 100);
+            bet750.setBackground(Color.BLACK);
+            con.add(bet750);
+
+            //bet1000 panel
+            bet1000 = new JPanel();
+            bet1000.setBounds(50, 350, 130, 100);
+            bet1000.setBackground(Color.BLACK);
+            con.add(bet1000);
+
+            //betPoints label
+            JLabel betPoints = new JLabel(player.getNickname() + ", how risky are you?");
+            betPoints.setBounds(100, 100, 600, 200);
+            betPoints.setBackground(Color.black);
+            betPoints.setForeground(Color.WHITE);
+            betPoints.setFont(new Font("Carlito", Font.PLAIN, 100));
+            betPoints.setHorizontalAlignment(JLabel.CENTER);
+            betPoints.setVerticalAlignment(JLabel.CENTER);
+            betPointsPanel.add(betPoints);
+
+            //bet250 button
+            JButton bet250Button = new JButton("250");
+            bet250Button.setBackground(Color.BLACK);
+            bet250Button.setForeground(Color.WHITE);
+            bet250Button.setSize(100, 100);
+            bet250Button.setFont(new Font("Carlito", Font.PLAIN, 50));
+            bet250Button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
+            bet250.add(bet250Button);
+
+            //bet500 button
+            JButton bet500Button = new JButton("500");
+            bet500Button.setBackground(Color.BLACK);
+            bet500Button.setForeground(Color.WHITE);
+            bet500Button.setSize(100, 100);
+            bet500Button.setFont(new Font("Carlito", Font.PLAIN, 50));
+            bet500.add(bet500Button);
+
+            //bet750 button
+            JButton bet750Button = new JButton("750");
+            bet750Button.setBackground(Color.BLACK);
+            bet750Button.setForeground(Color.WHITE);
+            bet750Button.setSize(100, 100);
+            bet750Button.setFont(new Font("Carlito", Font.PLAIN, 50));
+            bet750.add(bet750Button);
+
+            //bet1000 button
+            JButton bet1000Button = new JButton("1000");
+            bet1000Button.setBackground(Color.BLACK);
+            bet1000Button.setForeground(Color.WHITE);
+            bet1000Button.setSize(100, 100);
+            bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 50));
+            bet1000.add(bet1000Button);
+
         }
 
-        try{
-            System.out.println("\nNow tell me, " + player.getNickname() + ", how risky are you?");
 
-            try {
-                Thread.sleep(1000);
-            } catch(InterruptedException e) {
-                System.out.println("got interrupted!");
-            }
-
-            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
-            points = input.nextLine();
-            betPoints = Integer.valueOf(points);
-        }catch(NumberFormatException exception){
-            System.out.println("inside first catch");
-            //newBetPoints(player);
-        }
+//        int betPoints = 0;
+//        String points;
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
+//
+//        try{
+//            System.out.println("\nNow tell me, " + player.getNickname() + ", how risky are you?");
+//
+//            try {
+//                Thread.sleep(1000);
+//            } catch(InterruptedException e) {
+//                System.out.println("got interrupted!");
+//            }
+//
+//            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
+//            points = input.nextLine();
+//            betPoints = Integer.valueOf(points);
+//        }catch(NumberFormatException exception){
+//            System.out.println("inside first catch");
+//            //newBetPoints(player);
+//        }
 
     }
 

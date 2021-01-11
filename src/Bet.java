@@ -10,16 +10,14 @@ public class Bet extends Type {
      * @value position is an integer variable that makes sure that the points bet by a user will be stored in the
      * correct order.
      */
-    private final int [] betPoints;
-    //private static  int[] betOptions = {250, 500, 750, 1000};
-    private int position;
+//    private final int [] betPoints
+//    private static  int[] betOptions = {250, 500, 750, 1000};
+//    private int position;
 
     public Bet(){
-
-
         super();
-        betPoints = new int[2];
-        position = 0;
+//        betPoints = new int[2];
+//        position = 0;
 
     }
 
@@ -38,30 +36,29 @@ public class Bet extends Type {
     @Override
     public void changePoints(){
 
-        for(int i = 0 ; i < position; i++){
-            if(players.get(i).getStatus()){
-                players.get(i).increaseScoreBy(betPoints[i]);
-            }else if( !players.get(i).getStatus() ) {
-                players.get(i).increaseScoreBy(-betPoints[i]);
-                //edw esbhsa
+        for(Player player : players){
+            if(player.getStatus()){
+                player.increaseScoreBy(player.getBet());
+            }else if( !player.getStatus() ) {
+                player.increaseScoreBy(-player.getBet());
             }
         }
-        defaultfyPlayers();
+        defaultifyPlayers();
     }
 
-    /**
-     * setPoints is a void function that accepts an integer variable which contains the points bet
-     * and adds it to the betPoints array. Then it increases the position by 1.
-     */
-    public void setPoints(int betPoints){
-        //TODO h sygkrish na ginei mia metablhth boolean gia apolopoihsh if
-        if((betPoints == 250 || betPoints == 500 || betPoints == 750 || betPoints == 1000) && position <= 1){
-            this.betPoints[position]= betPoints;
-            position++;
-        }else{
-            //TODO pws xeirizomai to else se authn thn periptwsh? xreiazetai na exv print message?
-            System.out.println("error in setPoints!!!!!!!!!");
-        }
+//    /**
+//     * setPoints is a void function that accepts an integer variable which contains the points bet
+//     * and adds it to the betPoints array. Then it increases the position by 1.
+//     */
+//    public void setPoints(int betPoints){
+//        //TODO h sygkrish na ginei mia metablhth boolean gia apolopoihsh if
+//        if((betPoints == 250 || betPoints == 500 || betPoints == 750 || betPoints == 1000) && position <= 1){
+//            this.betPoints[position]= betPoints;
+//            position++;
+//        }else{
+//            //TODO pws xeirizomai to else se authn thn periptwsh? xreiazetai na exv print message?
+//            System.out.println("error in setPoints!!!!!!!!!");
+//        }
 
         /*
 
@@ -74,11 +71,11 @@ public class Bet extends Type {
         return false;
 
          */
-    }
+//    }
 
-    public void initializePositions(){
-        position = 0;
-    }
+//    public void initializePositions(){
+//        position = 0;
+//    }
 
     public String getName(){
         return "Bet";

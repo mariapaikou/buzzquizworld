@@ -36,7 +36,7 @@ public class RightAnswer extends Type{
             }
 
         }
-        defaultfyPlayers();
+        defaultifyPlayers();
     }
 
     public String getName(){

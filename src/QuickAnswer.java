@@ -57,7 +57,7 @@ public class QuickAnswer extends Type {
            sortedPlayers.remove(player);
 
         }
-        defaultfyPlayers();
+        defaultifyPlayers();
     }
 
     public String getName(){return "QuickAnswer";}

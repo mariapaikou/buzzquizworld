@@ -35,7 +35,7 @@ public abstract class Type {
 
     }
 
-    protected void defaultfyPlayers(){
+    protected void defaultifyPlayers(){
 
         for (Player player : players){
 
@@ -44,6 +44,7 @@ public abstract class Type {
 
                 player.setClickTime(-1);
             }
+            player.defaultifyBet();
         }
     }
 

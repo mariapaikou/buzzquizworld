@@ -16,6 +16,7 @@ public class Player implements Serializable {
     private int score;
     private boolean status;//0 if answered correctly, 1 if not
     private int clickTime; // int για να αποθηκευουμε κατευθιαν millisecond!  1 sec = 1000 millisecond!
+    private int bet;
     transient private Thread myThread;
 
     public Player(String nickname){
@@ -24,6 +25,7 @@ public class Player implements Serializable {
         status = false;
         clickTime = -1;
         this.myThread = new Thread();
+        bet = 0;
     }
 
 
@@ -36,6 +38,7 @@ public class Player implements Serializable {
         this.nickname="Randall Stephens!";
         score=0;
         status = false;
+        bet = 0;
     }
 
     public void setNickname(String nickname) {
@@ -61,12 +64,17 @@ public class Player implements Serializable {
     public int getScore(){
         return this.score;
     }
+
     public void setStatus(boolean status){ this.status = status; }
     public boolean getStatus(){
         return status;
     }
+
     public void setClickTime(int time){this.clickTime = time;}
     public int getClickTime(){return clickTime;}
+
+    public void setBet(int bet){this.bet = bet;}
+    public int getBet(){return bet;}
 
 
     /**
@@ -91,7 +99,9 @@ public class Player implements Serializable {
     /**
      * Function defaultfyStatus sets players status to false.
      */
-    public void defaultfyStatus(){this.status=false;}
+    public void defaultifyStatus(){this.status=false;}
+
+    public void defaultifyBet(){setBet(0);}
 
 
 }

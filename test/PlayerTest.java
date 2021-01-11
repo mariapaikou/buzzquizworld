@@ -88,7 +88,7 @@ class PlayerTest {
     void defaultfyStatus() {
 
         player.setStatus(true);
-        player.defaultfyStatus();
+        player.defaultifyStatus();
         assertEquals(false,player.getStatus());
 
     }

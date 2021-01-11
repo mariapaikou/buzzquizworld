@@ -18,7 +18,7 @@ public class Timer extends Type {
 
             }
         }
-        defaultfyPlayers();
+        defaultifyPlayers();
 
     }
 

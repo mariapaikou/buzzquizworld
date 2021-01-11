@@ -235,7 +235,7 @@ public class Game {
 //                display.whoWon(playerList);
 //                type.changePoints();
 //                setTypeInitialStatus(type);
-//               // defaultfyPlayersStatus(); ginetai mesa stis changePoints!
+//               // defaultifyPlayersStatus(); ginetai mesa stis changePoints!
 //                questionNum++;
 //                num--;
 //

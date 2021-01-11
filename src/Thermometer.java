@@ -80,7 +80,7 @@ public class Thermometer extends Type {
 
 
 
-        defaultfyPlayers();
+        defaultifyPlayers();
     }
 
     public String getName(){return "Thermometer";}

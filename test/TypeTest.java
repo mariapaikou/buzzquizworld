@@ -8,7 +8,7 @@ class TypeTest {
 
     private final Bet bet;
     private final RightAnswer rightAnswer;
-    private final Timer timer;
+    private final StopTheTimer stopTheTimer;
     private final QuickAnswer quickAnswer;
     private final Thermometer thermometer;
     private final Player player1;
@@ -25,7 +25,7 @@ class TypeTest {
         array.add(player2);
         bet = new Bet();
         rightAnswer = new RightAnswer();
-        timer = new Timer();
+        stopTheTimer = new StopTheTimer();
         quickAnswer = new QuickAnswer();
         thermometer = new Thermometer();
 
@@ -47,7 +47,7 @@ class TypeTest {
 
         assertTrue(rightAnswer.setPlayersList(array));
 
-        assertTrue(timer.setPlayersList(array));
+        assertTrue(stopTheTimer.setPlayersList(array));
 
         assertTrue(thermometer.setPlayersList(array));
 
@@ -66,7 +66,7 @@ class TypeTest {
 
         assertEquals("RightAnswer", rightAnswer.getName());
 
-        assertEquals("Timer", timer.getName());
+        assertEquals("StopTheTimer", stopTheTimer.getName());
 
         assertEquals("Thermometer",thermometer.getName());
 

@@ -4,19 +4,19 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TimerTest {
+class StopTheTimerTest {
     private final Player player1;
     private final Player player2;
     private final ArrayList<Player> players;
-    private final Timer timer;
+    private final StopTheTimer stopTheTimer;
 
 
-    public TimerTest(){
+    public StopTheTimerTest(){
 
         player1 = new Player();
         player2 = new Player();
         players = new ArrayList<>();
-        timer = new Timer();
+        stopTheTimer = new StopTheTimer();
 
 
     }
@@ -33,8 +33,8 @@ class TimerTest {
         player2.setClickTime(500);
 
 
-        timer.setPlayersList(players);
-        timer.changePoints();
+        stopTheTimer.setPlayersList(players);
+        stopTheTimer.changePoints();
 
         assertEquals(200, player1.getScore());
         assertEquals(0, player2.getScore());
@@ -51,8 +51,8 @@ class TimerTest {
 
 
 
-        timer.setPlayersList(players);
-        timer.changePoints();
+        stopTheTimer.setPlayersList(players);
+        stopTheTimer.changePoints();
 
         assertEquals(0, player1.getScore());
         assertEquals(0, player2.getScore());
@@ -69,8 +69,8 @@ class TimerTest {
         player1.setClickTime(3000);
         player2.setClickTime(1000);
 
-        timer.setPlayersList(players);
-        timer.changePoints();
+        stopTheTimer.setPlayersList(players);
+        stopTheTimer.changePoints();
 
         assertEquals(600, player1.getScore());
         assertEquals(200, player2.getScore());
@@ -78,6 +78,6 @@ class TimerTest {
 
     @Test
     void getName() {
-        assertEquals("Timer", timer.getName());
+        assertEquals("StopTheTimer", stopTheTimer.getName());
     }
 }

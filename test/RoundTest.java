@@ -31,7 +31,7 @@
 //                betCounter++;
 //            }else if(type instanceof RightAnswer){
 //                rightAnswerCounter++;
-//            }else if(type instanceof Timer){
+//            }else if(type instanceof StopTheTimer){
 //                timerCounter++;
 //            }else if(type instanceof  Thermometer){
 //                thermometerCounter++;

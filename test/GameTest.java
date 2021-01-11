@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+
 import java.util.ArrayList;
 
 
@@ -15,7 +14,7 @@ class GameTest{
     private Game game;
     private Bet bet;
     private RightAnswer rightAnswer;
-    private Timer timer;
+    private StopTheTimer stopTheTimer;
     private Thermometer thermometer;
     private QuickAnswer quickAnswer;
     private Player player1;
@@ -27,7 +26,7 @@ class GameTest{
 
         game = new Game();
         bet = new Bet();
-        timer = new Timer();
+        stopTheTimer = new StopTheTimer();
         rightAnswer = new RightAnswer();
         thermometer = new Thermometer();
         quickAnswer = new QuickAnswer();

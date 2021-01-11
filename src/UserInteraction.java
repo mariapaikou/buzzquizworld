@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.event.AncestorListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -8,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.Object;
@@ -80,7 +82,8 @@ public class UserInteraction implements KeyListener {
     private void basicDisplay(){
 
         con = frame.getContentPane();
-
+        //con.setLayout(new CardLayout());
+        con.setPreferredSize(new Dimension(800,500));
         //The panel that contains the text
         startTextPanel = new JPanel();
         //Look & Layout
@@ -353,19 +356,6 @@ public class UserInteraction implements KeyListener {
             }
         });
         HMPRightPanel.add(twoPlayers);
-
-
-//        int howMany;
-//        System.out.println("Oh I didn't see you there. Did you bring a friend?\n");
-//        System.out.println("Number of players(1 or 2): ");
-//        howMany = input.nextInt();
-//
-//        while(howMany<1 || howMany>2){
-//            System.out.println("Oops! Give me a correct number!!1!\n");//maybe errorClass?
-//            System.out.println("Number of players(1 or 2): ");
-//            howMany = input.nextInt();
-//        }
-//        return howMany;
     }
 
     /**
@@ -435,9 +425,10 @@ public class UserInteraction implements KeyListener {
                 players.add(playerOne);
                 game.setPlayerList(players);
                 if(numberOfPlayers == 2){
-                    readyPanel.setVisible(false);
                     NamePanelText.setVisible(false);
-
+                    NamePanel.setVisible(false);
+                    readyPanel.setVisible(false);
+                    con.remove(readyPanel);
                     nickname.setText("");
                     God2();
                 }else{
@@ -456,6 +447,10 @@ public class UserInteraction implements KeyListener {
     }
 
     private void God2() {
+        NamePanelText.setVisible(false);
+        NamePanel.setVisible(false);
+        readyPanel.setVisible(false);
+        //con.remove(readyPanel);
         NamePanelText.removeAll();
         readyPanel.removeAll();
         NamePanel.removeAll();
@@ -523,6 +518,8 @@ public class UserInteraction implements KeyListener {
                     try {
                         NamePanelText.setVisible(false);
                         NamePanel.setVisible(false);
+                        readyPanel.removeAll();
+                        con.remove(readyPanel);
                         readyPanel.setVisible(false);
                         LetsGo();
                     } catch (InterruptedException ie) {
@@ -540,6 +537,10 @@ public class UserInteraction implements KeyListener {
 
 
     public void LetsGo() throws InterruptedException {
+        NamePanelText.setVisible(false);
+        NamePanel.setVisible(false);
+        readyPanel.setVisible(false);
+
         //randomize questions
         game.randomizeQuestions();
 
@@ -595,6 +596,7 @@ public class UserInteraction implements KeyListener {
             text4.setVisible(false);
             letsGoPanel.setVisible(false);
             RoundNumberQuestionNumber();
+
         });
 
         Timer timer4 = new Timer(800, e -> {
@@ -623,6 +625,8 @@ public class UserInteraction implements KeyListener {
         timer1.start();
     }
 
+
+
     //Class to limit the number of characters in a JText
     public class JTextFieldLimit extends PlainDocument {
         private int limit;
@@ -645,26 +649,28 @@ public class UserInteraction implements KeyListener {
      */
     public void RoundNumberQuestionNumber(){
         //Turn off previous panel
-
-
-        if(rounds - 1 < game.getHowManyRounds()) {
-            if(questions - 1 < game.getNumberOfQuestions()) {
+        System.out.println("inside roundNumberQuestionsNumber!");
+       // con.removeAll();
+//        if(rounds - 1 < game.getHowManyRounds()) {
+//            System.out.println("inside if!");
+//            if(questions - 1 < game.getNumberOfQuestions()) {
+//                System.out.println("inside iffifiifififi!!!");
                 //Panel for the round label
                 RoundNumberPanel = new JPanel();
                 RoundNumberPanel.setBounds(0, 50, 800, 200);
-                RoundNumberPanel.setBackground(Color.BLACK);
+                RoundNumberPanel.setBackground(Color.PINK);
                 con.add(RoundNumberPanel);
 
                 //Panel for the question label
                 QuestionNumberPanel = new JPanel();
                 QuestionNumberPanel.setBounds(0, 250, 800, 100);
-                QuestionNumberPanel.setBackground(Color.BLACK);
+                QuestionNumberPanel.setBackground(Color.DARK_GRAY);
                 con.add(QuestionNumberPanel);
 
                 //Label ROUND i
                 JLabel roundLabel = new JLabel("Round " + rounds);
                 roundLabel.setBounds(0, 50, 800, 200);
-                roundLabel.setBackground(Color.black);
+                roundLabel.setBackground(Color.PINK);
                 roundLabel.setForeground(Color.WHITE);
                 roundLabel.setFont(new Font("Carlito", Font.PLAIN, 200));
                 roundLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -684,48 +690,38 @@ public class UserInteraction implements KeyListener {
                 //next method panel
                 RQOkayPanel = new JPanel();
                 RQOkayPanel.setBounds(550, 350, 100, 50);
-                RQOkayPanel.setBackground(Color.BLACK);
-                con.add(RQOkayPanel);
-
+                RQOkayPanel.setBackground(Color.YELLOW);
 
                 //next method button
                 JButton okayButton = new JButton("Okay");
-                okayButton.setBackground(Color.BLACK);
+                okayButton.setBackground(Color.PINK);
                 okayButton.setForeground(Color.WHITE);
                 okayButton.setSize(50, 50);
                 okayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+                RQOkayPanel.add(okayButton);
+                con.add(RQOkayPanel);
                 okayButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                       // System.out.println("inside action listerner");
+                        RoundNumberPanel.setVisible(false);
+                        QuestionNumberPanel.setVisible(false);
+                        RQOkayPanel.setVisible(false);
+                        con.remove(RQOkayPanel);
+                        RQOkayPanel.setVisible(false);
                         announcingTheType();
                     }
                 });
-                RQOkayPanel.add(okayButton);
-
-//                RoundNumberPanel.setVisible(false);
-//                QuestionNumberPanel.setVisible(false);
-//
-//
-//                Timer timer = new Timer(1000, e -> {
-//                    RoundNumberPanel.setVisible(true);
-//                    QuestionNumberPanel.setVisible(true);
-//                });
-//                timer.start();
-
-                //get next question
                 question = game.getNewQuestion();
-
-
-
-
-            }else{
-                rounds++;
-                questions = 1;
-                RoundNumberQuestionNumber();
-        }
-        }else{
-            //game is done
-        }
+//
+//            }else{
+//                rounds++;
+//                questions = 1;
+//               // RoundNumberQuestionNumber();
+//             }
+//        }else{
+//            //game is done
+//        }
     }
 
 
@@ -739,6 +735,12 @@ public class UserInteraction implements KeyListener {
         RoundNumberPanel.setVisible(false);
         QuestionNumberPanel.setVisible(false);
         RQOkayPanel.setVisible(false);
+        con.removeAll();
+        RoundNumberPanel.removeAll();
+        QuestionNumberPanel.removeAll();
+        RQOkayPanel.removeAll();
+        System.out.println("inside announcing the type!");
+
 
         //Get random type from game
         type = game.getRandomType();
@@ -746,7 +748,7 @@ public class UserInteraction implements KeyListener {
         //Panel for the type
         TypePanel = new JPanel();
         TypePanel.setBounds(50, 50, 700, 50);
-        TypePanel.setBackground(Color.BLACK);
+        TypePanel.setBackground(Color.PINK);
         con.add(TypePanel);
 
         //Label for the type
@@ -796,37 +798,6 @@ public class UserInteraction implements KeyListener {
         });
         typeOkayPanel.add(okay);
 
-//        System.out.println("\nNEW ROUND");
-//        try {
-//            Thread.sleep(1000);
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
-//        System.out.println("\nFor this round, you are playing " + type.getName());
-//        try {
-//            Thread.sleep(1000);
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
-//
-//
-//        if(type.getName().equals("RightAnswer")){
-//
-//            System.out.println("\nHow to play RightAnswer: Choose the answer you believe is correct and if you are right you win 1000 points.");
-//        }
-//        else if(type.getName().equals("Bet")){
-//
-//            System.out.println("\nHow to play Bet: You choose a bet amount (250/500/750/1000). " +
-//                    "If you answer the question correctly you get the points you bet. " +
-//                    "If you answer wrong you lose the bet amount from your points. ");
-//
-//        }else if(type.getName().equals("Timer")){
-//            //TODO na symplhrwthe
-//        }else if(type.getName().equals("QuickAnswer")){
-//            ////// TODO na symplhrvthei
-//        }else { // Thermometer!
-//            ///// TODO na symplhrwthei!
-//        }
 
     }
 
@@ -983,31 +954,6 @@ public class UserInteraction implements KeyListener {
         }
 
 
-//        int betPoints = 0;
-//        String points;
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
-//
-//        try{
-//            System.out.println("\nNow tell me, " + player.getNickname() + ", how risky are you?");
-//
-//            try {
-//                Thread.sleep(1000);
-//            } catch(InterruptedException e) {
-//                System.out.println("got interrupted!");
-//            }
-//
-//            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
-//            points = input.nextLine();
-//            betPoints = Integer.valueOf(points);
-//        }catch(NumberFormatException exception){
-//            System.out.println("inside first catch");
-//            //newBetPoints(player);
-//        }
 
     }
 
@@ -1125,25 +1071,7 @@ public class UserInteraction implements KeyListener {
         con.setVisible(true);
 
 
-//        System.out.println("\nQUESTION");
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
-//
-//        System.out.println(question.getQuestion());
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
-//
-//        ArrayList<String> answers = question.getAnswers();
-//        System.out.println(answers.get(0) + "     " + answers.get(1));
-//        System.out.println(answers.get(2) + "     " + answers.get(3));
+
 
     }
 
@@ -1245,7 +1173,7 @@ public class UserInteraction implements KeyListener {
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RoundNumberQuestionNumber();
+               // RoundNumberQuestionNumber();
             }
         });
         nextQuestion.add(next);

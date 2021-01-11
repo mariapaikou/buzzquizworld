@@ -21,6 +21,7 @@ import java.util.TimerTask;
  */
 
 public class UserInteraction implements KeyListener {
+    private JFrame frame;
     private Questions question;
     private Game game = new Game();
     private Type type = new Type() {
@@ -44,8 +45,9 @@ public class UserInteraction implements KeyListener {
     private int rounds = 1;
     private int questions = 1;
     Scanner input = new Scanner(System.in);
-    private final Container con;
-    private final JPanel startTextPanel, startButtonPanel;
+    private Container con;
+    private JPanel startTextPanel;
+    private JPanel startButtonPanel;
     private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
     private JPanel NamePanelText, NamePanel, readyPanel, letsGoPanel;
     private JPanel RoundNumberPanel, QuestionNumberPanel, RQOkayPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
@@ -55,19 +57,26 @@ public class UserInteraction implements KeyListener {
     private JPanel correctAnswerTextPanel, correctAnswerPanel, nextQuestion, scoresPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
+    private JPanel highScoresButtonPanel, totalWinsButtonPanel;
 
     public UserInteraction(){
-
         answer1 = new String();
         answer2 = new String();
+
         //The basic frame
-        JFrame frame = new JFrame("Buzz Quiz");
+        frame = new JFrame("Buzz Quiz");
         //Look & Layout
         frame.setSize(800, 500);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null); //bazei to frame sto kentro ths o8onhs
+        frame.setVisible(true);
+        basicDisplay();
+
+    }
+
+    private void basicDisplay(){
 
         con = frame.getContentPane();
 
@@ -91,32 +100,187 @@ public class UserInteraction implements KeyListener {
         //The panel that contains the button
         startButtonPanel = new JPanel();
         //Look & Layout
-        startButtonPanel.setBounds(300, 300, 200, 100);
-        startButtonPanel.setBackground(Color.black);
+        startButtonPanel.setBounds(300, 240, 200, 80);
+        startButtonPanel.setBackground(Color.BLACK);
         con.add(startButtonPanel);
 
         //The start button
         JButton startButton = new JButton("Start");
         //Look & Layout
-        startButton.setBackground(Color.BLACK);
+        startButton.setBackground(Color.PINK);
         startButton.setForeground(Color.WHITE);
-        startButton.setSize(200, 100);
+        startButton.setSize(200, 80);
         startButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                startTextPanel.setVisible(false);
+                startButtonPanel.setVisible(false);
+                highScoresButtonPanel.setVisible(false);
+                totalWinsButtonPanel.setVisible(false);
                 HowManyOfYou();
             }
         });
         startButtonPanel.add(startButton);
 
-        frame.setVisible(true);
+
+        highScoresButtonPanel = new JPanel();
+        highScoresButtonPanel.setBounds(300,320,200,80);
+        highScoresButtonPanel.setBackground(Color.BLACK);
+        con.add(highScoresButtonPanel);
+
+        JButton highScoreButton = new JButton("High Scores!");
+        highScoreButton.setBackground(Color.PINK);
+        highScoreButton.setForeground(Color.WHITE);
+        highScoreButton.setSize(200,80);
+        highScoreButton.setFont(new Font("Carlito", Font.PLAIN,30));
+        //action listener!
+        highScoreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startTextPanel.setVisible(false);
+                startButtonPanel.setVisible(false);
+                highScoresButtonPanel.setVisible(false);
+                totalWinsButtonPanel.setVisible(false);
+                showHighScores();
+            }
+        });
+        highScoresButtonPanel.add(highScoreButton);
+
+        totalWinsButtonPanel = new JPanel();
+        totalWinsButtonPanel.setBounds(300,400,200,80);
+        totalWinsButtonPanel.setBackground(Color.BLACK);
+        con.add(totalWinsButtonPanel);
+
+        JButton totalWinsButton = new JButton("Total Wins!");
+        totalWinsButton.setBackground(Color.PINK);
+        totalWinsButton.setForeground(Color.WHITE);
+        totalWinsButton.setSize(200,80);
+        totalWinsButton.setFont(new Font("Carlito", Font.PLAIN,30));
+        //action listener
+        totalWinsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startTextPanel.setVisible(false);
+                startButtonPanel.setVisible(false);
+                highScoresButtonPanel.setVisible(false);
+                totalWinsButtonPanel.setVisible(false);
+                showTotalWins();
+            }
+        });
+        totalWinsButtonPanel.add(totalWinsButton);
+
     }
 
+    /**
+     *
+     */
+    private void showHighScores(){
+        String [] data = game.getHighScores();
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        for(String sting: data){
+            System.out.println(sting);
+            listModel.addElement(sting);
+        }
+        JList<String> list = new JList<>(listModel);
+        list.setBounds(100,50,600,400);
+        list.setFont(new Font("Carlito", Font.PLAIN, 30));
+        list.setBackground(Color.PINK);
+        JPanel pane = new JPanel();
+        pane.setBounds(0,0,800,400);
+        pane.setLayout(new FlowLayout(FlowLayout.CENTER));
+        pane.add(list);
+        pane.setBackground(Color.PINK);
+
+        con.add(pane);
+
+        JPanel panel = new JPanel();
+
+        JButton backButton = new JButton("Back!");
+        backButton.setBackground(Color.BLACK);
+        backButton.setForeground(Color.WHITE);
+        backButton.setSize(100,100);
+        backButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        //Action Listener
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //list.setVisible(false);
+                pane.setVisible(false);
+                panel.setVisible(false);
+                basicDisplay();
+            }
+        });
+
+
+        panel.setBounds(100,400,100,100);
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panel.setBackground(Color.GRAY);
+        panel.add(backButton);
+        con.add(panel);
+
+    }
+
+
+    /**
+     *
+     */
+    private void showTotalWins(){
+        String [] data = game.getTotalWins();
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        for(String sting: data){
+            System.out.println(sting);
+            listModel.addElement(sting);
+        }
+        JList<String> list = new JList<>(listModel);
+        list.setBounds(100,50,600,400);
+        list.setFont(new Font("Carlito", Font.PLAIN, 30));
+        list.setBackground(Color.PINK);
+        JPanel pane = new JPanel();
+        pane.setBounds(0,0,800,400);
+        pane.setLayout(new FlowLayout(FlowLayout.CENTER));
+        pane.add(list);
+        pane.setBackground(Color.PINK);
+
+        con.add(pane);
+
+        JPanel panel = new JPanel();
+
+        JButton backButton = new JButton("Back!");
+        backButton.setBackground(Color.BLACK);
+        backButton.setForeground(Color.WHITE);
+        backButton.setSize(100,100);
+        backButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        //Action Listener
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //list.setVisible(false);
+                pane.setVisible(false);
+                panel.setVisible(false);
+                basicDisplay();
+            }
+        });
+
+
+        panel.setBounds(100,400,100,100);
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panel.setBackground(Color.GRAY);
+        panel.add(backButton);
+        con.add(panel);
+
+
+    }
+
+
+
+
+
+    /**
+     *
+     */
     public void HowManyOfYou(){
-        startTextPanel.setVisible(false);
-        startButtonPanel.setVisible(false);
         //The panel for the text
         HMPPanel = new JPanel();
         //Look & Layout

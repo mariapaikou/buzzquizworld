@@ -44,10 +44,10 @@ public class Game {
     }
     public void setHowManyRounds(int howManyRounds){this.howManyRounds = howManyRounds;}
     public void setNumberOfQuestions(int numberOfQuestions){this.numberOfQuestions = numberOfQuestions;}
-    public List<Player> getHighScores(){
+    public String [] getHighScores(){
         return scores.getHighestScores();
     }
-    public ArrayList<Player> getTotalWins(){
+    public String[] getTotalWins(){
         return scores.getTotalWins();
     }
 

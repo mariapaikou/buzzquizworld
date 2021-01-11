@@ -54,8 +54,9 @@ public class UserInteraction implements KeyListener {
     private JPanel NamePanelText, NamePanel, readyPanel, letsGoPanel;
     private JPanel RoundNumberPanel, QuestionNumberPanel, RQOkayPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
     private JPanel announcingCategoryPanel;
-    private JPanel betPointsPanel, bet250, bet500, bet750, bet1000;
+    private JPanel betPointsPanel, betPointsPanel2, bet250, bet500, bet750, bet1000;
     private JPanel  centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
+    private JPanel showScoreTextPanel, showScorePanel;
     private JPanel correctAnswerTextPanel, correctAnswerPanel, nextQuestion, scoresPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
@@ -847,118 +848,216 @@ public class UserInteraction implements KeyListener {
 
     }
 
-
-    //PREPEI NA PROSTHESW TO PWS THA ERXESAI KAI THA FEYGEIS APO EDW
     /**
      * BetPoints function, asks the player to bet and saves the amount in an int variable.
+     *
      * @return the betPoints variable, which contains the points bet by the player.
      */
     public void betPoints() {
         //turn off previous panels
 
-        for(Player player : players){
-            //BetPoints panel
-            betPointsPanel = new JPanel();
-            betPointsPanel.setBounds(100, 100, 600, 200);
-            betPointsPanel.setBackground(Color.BLACK);
-            con.add(betPointsPanel);
+        Player player = players.get(0);
 
-            //bet250 panel
-            bet250 = new JPanel();
-            bet250.setBounds(50, 350, 130, 100);
-            bet250.setBackground(Color.BLACK);
-            con.add(bet250);
+        //BetPoints panel
+        betPointsPanel = new JPanel();
+        betPointsPanel.setBounds(100, 100, 600, 200);
+        betPointsPanel.setBackground(Color.BLACK);
+        con.add(betPointsPanel);
 
-            //bet500 panel
-            bet500 = new JPanel();
-            bet500.setBounds(50, 350, 130, 100);
-            bet500.setBackground(Color.BLACK);
-            con.add(bet500);
+        //bet250 panel
+        bet250 = new JPanel();
+        bet250.setBounds(80, 350, 100, 100);
+        bet250.setBackground(Color.BLACK);
+        con.add(bet250);
 
-            //bet750 panel
-            bet750 = new JPanel();
-            bet750.setBounds(50, 350, 130, 100);
-            bet750.setBackground(Color.BLACK);
-            con.add(bet750);
+        //bet500 panel
+        bet500 = new JPanel();
+        bet500.setBounds(260, 350, 100, 100);
+        bet500.setBackground(Color.BLACK);
+        con.add(bet500);
 
-            //bet1000 panel
-            bet1000 = new JPanel();
-            bet1000.setBounds(50, 350, 130, 100);
-            bet1000.setBackground(Color.BLACK);
-            con.add(bet1000);
+        //bet750 panel
+        bet750 = new JPanel();
+        bet750.setBounds(440, 350, 100, 100);
+        bet750.setBackground(Color.BLACK);
+        con.add(bet750);
 
-            //betPoints label
-            JLabel betPoints = new JLabel(player.getNickname() + ", how risky are you?");
-            betPoints.setBounds(100, 100, 600, 200);
-            betPoints.setBackground(Color.black);
-            betPoints.setForeground(Color.WHITE);
-            betPoints.setFont(new Font("Carlito", Font.PLAIN, 100));
-            betPoints.setHorizontalAlignment(JLabel.CENTER);
-            betPoints.setVerticalAlignment(JLabel.CENTER);
-            betPointsPanel.add(betPoints);
+        //bet1000 panel
+        bet1000 = new JPanel();
+        bet1000.setBounds(620, 350, 100, 100);
+        bet1000.setBackground(Color.BLACK);
+        con.add(bet1000);
 
-            //bet250 button
-            JButton bet250Button = new JButton("250");
-            bet250Button.setBackground(Color.BLACK);
-            bet250Button.setForeground(Color.WHITE);
-            bet250Button.setSize(100, 100);
-            bet250Button.setFont(new Font("Carlito", Font.PLAIN, 50));
-            bet250Button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    player.setBet(250);
-                }
-            });
-            bet250.add(bet250Button);
+        //betPoints label
+        JLabel betPoints = new JLabel(player.getNickname() + ", how risky are you?");
+        betPoints.setBounds(100, 100, 600, 200);
+        betPoints.setBackground(Color.black);
+        betPoints.setForeground(Color.WHITE);
+        betPoints.setFont(new Font("Carlito", Font.PLAIN, 50));
+        betPoints.setHorizontalAlignment(JLabel.CENTER);
+        betPoints.setVerticalAlignment(JLabel.CENTER);
+        betPointsPanel.add(betPoints);
 
-            //bet500 button
-            JButton bet500Button = new JButton("500");
-            bet500Button.setBackground(Color.BLACK);
-            bet500Button.setForeground(Color.WHITE);
-            bet500Button.setSize(100, 100);
-            bet500Button.setFont(new Font("Carlito", Font.PLAIN, 50));
-            bet500Button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    player.setBet(500);
-                }
-            });
-            bet500.add(bet500Button);
+        //bet250 button
+        JButton bet250Button = new JButton("250");
+        bet250Button.setBackground(Color.BLACK);
+        bet250Button.setForeground(Color.WHITE);
+        bet250Button.setSize(100, 100);
+        bet250Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet250Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                player.setBet(250);
+                System.out.println(player.getNickname() + " " + player.getBet());
+                if(players.size() == 2){betPoints2();}
+            }
+        });
+        bet250.add(bet250Button);
 
-            //bet750 button
-            JButton bet750Button = new JButton("750");
-            bet750Button.setBackground(Color.BLACK);
-            bet750Button.setForeground(Color.WHITE);
-            bet750Button.setSize(100, 100);
-            bet750Button.setFont(new Font("Carlito", Font.PLAIN, 50));
-            bet750Button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    player.setBet(750);
-                }
-            });
-            bet750.add(bet750Button);
+        //bet500 button
+        JButton bet500Button = new JButton("500");
+        bet500Button.setBackground(Color.BLACK);
+        bet500Button.setForeground(Color.WHITE);
+        bet500Button.setSize(100, 100);
+        bet500Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet500Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                player.setBet(500);
+                System.out.println(player.getNickname() + " " + player.getBet());
+                if(players.size() == 2){betPoints2();}
+            }
+        });
+        bet500.add(bet500Button);
 
-            //bet1000 button
-            JButton bet1000Button = new JButton("1000");
-            bet1000Button.setBackground(Color.BLACK);
-            bet1000Button.setForeground(Color.WHITE);
-            bet1000Button.setSize(100, 100);
-            bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 50));
-            bet1000Button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    player.setBet(1000);
-                }
-            });
-            bet1000.add(bet1000Button);
+        //bet750 button
+        JButton bet750Button = new JButton("750");
+        bet750Button.setBackground(Color.BLACK);
+        bet750Button.setForeground(Color.WHITE);
+        bet750Button.setSize(100, 100);
+        bet750Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet750Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                player.setBet(750);
+                System.out.println(player.getNickname() + " " + player.getBet());
+                if(players.size() == 2){betPoints2();}
+            }
+        });
+        bet750.add(bet750Button);
 
-        }
-
-
-
+        //bet1000 button
+        JButton bet1000Button = new JButton("1000");
+        bet1000Button.setBackground(Color.BLACK);
+        bet1000Button.setForeground(Color.WHITE);
+        bet1000Button.setSize(100, 100);
+        bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet1000Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                player.setBet(1000);
+                System.out.println(player.getNickname() + " " + player.getBet());
+                if(players.size() == 2){betPoints2();}
+            }
+        });
+        bet1000.add(bet1000Button);
     }
+    public void betPoints2() {
+        betPointsPanel.setVisible(false);
 
+        //BetPoints panel
+        betPointsPanel2 = new JPanel();
+        betPointsPanel2.setBounds(100, 100, 600, 200);
+        betPointsPanel2.setBackground(Color.BLACK);
+        con.add(betPointsPanel2);
+
+        //bet250 panel
+        bet250.removeAll();
+
+        //bet500 panel
+        bet500.removeAll();
+
+        //bet750 panel
+        bet750.removeAll();
+
+        //bet1000 panel
+        bet1000.removeAll();
+
+        //betPoints label
+        JLabel betPoints2 = new JLabel("");
+        betPoints2.setText(players.get(1).getNickname() + ", how risky are you?");
+        betPoints2.setBounds(100, 100, 600, 200);
+        betPoints2.setBackground(Color.black);
+        betPoints2.setForeground(Color.WHITE);
+        betPoints2.setFont(new Font("Carlito", Font.PLAIN, 50));
+        betPoints2.setHorizontalAlignment(JLabel.CENTER);
+        betPoints2.setVerticalAlignment(JLabel.CENTER);
+        betPointsPanel2.add(betPoints2);
+
+        //bet250 button
+        JButton bet250Button = new JButton("250");
+        bet250Button.setBackground(Color.BLACK);
+        bet250Button.setForeground(Color.WHITE);
+        bet250Button.setSize(100, 100);
+        bet250Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet250Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                players.get(1).setBet(250);
+                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
+                //next method
+            }
+        });
+        bet250.add(bet250Button);
+
+        //bet500 button
+        JButton bet500Button = new JButton("500");
+        bet500Button.setBackground(Color.BLACK);
+        bet500Button.setForeground(Color.WHITE);
+        bet500Button.setSize(100, 100);
+        bet500Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet500Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                players.get(1).setBet(500);
+                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
+                //next method
+            }
+        });
+        bet500.add(bet500Button);
+
+        //bet750 button
+        JButton bet750Button = new JButton("750");
+        bet750Button.setBackground(Color.BLACK);
+        bet750Button.setForeground(Color.WHITE);
+        bet750Button.setSize(100, 100);
+        bet750Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet750Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                players.get(1).setBet(750);
+                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
+                //next method
+            }
+        });
+        bet750.add(bet750Button);
+
+        //bet1000 button
+        JButton bet1000Button = new JButton("1000");
+        bet1000Button.setBackground(Color.BLACK);
+        bet1000Button.setForeground(Color.WHITE);
+        bet1000Button.setSize(100, 100);
+        bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet1000Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                players.get(1).setBet(1000);
+                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
+                //next method
+            }
+        });
+        bet1000.add(bet1000Button);
+    }
 
     /**
      * This void function accepts a Questions type object and prints the question and the four possible answers.
@@ -1119,185 +1218,97 @@ public class UserInteraction implements KeyListener {
 
     }
 
-
     /**
      * This function prints the correct answer to the question asked previously.
      */
     public void correctAnswer(){
-        //change points
-        type.changePoints();
         //Turn off previous panels
 
         correctAnswerTextPanel = new JPanel();
         correctAnswerTextPanel.setBackground(Color.BLACK);
-        correctAnswerTextPanel.setBounds(100, 100, 150, 150);
+        correctAnswerTextPanel.setBounds(50, 50, 700, 200);
         con.add(correctAnswerTextPanel);
 
         correctAnswerPanel = new JPanel();
-        correctAnswerPanel.setBackground(Color.BLACK);
-        correctAnswerPanel.setBounds(400, 100, 150, 150);
+        correctAnswerPanel.setBackground(Color.black);
+        correctAnswerPanel.setBounds(50, 250, 700, 200);
         con.add(correctAnswerPanel);
 
-        nextQuestion = new JPanel();
-        nextQuestion.setBackground(Color.BLACK);
-        nextQuestion.setBounds(700, 400, 100, 100);
-        con.add(nextQuestion);
-
-        scoresPanel = new JPanel();
-        scoresPanel.setBackground(Color.BLACK);
-        scoresPanel.setBounds(100, 250, 300, 150);
-        con.add(scoresPanel);
+//        nextQuestion = new JPanel();
+//        nextQuestion.setBackground(Color.BLACK);
+//        nextQuestion.setBounds(700, 400, 100, 100);
+//        con.add(nextQuestion);
 
         JLabel theCorrectAnswer = new JLabel("The correct answer is...");
-        theCorrectAnswer.setBounds(100, 100, 150, 150);
+        theCorrectAnswer.setBounds(50, 50, 700, 200);
         theCorrectAnswer.setBackground(Color.black);
         theCorrectAnswer.setForeground(Color.WHITE);
-        theCorrectAnswer.setFont(new Font("Carlito", Font.PLAIN, 30));
+        theCorrectAnswer.setFont(new Font("Carlito", Font.PLAIN, 70));
         theCorrectAnswer.setHorizontalAlignment(JLabel.CENTER);
         theCorrectAnswer.setVerticalAlignment(JLabel.CENTER);
         correctAnswerTextPanel.add(theCorrectAnswer);
 
         JLabel is = new JLabel(question.getCorrectAnswer());
-        is.setBounds(400, 100, 150, 150);
-        is.setBackground(Color.black);
+        is.setBounds(50, 250, 700, 200);
+        is.setBackground(Color.pink);
         is.setForeground(Color.WHITE);
         is.setFont(new Font("Carlito", Font.PLAIN, 30));
         is.setHorizontalAlignment(JLabel.CENTER);
         is.setVerticalAlignment(JLabel.CENTER);
         correctAnswerPanel.add(is);
 
-        JButton next = new JButton("Next Question");
-        next.setBackground(Color.BLACK);
-        next.setForeground(Color.WHITE);
-        next.setSize(200, 100);
-        next.setFont(new Font("Carlito", Font.PLAIN, 30));
-        //Action
-        next.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               // RoundNumberQuestionNumber();
-            }
-        });
-        nextQuestion.add(next);
-
-        String allScores = null;
-        for (Player player : players){
-            allScores = allScores + player.getNickname() + ": " + player.getScore() +"\n";
-        }
-
-        JLabel scores = new JLabel(allScores);
-        scores.setBounds(100, 250, 300, 150);
-        scores.setBackground(Color.black);
-        scores.setForeground(Color.WHITE);
-        scores.setFont(new Font("Carlito", Font.PLAIN, 30));
-        scores.setHorizontalAlignment(JLabel.CENTER);
-        scores.setVerticalAlignment(JLabel.CENTER);
-        scoresPanel.add(scores);
-
         correctAnswerPanel.setVisible(false);
-        nextQuestion.setVisible(false);
-        scoresPanel.setVisible(false);
 
         Timer timer2 = new Timer(2000, e -> {
-            scoresPanel.setVisible(true);
-            nextQuestion.setVisible(true);
+            //ADD NEXT METHOD
         });
-        Timer timer1 = new Timer(5000, e -> {
+        Timer timer1 = new Timer(2000, e -> {
             correctAnswerPanel.setVisible(true);
             timer2.start();
         });
 
         timer1.start();
 
-        type.defaultifyPlayers();
+    }
 
-//        System.out.println("The correct answer is: ");
-//
-//        for (int i = 0; i < 3; i++) {
-//
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                System.out.print("got interrupted!");
-//            }
-//
-//            System.out.print(". ");
-//
-//        }
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
-//        //TODO na prasinizei thn swsth apanthsh anti na ektypvnei
-//        System.out.print(question.getCorrectAnswer());
+    public void showScores(){
+        String score = null;
+        String score2 = null;
+        if(numberOfPlayers == 1){
+            score = players.get(0).getNickname() + ": " + players.get(0).getScore();
+        }else{
+            score = players.get(0).getNickname() + ": " + players.get(0).getScore();
+            score2 = players.get(1).getNickname() + ": " + players.get(1).getScore();
+        }
+
+        showScoreTextPanel = new JPanel();
+        showScoreTextPanel.setBounds(50, 50, 700, 100);
+        showScoreTextPanel.setLayout(new BorderLayout());
+        showScoreTextPanel.setBackground(Color.black);
+        con.add(showScoreTextPanel);
+
+        showScorePanel = new JPanel();
+        showScorePanel.setBounds(50, 150, 700, 200);
+        showScorePanel.setLayout(new BorderLayout());
+        showScorePanel.setBackground(Color.black);
+        con.add(showScorePanel);
+
+        JLabel showScoreText = new JLabel("The score is:");
+        showScoreText.setFont(new Font("Carlito", Font.PLAIN, 50));
+        showScoreText.setForeground(Color.WHITE);
+        showScoreText.setHorizontalAlignment(JLabel.CENTER);
+        showScoreText.setVerticalAlignment(JLabel.CENTER);
+        showScoreTextPanel.add(showScoreText);
+
+        JLabel showScore = new JLabel("<html>" + score + "<br/>" + score2 + "</html>", SwingConstants.CENTER);
+        showScore.setFont(new Font("Carlito", Font.PLAIN, 30));
+        showScore.setForeground(Color.WHITE);
+        showScore.setHorizontalAlignment(JLabel.CENTER);
+        showScoreText.setVerticalAlignment(JLabel.CENTER);
+        showScorePanel.add(showScore);
 
     }
 
-    /**
-     * whoWon is a void function that is called after each question and it announces who
-     * answered correctly and who didn't by checking their status.
-     * @value players is the ArrayList that contains all the players that are playing.
-     */
-    public void whoWon(){
-
-        for (Player player : players){
-
-            if(player.getStatus()){
-
-                try {
-                    Thread.sleep(1000);
-                } catch(InterruptedException e) {
-                    System.out.println("got interrupted!");
-                }
-
-                System.out.println("\n");
-                System.out.println(player.getNickname() + ", you won!");
-
-            }
-            else if(!player.getStatus()){
-
-                try {
-                    Thread.sleep(1000);
-                } catch(InterruptedException e) {
-                    System.out.println("got interrupted!");
-                }
-
-                System.out.println("\n");
-                System.out.println(player.getNickname() + ", maybe next time!");
-
-            }
-        }
-
-    }
-
-    /**
-     * The function showRoundScores is called at the end of each round, to show the current score of the players.
-     */
-    public void showRoundScores(){
-
-        try {
-            Thread.sleep(2000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
-
-        System.out.println("\nThe scores for this round are:");
-
-        for (Player player : players){
-
-            try {
-                Thread.sleep(1000);
-            } catch(InterruptedException e) {
-                System.out.println("got interrupted!");
-            }
-
-            System.out.println(player.getNickname() + " = " + player.getScore());
-
-        }
-
-    }
 
     /**
      * finalScores prints the scores of each player at the end of the game
@@ -1334,22 +1345,19 @@ public class UserInteraction implements KeyListener {
 
     }
 
-    public String replay(){
-
-        System.out.println("THE END");
-        System.out.println("Play again? (yes or no)");
-        String answer = input.nextLine();
-
-        while (!answer.equals("yes")  && !answer.equals("no")){
-
-            System.out.println("Sorry, tell me again!");
-            System.out.println("Play again? (yes or no)");
-            answer = input.nextLine();
-            System.out.println("New answer is " + answer);
-
+    public void replay(){
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Would you like to play again?", "Replay", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.NO_OPTION) {
+            System.exit(0);
         }
-
-        return answer;
+        else if (response == JOptionPane.YES_OPTION) {
+            new UserInteraction();
+        }
+        else if (response == JOptionPane.CLOSED_OPTION) {
+            System.exit(0);
+        }
+        frame.dispose();
     }
 
 

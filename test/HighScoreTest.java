@@ -45,11 +45,11 @@ class HighScoreTest {
     @Test // ok?
     void gameStarted() {
 
-        highScore.gameStarted(onePlayerMode);
+        highScore.gameStarted();
         assertTrue(highScore.getTotalWins().isEmpty());
         assertTrue(highScore.getHighestScores().isEmpty());
 
-        highScore.gameStarted(twoPlayersMode);
+        highScore.gameStarted();
         assertTrue(highScore.getHighestScores().isEmpty());
 
 
@@ -62,7 +62,7 @@ class HighScoreTest {
 
         //one Player Mode
         player.increaseScoreBy(50);
-        highScore.gameStarted(onePlayerMode);
+        highScore.gameStarted();
 
         //add bob one time
         highScore.gameEnded(onePlayerMode);
@@ -92,7 +92,7 @@ class HighScoreTest {
     void gameEnded1(){
         // one player mode
         player.increaseScoreBy(5000);
-        highScore.gameStarted(onePlayerMode);
+        highScore.gameStarted();
 
 
         //add 10 times bob
@@ -156,7 +156,7 @@ class HighScoreTest {
     @Test
     void gameEnded2(){
         player.increaseScoreBy(5000);
-        highScore.gameStarted(onePlayerMode);
+        highScore.gameStarted();
         //add 10 times bob
         for(int i=0; i<10; i++){
             highScore.gameEnded(onePlayerMode);
@@ -180,7 +180,7 @@ class HighScoreTest {
     @Test // ok!
     void saveTotalWinsToFile() {
         // when file is empty
-        highScore.gameStarted(twoPlayersMode);
+        highScore.gameStarted();
         highScore.saveTotalWinsToFile(twoPlayerModeTest.getAbsolutePath()); // empty file
         assertFalse(twoPlayerModeTest.getAbsolutePath().isEmpty());
 
@@ -194,12 +194,12 @@ class HighScoreTest {
     @Test //ok!
     void saveTotalWinsToFile1(){
         //when file is not empty
-        highScore.gameStarted(twoPlayersMode);
+        highScore.gameStarted();
         highScore.gameEnded(twoPlayersMode);
         highScore.saveTotalWinsToFile("twoPlayerModeTest.dat");
         assertFalse(twoPlayerModeTest.getAbsolutePath().isEmpty());
 
-        highScore.gameStarted(twoPlayersMode);
+        highScore.gameStarted();
         highScore.gameEnded(twoPlayersMode);
         highScore.saveTotalWinsToFile("twoPlayerModeTest.dat");
         assertFalse(twoPlayerModeTest.getAbsolutePath().isEmpty());
@@ -213,7 +213,7 @@ class HighScoreTest {
 
     @Test //ok!
     void loadTotalWinsFromFile() {
-        highScore.gameStarted(twoPlayersMode);
+        highScore.gameStarted();
         highScore.gameEnded(twoPlayersMode);
         highScore.loadTotalWinsFromFile("twoPlayerModeTest.dat");
 
@@ -226,7 +226,7 @@ class HighScoreTest {
         playerA.increaseScoreBy(50);
         playerB.increaseScoreBy(600);
 
-        highScore.gameStarted(twoPlayersMode);
+        highScore.gameStarted();
         highScore.gameEnded(twoPlayersMode);
         highScore.loadTotalWinsFromFile("twoPlayerModeTest.dat");
 
@@ -248,12 +248,12 @@ class HighScoreTest {
 
     @Test //ok!
     void saveHighestScoresToFile() {
-        highScore.gameStarted(onePlayerMode);
+        highScore.gameStarted();
         highScore.gameEnded(onePlayerMode);
         highScore.saveHighestScoresToFile("onePlayerModeTest.dat");
         assertFalse(onePlayerModeTest.getAbsolutePath().isEmpty());
 
-        highScore.gameStarted(onePlayerMode);
+        highScore.gameStarted();
         highScore.gameEnded(onePlayerMode);
         highScore.saveHighestScoresToFile("onePlayerModeTest.dat");
         assertFalse(onePlayerModeTest.getAbsolutePath().isEmpty());
@@ -267,7 +267,7 @@ class HighScoreTest {
 
     @Test //ok!
     void loadHighestScoresFromFile() {
-        highScore.gameStarted(onePlayerMode);
+        highScore.gameStarted();
         highScore.gameEnded(onePlayerMode);
         highScore.loadHighestScoresFromFile("onePlayerModeTest.dat");
 

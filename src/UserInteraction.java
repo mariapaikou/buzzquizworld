@@ -21,6 +21,7 @@ import java.util.TimerTask;
  */
 
 public class UserInteraction implements KeyListener {
+    private Questions question;
     private Game game = new Game();
     private ArrayList<Player> players = new ArrayList<>();
     private int numberOfPlayers = 0;
@@ -31,7 +32,8 @@ public class UserInteraction implements KeyListener {
     private final JPanel startTextPanel, startButtonPanel;
     private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
     private JPanel NamePanelText, NamePanel, readyPanel, letsGoPanel;
-    private JPanel RoundNumberPanel, QuestionNumberPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
+    private JPanel RoundNumberPanel, QuestionNumberPanel, RQOkayPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
+    private JPanel announcingCategoryPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
 
@@ -301,6 +303,9 @@ public class UserInteraction implements KeyListener {
     }
 
     public void LetsGo() throws InterruptedException {
+        //randomize questions
+        game.randomizeQuestions();
+
         //disable previous panels
         NamePanelText.setVisible(false);
         NamePanel.setVisible(false);
@@ -417,7 +422,7 @@ public class UserInteraction implements KeyListener {
 
                 //Panel for the question label
                 QuestionNumberPanel = new JPanel();
-                QuestionNumberPanel.setBounds(0, 300, 800, 200);
+                QuestionNumberPanel.setBounds(0, 250, 800, 100);
                 QuestionNumberPanel.setBackground(Color.BLACK);
                 con.add(QuestionNumberPanel);
 
@@ -433,7 +438,7 @@ public class UserInteraction implements KeyListener {
 
                 //Label QUESTION j
                 JLabel questionLabel = new JLabel("Question " + questions);
-                questionLabel.setBounds(0, 300, 800, 200);
+                questionLabel.setBounds(0, 250, 800, 100);
                 questionLabel.setBackground(Color.black);
                 questionLabel.setForeground(Color.WHITE);
                 questionLabel.setFont(new Font("Carlito", Font.PLAIN, 100));
@@ -441,16 +446,43 @@ public class UserInteraction implements KeyListener {
                 questionLabel.setVerticalAlignment(JLabel.CENTER);
                 QuestionNumberPanel.add(questionLabel);
 
-                RoundNumberPanel.setVisible(false);
-                QuestionNumberPanel.setVisible(false);
+                //next method panel
+                RQOkayPanel = new JPanel();
+                RQOkayPanel.setBounds(550, 350, 100, 50);
+                RQOkayPanel.setBackground(Color.BLACK);
+                con.add(RQOkayPanel);
 
-                Timer timer = new Timer(500, e -> {
-                    RoundNumberPanel.setVisible(true);
-                    QuestionNumberPanel.setVisible(true);
+
+                //next method button
+                JButton okayButton = new JButton("Okay");
+                okayButton.setBackground(Color.BLACK);
+                okayButton.setForeground(Color.WHITE);
+                okayButton.setSize(50, 50);
+                okayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+                okayButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        announcingTheType();
+                    }
                 });
-                timer.start();
+                RQOkayPanel.add(okayButton);
 
-                //ADD THE METHODS FROM GAME TO START THE ROUND
+//                RoundNumberPanel.setVisible(false);
+//                QuestionNumberPanel.setVisible(false);
+//
+//
+//                Timer timer = new Timer(1000, e -> {
+//                    RoundNumberPanel.setVisible(true);
+//                    QuestionNumberPanel.setVisible(true);
+//                });
+//                timer.start();
+
+                //get next question
+                question = game.getNewQuestion();
+
+
+
+
             }else{
                 rounds++;
                 questions = 1;
@@ -461,75 +493,6 @@ public class UserInteraction implements KeyListener {
         }
     }
 
-    /**
-     * BetPoints function, asks the player to bet and saves the amount in an int variable.
-     * @return the betPoints variable, which contains the points bet by the player.
-     */
-    public void betPoints(Player player) {
-
-        int betPoints = 0;
-        String points;
-
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
-
-        try{
-            System.out.println("\nNow tell me, " + player.getNickname() + ", how risky are you?");
-
-            try {
-                Thread.sleep(1000);
-            } catch(InterruptedException e) {
-                System.out.println("got interrupted!");
-            }
-
-            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
-            points = input.nextLine();
-            betPoints = Integer.valueOf(points);
-        }catch(NumberFormatException exception){
-            System.out.println("inside first catch");
-            //newBetPoints(player);
-        }
-
-    }
-
-//    /** WE NO LONGER NEED THIS BECAUSE THE BETS WILL BE BUTTONS
-//     * newBetPoints is a function that is called when the player types a non acceptable amount to bet.
-//     * It informs the user about their mistake and asks for a new bet.
-//     * @return the new bet which is an integer.
-//     */
-//    public int newBetPoints(Player player){
-//
-//        int betPonits = 0;
-//        String points;
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
-//
-//        try{
-//            System.out.println("\nYou can't bet this amount" + player.getNickname() +", bet again!");
-//
-//            try {
-//                Thread.sleep(1000);
-//            } catch(InterruptedException e) {
-//                System.out.println("got interrupted!");
-//            }
-//
-//            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
-//            points = input.nextLine();
-//            betPonits = Integer.valueOf(points);
-//        }catch(NumberFormatException ex){
-//            newBetPoints(player);
-//        }
-//
-//        return betPonits;
-//
-//    }
 
     /**
      * Function announcingTheType accepts a Type object and prints a message that announces the type name
@@ -540,6 +503,7 @@ public class UserInteraction implements KeyListener {
         //Turn off previous panels
         RoundNumberPanel.setVisible(false);
         QuestionNumberPanel.setVisible(false);
+        RQOkayPanel.setVisible(false);
 
         //Get random type from game
         Type type = game.getRandomType();
@@ -597,8 +561,6 @@ public class UserInteraction implements KeyListener {
         });
         typeOkayPanel.add(okay);
 
-
-
 //        System.out.println("\nNEW ROUND");
 //        try {
 //            Thread.sleep(1000);
@@ -639,6 +601,33 @@ public class UserInteraction implements KeyListener {
      */
     public void announcingCategory(){
         //Turn off previous panels
+        TypePanel.setVisible(false);
+        TypeExplanationPanel.setVisible(false);
+        typeOkayPanel.setVisible(false);
+
+        //New panel
+        announcingCategoryPanel = new JPanel();
+        announcingCategoryPanel.setBounds(100, 100, 600, 300);
+        announcingCategoryPanel.setBackground(Color.BLACK);
+        con.add(announcingCategoryPanel);
+
+        //new label
+        JLabel category = new JLabel(question.getCategory());
+        category.setBounds(100, 100, 600, 300);
+        category.setBackground(Color.black);
+        category.setForeground(Color.WHITE);
+        category.setFont(new Font("Carlito", Font.PLAIN, 100));
+        category.setHorizontalAlignment(JLabel.CENTER);
+        category.setVerticalAlignment(JLabel.CENTER);
+        announcingCategoryPanel.add(category);
+
+        announcingCategoryPanel.setVisible(false);
+
+        Timer timer = new Timer(1000, e -> {
+            announcingCategoryPanel.setVisible(true);
+        });
+        timer.start();
+
 
 
 //        try {
@@ -647,6 +636,40 @@ public class UserInteraction implements KeyListener {
 //            System.out.println("got interrupted!");
 //        }
 //        System.out.println("\nCategory: " + question.getCategory());
+
+    }
+
+    /**
+     * BetPoints function, asks the player to bet and saves the amount in an int variable.
+     * @return the betPoints variable, which contains the points bet by the player.
+     */
+    public void betPoints(Player player) {
+
+        int betPoints = 0;
+        String points;
+
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            System.out.println("got interrupted!");
+        }
+
+        try{
+            System.out.println("\nNow tell me, " + player.getNickname() + ", how risky are you?");
+
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                System.out.println("got interrupted!");
+            }
+
+            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
+            points = input.nextLine();
+            betPoints = Integer.valueOf(points);
+        }catch(NumberFormatException exception){
+            System.out.println("inside first catch");
+            //newBetPoints(player);
+        }
 
     }
 
@@ -838,35 +861,7 @@ public class UserInteraction implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
-// WE DONT NEED THIS ANYMORE
-//    /**
-//     * This method accepts a Player object, asks the player for an answer and returns the input.
-//     * @return String variable that contains the answer.
-//     */
-//    public String getAnAnswer(Player player){
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
-//
-//        System.out.println(player.getNickname() + ", which answer do you think is correct?");
-//        return input.nextLine();
-//
-//    }
-//
-//    /** WE NO LONGER NEED THIS BECAUSE WE HAVE THE KEYLISTENER
-//     * getNewAnswer is called when the player types an answer that does not exist and asks for a new input.
-//     * @return String that contains the new answer.
-//     */
-//    public String getNewAnswer(Player player){
-//
-//        System.out.println("\n");
-//        System.out.println(player.getNickname() + " this is not an option! Guess again.");
-//        return input.nextLine();
-//
-//    }
+
 
     /**
      * This function prints the correct answer to the question asked previously.
@@ -996,10 +991,6 @@ public class UserInteraction implements KeyListener {
 
     }
 
-
-
-
-
     public String replay(){
 
         System.out.println("THE END");
@@ -1098,5 +1089,70 @@ public class UserInteraction implements KeyListener {
 
 */
 
+    //    /** WE NO LONGER NEED THIS BECAUSE THE BETS WILL BE BUTTONS
+//     * newBetPoints is a function that is called when the player types a non acceptable amount to bet.
+//     * It informs the user about their mistake and asks for a new bet.
+//     * @return the new bet which is an integer.
+//     */
+//    public int newBetPoints(Player player){
+//
+//        int betPonits = 0;
+//        String points;
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
+//
+//        try{
+//            System.out.println("\nYou can't bet this amount" + player.getNickname() +", bet again!");
+//
+//            try {
+//                Thread.sleep(1000);
+//            } catch(InterruptedException e) {
+//                System.out.println("got interrupted!");
+//            }
+//
+//            System.out.println("\nType how many points you bet(250 / 500 / 750 / 1000):");
+//            points = input.nextLine();
+//            betPonits = Integer.valueOf(points);
+//        }catch(NumberFormatException ex){
+//            newBetPoints(player);
+//        }
+//
+//        return betPonits;
+//
+//    }
+
+    // WE DONT NEED THIS ANYMORE
+//    /**
+//     * This method accepts a Player object, asks the player for an answer and returns the input.
+//     * @return String variable that contains the answer.
+//     */
+//    public String getAnAnswer(Player player){
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
+//
+//        System.out.println(player.getNickname() + ", which answer do you think is correct?");
+//        return input.nextLine();
+//
+//    }
+//
+//    /** WE NO LONGER NEED THIS BECAUSE WE HAVE THE KEYLISTENER
+//     * getNewAnswer is called when the player types an answer that does not exist and asks for a new input.
+//     * @return String that contains the new answer.
+//     */
+//    public String getNewAnswer(Player player){
+//
+//        System.out.println("\n");
+//        System.out.println(player.getNickname() + " this is not an option! Guess again.");
+//        return input.nextLine();
+//
+//    }
 
 }

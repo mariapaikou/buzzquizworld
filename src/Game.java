@@ -22,6 +22,7 @@ public class Game {
     private Round round; // einai swsto to final???
     private ReadQuestionsFile readQuestionsFile;
     private  HighScore scores;
+    private int questionPosition = 0;
 
 
     /**
@@ -63,83 +64,12 @@ public class Game {
  */
 
     public Game(){
-
-       // display = new UserInteraction();
-
-       // int howManyPlayers = display.HowManyOfYou();
-
-       // playerList = display.God(howManyPlayers);
-//        for (int i = howManyPlayers; i > 0; i--) {
-//            playerList.add(display.God());
-//        }
         readQuestionsFile = new ReadQuestionsFile();
         allQuestions = readQuestionsFile.loadQuestions("questions.text.txt");
         scores = new HighScore("highscores.dat","totalwins.dat");
         round = new Round();
 
     }
-
-/*
-    public ArrayList<Player> getPlayerList() { return playerList; }
- */
-
-//    /**
-//     * Function PlayTheGame starts off by calling the fillAllQuestions method which fills the ArrayList with
-//     * Questions objects which then randomizes with the randomizeQuestions method. It has a while loop that controls
-//     * the number of rounds. Each time it creates a Round object and a type that is randomly chosen by the Round objects method,
-//     * getRandomType. Then it sets the type object's player list to the list that Game has. A while loop is used to control the amount
-//     * of questions that will be asked for the round. It prints the questions one by one, accepts the answers from the
-//     * players and checks if they are correct. Then it adjusts the status of the players, displays the correct answer and the winners
-//     * and changes their points.
-//     */
-//    public void PlayTheGame(){
-//
-//       // fillAllQuestions();
-//      //  randomizeQuestions();
-//        int questionNum = 0;
-//
-//        while(howManyRounds > 0){
-//
-//            int num = numberOfQuestions;
-//            //Round round = new Round(); // to ebala ston consturctor kai nomizw doyleysei swsta!
-//
-//           // Type type = round.getRandomType();
-//          //  type.setPlayersList(playerList);
-//
-//            while (num > 0){
-//
-//                display.announcingTheType(type);
-//                display.announcingCategory(allQuestions.get(questionNum));
-//                setTypesInitialBehaviour(type);
-//                display.askTheQuestion(allQuestions.get(questionNum));
-//
-//                for (Player player : playerList){
-//                    String answer = display.getAnAnswer(player);
-//                    //String answer = getPlayersAnswer(player,questionNum);
-//
-//                    if (answer.equals(allQuestions.get(questionNum).getCorrectAnswer())){
-//                        player.setStatus(true);
-//                    }
-//
-//                }
-//
-//                display.correctAnswer(allQuestions.get(questionNum));
-//                display.whoWon(playerList);
-//                type.changePoints();
-//                setTypeInitialStatus(type);
-//               // defaultfyPlayersStatus(); ginetai mesa stis changePoints!
-//                questionNum++;
-//                num--;
-//
-//            }
-//            display.showRoundScores(playerList);
-//            howManyRounds--;
-//        }
-//        display.finalScores(playerList);
-//        howManyRounds = 3; //mhpws prepei na ginei stathera gia eykolia synthrhshs!
-//        initializePlayersScore();
-//
-//    }
 
     /**
      * Method getRandomType returns a random type of game
@@ -154,12 +84,12 @@ public class Game {
     }
 
     /**
-     * Method getNewQuestion returns the question located at the i position of the allQuestions array
-     * @param i the position in witch the method will find the question
+     * Method getNewQuestion returns the question located at the questionPosition position of the allQuestions array
      * @return Question
      */
-    public Questions getNewQuestion(int i){
-        return allQuestions.get(i);
+    public Questions getNewQuestion(){
+        questionPosition++;
+        return allQuestions.get(questionPosition);
     }
 
     /**
@@ -169,30 +99,6 @@ public class Game {
     private void changePoints(Type type){
         type.changePoints();
     }
-
-
-//
-//    /**
-//     * Function getPlayersAnswer calls UserInteraction method getAnswer to get an answer to the question asked and checks
-//     * if answer is an acceptable value by calling UserInteractions method acceptableAnswer.
-//     * @param player
-//     * @param questionNum
-//     * @return answer String value that contains player's answer to the question asked
-//     */
-// NO NEED
-//     private String getPlayersAnswer(Player player, int questionNum){
-//
-//         String answer = display.getAnAnswer(player);
-//         boolean correct = allQuestions.get(questionNum).acceptableAnswer(answer);
-//
-////         while (!correct){
-////             answer = display.getNewAnswer(player);
-////             correct = allQuestions.get(questionNum).acceptableAnswer(answer);
-////         }
-//        return answer;
-//
-//    }
-
 
     /**
      * Function setBetInitialBehaviour gets as parameter a Type object and checks if it is an instance of Bet/........
@@ -279,6 +185,101 @@ public class Game {
 //        }
 
     }
+    //SKOUPIDIA
+
+/*
+    public ArrayList<Player> getPlayerList() { return playerList; }
+ */
+
+//    /**
+//     * Function PlayTheGame starts off by calling the fillAllQuestions method which fills the ArrayList with
+//     * Questions objects which then randomizes with the randomizeQuestions method. It has a while loop that controls
+//     * the number of rounds. Each time it creates a Round object and a type that is randomly chosen by the Round objects method,
+//     * getRandomType. Then it sets the type object's player list to the list that Game has. A while loop is used to control the amount
+//     * of questions that will be asked for the round. It prints the questions one by one, accepts the answers from the
+//     * players and checks if they are correct. Then it adjusts the status of the players, displays the correct answer and the winners
+//     * and changes their points.
+//     */
+//    public void PlayTheGame(){
+//
+//       // fillAllQuestions();
+//      //  randomizeQuestions();
+//        int questionNum = 0;
+//
+//        while(howManyRounds > 0){
+//
+//            int num = numberOfQuestions;
+//            //Round round = new Round(); // to ebala ston consturctor kai nomizw doyleysei swsta!
+//
+//           // Type type = round.getRandomType();
+//          //  type.setPlayersList(playerList);
+//
+//            while (num > 0){
+//
+//                display.announcingTheType(type);
+//                display.announcingCategory(allQuestions.get(questionNum));
+//                setTypesInitialBehaviour(type);
+//                display.askTheQuestion(allQuestions.get(questionNum));
+//
+//                for (Player player : playerList){
+//                    String answer = display.getAnAnswer(player);
+//                    //String answer = getPlayersAnswer(player,questionNum);
+//
+//                    if (answer.equals(allQuestions.get(questionNum).getCorrectAnswer())){
+//                        player.setStatus(true);
+//                    }
+//
+//                }
+//
+//                display.correctAnswer(allQuestions.get(questionNum));
+//                display.whoWon(playerList);
+//                type.changePoints();
+//                setTypeInitialStatus(type);
+//               // defaultfyPlayersStatus(); ginetai mesa stis changePoints!
+//                questionNum++;
+//                num--;
+//
+//            }
+//            display.showRoundScores(playerList);
+//            howManyRounds--;
+//        }
+//        display.finalScores(playerList);
+//        howManyRounds = 3; //mhpws prepei na ginei stathera gia eykolia synthrhshs!
+//        initializePlayersScore();
+//
+//    }
+
+
+//
+//    /**
+//     * Function getPlayersAnswer calls UserInteraction method getAnswer to get an answer to the question asked and checks
+//     * if answer is an acceptable value by calling UserInteractions method acceptableAnswer.
+//     * @param player
+//     * @param questionNum
+//     * @return answer String value that contains player's answer to the question asked
+//     */
+// NO NEED
+//     private String getPlayersAnswer(Player player, int questionNum){
+//
+//         String answer = display.getAnAnswer(player);
+//         boolean correct = allQuestions.get(questionNum).acceptableAnswer(answer);
+//
+////         while (!correct){
+////             answer = display.getNewAnswer(player);
+////             correct = allQuestions.get(questionNum).acceptableAnswer(answer);
+////         }
+//        return answer;
+//
+//    }
+
+    // display = new UserInteraction();
+
+    // int howManyPlayers = display.HowManyOfYou();
+
+    // playerList = display.God(howManyPlayers);
+//        for (int i = howManyPlayers; i > 0; i--) {
+//            playerList.add(display.God());
+//        }
 
 }
 

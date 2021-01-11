@@ -58,6 +58,7 @@ public class UserInteraction implements KeyListener {
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
     private JPanel highScoresButtonPanel, totalWinsButtonPanel;
+    private JTextField nickname;
 
     public UserInteraction(){
         answer1 = new String();
@@ -324,6 +325,9 @@ public class UserInteraction implements KeyListener {
         onePlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                HMPPanel.setVisible(false);
+                HMPLeftPanel.setVisible(false);
+                HMPRightPanel.setVisible(false);
                 numberOfPlayers = 1;
                 God(1);
             }
@@ -341,11 +345,15 @@ public class UserInteraction implements KeyListener {
         twoPlayers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                HMPPanel.setVisible(false);
+                HMPLeftPanel.setVisible(false);
+                HMPRightPanel.setVisible(false);
                 numberOfPlayers = 2;
                 God(2);
             }
         });
         HMPRightPanel.add(twoPlayers);
+
 
 //        int howMany;
 //        System.out.println("Oh I didn't see you there. Did you bring a friend?\n");
@@ -366,10 +374,8 @@ public class UserInteraction implements KeyListener {
      * to be added to the playerList.
      * @return A Player object
      */
-    public void God(int numOfPlayers){
-        HMPPanel.setVisible(false);
-        HMPLeftPanel.setVisible(false);
-        HMPRightPanel.setVisible(false);
+    public void God(int numberOfPlayers){
+
         //The panel for the text
         NamePanelText = new JPanel();
         //Look & Layout
@@ -396,7 +402,91 @@ public class UserInteraction implements KeyListener {
         con.add(NamePanel);
 
         //TextField for the nickname input
-        JTextField nickname = new JTextField();
+        nickname = new JTextField();
+        //Look & Layout
+        nickname.setBounds(100,200,400,100);
+        NamePanel.add(nickname);
+        nickname.setText("");
+        nickname.setColumns(7);
+        nickname.setBackground(Color.white);
+        nickname.setForeground(Color.black);
+        nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
+        nickname.setDocument(new JTextFieldLimit(10));
+
+        //Panel for the button
+        readyPanel = new JPanel();
+        //Look & Layout
+        readyPanel.setBounds(500, 200, 100, 100);
+        readyPanel.setBackground(Color.black);
+        con.add(readyPanel);
+
+        //Button
+        JButton readyButton = new JButton("Ready");
+        readyButton.setBackground(Color.BLACK);
+        readyButton.setForeground(Color.WHITE);
+        readyButton.setSize(100, 100);
+        readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        readyPanel.add(readyButton);
+        readyButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                System.out.println("inside first if!");
+                Player playerOne = new Player();
+                playerOne.setNickname(nickname.getText());
+                players.add(playerOne);
+                game.setPlayerList(players);
+                if(numberOfPlayers == 2){
+                    readyPanel.setVisible(false);
+                    NamePanelText.setVisible(false);
+
+                    nickname.setText("");
+                    God2();
+                }else{
+                    try{
+                        LetsGo();
+                    }catch(InterruptedException ie) {
+
+                        System.out.println("got interrupted!");
+
+                    }
+                }
+
+            }
+        });
+
+    }
+
+    private void God2() {
+        NamePanelText.removeAll();
+        readyPanel.removeAll();
+        NamePanel.removeAll();
+
+        //The panel for the text
+        NamePanelText = new JPanel();
+        //Look & Layout
+        NamePanelText.setBounds(100, 100, 500, 100);
+        NamePanelText.setBackground(Color.black);
+        con.add(NamePanelText);
+
+        //The area that holds the text
+        JTextArea NameText = new JTextArea("Choose a nickname (10 characters max):");
+        //Look & Layout
+        NameText.setBounds(100,100,500,100);
+        NameText.setBackground(Color.black);
+        NameText.setForeground(Color.WHITE);
+        NameText.setFont(new Font("Carlito", Font.PLAIN, 30));
+        NameText.setLineWrap(true);
+        NameText.setEditable(false);
+        NamePanelText.add(NameText);
+
+        //The panel for the nickname input
+        NamePanel = new JPanel();
+        //Look & Layout
+        NamePanel.setBounds(100, 200, 400, 100);
+        NamePanel.setBackground(Color.black);
+        con.add(NamePanel);
+
+        //TextField for the nickname input
+        nickname = new JTextField();
         //Look & Layout
         nickname.setBounds(100,200,400,100);
         NamePanel.add(nickname);
@@ -422,77 +512,38 @@ public class UserInteraction implements KeyListener {
         readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         readyPanel.add(readyButton);
 
-        if(numOfPlayers==1){
-            readyButton.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e){
+        System.out.println("inside god2!");
+
+            readyButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
                     Player playerOne = new Player();
                     playerOne.setNickname(nickname.getText());
                     players.add(playerOne);
                     game.setPlayerList(players);
-                    try{
+                    try {
+                        NamePanelText.setVisible(false);
+                        NamePanel.setVisible(false);
+                        readyPanel.setVisible(false);
                         LetsGo();
-                    }catch(InterruptedException ie) {
+                    } catch (InterruptedException ie) {
 
-                    System.out.println("got interrupted!");
+                        System.out.println("got interrupted!");
 
                     }
+
+
                 }
             });
-        }
-        else{
-            readyButton.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    Player playerTwo = new Player();
-                    playerTwo.setNickname(nickname.getText());
-                    players.add(playerTwo);
-                    nickname.setText("");
-                    God(1);
-                }
-            });
-        }
-//        System.out.println("You mortal man, name yourself!");
-//
-//        try {
-//
-//            Thread.sleep(1000);
-//
-//        } catch(InterruptedException e) {
-//
-//            System.out.println("got interrupted!");
-//
-//        }
-//
-//        System.out.println("Name: ");
-//        String name = input.nextLine();
-//
-//        while (name.equals("") ) {
-//
-//            System.out.println("You have to give a name!");
-//            System.out.println("Name: ");
-//
-//            name = input.nextLine();
-//
-//        }
-//
-//        Player player = new Player( );
-//        player.setNickname(name);
-//
-//       return player;
-//        try{
-//            LetsGo();
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
+
     }
+
+
 
     public void LetsGo() throws InterruptedException {
         //randomize questions
         game.randomizeQuestions();
 
         //disable previous panels
-        NamePanelText.setVisible(false);
-        NamePanel.setVisible(false);
-        readyPanel.setVisible(false);
 
         letsGoPanel = new JPanel();
         letsGoPanel.setBounds(0, 100, 800, 400);
@@ -542,6 +593,7 @@ public class UserInteraction implements KeyListener {
 
         Timer timer5 = new Timer(800, e -> {
             text4.setVisible(false);
+            letsGoPanel.setVisible(false);
             RoundNumberQuestionNumber();
         });
 
@@ -593,7 +645,7 @@ public class UserInteraction implements KeyListener {
      */
     public void RoundNumberQuestionNumber(){
         //Turn off previous panel
-        letsGoPanel.setVisible(false);
+
 
         if(rounds - 1 < game.getHowManyRounds()) {
             if(questions - 1 < game.getNumberOfQuestions()) {

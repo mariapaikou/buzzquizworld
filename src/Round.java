@@ -29,7 +29,7 @@ public class Round {
         }else if(r == 3){
             type = new QuickAnswer();
         }else if(r == 4){
-            type = new Timer();
+            type = new StopTheTimer();
         }else{
             type = new Thermometer();
         }
@@ -46,7 +46,7 @@ public class Round {
         }else if(r == 2){
             type = new Bet();
         }else{
-            type = new Timer();
+            type = new StopTheTimer();
         }
 
         return type;

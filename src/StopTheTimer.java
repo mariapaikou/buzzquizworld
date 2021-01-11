@@ -1,6 +1,6 @@
-public class Timer extends Type {
+public class StopTheTimer extends Type {
 
-    public Timer(){
+    public StopTheTimer(){
         super();
        // timeLeft = new int[players.size()]; // xreiazetai???
     }
@@ -27,7 +27,7 @@ public class Timer extends Type {
   //  } //xreiazetai???
 
 
-    public String getName(){return "Timer";}
+    public String getName(){return "StopTheTimer";}
 
     public String getExplanation(){
         String explanation = "There is a timer that counts down 5 seconds and each player who answers correctly earns as many points as the milliseconds left when he answered multiplied by 0.2.";

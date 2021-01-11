@@ -59,8 +59,9 @@ public class UserInteraction implements KeyListener {
     private JPanel correctAnswerTextPanel, correctAnswerPanel, nextQuestion, scoresPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
-    private JPanel highScoresButtonPanel, totalWinsButtonPanel;
+    private JPanel highScoresButtonPanel, totalWinsButtonPanel, goButtonPanel;
     private JTextField nickname;
+    private Timer timer1, timer2,timer3,timer4,timer5;
 
     public UserInteraction(){
         answer1 = new String();
@@ -592,33 +593,38 @@ public class UserInteraction implements KeyListener {
         text3.setVisible(false);
         text4.setVisible(false);
 
-        Timer timer5 = new Timer(800, e -> {
+        timer5 = new Timer(800, e -> {
             text4.setVisible(false);
             letsGoPanel.setVisible(false);
+            timer1.stop();
+            timer2.stop();
+            timer3.stop();
+            timer4.stop();
+            timer5.stop();
             RoundNumberQuestionNumber();
 
         });
 
-        Timer timer4 = new Timer(800, e -> {
+        timer4 = new Timer(800, e -> {
             text3.setVisible(false);
             text4.setVisible(true);
             timer5.start();
         });
 
-        Timer timer3 = new Timer(800, e -> {
+        timer3 = new Timer(800, e -> {
             text2.setVisible(false);
             text3.setVisible(true);
             timer4.start();
 
         });
 
-        Timer timer2 = new Timer(800, e -> {
+        timer2 = new Timer(800, e -> {
             text1.setVisible(false);
             text2.setVisible(true);
             timer3.start();
         });
 
-        Timer timer1 = new Timer(800, e -> {
+        timer1 = new Timer(800, e -> {
             text1.setVisible(true);
             timer2.start();
         });
@@ -649,12 +655,9 @@ public class UserInteraction implements KeyListener {
      */
     public void RoundNumberQuestionNumber(){
         //Turn off previous panel
-        System.out.println("inside roundNumberQuestionsNumber!");
-       // con.removeAll();
-//        if(rounds - 1 < game.getHowManyRounds()) {
-//            System.out.println("inside if!");
-//            if(questions - 1 < game.getNumberOfQuestions()) {
-//                System.out.println("inside iffifiifififi!!!");
+        con.removeAll();
+        if(rounds - 1 < game.getHowManyRounds()) {
+            if(questions - 1 < game.getNumberOfQuestions()) {
                 //Panel for the round label
                 RoundNumberPanel = new JPanel();
                 RoundNumberPanel.setBounds(0, 50, 800, 200);
@@ -713,15 +716,15 @@ public class UserInteraction implements KeyListener {
                     }
                 });
                 question = game.getNewQuestion();
-//
-//            }else{
-//                rounds++;
-//                questions = 1;
-//               // RoundNumberQuestionNumber();
-//             }
-//        }else{
-//            //game is done
-//        }
+
+            }else{
+                rounds++;
+                questions = 1;
+                RoundNumberQuestionNumber();
+             }
+        }else{
+            //game is done
+        }
     }
 
 
@@ -739,8 +742,6 @@ public class UserInteraction implements KeyListener {
         RoundNumberPanel.removeAll();
         QuestionNumberPanel.removeAll();
         RQOkayPanel.removeAll();
-        System.out.println("inside announcing the type!");
-
 
         //Get random type from game
         type = game.getRandomType();
@@ -753,10 +754,10 @@ public class UserInteraction implements KeyListener {
 
         //Label for the type
         JLabel typeLabel = new JLabel(type.getName());
-        typeLabel.setBounds(0, 0, 800, 250);
+        typeLabel.setBounds(50, 50, 700, 50);
         typeLabel.setBackground(Color.black);
         typeLabel.setForeground(Color.WHITE);
-        typeLabel.setFont(new Font("Carlito", Font.PLAIN, 300));
+        typeLabel.setFont(new Font("Carlito", Font.PLAIN, 30));
         typeLabel.setHorizontalAlignment(JLabel.CENTER);
         typeLabel.setVerticalAlignment(JLabel.CENTER);
         TypePanel.add(typeLabel);
@@ -769,19 +770,21 @@ public class UserInteraction implements KeyListener {
         con.add(TypeExplanationPanel);
 
         //Label for the explanation
-        JLabel typeExplanationLabel = new JLabel(type.getExplanation());
-        typeExplanationLabel.setBounds(50, 100, 700, 300);
-        typeExplanationLabel.setBackground(Color.black);
-        typeExplanationLabel.setForeground(Color.WHITE);
-        typeExplanationLabel.setFont(new Font("Carlito", Font.PLAIN, 30));
-        typeExplanationLabel.setHorizontalAlignment(JLabel.CENTER);
-        typeExplanationLabel.setVerticalAlignment(JLabel.CENTER);
-        TypeExplanationPanel.add(typeExplanationLabel);
+        JTextArea typeExplanationArea = new JTextArea(type.getExplanation());
+        typeExplanationArea.setBounds(50, 100, 700, 300);
+        typeExplanationArea.setBackground(Color.black);
+        typeExplanationArea.setForeground(Color.WHITE);
+        typeExplanationArea.setFont(new Font("Carlito", Font.PLAIN, 30));
+        typeExplanationArea.setLineWrap(true);
+//        typeExplanationLabel.setHorizontalAlignment(JLabel.CENTER);
+//        typeExplanationLabel.setVerticalAlignment(JLabel.CENTER);
+
+        TypeExplanationPanel.add(typeExplanationArea);
 
         //Panel for the okay button
         typeOkayPanel = new JPanel();
-        typeOkayPanel.setBounds(750, 450, 50, 50);
-        typeOkayPanel.setBackground(Color.BLACK);
+        typeOkayPanel.setBounds(600, 400, 100, 100);
+        typeOkayPanel.setBackground(Color.PINK);
         con.add(typeOkayPanel);
 
         //Okay button
@@ -813,13 +816,13 @@ public class UserInteraction implements KeyListener {
 
         //New panel
         announcingCategoryPanel = new JPanel();
-        announcingCategoryPanel.setBounds(100, 100, 600, 300);
-        announcingCategoryPanel.setBackground(Color.BLACK);
+        announcingCategoryPanel.setBounds(100, 100, 600, 100);
+        announcingCategoryPanel.setBackground(Color.PINK);
         con.add(announcingCategoryPanel);
 
         //new label
         JLabel category = new JLabel(question.getCategory());
-        category.setBounds(100, 100, 600, 300);
+        category.setBounds(100, 100, 600, 100);
         category.setBackground(Color.black);
         category.setForeground(Color.WHITE);
         category.setFont(new Font("Carlito", Font.PLAIN, 100));
@@ -827,21 +830,20 @@ public class UserInteraction implements KeyListener {
         category.setVerticalAlignment(JLabel.CENTER);
         announcingCategoryPanel.add(category);
 
-        announcingCategoryPanel.setVisible(false);
+        JButton goButton = new JButton("GO!");
+        goButton.setBackground(Color.PINK);
+        goButton.setForeground(Color.WHITE);
+        goButton.setSize(100, 100);
+        goButton.setFont(new Font("Carlito", Font.PLAIN, 30));
 
-        Timer timer = new Timer(1000, e -> {
-            announcingCategoryPanel.setVisible(true);
-        });
-        timer.start();
+        goButtonPanel = new JPanel();
+        goButtonPanel.setBounds(350,300,100,100);
+        goButtonPanel.setBackground(Color.BLACK);
+        goButtonPanel.add(goButton);
+        con.add(goButtonPanel);
 
 
 
-//        try {
-//            Thread.sleep(1000);
-//        } catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//        }
-//        System.out.println("\nCategory: " + question.getCategory());
 
     }
 
@@ -1415,8 +1417,8 @@ public class UserInteraction implements KeyListener {
     public void Choise(String nameOfGame){
         if(nameOfGame=="Right Answer"){
             RightAnswer rightAnswer = new RightAnswer();
-        }else if(nameOfGame=="Timer"){
-            Timer timer= new Timer();
+        }else if(nameOfGame=="StopTheTimer"){
+            StopTheTimer timer= new StopTheTimer();
         }else if(nameOfGame=="Bet"){
             Bet bet = new Bet();
         }else if(nameOfGame == "Quick Answer"){

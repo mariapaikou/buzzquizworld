@@ -121,9 +121,9 @@ public class Game {
 //
 //                ((Bet) type).setPoints(bets[i]);
 //            }
-////        }else if (type instanceof Timer) {
-////            // tha friaxnoyme to Timer antikeimeno!!!
-////            //TODO mhpws prepei na einai mesa sthn Timer? h sthn UserIneraction!!!!
+////        }else if (type instanceof StopTheTimer) {
+////            // tha friaxnoyme to StopTheTimer antikeimeno!!!
+////            //TODO mhpws prepei na einai mesa sthn StopTheTimer? h sthn UserIneraction!!!!
 ////        }
 //        }
 //    }

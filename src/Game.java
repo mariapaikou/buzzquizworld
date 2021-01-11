@@ -78,7 +78,14 @@ public class Game {
 
 
     public Type getRandomType(){
-        Type type = round.getRandomType();
+        Type type;
+
+        if(playerList.size() == 1){
+            type = round.towPlayerMode();
+        }else{
+            type = round.onePlayerMode();
+        }
+
         type.setPlayersList(playerList);
         return type;
     }

@@ -307,12 +307,12 @@ public class UserInteraction implements KeyListener {
         readyPanel.setVisible(false);
 
         letsGoPanel = new JPanel();
-        letsGoPanel.setBounds(0, 0, 800, 400);
+        letsGoPanel.setBounds(0, 100, 800, 400);
         letsGoPanel.setBackground(Color.BLACK);
         con.add(letsGoPanel);
 
         JLabel text1 = new JLabel("LET");
-        text1.setBounds(0, 0, 800, 400);
+        text1.setBounds(0, 100, 800, 400);
         text1.setBackground(Color.black);
         text1.setForeground(Color.WHITE);
         text1.setFont(new Font("Carlito", Font.PLAIN, 300));
@@ -321,7 +321,7 @@ public class UserInteraction implements KeyListener {
         letsGoPanel.add(text1);
 
         JLabel text2 = new JLabel("THE");
-        text2.setBounds(0, 0, 800, 400);
+        text2.setBounds(0, 100, 800, 400);
         text2.setBackground(Color.black);
         text2.setForeground(Color.WHITE);
         text2.setFont(new Font("Carlito", Font.PLAIN, 300));
@@ -330,7 +330,7 @@ public class UserInteraction implements KeyListener {
         letsGoPanel.add(text2);
 
         JLabel text3 = new JLabel("GAME");
-        text3.setBounds(0, 0, 800, 400);
+        text3.setBounds(0, 100, 800, 400);
         text3.setBackground(Color.black);
         text3.setForeground(Color.WHITE);
         text3.setFont(new Font("Carlito", Font.PLAIN, 300));
@@ -339,10 +339,10 @@ public class UserInteraction implements KeyListener {
         letsGoPanel.add(text3);
 
         JLabel text4 = new JLabel("BEGIN");
-        text4.setBounds(0, 0, 800, 400);
+        text4.setBounds(0, 100, 800, 400);
         text4.setBackground(Color.black);
         text4.setForeground(Color.WHITE);
-        text4.setFont(new Font("Carlito", Font.PLAIN, 200));
+        text4.setFont(new Font("Carlito", Font.PLAIN, 300));
         text4.setHorizontalAlignment(JLabel.CENTER);
         text4.setVerticalAlignment(JLabel.CENTER);
         letsGoPanel.add(text4);
@@ -352,30 +352,31 @@ public class UserInteraction implements KeyListener {
         text3.setVisible(false);
         text4.setVisible(false);
 
-        Timer timer5 = new Timer(500, e -> {
+        Timer timer5 = new Timer(800, e -> {
             text4.setVisible(false);
             RoundNumberQuestionNumber();
         });
 
-        Timer timer4 = new Timer(500, e -> {
+        Timer timer4 = new Timer(800, e -> {
             text3.setVisible(false);
             text4.setVisible(true);
+            timer5.start();
         });
 
-        Timer timer3 = new Timer(500, e -> {
+        Timer timer3 = new Timer(800, e -> {
             text2.setVisible(false);
             text3.setVisible(true);
             timer4.start();
 
         });
 
-        Timer timer2 = new Timer(500, e -> {
+        Timer timer2 = new Timer(800, e -> {
             text1.setVisible(false);
             text2.setVisible(true);
             timer3.start();
         });
 
-        Timer timer1 = new Timer(500, e -> {
+        Timer timer1 = new Timer(800, e -> {
             text1.setVisible(true);
             timer2.start();
         });
@@ -410,32 +411,32 @@ public class UserInteraction implements KeyListener {
             if(questions - 1 < game.getNumberOfQuestions()) {
                 //Panel for the round label
                 RoundNumberPanel = new JPanel();
-                RoundNumberPanel.setBounds(0, 0, 800, 250);
+                RoundNumberPanel.setBounds(0, 50, 800, 200);
                 RoundNumberPanel.setBackground(Color.BLACK);
                 con.add(RoundNumberPanel);
 
                 //Panel for the question label
                 QuestionNumberPanel = new JPanel();
-                QuestionNumberPanel.setBounds(0, 250, 800, 250);
+                QuestionNumberPanel.setBounds(0, 300, 800, 200);
                 QuestionNumberPanel.setBackground(Color.BLACK);
                 con.add(QuestionNumberPanel);
 
                 //Label ROUND i
                 JLabel roundLabel = new JLabel("Round " + rounds);
-                roundLabel.setBounds(0, 0, 800, 250);
+                roundLabel.setBounds(0, 50, 800, 200);
                 roundLabel.setBackground(Color.black);
                 roundLabel.setForeground(Color.WHITE);
-                roundLabel.setFont(new Font("Carlito", Font.PLAIN, 300));
+                roundLabel.setFont(new Font("Carlito", Font.PLAIN, 200));
                 roundLabel.setHorizontalAlignment(JLabel.CENTER);
                 roundLabel.setVerticalAlignment(JLabel.CENTER);
                 RoundNumberPanel.add(roundLabel);
 
                 //Label QUESTION j
                 JLabel questionLabel = new JLabel("Question " + questions);
-                questionLabel.setBounds(0, 250, 800, 250);
+                questionLabel.setBounds(0, 300, 800, 200);
                 questionLabel.setBackground(Color.black);
                 questionLabel.setForeground(Color.WHITE);
-                questionLabel.setFont(new Font("Carlito", Font.PLAIN, 300));
+                questionLabel.setFont(new Font("Carlito", Font.PLAIN, 100));
                 questionLabel.setHorizontalAlignment(JLabel.CENTER);
                 questionLabel.setVerticalAlignment(JLabel.CENTER);
                 QuestionNumberPanel.add(questionLabel);

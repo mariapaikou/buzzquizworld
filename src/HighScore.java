@@ -139,17 +139,48 @@ public class HighScore {
 //    }
 
 
-
-    public ArrayList<Player> getTotalWins(){
-        return totalWins;
+    /**
+     *
+     */
+    public String[] getTotalWins() {
+        String[] list;
+        if (totalWins.size() == 0) {
+            list = new String[]{"There are no total wins yet!"};
+        } else {
+            list = new String[(totalWins.size() - 1) / 2];
+            for (int i = 0; i < list.length; i += 2) {
+                list[i] = (totalWins.get(i).getNickname() + " " + totalWins.get(i).getScore() + " " + totalWins.get(i + 1).getNickname() + " " + totalWins.get(i + 1).getScore());
+            }
+        }
+        System.out.println(list);
+        return list;
     }
 
-    public List<Player> getHighestScores(){
-        return highestScores;
+
+    public String [] getHighestScores(){
+        String [] list;
+        if(highestScores.size() == 0){
+            list = new String[]{"There are no high scores yet!"};
+        }else{
+            list= new String[highestScores.size()-1];
+            for(int i=0; i<highestScores.size();i++){
+                list[i] = (highestScores.get(i).getNickname() + " " + highestScores.get(i).getScore());
+            }
+        }
+        System.out.println(list);
+        return list;
     }
-//    public LinkedList<Player> getHighestScores(){
+//
+//    public ArrayList<Player> getTotalWins(){
+//        return totalWins;
+//    }
+//
+//    public List<Player> getHighestScores(){
 //        return highestScores;
 //    }
+////    public LinkedList<Player> getHighestScores(){
+////        return highestScores;
+////    }
 
 
 

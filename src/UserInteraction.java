@@ -24,13 +24,15 @@ public class UserInteraction implements KeyListener {
     private Game game;
     private ArrayList<Player> players;
     private int numberOfPlayers;
+    private int rounds = 1;
+    private int questions = 1;
     Scanner input = new Scanner(System.in);
     private final Container con;
     private final JPanel startTextPanel, startButtonPanel;
     private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
     private JPanel NamePanelText, NamePanel, readyPanel, letsGoPanel;
-    String answer1;
-    String answer2;
+    private JPanel RoundNumberPanel, QuestionNumberPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
+    String answer1, answer2;
     ArrayList<String> answers;
 
     public UserInteraction(){
@@ -352,6 +354,11 @@ public class UserInteraction implements KeyListener {
         text3.setVisible(false);
         text4.setVisible(false);
 
+        Timer timer5 = new Timer(500, e -> {
+            text4.setVisible(false);
+            RoundNumberQuestionNumber();
+        });
+
         Timer timer4 = new Timer(500, e -> {
             text3.setVisible(false);
             text4.setVisible(true);
@@ -391,6 +398,67 @@ public class UserInteraction implements KeyListener {
             if ((getLength() + str.length()) <= limit) {
                 super.insertString(offset, str, attr);
             }
+        }
+    }
+
+    /**
+     * ROUND i, QUESTION j, and all the variable get ready.
+     */
+    public void RoundNumberQuestionNumber(){
+        //Turn off previous panel
+        letsGoPanel.setVisible(false);
+
+        if(rounds - 1 < game.getHowManyRounds()) {
+            if(questions - 1 < game.getNumberOfQuestions()) {
+                //Panel for the round label
+                RoundNumberPanel = new JPanel();
+                RoundNumberPanel.setBounds(0, 0, 800, 250);
+                RoundNumberPanel.setBackground(Color.BLACK);
+                con.add(RoundNumberPanel);
+
+                //Panel for the question label
+                QuestionNumberPanel = new JPanel();
+                QuestionNumberPanel.setBounds(0, 250, 800, 250);
+                QuestionNumberPanel.setBackground(Color.BLACK);
+                con.add(QuestionNumberPanel);
+
+                //Label ROUND i
+                JLabel roundLabel = new JLabel("Round " + rounds);
+                roundLabel.setBounds(0, 0, 800, 250);
+                roundLabel.setBackground(Color.black);
+                roundLabel.setForeground(Color.WHITE);
+                roundLabel.setFont(new Font("Carlito", Font.PLAIN, 300));
+                roundLabel.setHorizontalAlignment(JLabel.CENTER);
+                roundLabel.setVerticalAlignment(JLabel.CENTER);
+                RoundNumberPanel.add(roundLabel);
+
+                //Label QUESTION j
+                JLabel questionLabel = new JLabel("Question " + questions);
+                questionLabel.setBounds(0, 250, 800, 250);
+                questionLabel.setBackground(Color.black);
+                questionLabel.setForeground(Color.WHITE);
+                questionLabel.setFont(new Font("Carlito", Font.PLAIN, 300));
+                questionLabel.setHorizontalAlignment(JLabel.CENTER);
+                questionLabel.setVerticalAlignment(JLabel.CENTER);
+                QuestionNumberPanel.add(questionLabel);
+
+                RoundNumberPanel.setVisible(false);
+                QuestionNumberPanel.setVisible(false);
+
+                Timer timer = new Timer(500, e -> {
+                    RoundNumberPanel.setVisible(true);
+                    QuestionNumberPanel.setVisible(true);
+                });
+                timer.start();
+
+                //ADD THE METHODS FROM GAME TO START THE ROUND
+            }else{
+                rounds++;
+                questions = 1;
+                RoundNumberQuestionNumber();
+        }
+        }else{
+            //game is done
         }
     }
 
@@ -467,61 +535,125 @@ public class UserInteraction implements KeyListener {
 //    }
 
     /**
-     * Function announcingCategory accepts a Questions type object and announces the category of the question
-     * to the player.
-     * @param question the question about to be asked
-     */
-    public void announcingCategory(Questions question){
-
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
-        System.out.println("\nCategory: " + question.getCategory());
-
-    }
-
-    /**
      * Function announcingTheType accepts a Type object and prints a message that announces the type name
      * through the getName method. Then it explains the way you play the game depending on the type.
      * @value type is a Type of game that is randomly chosen in an other class.
      */
     public void announcingTheType(Type type){
+        //Turn off previous panels
+        RoundNumberPanel.setVisible(false);
+        QuestionNumberPanel.setVisible(false);
 
-        System.out.println("\nNEW ROUND");
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
-        System.out.println("\nFor this round, you are playing " + type.getName());
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
+        //Get random type from game
+        Type type1;
+
+        //Panel for the type
+        TypePanel = new JPanel();
+        TypePanel.setBounds(50, 50, 700, 50);
+        TypePanel.setBackground(Color.BLACK);
+        con.add(TypePanel);
+
+        //Label for the type
+        JLabel typeLabel = new JLabel(type1.getName());
+        typeLabel.setBounds(0, 0, 800, 250);
+        typeLabel.setBackground(Color.black);
+        typeLabel.setForeground(Color.WHITE);
+        typeLabel.setFont(new Font("Carlito", Font.PLAIN, 300));
+        typeLabel.setHorizontalAlignment(JLabel.CENTER);
+        typeLabel.setVerticalAlignment(JLabel.CENTER);
+        TypePanel.add(typeLabel);
 
 
-        if(type.getName().equals("RightAnswer")){
+        //Panel for the explanation
+        TypeExplanationPanel = new JPanel();
+        TypeExplanationPanel.setBounds(50, 100, 700, 300);
+        TypeExplanationPanel.setBackground(Color.BLACK);
+        con.add(TypeExplanationPanel);
 
-            System.out.println("\nHow to play RightAnswer: Choose the answer you believe is correct and if you are right you win 1000 points.");
-        }
-        else if(type.getName().equals("Bet")){
+        //Label for the explanation
+        JLabel typeExplanationLabel = new JLabel(type1.getExplanation());
+        typeExplanationLabel.setBounds(50, 100, 700, 300);
+        typeExplanationLabel.setBackground(Color.black);
+        typeExplanationLabel.setForeground(Color.WHITE);
+        typeExplanationLabel.setFont(new Font("Carlito", Font.PLAIN, 30));
+        typeExplanationLabel.setHorizontalAlignment(JLabel.CENTER);
+        typeExplanationLabel.setVerticalAlignment(JLabel.CENTER);
+        TypeExplanationPanel.add(typeExplanationLabel);
 
-            System.out.println("\nHow to play Bet: You choose a bet amount (250/500/750/1000). " +
-                    "If you answer the question correctly you get the points you bet. " +
-                    "If you answer wrong you lose the bet amount from your points. ");
+        //Panel for the okay button
+        typeOkayPanel = new JPanel();
+        typeOkayPanel.setBounds(750, 450, 50, 50);
+        typeOkayPanel.setBackground(Color.BLACK);
+        con.add(typeOkayPanel);
 
-        }else if(type.getName().equals("Timer")){
-            //TODO na symplhrwthe
-        }else if(type.getName().equals("QuickAnswer")){
-            ////// TODO na symplhrvthei
-        }else { // Thermometer!
-            ///// TODO na symplhrwthei!
-        }
+        //Okay button
+        JButton okay = new JButton("Okay");
+        okay.setBackground(Color.BLACK);
+        okay.setForeground(Color.WHITE);
+        okay.setSize(50, 50);
+        okay.setFont(new Font("Carlito", Font.PLAIN, 30));
+        okay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                announcingCategory();
+            }
+        });
+        typeOkayPanel.add(okay);
+
+
+
+//        System.out.println("\nNEW ROUND");
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
+//        System.out.println("\nFor this round, you are playing " + type.getName());
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
+//
+//
+//        if(type.getName().equals("RightAnswer")){
+//
+//            System.out.println("\nHow to play RightAnswer: Choose the answer you believe is correct and if you are right you win 1000 points.");
+//        }
+//        else if(type.getName().equals("Bet")){
+//
+//            System.out.println("\nHow to play Bet: You choose a bet amount (250/500/750/1000). " +
+//                    "If you answer the question correctly you get the points you bet. " +
+//                    "If you answer wrong you lose the bet amount from your points. ");
+//
+//        }else if(type.getName().equals("Timer")){
+//            //TODO na symplhrwthe
+//        }else if(type.getName().equals("QuickAnswer")){
+//            ////// TODO na symplhrvthei
+//        }else { // Thermometer!
+//            ///// TODO na symplhrwthei!
+//        }
 
     }
+
+    /**
+     * Function announcingCategory accepts a Questions type object and announces the category of the question
+     * to the player.
+     * @param question the question about to be asked
+     */
+    public void announcingCategory(Questions question){
+        //Turn off previous panels
+
+
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            System.out.println("got interrupted!");
+//        }
+//        System.out.println("\nCategory: " + question.getCategory());
+
+    }
+
 
     /**
      * This void function accepts a Questions type object and prints the question and the four possible answers.

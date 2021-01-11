@@ -21,9 +21,9 @@ import java.util.TimerTask;
  */
 
 public class UserInteraction implements KeyListener {
-    private Game game;
-    private ArrayList<Player> players;
-    private int numberOfPlayers;
+    private Game game = new Game();
+    private ArrayList<Player> players = new ArrayList<>();
+    private int numberOfPlayers = 0;
     private int rounds = 1;
     private int questions = 1;
     Scanner input = new Scanner(System.in);
@@ -32,8 +32,8 @@ public class UserInteraction implements KeyListener {
     private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
     private JPanel NamePanelText, NamePanel, readyPanel, letsGoPanel;
     private JPanel RoundNumberPanel, QuestionNumberPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
-    String answer1, answer2;
-    ArrayList<String> answers;
+    private String answer1, answer2;
+    private ArrayList<String> answers = new ArrayList<>();
 
     public UserInteraction(){
 

@@ -28,9 +28,9 @@ public class Game {
      * Method setPlayerList sets the playerList and loads the files by calling the gameStarted method
      * @param playerList the arrayList that contains the players for this game
      */
-    public void setPlayerList(ArrayList <Player> playerList){
+    public void setPlayerList(ArrayList<Player> playerList){
         this.playerList = playerList;
-        scores.gameStarted();
+        //scores.gameStarted();
     }
     public ArrayList <Player> getPlayerList(){
         return playerList;
@@ -263,7 +263,7 @@ public class Game {
         boolean play = true;
        // Scanner input = new Scanner(System.in);
         Game b = new Game();
-//        UserInteraction a = new UserInteraction();
+        UserInteraction a = new UserInteraction();
 
 
 //        while(play){

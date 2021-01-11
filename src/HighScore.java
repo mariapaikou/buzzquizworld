@@ -18,13 +18,14 @@ public class HighScore {
 
     }
 
-    public void gameStarted(ArrayList<Player> players){
-
-        if(players.size() > 1) {
-            loadTotalWinsFromFile(twoPlayerModeFile);
-        }else if(players.size() == 1){
+    public void gameStarted(){
             loadHighestScoresFromFile(onePlayerModeFile);
-        }
+            loadTotalWinsFromFile(twoPlayerModeFile);
+//        if(players.size() > 1) {
+//            loadTotalWinsFromFile(twoPlayerModeFile);
+//        }else if(players.size() == 1){
+//            loadHighestScoresFromFile(onePlayerModeFile);
+//        }
 
     }
 

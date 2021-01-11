@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -14,19 +15,22 @@ import java.util.Scanner;
 
 public class Game {
     private ArrayList <Player> playerList;
-    private final ArrayList<Questions> allQuestions;
+    private ArrayList<Questions> allQuestions;
     private static int howManyRounds = 3;
-    private final static int numberOfQuestions = 5; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
-    private final UserInteraction display;
+    private  int numberOfQuestions = 5; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
+   // private final UserInteraction display;
     private Round round; // einai swsto to final???
     private ReadQuestionsFile readQuestionsFile;
+    private  HighScore scores;
+
 
     /**
-     * SETTERS AND GETTERS FOR THE GUI
-     * @param playerList
+     * Method setPlayerList sets the playerList and loads the files by calling the gameStarted method
+     * @param playerList the arrayList that contains the players for this game
      */
     public void setPlayerList(ArrayList <Player> playerList){
         this.playerList = playerList;
+        scores.gameStarted();
     }
     public ArrayList <Player> getPlayerList(){
         return playerList;
@@ -36,6 +40,14 @@ public class Game {
     }
     public int getNumberOfQuestions(){
         return numberOfQuestions;
+    }
+    public void setHowManyRounds(int howManyRounds){this.howManyRounds = howManyRounds;}
+    public void setNumberOfQuestions(int numberOfQuestions){this.numberOfQuestions = numberOfQuestions;}
+    public List<Player> getHighScores(){
+        return scores.getHighestScores();
+    }
+    public ArrayList<Player> getTotalWins(){
+        return scores.getTotalWins();
     }
 
 /**
@@ -52,16 +64,17 @@ public class Game {
 
     public Game(){
 
-        display = new UserInteraction();
+       // display = new UserInteraction();
 
-        int howManyPlayers = display.HowManyOfYou();
+       // int howManyPlayers = display.HowManyOfYou();
 
-        playerList = display.God(howManyPlayers);
+       // playerList = display.God(howManyPlayers);
 //        for (int i = howManyPlayers; i > 0; i--) {
 //            playerList.add(display.God());
 //        }
         readQuestionsFile = new ReadQuestionsFile();
         allQuestions = readQuestionsFile.loadQuestions("questions.text.txt");
+        scores = new HighScore("highscores.dat","totalwins.dat");
         round = new Round();
 
     }
@@ -70,75 +83,102 @@ public class Game {
     public ArrayList<Player> getPlayerList() { return playerList; }
  */
 
+//    /**
+//     * Function PlayTheGame starts off by calling the fillAllQuestions method which fills the ArrayList with
+//     * Questions objects which then randomizes with the randomizeQuestions method. It has a while loop that controls
+//     * the number of rounds. Each time it creates a Round object and a type that is randomly chosen by the Round objects method,
+//     * getRandomType. Then it sets the type object's player list to the list that Game has. A while loop is used to control the amount
+//     * of questions that will be asked for the round. It prints the questions one by one, accepts the answers from the
+//     * players and checks if they are correct. Then it adjusts the status of the players, displays the correct answer and the winners
+//     * and changes their points.
+//     */
+//    public void PlayTheGame(){
+//
+//       // fillAllQuestions();
+//      //  randomizeQuestions();
+//        int questionNum = 0;
+//
+//        while(howManyRounds > 0){
+//
+//            int num = numberOfQuestions;
+//            //Round round = new Round(); // to ebala ston consturctor kai nomizw doyleysei swsta!
+//
+//           // Type type = round.getRandomType();
+//          //  type.setPlayersList(playerList);
+//
+//            while (num > 0){
+//
+//                display.announcingTheType(type);
+//                display.announcingCategory(allQuestions.get(questionNum));
+//                setTypesInitialBehaviour(type);
+//                display.askTheQuestion(allQuestions.get(questionNum));
+//
+//                for (Player player : playerList){
+//                    String answer = display.getAnAnswer(player);
+//                    //String answer = getPlayersAnswer(player,questionNum);
+//
+//                    if (answer.equals(allQuestions.get(questionNum).getCorrectAnswer())){
+//                        player.setStatus(true);
+//                    }
+//
+//                }
+//
+//                display.correctAnswer(allQuestions.get(questionNum));
+//                display.whoWon(playerList);
+//                type.changePoints();
+//                setTypeInitialStatus(type);
+//               // defaultfyPlayersStatus(); ginetai mesa stis changePoints!
+//                questionNum++;
+//                num--;
+//
+//            }
+//            display.showRoundScores(playerList);
+//            howManyRounds--;
+//        }
+//        display.finalScores(playerList);
+//        howManyRounds = 3; //mhpws prepei na ginei stathera gia eykolia synthrhshs!
+//        initializePlayersScore();
+//
+//    }
+
     /**
-     * Function PlayTheGame starts off by calling the fillAllQuestions method which fills the ArrayList with
-     * Questions objects which then randomizes with the randomizeQuestions method. It has a while loop that controls
-     * the number of rounds. Each time it creates a Round object and a type that is randomly chosen by the Round objects method,
-     * getRandomType. Then it sets the type object's player list to the list that Game has. A while loop is used to control the amount
-     * of questions that will be asked for the round. It prints the questions one by one, accepts the answers from the
-     * players and checks if they are correct. Then it adjusts the status of the players, displays the correct answer and the winners
-     * and changes their points.
+     * Method getRandomType returns a random type of game
+     * @return Type
      */
-    public void PlayTheGame(){
-//       try {
-//           display.LetsGo();
-//       }catch(InterruptedException e) {
-//            System.out.println("got interrupted!");
-//       }
-       // fillAllQuestions();
-        randomizeQuestions(allQuestions);
-        int questionNum = 0;
 
-        while(howManyRounds > 0){
 
-            int num = numberOfQuestions;
-            //Round round = new Round(); // to ebala ston consturctor kai nomizw doyleysei swsta!
-
-            Type type = round.getRandomType();
-            type.setPlayersList(playerList);
-
-            while (num > 0){
-
-                display.announcingTheType(type);
-                display.announcingCategory(allQuestions.get(questionNum));
-                setTypesInitialBehaviour(type);
-                display.askTheQuestion(allQuestions.get(questionNum));
-
-                for (Player player : playerList){
-                    String answer = display.getAnAnswer(player);
-                    //String answer = getPlayersAnswer(player,questionNum);
-
-                    if (answer.equals(allQuestions.get(questionNum).getCorrectAnswer())){
-                        player.setStatus(true);
-                    }
-
-                }
-
-                display.correctAnswer(allQuestions.get(questionNum));
-                display.whoWon(playerList);
-                type.changePoints();
-                setTypeInitialStatus(type);
-               // defaultfyPlayersStatus(); ginetai mesa stis changePoints!
-                questionNum++;
-                num--;
-
-            }
-            display.showRoundScores(playerList);
-            howManyRounds--;
-        }
-        display.finalScores(playerList);
-        howManyRounds = 3; //mhpws prepei na ginei stathera gia eykolia synthrhshs!
-        initializePlayersScore();
-
+    public Type getRandomType(){
+        Type type = round.getRandomType();
+        type.setPlayersList(playerList);
+        return type;
     }
 
     /**
-     * Function getPlayersAnswer calls UserInteraction method getAnswer to get an answer to the question asked and checks
-     * if answer is an acceptable value by calling UserInteractions method acceptableAnswer.
-     * @param player
-     * @param questionNum
-     * @return answer String value that contains player's answer to the question asked
+     * Method getNewQuestion returns the question located at the i position of the allQuestions array
+     * @param i the position in witch the method will find the question
+     * @return Question
      */
+    public Questions getNewQuestion(int i){
+        return allQuestions.get(i);
+    }
+
+    /**
+     * Method changePoints calls the right changePoints method in order to change Players points after every question
+     * @param type is te type that the changePoints is going to use
+     */
+    private void changePoints(Type type){
+        type.changePoints();
+    }
+
+
+//
+//    /**
+//     * Function getPlayersAnswer calls UserInteraction method getAnswer to get an answer to the question asked and checks
+//     * if answer is an acceptable value by calling UserInteractions method acceptableAnswer.
+//     * @param player
+//     * @param questionNum
+//     * @return answer String value that contains player's answer to the question asked
+//     */
 // NO NEED
 //     private String getPlayersAnswer(Player player, int questionNum){
 //
@@ -155,29 +195,25 @@ public class Game {
 
 
     /**
-     * Function setTypesInitialBehaviour gets as parameter a Type object and checks if it is an instance of Bet/........
-     * Then it sets the initialBehaviour for each type of game.
-     * For Bet it calls UserInteraction method betPoints to get betPoints from the player and then it calls Bet's method
-     * setPoints to initialize player's betpoints for this question.
-     * @param type a type object created by playTheGame that represents the type of game being played at the moment.
+     * Function setBetInitialBehaviour gets as parameter a Type object and checks if it is an instance of Bet/........
+     * Then it sets the initialBehaviour for each bet type.
+     * It calls Bet's method setPoints to initialize player's betPoints for this question.
+     * @param type a type object that represents the type of game being played at the moment.
+     * @param bets an int array that contains the players bet in the same order as they are placed in the playerList
      */
-    private void setTypesInitialBehaviour(Type type) {
+    public void setBetInitialBehaviour(Type type, int [] bets) {
 
         if (type instanceof Bet) {
-            for (Player player : playerList) {
-                int points = display.betPoints(player);
+            for (int i = 0; i < playerList.size(); i++) {
 
-//                while (points != 250 && points != 500 && points != 750 && points != 1000) {
-//                    points = display.newBetPoints(player);
-//                }
-                ((Bet) type).setPoints(points);
+                ((Bet) type).setPoints(bets[i]);
             }
-        }else if (type instanceof Timer) {
-            // tha friaxnoyme to Timer antikeimeno!!!
-            //TODO mhpws prepei na einai mesa sthn Timer? h sthn UserIneraction!!!!
+//        }else if (type instanceof Timer) {
+//            // tha friaxnoyme to Timer antikeimeno!!!
+//            //TODO mhpws prepei na einai mesa sthn Timer? h sthn UserIneraction!!!!
+//        }
         }
     }
-
 
     /**
      * Function setTypeInitialStatus gets as parameter a Type object and checks if it is an instance of Bet/..........
@@ -185,7 +221,7 @@ public class Game {
      * For Bet it initialize position to 0
      * @param type a type object created by playTheGame that represents the type of game being played at the moment.
      */
-    private void setTypeInitialStatus(Type type){
+    public void setTypeInitialStatus(Type type){
 
         if(type instanceof Bet){
             ((Bet) type).initializePositions();
@@ -199,7 +235,7 @@ public class Game {
      * Function initializePlayersScore is a void function that sets every players score back to 0 by calling Player's
      * method initializePlayersScore.
      */
-    private void initializePlayersScore(){
+    public void initializePlayersScore(){
 
         for(Player player : playerList){
             player.initializeScore();
@@ -208,51 +244,11 @@ public class Game {
     }
 
 
-
-
-
     /**
-     * Temporary method fillAllQuestions that creates Questions objects and adds them to the ArrayList.
-     */
-    private void fillAllQuestions(){
-
-//        Questions a = new Questions("Which nut is used to make dynamite?", "Peanuts", "Walnuts", "Pine nuts", "Almonds", "Peanuts", "Food", "null");
-//        allQuestions.add(a);
-//
-//        Questions b = new Questions("When was the band System of a Down formed?", "1988", "1987", "1990", "1992", "1988", "Music", "null");
-//        allQuestions.add(b);
-//
-//        Questions c = new Questions("How many films have Al Pacino and Robert De Niro starred in together?", "10", "6", "2", "4", "4", "Films", "null");
-//        allQuestions.add(c);
-//
-//        Questions d = new Questions("Who invented Coca-Cola?", "John Pemberton", "Asa Griggs Candler", "Charles Elmer Hires", "John Matthews", "John Pemberton", "Food", "null");
-//        allQuestions.add(d);
-//
-//        Questions e = new Questions("On an email, what does \"CC\" stand for?", "Carbon Copy", "Course Corrected", "Check Core", "Can't Complete", "Carbon Copy", "Technology", "null");
-//        allQuestions.add(e);
-//
-//        Questions f = new Questions("Which of these social media platforms was launched in 2010? ", "Twitter", "Myspace", "Facebook", "Instagram", "Instagram", "Technology", "null");
-//        allQuestions.add(f);
-//
-//        Questions g = new Questions("What year was the first Toy Story film released in cinemas?", "1995", "1999", "2001", "1992", "1995", "Films", "null");
-//        allQuestions.add(g);
-//
-//        Questions h = new Questions("Which computer programming language was known for its \"turtle graphics\"?", "Logo", "Python", "COBOL", "C++", "Logo","Technology", "null");
-//        allQuestions.add(h);
-//
-//        Questions i = new Questions("How many moons does Mars have in all?", "0", "5", "8", "2", "2","Science", "null");
-//        allQuestions.add(i);
-//
-//        Questions j = new Questions("What is the largest organ in the human body?", "Heart", "Large Intestine", "Lungs", "Skin", "Skin", "Science", "null");
-//        allQuestions.add(j);
-
-    }
-
-    /**
-     * Function randomizeQuestions accepts allQuestions and shuffles the ArrayList.
+     * Method randomizeQuestions  shuffles the allQuestions ArrayList.
      * @value allQuestions is the ArrayList that contains all the Questions objects available.
      */
-    private void randomizeQuestions(ArrayList<Questions> allQuestions){
+    public void randomizeQuestions(){
         Collections.shuffle(allQuestions);
     }
 
@@ -272,8 +268,8 @@ public class Game {
 
 //        while(play){
 
-            b.PlayTheGame();
-            //TODO na baloyme na kaleitai h replay !!!!!
+          //  b.PlayTheGame();
+            //TODO na paei sthn userInteraction
 //            String answer = a.replay();
 
 //            if(answer.equals("no")) {
@@ -285,16 +281,4 @@ public class Game {
     }
 
 }
-// SKOYPIDIA!!!!!!!!!!!!!!!!!
-//
-//    /**
-//     * Function defaultfyPlayersStatus is a void function that sets players status back to false by calling Player's method
-//     * defaultfyStatus
-//     */
-//    private void defaultfyPlayersStatus(){
-//
-//        for (Player player : playerList){
-//            player.defaultfyStatus();
-//        }
-//
-//    }
+

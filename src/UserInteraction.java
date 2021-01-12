@@ -682,10 +682,8 @@ public class UserInteraction  { //implements KeyListener
     /**
      * Function announcingTheType accepts a Type object and prints a message that announces the type name
      * through the getName method. Then it explains the way you play the game depending on the type.
-     * @value type is a Type of game that is randomly chosen in an other class.
      */
     public void announcingTheType(){
-        //Turn off previous panels
         RoundNumberPanel.setVisible(false);
         ROkayPanel.setVisible(false);
 
@@ -747,8 +745,8 @@ public class UserInteraction  { //implements KeyListener
         });
         typeOkayPanel.add(okay);
 
-
     }
+
     /**
      * QUESTION j
      */
@@ -803,6 +801,8 @@ public class UserInteraction  { //implements KeyListener
             questions = 1;
             roundNumber();
         }
+
+
     }
 
     /**
@@ -810,7 +810,6 @@ public class UserInteraction  { //implements KeyListener
      * to the player.
      */
     public void announcingCategory(){
-        //Turn off previous panels
         QuestionNumberPanel.setVisible(false);
         QOkayPanel.setVisible(false);
 
@@ -838,7 +837,11 @@ public class UserInteraction  { //implements KeyListener
         goButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(type instanceof Bet){
+                    betPoints();
+                }else {
                     askTheQuestion();
+                }
             }
         });
         goButtonPanel = new JPanel();
@@ -850,6 +853,7 @@ public class UserInteraction  { //implements KeyListener
 
     }
 
+
     /**
      * BetPoints function, asks the player to bet and saves the amount in an int variable.
      *
@@ -857,6 +861,8 @@ public class UserInteraction  { //implements KeyListener
      */
     public void betPoints() {
         //turn off previous panels
+        announcingCategoryPanel.setVisible(false);
+        goButtonPanel.setVisible(false);
 
         Player player = players.get(0);
 
@@ -911,7 +917,16 @@ public class UserInteraction  { //implements KeyListener
             public void actionPerformed(ActionEvent e) {
                 player.setBet(250);
                 System.out.println(player.getNickname() + " " + player.getBet());
-                if(players.size() == 2){betPoints2();}
+                if(players.size() == 2){
+                    betPoints2();
+                }else{
+                    betPointsPanel.setVisible(false);
+                    bet250.setVisible(false);
+                    bet500.setVisible(false);
+                    bet750.setVisible(false);
+                    bet1000.setVisible(false);
+                    askTheQuestion();
+                }
             }
         });
         bet250.add(bet250Button);
@@ -927,7 +942,16 @@ public class UserInteraction  { //implements KeyListener
             public void actionPerformed(ActionEvent e) {
                 player.setBet(500);
                 System.out.println(player.getNickname() + " " + player.getBet());
-                if(players.size() == 2){betPoints2();}
+                if(players.size() == 2){
+                    betPoints2();
+                }else{
+                    betPointsPanel.setVisible(false);
+                    bet250.setVisible(false);
+                    bet500.setVisible(false);
+                    bet750.setVisible(false);
+                    bet1000.setVisible(false);
+                    askTheQuestion();
+                }
             }
         });
         bet500.add(bet500Button);
@@ -943,7 +967,16 @@ public class UserInteraction  { //implements KeyListener
             public void actionPerformed(ActionEvent e) {
                 player.setBet(750);
                 System.out.println(player.getNickname() + " " + player.getBet());
-                if(players.size() == 2){betPoints2();}
+                if(players.size() == 2){
+                    betPoints2();
+                }else{
+                    betPointsPanel.setVisible(false);
+                    bet250.setVisible(false);
+                    bet500.setVisible(false);
+                    bet750.setVisible(false);
+                    bet1000.setVisible(false);
+                    askTheQuestion();
+                }
             }
         });
         bet750.add(bet750Button);
@@ -959,7 +992,16 @@ public class UserInteraction  { //implements KeyListener
             public void actionPerformed(ActionEvent e) {
                 player.setBet(1000);
                 System.out.println(player.getNickname() + " " + player.getBet());
-                if(players.size() == 2){betPoints2();}
+                if(players.size() == 2){
+                    betPoints2();
+                }else{
+                    betPointsPanel.setVisible(false);
+                    bet250.setVisible(false);
+                    bet500.setVisible(false);
+                    bet750.setVisible(false);
+                    bet1000.setVisible(false);
+                    askTheQuestion();
+                }
             }
         });
         bet1000.add(bet1000Button);
@@ -1007,7 +1049,12 @@ public class UserInteraction  { //implements KeyListener
             public void actionPerformed(ActionEvent e) {
                 players.get(1).setBet(250);
                 System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
-                //next method
+                betPointsPanel2.setVisible(false);
+                bet250.setVisible(false);
+                bet500.setVisible(false);
+                bet750.setVisible(false);
+                bet1000.setVisible(false);
+                askTheQuestion();
             }
         });
         bet250.add(bet250Button);
@@ -1023,7 +1070,12 @@ public class UserInteraction  { //implements KeyListener
             public void actionPerformed(ActionEvent e) {
                 players.get(1).setBet(500);
                 System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
-                //next method
+                betPointsPanel2.setVisible(false);
+                bet250.setVisible(false);
+                bet500.setVisible(false);
+                bet750.setVisible(false);
+                bet1000.setVisible(false);
+                askTheQuestion();
             }
         });
         bet500.add(bet500Button);
@@ -1039,7 +1091,12 @@ public class UserInteraction  { //implements KeyListener
             public void actionPerformed(ActionEvent e) {
                 players.get(1).setBet(750);
                 System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
-                //next method
+                betPointsPanel2.setVisible(false);
+                bet250.setVisible(false);
+                bet500.setVisible(false);
+                bet750.setVisible(false);
+                bet1000.setVisible(false);
+                askTheQuestion();
             }
         });
         bet750.add(bet750Button);
@@ -1055,11 +1112,17 @@ public class UserInteraction  { //implements KeyListener
             public void actionPerformed(ActionEvent e) {
                 players.get(1).setBet(1000);
                 System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
-                //next method
+                betPointsPanel2.setVisible(false);
+                bet250.setVisible(false);
+                bet500.setVisible(false);
+                bet750.setVisible(false);
+                bet1000.setVisible(false);
+                askTheQuestion();
             }
         });
         bet1000.add(bet1000Button);
     }
+
 
     /**
      * This void function accepts a Questions type object and prints the question and the four possible answers.

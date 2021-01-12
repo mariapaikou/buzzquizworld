@@ -65,7 +65,7 @@ public class Game {
 
     public Game(){
         readQuestionsFile = new ReadQuestionsFile();
-        allQuestions = readQuestionsFile.loadQuestions("questions.text.txt");
+        allQuestions = readQuestionsFile.loadQuestions("testQuestion.txt");
         scores = new HighScore("highscores.dat","totalwins.dat");
         round = new Round();
 

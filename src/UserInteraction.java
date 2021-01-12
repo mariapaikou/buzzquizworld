@@ -4,10 +4,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import javax.swing.Timer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -1048,7 +1045,6 @@ public class UserInteraction  { //implements KeyListener
      * This void function accepts a Questions type object and prints the question and the four possible answers.
      */
     public void askTheQuestion(){
-
         announcingCategoryPanel.setVisible(false);
         goButtonPanel.setVisible(false);
 
@@ -1063,6 +1059,7 @@ public class UserInteraction  { //implements KeyListener
 
         label.setLayout(new FlowLayout(FlowLayout.CENTER));
         // elegxow gia to an h eikona einai yparkth
+        System.out.println(questionImageName.equals("null"));
         if(!(questionImageName.equals("null"))){
             label.setIcon(new ImageIcon(questionImageName));
         }
@@ -1070,12 +1067,12 @@ public class UserInteraction  { //implements KeyListener
 
         centerPanel.add(label);
         centerPanel.setVisible(true);
-        con.add(centerPanel);
+        con.add(centerPanel, BorderLayout.CENTER);
 
 
         questionPanel = new JPanel();
         questionPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        questionPanel.setBounds(100,260,600,50);
+        questionPanel.setBounds(0,260,800,50);
         questionPanel.setBackground(Color.pink);
 
         answers = question.getAnswers();
@@ -1084,7 +1081,8 @@ public class UserInteraction  { //implements KeyListener
         labelQ.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelQ.setHorizontalAlignment(JLabel.LEFT);
         labelQ.setText(question.getQuestion());
-        labelQ.setFont(new Font("Carlito",Font.PLAIN,10));
+        labelQ.setFont(new Font("Carlito",Font.PLAIN,30));
+        labelQ.setSize(800,50);
         labelQ.setVisible(true);
         questionPanel.add(labelQ);
 
@@ -1149,63 +1147,60 @@ public class UserInteraction  { //implements KeyListener
         con.add(answerPanelD);
 
 
+        JLabel instructionLabel = new JLabel("BUTTONS FOR Player 1: A->Q,B->W,C->E,D->R BUTTONS FOR Player 2: A->U,B->I,C->O,D->P");
+        instructionLabel.setSize(800,110);
+        instructionLabel.setBackground(Color.BLACK);
+        instructionLabel.setFont(new Font("Carlito",Font.PLAIN,20));
+        instructionLabel.setForeground(Color.WHITE);
+
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.setBounds(100,0,800,110);
-        bottomPanel.setBackground(Color.PINK);
+        bottomPanel.setBounds(0,390,800,110);
+        bottomPanel.setBackground(Color.black);
+        bottomPanel.add(instructionLabel);
         con.add(bottomPanel);
 
-
+        frame.addKeyListener(new MyKeyListener());
+        frame.setVisible(false);
+        frame.setVisible(true);
     }
 
-//    @Override
-//    public void keyTyped(KeyEvent e) {
-//        //no need to implement
-//    }
-//
-//    @Override
-//    public void keyPressed(KeyEvent e) {
-//        System.out.println("inside key listerner");
-//        int key = e.getKeyCode();
-//       // if(!answers.isEmpty()){
-//            if(key == KeyEvent.VK_Q){
-//                answer1 = answers.get(0);
-//                System.out.println("inside q button");
-//            }else if(key == KeyEvent.VK_W){
-//                answer1 = answers.get(1);
-//                System.out.println("inside w button");
-//            }else if(key == KeyEvent.VK_E){
-//                answer1 = answers.get(2);
-//                System.out.println("inside e button");
-//            }else if(key == KeyEvent.VK_R){
-//                answer1 = answers.get(3);
-//                System.out.println("inside r button");
+    class MyKeyListener extends KeyAdapter {
+
+        public void keyPressed(KeyEvent event){
+//            if(event.getKeyCode() == KeyEvent.VK_Q){
+//                System.out.println("q was pressed");
 //            }
-//            if(game.getPlayerList().size() == 2){
-//                if(key == KeyEvent.VK_U){
-//                    answer2 = answers.get(0);
-//                    System.out.println("inside u button");
-//                }else if(key == KeyEvent.VK_I){
-//                    answer2 = answers.get(1);
-//                    System.out.println("inside i button");
-//                }else if(key == KeyEvent.VK_O){
-//                    answer2 = answers.get(2);
-//                    System.out.println("inside o button");
-//                }else if(key == KeyEvent.VK_P){
-//                    answer2 = answers.get(3);
-//                    System.out.println("inside p button");
-//                }
-//            }
-//       // }
-//      //  answers.clear();
-//        System.out.println(answer1);
-//        System.out.println(answer2);
-//    }
 //
-//    @Override
-//    public void keyReleased(KeyEvent e) {
-//        //no need to implement
-//    }
+//        }
+            System.out.println("inside myKeyListener");
+            int key = event.getKeyCode();
+            if(key == KeyEvent.VK_Q){
+                answer1 = answers.get(0);
+            }else if(key == KeyEvent.VK_W){
+                answer1 = answers.get(1);
+            }else if(key == KeyEvent.VK_E){
+                answer1 = answers.get(2);
+            }else if(key == KeyEvent.VK_R){
+                answer1 = answers.get(3);
+            }else if(key == KeyEvent.VK_U){
+                answer2 = answers.get(0);
+            }else if(key == KeyEvent.VK_I){
+                answer2 = answers.get(1);
+            }else if(key == KeyEvent.VK_O){
+                answer2 = answers.get(2);
+            }else if(key == KeyEvent.VK_P){
+                answer2 = answers.get(3);
+            }
+
+            System.out.println(answer1);
+            System.out.println(answer2);
+//        if(!answer1.equals(null) && !answer2.equals(null)){
+//          //TODO elegxos gia to an phra kai tis duo apanthseis gia na kalw thn correctAnswer!
+//        }
+        }
+    }
+
 
     /**
      * This function prints the correct answer to the question asked previously.

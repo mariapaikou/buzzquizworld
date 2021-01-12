@@ -828,9 +828,6 @@ public class UserInteraction  { //implements KeyListener
 
         con.add(goButtonPanel);
 
-
-
-
     }
 
     /**

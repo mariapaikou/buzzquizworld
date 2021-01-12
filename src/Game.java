@@ -117,7 +117,7 @@ public class Game {
      * Method changePoints calls the right changePoints method in order to change Players points after every question
      * @param type is te type that the changePoints is going to use
      */
-    private void changePoints(Type type){
+    public void changePoints(Type type){
         type.changePoints();
     }
 

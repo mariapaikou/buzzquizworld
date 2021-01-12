@@ -1165,7 +1165,7 @@ public class UserInteraction  { //implements KeyListener
         labelQ.setHorizontalAlignment(JLabel.LEFT);
         labelQ.setText(question.getQuestion());
         labelQ.setFont(new Font("Carlito",Font.PLAIN,30));
-        labelQ.setSize(800,50);
+        labelQ.setSize(800,50 );
         labelQ.setVisible(true);
         questionPanel.add(labelQ);
 
@@ -1278,9 +1278,21 @@ public class UserInteraction  { //implements KeyListener
 
             System.out.println(answer1);
             System.out.println(answer2);
-//        if(!answer1.equals(null) && !answer2.equals(null)){
-//          //TODO elegxos gia to an phra kai tis duo apanthseis gia na kalw thn correctAnswer!
-//        }
+            if(numberOfPlayers == 1 && answer1!= null){
+
+                ArrayList<String> answers = new ArrayList<>();
+                answers.add(answer1);
+                game.setStatuses(answers,question.getCorrectAnswer());
+                game.changePoints(type);
+                correctAnswer();
+            }else if(numberOfPlayers == 2 && answer1!= null && answer2 != null){
+
+                ArrayList<String> answers = new ArrayList<>();
+                answers.add(answer1);
+                answers.add(answer2);
+                game.setStatuses(answers,question.getCorrectAnswer());
+                game.changePoints(type);
+            }
         }
     }
 
@@ -1290,6 +1302,14 @@ public class UserInteraction  { //implements KeyListener
      */
     public void correctAnswer(){
         //Turn off previous panels
+        bottomPanel.setVisible(false);
+        answerPanelA.setVisible(false);
+        answerPanelB.setVisible(false);
+        answerPanelC.setVisible(false);
+        answerPanelD.setVisible(false);
+        centerPanel.setVisible(false);
+        questionPanel.setVisible(false);
+
         correctAnswerTextPanel = new JPanel();
         correctAnswerTextPanel.setBackground(Color.BLACK);
         correctAnswerTextPanel.setBounds(50, 50, 700, 200);
@@ -1320,10 +1340,12 @@ public class UserInteraction  { //implements KeyListener
 
         correctAnswerPanel.setVisible(false);
 
-        Timer timer2 = new Timer(2000, e -> {
+        timer2 = new Timer(2000, e -> {
+            timer1.stop();
+            timer2.stop();
             showScores();
         });
-        Timer timer1 = new Timer(2000, e -> {
+        timer1 = new Timer(2000, e -> {
             correctAnswerPanel.setVisible(true);
             timer2.start();
         });
@@ -1333,6 +1355,11 @@ public class UserInteraction  { //implements KeyListener
     }
 
     public void showScores(){
+        correctAnswerPanel.setVisible(false);
+        correctAnswerTextPanel.setVisible(false);
+
+
+        System.out.println("inside show scores");
         String score = null;
         String score2 = null;
         if(numberOfPlayers == 1){

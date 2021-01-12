@@ -15,7 +15,7 @@ public class Player implements Serializable {
     private String nickname;
     private int score;
     private boolean status;//0 if answered correctly, 1 if not
-    private int clickTime; // int για να αποθηκευουμε κατευθιαν millisecond!  1 sec = 1000 millisecond!
+    private long clickTime; // int για να αποθηκευουμε κατευθιαν millisecond!  1 sec = 1000 millisecond!
     private int bet;
     transient private Thread myThread;
 
@@ -70,8 +70,8 @@ public class Player implements Serializable {
         return status;
     }
 
-    public void setClickTime(int time){this.clickTime = time;}
-    public int getClickTime(){return clickTime;}
+    public void setClickTime(long time){this.clickTime = time;}
+    public long getClickTime(){return clickTime;}
 
     public void setBet(int bet){this.bet = bet;}
     public int getBet(){return bet;}

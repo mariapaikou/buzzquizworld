@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 
 public class Game {
-    private ArrayList <Player> playerList;
+//    private ArrayList <Player> playerList;
     private ArrayList<Questions> allQuestions;
     private static int howManyRounds = 3;
     private  int numberOfQuestions = 5; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
@@ -25,17 +25,17 @@ public class Game {
     private int questionPosition = 0;
 
 
-    /**
-     * Method setPlayerList sets the playerList and loads the files by calling the gameStarted method
-     * @param playerList the arrayList that contains the players for this game
-     */
-    public void setPlayerList(ArrayList<Player> playerList){
-        this.playerList = playerList;
-        scores.gameStarted();
-    }
-    public ArrayList <Player> getPlayerList(){
-        return playerList;
-    }
+//    /**
+//     * Method setPlayerList sets the playerList and loads the files by calling the gameStarted method
+//     * @param playerList the arrayList that contains the players for this game
+//     */
+//    public void setPlayerList(ArrayList<Player> playerList){
+//        this.playerList = playerList;
+//        scores.gameStarted();
+//    }
+//    public ArrayList <Player> getPlayerList(){
+//        return playerList;
+//    }
     public int getHowManyRounds(){
         return howManyRounds;
     }
@@ -77,7 +77,7 @@ public class Game {
      */
 
 
-    public Type getRandomType(){
+    public Type getRandomType(ArrayList<Player> playerList){
         Type type;
 
         if(playerList.size() == 1){
@@ -99,7 +99,7 @@ public class Game {
         return allQuestions.get(questionPosition);
     }
 
-    public void setStatuses(ArrayList<String> answers, String correctAnswer){
+    public void setStatuses(ArrayList<String> answers, String correctAnswer, ArrayList<Player> playerList){
         if (playerList.size() == 1){
             if(answers.get(0).equals(correctAnswer)){
                 playerList.get(0).setStatus(true);
@@ -114,6 +114,32 @@ public class Game {
     }
 
     /**
+     *
+     * @param clickTimes
+     * @param startTime
+     * @param type
+     */
+
+    public void setTime(long[] clickTimes, long startTime, Type type, ArrayList<Player> playerList){
+        if(playerList.size() > 1){
+            if(type instanceof StopTheTimer){
+                for(int i = 0; i < playerList.size(); i++ ){
+                    long timeLeft = 5000 - clickTimes[i];
+                    playerList.get(i).setClickTime(timeLeft);
+                }
+
+
+            }else if (type instanceof QuickAnswer || type instanceof  Thermometer){
+                for(int i = 0; i < playerList.size(); i++){
+                    playerList.get(i).setClickTime(startTime - clickTimes[i]);
+                }
+            }
+
+        }
+
+    }
+
+    /**
      * Method changePoints calls the right changePoints method in order to change Players points after every question
      * @param type is te type that the changePoints is going to use
      */
@@ -125,7 +151,7 @@ public class Game {
      * Function initializePlayersScore is a void function that sets every players score back to 0 by calling Player's
      * method initializePlayersScore.
      */
-    public void initializePlayersScore(){
+    public void initializePlayersScore(ArrayList<Player> playerList){
 
         for(Player player : playerList){
             player.initializeScore();

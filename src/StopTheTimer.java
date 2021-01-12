@@ -11,9 +11,10 @@ public class StopTheTimer extends Type {
 
             if (player.getStatus()) {
 
-                int timeLeft = player.getClickTime();
+                long timeLeft = player.getClickTime();
                 if (timeLeft != -1) {
-                    player.increaseScoreBy((int) (timeLeft * 0.2));
+                    //TODO edw prepei na upologizoume ton swsto xrono
+                    player.increaseScoreBy((int) ( timeLeft * 0.2));
                 }
 
             }

@@ -55,7 +55,8 @@ public class UserInteraction  { //implements KeyListener
     private JPanel highScoresButtonPanel, totalWinsButtonPanel, goButtonPanel;
     private JTextField nickname;
     private Timer timer1, timer2,timer3,timer4,timer5;
-    JLabel label,labelA, labelB, labelC, labelD, labelQ;
+    private JLabel label,labelA, labelB, labelC, labelD, labelQ;
+    private long startTime , endTime1, endTime2;
 
     public UserInteraction(){
         answer1 = new String();
@@ -419,7 +420,6 @@ public class UserInteraction  { //implements KeyListener
                 Player playerOne = new Player();
                 playerOne.setNickname(nickname.getText());
                 players.add(playerOne);
-                game.setPlayerList(players);
                 if(numberOfPlayers == 2){
                     NamePanelText.setVisible(false);
                     NamePanel.setVisible(false);
@@ -510,7 +510,6 @@ public class UserInteraction  { //implements KeyListener
                     Player playerOne = new Player();
                     playerOne.setNickname(nickname.getText());
                     players.add(playerOne);
-                    game.setPlayerList(players);
                     try {
                         NamePanelText.setVisible(false);
                         NamePanel.setVisible(false);
@@ -691,7 +690,7 @@ public class UserInteraction  { //implements KeyListener
         ROkayPanel.setVisible(false);
 
         //Get random type from game
-        type = game.getRandomType();
+        type = game.getRandomType(players);
 
         //Panel for the type
         TypePanel = new JPanel();
@@ -1249,54 +1248,90 @@ public class UserInteraction  { //implements KeyListener
         frame.addKeyListener(new MyKeyListener());
         frame.setVisible(false);
         frame.setVisible(true);
+        startTime = System.currentTimeMillis();
     }
 
     class MyKeyListener extends KeyAdapter {
 
         public void keyPressed(KeyEvent event){
-//            if(event.getKeyCode() == KeyEvent.VK_Q){
-//                System.out.println("q was pressed");
-//            }
-//
-//        }
-            System.out.println("inside myKeyListener");
-            int key = event.getKeyCode();
-            if(key == KeyEvent.VK_Q){
-                answer1 = answers.get(0);
-            }else if(key == KeyEvent.VK_W){
-                answer1 = answers.get(1);
-            }else if(key == KeyEvent.VK_E){
-                answer1 = answers.get(2);
-            }else if(key == KeyEvent.VK_R){
-                answer1 = answers.get(3);
-            }else if(key == KeyEvent.VK_U){
-                answer2 = answers.get(0);
-            }else if(key == KeyEvent.VK_I){
-                answer2 = answers.get(1);
-            }else if(key == KeyEvent.VK_O){
-                answer2 = answers.get(2);
-            }else if(key == KeyEvent.VK_P){
-                answer2 = answers.get(3);
-            }
 
-            System.out.println(answer1);
-            System.out.println(answer2);
+
+            int key = event.getKeyCode();
+             if(numberOfPlayers ==1){
+                 if(key == KeyEvent.VK_Q){
+                     endTime1 = System.currentTimeMillis();
+                     answer1 = answers.get(0);
+                 }else if(key == KeyEvent.VK_W){
+                     endTime1 = System.currentTimeMillis();
+                     answer1 = answers.get(1);
+                 }else if(key == KeyEvent.VK_E){
+                     endTime1 = System.currentTimeMillis();
+                     answer1 = answers.get(2);
+                 }else if(key == KeyEvent.VK_R){
+                     endTime1 = System.currentTimeMillis();
+                     answer1 = answers.get(3);
+                 }
+             }else if(numberOfPlayers == 2){
+                 if(key == KeyEvent.VK_Q){
+                     endTime1 = System.currentTimeMillis();
+                     answer1 = answers.get(0);
+                 }else if(key == KeyEvent.VK_W){
+                     endTime1 = System.currentTimeMillis();
+                     answer1 = answers.get(1);
+                 }else if(key == KeyEvent.VK_E){
+                     endTime1 = System.currentTimeMillis();
+                     answer1 = answers.get(2);
+                 }else if(key == KeyEvent.VK_R){
+                     endTime1 = System.currentTimeMillis();
+                     answer1 = answers.get(3);
+                 }else if(key == KeyEvent.VK_U){
+                     endTime2 = System.currentTimeMillis();
+                     answer2 = answers.get(0);
+                 }else if(key == KeyEvent.VK_I){
+                     endTime2 = System.currentTimeMillis();
+                     answer2 = answers.get(1);
+                 }else if(key == KeyEvent.VK_O){
+                     endTime2 = System.currentTimeMillis();
+                     answer2 = answers.get(2);
+                 }else if(key == KeyEvent.VK_P){
+                     endTime2 = System.currentTimeMillis();
+                     answer2 = answers.get(3);
+                 }
+             }
+
+
+
+
+            System.out.println(answer1);/////////////
+            System.out.println(answer2);/////////////
+
             if(numberOfPlayers == 1 && answer1!= null){
-                System.out.println("inside key list ifffffff");
                 ArrayList<String> answers = new ArrayList<>();
+                long [] times = new long[1];
+                times[0] = endTime1;
+
                 answers.add(answer1);
-                game.setStatuses(answers,question.getCorrectAnswer());
+                game.setStatuses(answers,question.getCorrectAnswer(), players);
                 answer1 = null;
+
                 game.changePoints(type);
+                game.setTime(times,startTime,type,players);
                 correctAnswer();
             }else if(numberOfPlayers == 2 && answer1!= null && answer2 != null){
-                System.out.println("inside key list elseeeeee ifffff");
                 ArrayList<String> answers = new ArrayList<>();
+                long [] times = new long[2];
+
+                times[0] = endTime1;
+                times[1] = endTime2;
+//                System.out.println("endTime1="+endTime1);
+//                System.out.println("endTime2="+endTime2);
+//                System.out.println(endTime2 > endTime1);
                 answers.add(answer1);
                 answers.add(answer2);
-                game.setStatuses(answers,question.getCorrectAnswer());
+                game.setStatuses(answers,question.getCorrectAnswer(),players);
                 answer1 = null;
                 answer2 = null;
+                game.setTime(times,startTime,type, players);
                 game.changePoints(type);
                 correctAnswer();
             }

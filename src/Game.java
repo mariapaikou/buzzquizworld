@@ -99,6 +99,20 @@ public class Game {
         return allQuestions.get(questionPosition);
     }
 
+    public void setStatuses(ArrayList<String> answers, String correctAnswer){
+        if (playerList.size() == 1){
+            if(answers.get(0).equals(correctAnswer)){
+                playerList.get(0).setStatus(true);
+            }
+        }else{
+            for(int i=0; i<playerList.size(); i++){
+                if(answers.get(i).equals(correctAnswer)){
+                    playerList.get(i).setStatus(true);
+                }
+            }
+        }
+    }
+
     /**
      * Method changePoints calls the right changePoints method in order to change Players points after every question
      * @param type is te type that the changePoints is going to use

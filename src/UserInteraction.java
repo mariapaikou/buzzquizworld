@@ -634,11 +634,7 @@ public class UserInteraction  { //implements KeyListener
      * ROUND i
      */
     public void roundNumber(){
-//        showStatusPanel1.setVisible(false);
-//        showStatusPanel2.setVisible(false);
-//        showScoreTextPanel.setVisible(false);
-//        showScorePanel1.setVisible(false);
-//        showScorePanel2.setVisible(false);
+        System.out.println("inside round number");
         //Turn off previous panel
         letsGoPanel.setVisible(false);
         con.remove(letsGoPanel);
@@ -692,7 +688,7 @@ public class UserInteraction  { //implements KeyListener
      * through the getName method. Then it explains the way you play the game depending on the type.
      */
     public void announcingTheType(){
-
+        System.out.println("inside announcing the type");
         RoundNumberPanel.setVisible(false);
         ROkayPanel.setVisible(false);
 
@@ -761,6 +757,7 @@ public class UserInteraction  { //implements KeyListener
      */
 
     public void questionNumber(){
+        System.out.println("inside question number!");
         TypePanel.setVisible(false);
         TypeExplanationPanel.setVisible(false);
         typeOkayPanel.setVisible(false);
@@ -819,6 +816,7 @@ public class UserInteraction  { //implements KeyListener
      * to the player.
      */
     public void announcingCategory(){
+        System.out.println("inside category");
         QuestionNumberPanel.setVisible(false);
         QOkayPanel.setVisible(false);
 
@@ -1137,6 +1135,7 @@ public class UserInteraction  { //implements KeyListener
      * This void function accepts a Questions type object and prints the question and the four possible answers.
      */
     public void askTheQuestion(){
+        System.out.println("inside ask the question");
         announcingCategoryPanel.setVisible(false);
         goButtonPanel.setVisible(false);
 
@@ -1256,13 +1255,14 @@ public class UserInteraction  { //implements KeyListener
         frame.setVisible(false);
         frame.setVisible(true);
         startTime = System.currentTimeMillis();
+
     }
 
     class MyKeyListener extends KeyAdapter {
 
         public void keyPressed(KeyEvent event){
 
-
+            System.out.println("inside acrion listener!");
             int key = event.getKeyCode();
              if(numberOfPlayers ==1){
                  if(key == KeyEvent.VK_Q){
@@ -1306,12 +1306,6 @@ public class UserInteraction  { //implements KeyListener
                  }
              }
 
-
-
-
-            System.out.println(answer1);/////////////
-            System.out.println(answer2);/////////////
-
             if(numberOfPlayers == 1 && answer1!= null){
                 ArrayList<String> answers = new ArrayList<>();
                 long [] times = new long[1];
@@ -1319,13 +1313,10 @@ public class UserInteraction  { //implements KeyListener
 
                 answers.add(answer1);
                 players = game.setStatuses(answers,question.getCorrectAnswer(), players);
-                for(Player player:players){
-                    System.out.println("indise keyListener now status is"+ player.getStatus());
-                }
                 answer1 = null;
-
                 game.changePoints(type);
                 game.setTime(times,startTime,type,players);
+                frame.removeKeyListener(this);
                 correctAnswer();
             }else if(numberOfPlayers == 2 && answer1!= null && answer2 != null){
                 ArrayList<String> answers = new ArrayList<>();
@@ -1333,9 +1324,6 @@ public class UserInteraction  { //implements KeyListener
 
                 times[0] = endTime1;
                 times[1] = endTime2;
-//                System.out.println("endTime1="+endTime1);
-//                System.out.println("endTime2="+endTime2);
-//                System.out.println(endTime2 > endTime1);
                 answers.add(answer1);
                 answers.add(answer2);
                 game.setStatuses(answers,question.getCorrectAnswer(),players);
@@ -1343,16 +1331,24 @@ public class UserInteraction  { //implements KeyListener
                 answer2 = null;
                 game.setTime(times,startTime,type, players);
                 game.changePoints(type);
+                frame.removeKeyListener(this);
                 correctAnswer();
             }
         }
     }
 
 
+
+
+
+
+
+
     /**
      * This function prints the correct answer to the question asked previously.
      */
     public void correctAnswer(){
+        System.out.println("inside correct Aswer");
         //Turn off previous panels
         bottomPanel.setVisible(false);
         answerPanelA.setVisible(false);
@@ -1393,12 +1389,17 @@ public class UserInteraction  { //implements KeyListener
         correctAnswerPanel.setVisible(false);
 
         timer2 = new Timer(2000, e -> {
+            System.out.println("inside timer2");
+            correctAnswerPanel.setVisible(false);
+            correctAnswerTextPanel.setVisible(false);
             timer1.stop();
             timer2.stop();
             showScores();
         });
         timer1 = new Timer(2000, e -> {
+            System.out.println("inside timer1");
             correctAnswerPanel.setVisible(true);
+            timer1.stop();
             timer2.start();
         });
 
@@ -1407,6 +1408,7 @@ public class UserInteraction  { //implements KeyListener
     }
 
     public void showScores(){
+        System.out.println("inside show scores");
         correctAnswerPanel.setVisible(false);
         correctAnswerTextPanel.setVisible(false);
 
@@ -1419,12 +1421,6 @@ public class UserInteraction  { //implements KeyListener
 
         score1 = players.get(0).getNickname() + ": " + players.get(0).getScore();
         status1 = players.get(0).getStatus();
-        System.out.println("inside showScores status1="+ status1);
-
-        for(Player player:players){
-            System.out.println("inside showScores players status is" + player.getStatus());
-            System.out.println("score now is" + player.getScore());
-        }
 
         System.out.println(status1);
 
@@ -1434,7 +1430,6 @@ public class UserInteraction  { //implements KeyListener
             answered2 = players.get(1).getNickname() + ", maybe next time!";
         }
         if(status1){
-            System.out.println("mphke sthn if!!!!!!!!!!!");
             answered1 = players.get(0).getNickname() + ", you guessed correctly!";
         }
         if(status2){
@@ -1511,17 +1506,22 @@ public class UserInteraction  { //implements KeyListener
             showScorePanel2.setVisible(false);
         }
 
-        timer1 = new Timer(2000, e -> {
+        timer3 = new Timer(2000, e -> {
+            System.out.println("inside timer3");
+            game.defaultifyPlayers(players);
             showStatusPanel1.setVisible(false);
             showStatusPanel2.setVisible(false);
             showScoreTextPanel.setVisible(false);
             showScorePanel1.setVisible(false);
             showScorePanel2.setVisible(false);
-            timer1.stop();
+
             questions++;
+
             questionNumber();
+            timer3.stop();
         });
-        timer1.start();
+
+        timer3.start();
 
 
     }

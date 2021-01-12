@@ -47,8 +47,8 @@ public class UserInteraction  { //implements KeyListener
     private JPanel RoundNumberPanel, QuestionNumberPanel, RQOkayPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
     private JPanel announcingCategoryPanel;
     private JPanel betPointsPanel, betPointsPanel2, bet250, bet500, bet750, bet1000;
-    private JPanel  centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
-    private JPanel showScoreTextPanel, showScorePanel1, showScorePanel2, ROkayPanel, QOkayPanel;
+    private JPanel centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
+    private JPanel showStatusPanel1, showStatusPanel2, showScoreTextPanel, showScorePanel1, showScorePanel2, ROkayPanel, QOkayPanel;
     private JPanel correctAnswerTextPanel, correctAnswerPanel, nextQuestion, scoresPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
@@ -1400,34 +1400,74 @@ public class UserInteraction  { //implements KeyListener
         correctAnswerPanel.setVisible(false);
         correctAnswerTextPanel.setVisible(false);
 
-
-        System.out.println("inside show scores");
-        String score = null;
+        String score1;
         String score2 = null;
-        if(numberOfPlayers == 1){
-            score = players.get(0).getNickname() + ": " + players.get(0).getScore();
-        }else{
-            score = players.get(0).getNickname() + ": " + players.get(0).getScore();
+        boolean status1;
+        boolean status2 = false;
+        String answered1 = players.get(0).getNickname() + ", maybe next time!";
+        String answered2 = null;
+
+        score1 = players.get(0).getNickname() + ": " + players.get(0).getScore();
+        status1 = players.get(0).getStatus();
+
+        System.out.println(status1);
+
+        if(numberOfPlayers == 2){
             score2 = players.get(1).getNickname() + ": " + players.get(1).getScore();
+            status2 = players.get(1).getStatus();
+            answered2 = players.get(1).getNickname() + ", maybe next time!";
+        }
+        if(status1){
+            System.out.println("mphke sthn if!!!!!!!!!!!");
+            answered1 = players.get(0).getNickname() + ", you guessed correctly!";
+        }
+        if(status2){
+            answered1 = players.get(1).getNickname() + ", you guessed correctly!";
         }
 
+        showStatusPanel1 = new JPanel();
+        showStatusPanel1.setBounds(50, 50, 700, 80);
+        showStatusPanel1.setLayout(new BorderLayout());
+        showStatusPanel1.setBackground(Color.black);
+        con.add(showStatusPanel1);
+
+        showStatusPanel2 = new JPanel();
+        showStatusPanel2.setBounds(50, 130, 700, 80);
+        showStatusPanel2.setLayout(new BorderLayout());
+        showStatusPanel2.setBackground(Color.black);
+        con.add(showStatusPanel2);
+
         showScoreTextPanel = new JPanel();
-        showScoreTextPanel.setBounds(50, 50, 700, 100);
+        showScoreTextPanel.setBounds(50, 210, 700, 80);
         showScoreTextPanel.setLayout(new BorderLayout());
         showScoreTextPanel.setBackground(Color.black);
         con.add(showScoreTextPanel);
 
         showScorePanel1 = new JPanel();
-        showScorePanel1.setBounds(50, 150, 700, 100);
+        showScorePanel1.setBounds(50, 290, 700, 80);
         showScorePanel1.setLayout(new BorderLayout());
         showScorePanel1.setBackground(Color.black);
         con.add(showScorePanel1);
 
         showScorePanel2 = new JPanel();
-        showScorePanel2.setBounds(50, 250, 700, 100);
+        showScorePanel2.setBounds(50, 370, 700, 80);
         showScorePanel2.setLayout(new BorderLayout());
         showScorePanel2.setBackground(Color.black);
         con.add(showScorePanel2);
+
+        JLabel showStatus1 = new JLabel(answered1);
+        showStatus1.setFont(new Font("Carlito", Font.PLAIN, 30));
+        showStatus1.setForeground(Color.WHITE);
+        showStatus1.setHorizontalAlignment(JLabel.CENTER);
+        showStatus1.setVerticalAlignment(JLabel.CENTER);
+        showStatusPanel1.add(showStatus1);
+
+        JLabel showStatus2 = new JLabel(answered2);
+        showStatus2.setFont(new Font("Carlito", Font.PLAIN, 30));
+        showStatus2.setForeground(Color.WHITE);
+        showStatus2.setHorizontalAlignment(JLabel.CENTER);
+        showStatus2.setVerticalAlignment(JLabel.CENTER);
+        showStatusPanel2.add(showStatus2);
 
         JLabel showScoreText = new JLabel("The score is:");
         showScoreText.setFont(new Font("Carlito", Font.PLAIN, 50));
@@ -1436,7 +1476,7 @@ public class UserInteraction  { //implements KeyListener
         showScoreText.setVerticalAlignment(JLabel.CENTER);
         showScoreTextPanel.add(showScoreText);
 
-        JLabel showScore1 = new JLabel(score);
+        JLabel showScore1 = new JLabel(score1);
         showScore1.setFont(new Font("Carlito", Font.PLAIN, 30));
         showScore1.setForeground(Color.WHITE);
         showScore1.setHorizontalAlignment(JLabel.CENTER);
@@ -1451,11 +1491,22 @@ public class UserInteraction  { //implements KeyListener
         showScorePanel2.add(showScore2);
 
         if(numberOfPlayers == 1){
+            showStatusPanel2.setVisible(false);
             showScorePanel2.setVisible(false);
         }
 
-        //questions++;
-        //questionNumber();
+        timer1 = new Timer(2000, e -> {
+            showStatusPanel1.setVisible(false);
+            showStatusPanel2.setVisible(false);
+            showScoreTextPanel.setVisible(false);
+            showScorePanel1.setVisible(false);
+            showScorePanel2.setVisible(false);
+            timer1.stop();
+            questions++;
+            questionNumber();
+        });
+        timer1.start();
+
 
     }
 

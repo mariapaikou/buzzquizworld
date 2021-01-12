@@ -57,6 +57,7 @@ public class UserInteraction  { //implements KeyListener
     private Timer timer1, timer2,timer3,timer4,timer5;
     private JLabel label,labelA, labelB, labelC, labelD, labelQ;
     private long startTime , endTime1, endTime2;
+    private JPanel AndTheWinnerIsPanel, winnerPanel, FinalScoresPanel, finalLeftScorePanel, finalRightScorePanel, playerFinalScoreTextPanel, playerFinalScorePanel;
 
     public UserInteraction(){
         answer1 = new String();
@@ -678,7 +679,11 @@ public class UserInteraction  { //implements KeyListener
             });
 
         }else{
-            finalScores();
+            if(numberOfPlayers == 1){
+                finalScore();
+            }else{
+                winner();
+            }
         }
     }
 
@@ -688,7 +693,7 @@ public class UserInteraction  { //implements KeyListener
      * through the getName method. Then it explains the way you play the game depending on the type.
      */
     public void announcingTheType(){
-        System.out.println("inside announcing the type");
+
         RoundNumberPanel.setVisible(false);
         ROkayPanel.setVisible(false);
 
@@ -1526,40 +1531,123 @@ public class UserInteraction  { //implements KeyListener
 
     }
 
-
     /**
      * finalScores prints the scores of each player at the end of the game
      */
-    public void finalScores(){
+    public void finalScore(){
+        RoundNumberPanel.setVisible(false);
+        ROkayPanel.setVisible(false);
 
-        try {
-             Thread.sleep(2000);
-        }catch(InterruptedException e) {
-             System.out.println("got interrupted!");
+        playerFinalScoreTextPanel = new JPanel();
+        playerFinalScoreTextPanel.setBounds(50, 50, 700, 200);
+        playerFinalScoreTextPanel.setLayout(new BorderLayout());
+        playerFinalScoreTextPanel.setBackground(Color.black);
+        con.add(playerFinalScoreTextPanel);
+
+        playerFinalScorePanel = new JPanel();
+        playerFinalScorePanel.setBounds(250, 250, 300, 100);
+        playerFinalScorePanel.setLayout(new BorderLayout());
+        playerFinalScorePanel.setBackground(Color.black);
+        con.add(playerFinalScorePanel);
+
+        JLabel playerFinalScoreText = new JLabel(players.get(0).getNickname() + ", your final score is:");
+        playerFinalScoreText.setFont(new Font("Carlito", Font.PLAIN, 50));
+        playerFinalScoreText.setForeground(Color.WHITE);
+        playerFinalScoreText.setHorizontalAlignment(JLabel.CENTER);
+        playerFinalScoreTextPanel.add(playerFinalScoreText);
+
+        JLabel playerFinalScore = new JLabel(String.valueOf(players.get(0).getScore()));
+        playerFinalScore.setFont(new Font("Carlito", Font.PLAIN, 80));
+        playerFinalScore.setForeground(Color.WHITE);
+        playerFinalScore.setHorizontalAlignment(JLabel.CENTER);
+        playerFinalScore.setVerticalAlignment(JLabel.CENTER);
+        playerFinalScorePanel.add(playerFinalScore);
+
+        timer2 = new Timer(3000, e -> {
+            replay();
+            timer2.stop();
+        });
+        timer2.start();
+
+
+    }
+    public void winner(){
+        RoundNumberPanel.setVisible(false);
+        ROkayPanel.setVisible(false);
+
+        String TheWinner = null;
+
+        if(players.get(0).getScore() > players.get(1).getScore()){
+            TheWinner = players.get(0).getNickname();
+        }else{
+            TheWinner = players.get(1).getNickname();
         }
 
-        System.out.println("\nNow, for the grand reveal");
+        AndTheWinnerIsPanel = new JPanel();
+        AndTheWinnerIsPanel.setBounds(50, 50, 700, 150);
+        AndTheWinnerIsPanel.setLayout(new BorderLayout());
+        AndTheWinnerIsPanel.setBackground(Color.black);
+        frame.add(AndTheWinnerIsPanel);
 
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
+        JLabel andTheWinnerIs = new JLabel("And the winner is . . .");
+        andTheWinnerIs.setFont(new Font("Carlito", Font.PLAIN, 50));
+        andTheWinnerIs.setForeground(Color.WHITE);
+        andTheWinnerIs.setHorizontalAlignment(JLabel.CENTER);
+        AndTheWinnerIsPanel.add(andTheWinnerIs);
 
-        System.out.println("\nThe final scores are:");
+        winnerPanel = new JPanel();
+        winnerPanel.setBounds(250, 200, 300, 100);
+        winnerPanel.setLayout(new BorderLayout());
+        winnerPanel.setBackground(Color.black);
+        frame.add(winnerPanel);
 
-        for (Player player : players){
+        JLabel winner = new JLabel(TheWinner);
+        winner.setFont(new Font("Carlito", Font.PLAIN, 30));
+        winner.setForeground(Color.WHITE);
+        winner.setHorizontalAlignment(JLabel.CENTER);
+        winnerPanel.add(winner);
 
-            try {
-                Thread.sleep(1000);
-            }catch(InterruptedException e) {
-                System.out.print("got interrupted!");
-            }
+        FinalScoresPanel = new JPanel();
+        FinalScoresPanel.setBounds(50, 300, 700, 100);
+        FinalScoresPanel.setLayout(new BorderLayout());
+        FinalScoresPanel.setBackground(Color.black);
+        frame.add(FinalScoresPanel);
 
-            System.out.println(player.getNickname() + " = " + player.getScore());
+        JLabel finalScores = new JLabel("Your final scores were:");
+        finalScores.setFont(new Font("Carlito", Font.PLAIN, 50));
+        finalScores.setForeground(Color.WHITE);
+        finalScores.setHorizontalAlignment(JLabel.CENTER);
+        FinalScoresPanel.add(finalScores);
 
-        }
+        finalLeftScorePanel = new JPanel();
+        finalLeftScorePanel.setBounds(100, 400, 250, 50);
+        finalLeftScorePanel.setLayout(new BorderLayout());
+        finalLeftScorePanel.setBackground(Color.black);
+        frame.add(finalLeftScorePanel);
 
+        JLabel finaLeftScore = new JLabel(players.get(0).getNickname() + ": " + players.get(0).getScore());
+        finaLeftScore.setFont(new Font("Carlito", Font.PLAIN, 30));
+        finaLeftScore.setForeground(Color.WHITE);
+        finaLeftScore.setHorizontalAlignment(JLabel.CENTER);
+        finalLeftScorePanel.add(finaLeftScore);
+
+        finalRightScorePanel = new JPanel();
+        finalRightScorePanel.setBounds(450, 400, 250, 50);
+        finalRightScorePanel.setLayout(new BorderLayout());
+        finalRightScorePanel.setBackground(Color.black);
+        frame.add(finalRightScorePanel);
+
+        JLabel finaRightScore = new JLabel(players.get(1).getNickname() + ": " + players.get(1).getScore());
+        finaRightScore.setFont(new Font("Carlito", Font.PLAIN, 30));
+        finaRightScore.setForeground(Color.WHITE);
+        finaRightScore.setHorizontalAlignment(JLabel.CENTER);
+        finalRightScorePanel.add(finaRightScore);
+
+        timer3 = new Timer(3000, e -> {
+            replay();
+            timer3.stop();
+        });
+        timer3.start();
     }
 
     public void replay(){
@@ -1569,7 +1657,7 @@ public class UserInteraction  { //implements KeyListener
             System.exit(0);
         }
         else if (response == JOptionPane.YES_OPTION) {
-            new UserInteraction();
+            basicDisplay();
         }
         else if (response == JOptionPane.CLOSED_OPTION) {
             System.exit(0);

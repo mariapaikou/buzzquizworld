@@ -51,7 +51,7 @@ public class UserInteraction  { //implements KeyListener
     private JPanel announcingCategoryPanel;
     private JPanel betPointsPanel, betPointsPanel2, bet250, bet500, bet750, bet1000;
     private JPanel  centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
-    private JPanel showScoreTextPanel, showScorePanel;
+    private JPanel showScoreTextPanel, showScorePanel, ROkayPanel, QOkayPanel;
     private JPanel correctAnswerTextPanel, correctAnswerPanel, nextQuestion, scoresPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
@@ -572,7 +572,7 @@ public class UserInteraction  { //implements KeyListener
             timer3.stop();
             timer4.stop();
             timer5.stop();
-            RoundNumberQuestionNumber();
+            roundNumber();
 
         });
 
@@ -631,79 +631,53 @@ public class UserInteraction  { //implements KeyListener
     }
 
     /**
-     * ROUND i, QUESTION j, and all the variable get ready.
+     * ROUND i
      */
-    public void RoundNumberQuestionNumber(){
+    public void roundNumber(){
         //Turn off previous panel
-        con.removeAll();
+        letsGoPanel.setVisible(false);
+        con.remove(letsGoPanel);
+
         if(rounds - 1 < game.getHowManyRounds()) {
-            if(questions - 1 < game.getNumberOfQuestions()) {
-                //Panel for the round label
-                RoundNumberPanel = new JPanel();
-                RoundNumberPanel.setBounds(0, 50, 800, 200);
-                RoundNumberPanel.setBackground(Color.PINK);
-                con.add(RoundNumberPanel);
+            //Panel for the round label
+            RoundNumberPanel = new JPanel();
+            RoundNumberPanel.setBounds(0, 50, 800, 200);
+            RoundNumberPanel.setBackground(Color.PINK);
+            con.add(RoundNumberPanel);
 
-                //Panel for the question label
-                QuestionNumberPanel = new JPanel();
-                QuestionNumberPanel.setBounds(0, 250, 800, 100);
-                QuestionNumberPanel.setBackground(Color.DARK_GRAY);
-                con.add(QuestionNumberPanel);
+            //Label ROUND i
+            JLabel roundLabel = new JLabel("Round " + rounds);
+            roundLabel.setBounds(0, 50, 800, 200);
+            roundLabel.setBackground(Color.PINK);
+            roundLabel.setForeground(Color.WHITE);
+            roundLabel.setFont(new Font("Carlito", Font.PLAIN, 200));
+            roundLabel.setHorizontalAlignment(JLabel.CENTER);
+            roundLabel.setVerticalAlignment(JLabel.CENTER);
+            RoundNumberPanel.add(roundLabel);
 
-                //Label ROUND i
-                JLabel roundLabel = new JLabel("Round " + rounds);
-                roundLabel.setBounds(0, 50, 800, 200);
-                roundLabel.setBackground(Color.PINK);
-                roundLabel.setForeground(Color.WHITE);
-                roundLabel.setFont(new Font("Carlito", Font.PLAIN, 200));
-                roundLabel.setHorizontalAlignment(JLabel.CENTER);
-                roundLabel.setVerticalAlignment(JLabel.CENTER);
-                RoundNumberPanel.add(roundLabel);
+            //next method panel
+            ROkayPanel = new JPanel();
+            ROkayPanel.setBounds(550, 350, 100, 50);
+            ROkayPanel.setBackground(Color.YELLOW);
 
-                //Label QUESTION j
-                JLabel questionLabel = new JLabel("Question " + questions);
-                questionLabel.setBounds(0, 250, 800, 100);
-                questionLabel.setBackground(Color.black);
-                questionLabel.setForeground(Color.WHITE);
-                questionLabel.setFont(new Font("Carlito", Font.PLAIN, 100));
-                questionLabel.setHorizontalAlignment(JLabel.CENTER);
-                questionLabel.setVerticalAlignment(JLabel.CENTER);
-                QuestionNumberPanel.add(questionLabel);
+            //next method button
+            JButton okayButton = new JButton("Okay");
+            okayButton.setBackground(Color.PINK);
+            okayButton.setForeground(Color.WHITE);
+            okayButton.setSize(50, 50);
+            okayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+            ROkayPanel.add(okayButton);
+            con.add(ROkayPanel);
+            okayButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // System.out.println("inside action listerner");
+                    announcingTheType();
+                }
+            });
 
-                //next method panel
-                RQOkayPanel = new JPanel();
-                RQOkayPanel.setBounds(550, 350, 100, 50);
-                RQOkayPanel.setBackground(Color.YELLOW);
-
-                //next method button
-                JButton okayButton = new JButton("Okay");
-                okayButton.setBackground(Color.PINK);
-                okayButton.setForeground(Color.WHITE);
-                okayButton.setSize(50, 50);
-                okayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
-                RQOkayPanel.add(okayButton);
-                con.add(RQOkayPanel);
-                okayButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                       // System.out.println("inside action listerner");
-                        RoundNumberPanel.setVisible(false);
-                        QuestionNumberPanel.setVisible(false);
-                        RQOkayPanel.setVisible(false);
-                        con.remove(RQOkayPanel);
-                        RQOkayPanel.setVisible(false);
-                        announcingTheType();
-                    }
-                });
-                question = game.getNewQuestion();
-
-            }else{
-                rounds++;
-                questions = 1;
-                RoundNumberQuestionNumber();
-             }
         }else{
-            //game is done
+            finalScores();
         }
     }
 
@@ -716,12 +690,7 @@ public class UserInteraction  { //implements KeyListener
     public void announcingTheType(){
         //Turn off previous panels
         RoundNumberPanel.setVisible(false);
-        QuestionNumberPanel.setVisible(false);
-        RQOkayPanel.setVisible(false);
-        con.removeAll();
-        RoundNumberPanel.removeAll();
-        QuestionNumberPanel.removeAll();
-        RQOkayPanel.removeAll();
+        ROkayPanel.setVisible(false);
 
         //Get random type from game
         type = game.getRandomType();
@@ -776,12 +745,67 @@ public class UserInteraction  { //implements KeyListener
         okay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                announcingCategory();
+                questionNumber();
             }
         });
         typeOkayPanel.add(okay);
 
 
+    }
+    /**
+     * QUESTION j
+     */
+
+    public void questionNumber(){
+        TypePanel.setVisible(false);
+        TypeExplanationPanel.setVisible(false);
+        typeOkayPanel.setVisible(false);
+        if(questions - 1 < game.getNumberOfQuestions()) {
+            //Panel for the question label
+            QuestionNumberPanel = new JPanel();
+            QuestionNumberPanel.setBounds(0, 50, 800, 200);
+            QuestionNumberPanel.setBackground(Color.DARK_GRAY);
+            con.add(QuestionNumberPanel);
+
+            //Label QUESTION j
+            JLabel questionLabel = new JLabel("Question " + questions);
+            questionLabel.setBounds(0, 50, 800, 200);
+            questionLabel.setBackground(Color.black);
+            questionLabel.setForeground(Color.WHITE);
+            questionLabel.setFont(new Font("Carlito", Font.PLAIN, 150));
+            questionLabel.setHorizontalAlignment(JLabel.CENTER);
+            questionLabel.setVerticalAlignment(JLabel.CENTER);
+            QuestionNumberPanel.add(questionLabel);
+
+            //next method panel
+            QOkayPanel = new JPanel();
+            QOkayPanel.setBounds(550, 350, 100, 50);
+            QOkayPanel.setBackground(Color.YELLOW);
+
+            //next method button
+            JButton qokayButton = new JButton("Okay");
+            qokayButton.setBackground(Color.PINK);
+            qokayButton.setForeground(Color.WHITE);
+            qokayButton.setSize(50, 50);
+            qokayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+            QOkayPanel.add(qokayButton);
+            con.add(QOkayPanel);
+            qokayButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // System.out.println("inside action listerner");
+                    QuestionNumberPanel.setVisible(false);
+                    QOkayPanel.setVisible(false);
+                    con.remove(QOkayPanel);
+                    question = game.getNewQuestion();
+                    announcingCategory();
+                }
+            });
+        }else{
+            rounds++;
+            questions = 1;
+            roundNumber();
+        }
     }
 
     /**
@@ -790,9 +814,8 @@ public class UserInteraction  { //implements KeyListener
      */
     public void announcingCategory(){
         //Turn off previous panels
-        TypePanel.setVisible(false);
-        TypeExplanationPanel.setVisible(false);
-        typeOkayPanel.setVisible(false);
+        QuestionNumberPanel.setVisible(false);
+        QOkayPanel.setVisible(false);
 
         //New panel
         announcingCategoryPanel = new JPanel();
@@ -1240,7 +1263,7 @@ public class UserInteraction  { //implements KeyListener
         correctAnswerPanel.setVisible(false);
 
         Timer timer2 = new Timer(2000, e -> {
-            //ADD NEXT METHOD
+            showScores();
         });
         Timer timer1 = new Timer(2000, e -> {
             correctAnswerPanel.setVisible(true);
@@ -1286,6 +1309,9 @@ public class UserInteraction  { //implements KeyListener
         showScore.setHorizontalAlignment(JLabel.CENTER);
         showScoreText.setVerticalAlignment(JLabel.CENTER);
         showScorePanel.add(showScore);
+
+        //questions++;
+        //questionNumber();
 
     }
 

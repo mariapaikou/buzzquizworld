@@ -78,9 +78,6 @@ public class Thermometer extends Type {
 
         nameOfWinner.clear();
 
-
-
-        defaultifyPlayers();
     }
 
     public String getName(){return "Thermometer";}

@@ -19,7 +19,6 @@ public class StopTheTimer extends Type {
 
             }
         }
-        defaultifyPlayers();
 
     }
 

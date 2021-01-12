@@ -81,6 +81,7 @@ public class UserInteraction  { //implements KeyListener
         con = frame.getContentPane();
         con.setPreferredSize(new Dimension(800,500));
 
+
         //The panel that contains the text
         startTextPanel = new JPanel();
         //Look & Layout
@@ -171,7 +172,7 @@ public class UserInteraction  { //implements KeyListener
             }
         });
         totalWinsButtonPanel.add(totalWinsButton);
-
+        game.readHighScores();
     }
 
     /**
@@ -1311,7 +1312,10 @@ public class UserInteraction  { //implements KeyListener
                 times[0] = endTime1;
 
                 answers.add(answer1);
-                game.setStatuses(answers,question.getCorrectAnswer(), players);
+                players = game.setStatuses(answers,question.getCorrectAnswer(), players);
+                for(Player player:players){
+                    System.out.println("indise keyListener now status is"+ player.getStatus());
+                }
                 answer1 = null;
 
                 game.changePoints(type);
@@ -1409,6 +1413,12 @@ public class UserInteraction  { //implements KeyListener
 
         score1 = players.get(0).getNickname() + ": " + players.get(0).getScore();
         status1 = players.get(0).getStatus();
+        System.out.println("inside showScores status1="+ status1);
+
+        for(Player player:players){
+            System.out.println("inside showScores players status is" + player.getStatus());
+            System.out.println("score now is" + player.getScore());
+        }
 
         System.out.println(status1);
 

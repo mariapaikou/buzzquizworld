@@ -35,20 +35,6 @@ public abstract class Type {
 
     }
 
-    protected void defaultifyPlayers(){
-
-        for (Player player : players){
-
-            player.setStatus(false);
-            if(player.getClickTime() > -1){
-
-                player.setClickTime(-1);
-            }
-            if(player.getBet() > 0){
-                player.defaultifyBet();
-            }
-        }
-    }
 
     public abstract String getExplanation();
 

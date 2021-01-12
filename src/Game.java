@@ -1,3 +1,4 @@
+import java.awt.image.AreaAveragingScaleFilter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +43,7 @@ public class Game {
     public int getNumberOfQuestions(){
         return numberOfQuestions;
     }
+    public void readHighScores(){scores.gameStarted();}
     public void setHowManyRounds(int howManyRounds){this.howManyRounds = howManyRounds;}
     public void setNumberOfQuestions(int numberOfQuestions){this.numberOfQuestions = numberOfQuestions;}
     public String [] getHighScores(){
@@ -65,7 +67,7 @@ public class Game {
 
     public Game(){
         readQuestionsFile = new ReadQuestionsFile();
-        allQuestions = readQuestionsFile.loadQuestions("testQuestion.txt");
+        allQuestions = readQuestionsFile.loadQuestions("questions.text.txt");
         scores = new HighScore("highscores.dat","totalwins.dat");
         round = new Round();
 
@@ -81,9 +83,9 @@ public class Game {
         Type type;
 
         if(playerList.size() == 1){
-            type = round.towPlayerMode();
-        }else{
             type = round.onePlayerMode();
+        }else{
+            type = round.towPlayerMode();
         }
 
         type.setPlayersList(playerList);
@@ -99,10 +101,11 @@ public class Game {
         return allQuestions.get(questionPosition);
     }
 
-    public void setStatuses(ArrayList<String> answers, String correctAnswer, ArrayList<Player> playerList){
+    public ArrayList<Player> setStatuses(ArrayList<String> answers, String correctAnswer, ArrayList<Player> playerList){
         if (playerList.size() == 1){
             if(answers.get(0).equals(correctAnswer)){
                 playerList.get(0).setStatus(true);
+                System.out.println("inside setStatuses"+ playerList.get(0).getStatus());
             }
         }else{
             for(int i=0; i<playerList.size(); i++){
@@ -111,6 +114,7 @@ public class Game {
                 }
             }
         }
+        return playerList;
     }
 
     /**

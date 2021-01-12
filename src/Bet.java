@@ -43,7 +43,7 @@ public class Bet extends Type {
                 player.increaseScoreBy(-player.getBet());
             }
         }
-        defaultifyPlayers();
+
     }
 
 //    /**

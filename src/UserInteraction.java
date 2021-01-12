@@ -61,6 +61,9 @@ public class UserInteraction  { //implements KeyListener
         answer1 = new String();
         answer2 = new String();
 
+        answer1 = null;
+        answer2 = null;
+
         //The basic frame
         frame = new JFrame("Buzz Quiz");
         //Look & Layout
@@ -1279,19 +1282,23 @@ public class UserInteraction  { //implements KeyListener
             System.out.println(answer1);
             System.out.println(answer2);
             if(numberOfPlayers == 1 && answer1!= null){
-
+                System.out.println("inside key list ifffffff");
                 ArrayList<String> answers = new ArrayList<>();
                 answers.add(answer1);
                 game.setStatuses(answers,question.getCorrectAnswer());
+                answer1 = null;
                 game.changePoints(type);
                 correctAnswer();
             }else if(numberOfPlayers == 2 && answer1!= null && answer2 != null){
-
+                System.out.println("inside key list elseeeeee ifffff");
                 ArrayList<String> answers = new ArrayList<>();
                 answers.add(answer1);
                 answers.add(answer2);
                 game.setStatuses(answers,question.getCorrectAnswer());
+                answer1 = null;
+                answer2 = null;
                 game.changePoints(type);
+                correctAnswer();
             }
         }
     }

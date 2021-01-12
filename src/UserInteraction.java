@@ -17,7 +17,7 @@ import java.util.Scanner;
  * the messages and collects the data that we need from the users.
  */
 
-public class UserInteraction implements KeyListener {
+public class UserInteraction  { //implements KeyListener
     private JFrame frame;
     private Questions question;
     private Game game = new Game();
@@ -58,6 +58,7 @@ public class UserInteraction implements KeyListener {
     private JPanel highScoresButtonPanel, totalWinsButtonPanel, goButtonPanel;
     private JTextField nickname;
     private Timer timer1, timer2,timer3,timer4,timer5;
+    JLabel label,labelA, labelB, labelC, labelD, labelQ;
 
     public UserInteraction(){
         answer1 = new String();
@@ -72,15 +73,13 @@ public class UserInteraction implements KeyListener {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null); //bazei to frame sto kentro ths o8onhs
         frame.setVisible(true);
-        basicDisplay();
 
     }
 
     private void basicDisplay(){
-
         con = frame.getContentPane();
-        //con.setLayout(new CardLayout());
         con.setPreferredSize(new Dimension(800,500));
+
         //The panel that contains the text
         startTextPanel = new JPanel();
         //Look & Layout
@@ -816,11 +815,17 @@ public class UserInteraction implements KeyListener {
         goButton.setForeground(Color.WHITE);
         goButton.setSize(100, 100);
         goButton.setFont(new Font("Carlito", Font.PLAIN, 30));
-
+        goButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    askTheQuestion();
+            }
+        });
         goButtonPanel = new JPanel();
         goButtonPanel.setBounds(350,300,100,100);
         goButtonPanel.setBackground(Color.BLACK);
         goButtonPanel.add(goButton);
+
         con.add(goButtonPanel);
 
 
@@ -1043,7 +1048,10 @@ public class UserInteraction implements KeyListener {
      * This void function accepts a Questions type object and prints the question and the four possible answers.
      */
     public void askTheQuestion(){
-        JLabel label,labelA, labelB, labelC, labelD, labelQ;
+
+        announcingCategoryPanel.setVisible(false);
+        goButtonPanel.setVisible(false);
+
         String questionImageName= question.getImageName();
 
         centerPanel = new JPanel();
@@ -1062,8 +1070,7 @@ public class UserInteraction implements KeyListener {
 
         centerPanel.add(label);
         centerPanel.setVisible(true);
-
-        con.add(centerPanel, BorderLayout.CENTER);
+        con.add(centerPanel);
 
 
         questionPanel = new JPanel();
@@ -1077,7 +1084,7 @@ public class UserInteraction implements KeyListener {
         labelQ.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelQ.setHorizontalAlignment(JLabel.LEFT);
         labelQ.setText(question.getQuestion());
-        labelQ.setFont(new Font("Carlito",Font.PLAIN,25));
+        labelQ.setFont(new Font("Carlito",Font.PLAIN,10));
         labelQ.setVisible(true);
         questionPanel.add(labelQ);
 
@@ -1147,54 +1154,58 @@ public class UserInteraction implements KeyListener {
         bottomPanel.setBounds(100,0,800,110);
         bottomPanel.setBackground(Color.PINK);
         con.add(bottomPanel);
-        con.addKeyListener(this);
-        con.validate();//validate the image
-        con.setVisible(true);
-
-
 
 
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        //no need to implement
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
-        if(!answers.isEmpty()){
-            if(key == KeyEvent.VK_Q){
-                answer1 = answers.get(0);
-            }else if(key == KeyEvent.VK_W){
-                answer1 = answers.get(1);
-            }else if(key == KeyEvent.VK_E){
-                answer1 = answers.get(2);
-            }else if(key == KeyEvent.VK_R){
-                answer1 = answers.get(3);
-            }
-            if(game.getPlayerList().size() == 2){
-                if(key == KeyEvent.VK_U){
-                    answer2 = answers.get(0);
-                }else if(key == KeyEvent.VK_I){
-                    answer2 = answers.get(1);
-                }else if(key == KeyEvent.VK_O){
-                    answer2 = answers.get(2);
-                }else if(key == KeyEvent.VK_P){
-                    answer2 = answers.get(3);
-                }
-            }
-        }
-        answers.clear();
+//    @Override
+//    public void keyTyped(KeyEvent e) {
+//        //no need to implement
+//    }
+//
+//    @Override
+//    public void keyPressed(KeyEvent e) {
+//        System.out.println("inside key listerner");
+//        int key = e.getKeyCode();
+//       // if(!answers.isEmpty()){
+//            if(key == KeyEvent.VK_Q){
+//                answer1 = answers.get(0);
+//                System.out.println("inside q button");
+//            }else if(key == KeyEvent.VK_W){
+//                answer1 = answers.get(1);
+//                System.out.println("inside w button");
+//            }else if(key == KeyEvent.VK_E){
+//                answer1 = answers.get(2);
+//                System.out.println("inside e button");
+//            }else if(key == KeyEvent.VK_R){
+//                answer1 = answers.get(3);
+//                System.out.println("inside r button");
+//            }
+//            if(game.getPlayerList().size() == 2){
+//                if(key == KeyEvent.VK_U){
+//                    answer2 = answers.get(0);
+//                    System.out.println("inside u button");
+//                }else if(key == KeyEvent.VK_I){
+//                    answer2 = answers.get(1);
+//                    System.out.println("inside i button");
+//                }else if(key == KeyEvent.VK_O){
+//                    answer2 = answers.get(2);
+//                    System.out.println("inside o button");
+//                }else if(key == KeyEvent.VK_P){
+//                    answer2 = answers.get(3);
+//                    System.out.println("inside p button");
+//                }
+//            }
+//       // }
+//      //  answers.clear();
 //        System.out.println(answer1);
 //        System.out.println(answer2);
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        //no need to implement
-    }
+//    }
+//
+//    @Override
+//    public void keyReleased(KeyEvent e) {
+//        //no need to implement
+//    }
 
     /**
      * This function prints the correct answer to the question asked previously.
@@ -1333,6 +1344,11 @@ public class UserInteraction implements KeyListener {
     }
 
 
+
+    public static void main(String [] args){
+        UserInteraction userInteraction = new UserInteraction();
+        userInteraction.basicDisplay();
+    }
 
 
 }

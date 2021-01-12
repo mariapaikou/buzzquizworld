@@ -17,23 +17,23 @@ import java.util.Scanner;
 public class UserInteraction  { //implements KeyListener
     private JFrame frame;
     private Questions question;
-    private Game game = new Game();
-    private Type type = new Type() {
-        @Override
-        public void changePoints() {
-
-        }
-
-        @Override
-        public String getName() {
-            return null;
-        }
-
-        @Override
-        public String getExplanation() {
-            return null;
-        }
-    };
+    private Game game;
+    private Type type; //= new Type() {
+//        @Override
+//        public void changePoints() {
+//
+//        }
+//
+//        @Override
+//        public String getName() {
+//            return null;
+//        }
+//
+//        @Override
+//        public String getExplanation() {
+//            return null;
+//        }
+//    };
     private ArrayList<Player> players = new ArrayList<>();
     private int numberOfPlayers = 0;
     private int rounds = 1;
@@ -58,6 +58,7 @@ public class UserInteraction  { //implements KeyListener
     private JLabel label,labelA, labelB, labelC, labelD, labelQ;
     private long startTime , endTime1, endTime2;
     private JPanel AndTheWinnerIsPanel, winnerPanel, FinalScoresPanel, finalLeftScorePanel, finalRightScorePanel, playerFinalScoreTextPanel, playerFinalScorePanel;
+    private int defaultNumQuestions;
 
     public UserInteraction(){
         answer1 = new String();
@@ -65,6 +66,8 @@ public class UserInteraction  { //implements KeyListener
 
         answer1 = null;
         answer2 = null;
+
+        game = new Game();
 
         //The basic frame
         frame = new JFrame("Buzz Quiz");
@@ -635,10 +638,11 @@ public class UserInteraction  { //implements KeyListener
      * ROUND i
      */
     public void roundNumber(){
-        System.out.println("inside round number");
         //Turn off previous panel
         letsGoPanel.setVisible(false);
         con.remove(letsGoPanel);
+
+        defaultNumQuestions = game.getNumberOfQuestions();
 
         if(rounds - 1 < game.getHowManyRounds()) {
             //Panel for the round label
@@ -766,7 +770,8 @@ public class UserInteraction  { //implements KeyListener
         TypePanel.setVisible(false);
         TypeExplanationPanel.setVisible(false);
         typeOkayPanel.setVisible(false);
-        if(questions - 1 < game.getNumberOfQuestions()) {
+
+        if(questions - 1 < defaultNumQuestions) {
             //Panel for the question label
             QuestionNumberPanel = new JPanel();
             QuestionNumberPanel.setBounds(0, 50, 800, 200);
@@ -1513,7 +1518,7 @@ public class UserInteraction  { //implements KeyListener
 
         timer3 = new Timer(2000, e -> {
             System.out.println("inside timer3");
-            game.defaultifyPlayers(players);
+            game.defaultifyPlayers(players, type);
             showStatusPanel1.setVisible(false);
             showStatusPanel2.setVisible(false);
             showScoreTextPanel.setVisible(false);
@@ -1521,7 +1526,9 @@ public class UserInteraction  { //implements KeyListener
             showScorePanel2.setVisible(false);
 
             questions++;
-
+            if(type instanceof Thermometer && !game.checkStreak(players)){
+                defaultNumQuestions++;
+            }
             questionNumber();
             timer3.stop();
         });
@@ -1651,6 +1658,7 @@ public class UserInteraction  { //implements KeyListener
     }
 
     public void replay(){
+        game.initializePlayersScore(players);
         JDialog.setDefaultLookAndFeelDecorated(true);
         int response = JOptionPane.showConfirmDialog(null, "Would you like to play again?", "Replay", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.NO_OPTION) {

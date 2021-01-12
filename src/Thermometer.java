@@ -1,87 +1,64 @@
-
-import javax.swing.plaf.IconUIResource;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class Thermometer extends Type {
 
     private final int points;
-    private final HashMap correctAnswers;
     private ArrayList<Player> nameOfWinner;
 
+    /**
+     *
+     */
     public Thermometer(){
 
         super();
         points = 5000;
-        correctAnswers = new HashMap();
         nameOfWinner = new ArrayList<>();
 
     }
 
-    @Override
-    public boolean setPlayersList(ArrayList<Player> players){
-        boolean flag = super.setPlayersList(players);
-        if(flag && players.size()>1){
-            initializeCorrectAnswers();
-        }else{
-            flag = false;
-        }
-
-        return flag;
-    }
 
 
-
-    public void initializeCorrectAnswers(){
-        correctAnswers.clear();
-        for(Player player : players){
-
-            correctAnswers.put(player.getNickname(),0);
-
-        }
-    }
-
-
+    /**
+     *
+     */
     public void changePoints(){
 
-        int sup;
+        ArrayList pos = new ArrayList();
 
-        for(Player player : players){
-            if(player.getStatus()){
-
-                sup= (int) correctAnswers.get(player.getNickname());
-                correctAnswers.replace(player.getNickname(),sup+1);
-
-                if((int) correctAnswers.get(player.getNickname()) == 5){
-                    nameOfWinner.add(player);
-                }
-
+        for(int i=0; i<players.size(); i++){
+            if((players.get(i).getStreak() == 5) && players.get(i).getStatus()){
+                System.out.println("players sreak" + players.get(i).getStreak());
+                System.out.println("elegxos ths thermometer");
+                pos.add(i);
             }
-
         }
 
-        if(nameOfWinner.size() == 1){
-            nameOfWinner.get(0).increaseScoreBy(points);
-            initializeCorrectAnswers();
-        }else if(nameOfWinner.size() > 1){
-            long max = 999999999;
-            sup = -1;
-            for(int i = 0; i<nameOfWinner.size(); i++){
-                if(nameOfWinner.get(i).getClickTime() < max){
-                    max = nameOfWinner.get(i).getClickTime();
-                    sup = i;
+
+        if(pos.size() == 1){
+            players.get((int) pos.get(0)).increaseScoreBy(points);
+        }else if(pos.size() > 1){
+            int max = (int) pos.get(0);
+            for(int i=1; i<pos.size();i++){
+                if(players.get((int)pos.get(i)).getClickTime() > max){
+                    max = i;
                 }
             }
-            nameOfWinner.get(sup).increaseScoreBy(points);
-            initializeCorrectAnswers();
+            players.get(max).increaseScoreBy(points);
         }
-
-        nameOfWinner.clear();
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName(){return "Thermometer";}
 
+    /**
+     *
+     * @return
+     */
     public String getExplanation(){
         String explanation = "The first player to answer 5 questions correctly earns 5000 points.";
         return explanation;

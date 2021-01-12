@@ -123,24 +123,9 @@ public class HighScore {
     }
 
 
-//    public void roundOver(ArrayList<Player> players){
-//        if(players.size() == 1){
-//            //nothing
-//        }
-//        else{
-//            for(Player player : players){
-//                if(player.getStatus()){
-//                    totalWins.replace(player.getNickname(), totalWins.get(player.getNickname()+1));
-//                }
-//            }
-//
-//        }
-//
-//    }
-
-
     /**
      *
+     * @return
      */
     public String[] getTotalWins() {
         String[] list;
@@ -156,7 +141,10 @@ public class HighScore {
         return list;
     }
 
-
+    /**
+     *
+     * @return
+     */
     public String [] getHighestScores(){
         String [] list;
         if(highestScores.size() == 0){

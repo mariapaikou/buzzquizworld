@@ -21,19 +21,20 @@ public class Round {
     public Type towPlayerMode() {
 
         Type type;
-        int r = random.nextInt(5);
-
-        if (r == 1) {
-            type = new RightAnswer();
-        } else if (r == 2) {
-            type = new Bet();
-        } else if (r == 3) {
-            type = new QuickAnswer();
-        } else if (r == 4) {
-            type = new StopTheTimer();
-        } else {
-            type = new Thermometer();
-        }
+        type = new Thermometer();
+//        int r = random.nextInt(5);
+//
+//        if (r == 1) {
+//            type = new RightAnswer();
+//        } else if (r == 2) {
+//            type = new Bet();
+//        } else if (r == 3) {
+//            type = new QuickAnswer();
+//        } else if (r == 4) {
+//            type = new StopTheTimer();
+//        } else {
+//            type = new Thermometer();
+//        }
         return type;
 
     }

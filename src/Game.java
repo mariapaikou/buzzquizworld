@@ -172,11 +172,37 @@ public class Game {
         type.changePoints();
     }
 
-    public void defaultifyPlayers(ArrayList<Player> playerList){
+    /**
+     *
+     * @param playerList
+     * @param type
+     */
+    public void defaultifyPlayers(ArrayList<Player> playerList, Type type){
         for (Player player: playerList){
             player.setStatus(false);
+            if(type instanceof Bet){
+                player.defaultifyBet();
+            }
         }
     }
+
+    /**
+     *
+     * @param playerList
+     * @return
+     */
+    public boolean checkStreak(ArrayList<Player> playerList){
+        boolean someoneWon = false;
+        for(Player player : playerList){
+            if(player.getStreak() == 5){
+                someoneWon = true;
+                break;
+            }
+        }
+        return someoneWon;
+    }
+
+
     /**
      * Function initializePlayersScore is a void function that sets every players score back to 0 by calling Player's
      * method initializePlayersScore.

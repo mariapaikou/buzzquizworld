@@ -17,7 +17,8 @@ public class Player implements Serializable {
     private boolean status;//0 if answered correctly, 1 if not
     private long clickTime; // int για να αποθηκευουμε κατευθιαν millisecond!  1 sec = 1000 millisecond!
     private int bet;
-    transient private Thread myThread;
+    transient private Thread myThread;// gia thn apothikeush se arxeia
+    private int streak;
 
     public Player(String nickname){
         this.nickname = nickname;
@@ -26,6 +27,7 @@ public class Player implements Serializable {
         clickTime = -1;
         this.myThread = new Thread();
         bet = 0;
+        streak = 0;
     }
 
 
@@ -34,11 +36,11 @@ public class Player implements Serializable {
      * Constructor with no given variable for damage control, it initializes the variables.
      */
     public Player(){
-        //TODO mhpws prepei na dexetai to onoma san orisma gia na mhn xreiazetai o elegzos sthn set?
         this.nickname="Randall Stephens!";
-        score=0;
+        score = 0;
         status = false;
         bet = 0;
+        streak = 0;
     }
 
     public void setNickname(String nickname) {
@@ -50,16 +52,6 @@ public class Player implements Serializable {
     public String getNickname(){
         return this.nickname;
     }
-
-    //den xreiazetai alla tha to sbhsoyme meta
-    /*
-    public void setScore(int score){
-        if(score == 0){
-            this.score=score;
-        }
-
-    }
-     */
 
     public int getScore(){
         return this.score;
@@ -76,6 +68,19 @@ public class Player implements Serializable {
     public void setBet(int bet){this.bet = bet;}
     public int getBet(){return bet;}
 
+    public int getStreak(){return streak;}
+
+    /**
+     *  Method increase streak by one
+     */
+    public void increaseStreak(){
+        streak++;
+    }
+
+    /**
+     * Method sets streak = 0
+     */
+    public void defautifyStreak(){streak = 0;}
 
     /**
      * Function increaseScoreBy accepts the
@@ -102,6 +107,7 @@ public class Player implements Serializable {
     public void defaultifyStatus(){this.status=false;}
 
     public void defaultifyBet(){setBet(0);}
+
 
 
 }

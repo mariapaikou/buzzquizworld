@@ -634,6 +634,11 @@ public class UserInteraction  { //implements KeyListener
      * ROUND i
      */
     public void roundNumber(){
+//        showStatusPanel1.setVisible(false);
+//        showStatusPanel2.setVisible(false);
+//        showScoreTextPanel.setVisible(false);
+//        showScorePanel1.setVisible(false);
+//        showScorePanel2.setVisible(false);
         //Turn off previous panel
         letsGoPanel.setVisible(false);
         con.remove(letsGoPanel);
@@ -687,6 +692,7 @@ public class UserInteraction  { //implements KeyListener
      * through the getName method. Then it explains the way you play the game depending on the type.
      */
     public void announcingTheType(){
+
         RoundNumberPanel.setVisible(false);
         ROkayPanel.setVisible(false);
 

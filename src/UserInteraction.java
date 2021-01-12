@@ -48,7 +48,7 @@ public class UserInteraction  { //implements KeyListener
     private JPanel announcingCategoryPanel;
     private JPanel betPointsPanel, betPointsPanel2, bet250, bet500, bet750, bet1000;
     private JPanel  centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
-    private JPanel showScoreTextPanel, showScorePanel, ROkayPanel, QOkayPanel;
+    private JPanel showScoreTextPanel, showScorePanel1, showScorePanel2, ROkayPanel, QOkayPanel;
     private JPanel correctAnswerTextPanel, correctAnswerPanel, nextQuestion, scoresPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
@@ -1417,11 +1417,17 @@ public class UserInteraction  { //implements KeyListener
         showScoreTextPanel.setBackground(Color.black);
         con.add(showScoreTextPanel);
 
-        showScorePanel = new JPanel();
-        showScorePanel.setBounds(50, 150, 700, 200);
-        showScorePanel.setLayout(new BorderLayout());
-        showScorePanel.setBackground(Color.black);
-        con.add(showScorePanel);
+        showScorePanel1 = new JPanel();
+        showScorePanel1.setBounds(50, 150, 700, 100);
+        showScorePanel1.setLayout(new BorderLayout());
+        showScorePanel1.setBackground(Color.black);
+        con.add(showScorePanel1);
+
+        showScorePanel2 = new JPanel();
+        showScorePanel2.setBounds(50, 250, 700, 100);
+        showScorePanel2.setLayout(new BorderLayout());
+        showScorePanel2.setBackground(Color.black);
+        con.add(showScorePanel2);
 
         JLabel showScoreText = new JLabel("The score is:");
         showScoreText.setFont(new Font("Carlito", Font.PLAIN, 50));
@@ -1430,12 +1436,23 @@ public class UserInteraction  { //implements KeyListener
         showScoreText.setVerticalAlignment(JLabel.CENTER);
         showScoreTextPanel.add(showScoreText);
 
-        JLabel showScore = new JLabel("<html>" + score + "<br/>" + score2 + "</html>", SwingConstants.CENTER);
-        showScore.setFont(new Font("Carlito", Font.PLAIN, 30));
-        showScore.setForeground(Color.WHITE);
-        showScore.setHorizontalAlignment(JLabel.CENTER);
+        JLabel showScore1 = new JLabel(score);
+        showScore1.setFont(new Font("Carlito", Font.PLAIN, 30));
+        showScore1.setForeground(Color.WHITE);
+        showScore1.setHorizontalAlignment(JLabel.CENTER);
         showScoreText.setVerticalAlignment(JLabel.CENTER);
-        showScorePanel.add(showScore);
+        showScorePanel1.add(showScore1);
+
+        JLabel showScore2 = new JLabel(score2);
+        showScore2.setFont(new Font("Carlito", Font.PLAIN, 30));
+        showScore2.setForeground(Color.WHITE);
+        showScore2.setHorizontalAlignment(JLabel.CENTER);
+        showScoreText.setVerticalAlignment(JLabel.CENTER);
+        showScorePanel2.add(showScore2);
+
+        if(numberOfPlayers == 1){
+            showScorePanel2.setVisible(false);
+        }
 
         //questions++;
         //questionNumber();

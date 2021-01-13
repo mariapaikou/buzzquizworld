@@ -176,7 +176,7 @@ public class UserInteraction  { //implements KeyListener
             }
         });
         totalWinsButtonPanel.add(totalWinsButton);
-        game.readHighScores();
+        game.readScores();
     }
 
     /**
@@ -184,9 +184,10 @@ public class UserInteraction  { //implements KeyListener
      */
     private void showHighScores(){
         String [] data = game.getHighScores();
+        System.out.println(data.length + "data.length");
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for(String sting: data){
-            System.out.println(sting);
+            System.out.println("string is" + sting);
             listModel.addElement(sting);
         }
         JList<String> list = new JList<>(listModel);
@@ -1336,9 +1337,12 @@ public class UserInteraction  { //implements KeyListener
                 times[1] = endTime2;
                 answers.add(answer1);
                 answers.add(answer2);
+                System.out.println("ansewer1" + answer1);
+                System.out.println("answer2" + answer2);
                 game.setStatuses(answers,question.getCorrectAnswer(),players);
                 answer1 = null;
                 answer2 = null;
+                answers.clear();
                 game.setTime(times,startTime,type, players);
                 game.changePoints(type);
                 frame.removeKeyListener(this);
@@ -1531,8 +1535,9 @@ public class UserInteraction  { //implements KeyListener
             }else if(type instanceof Thermometer && game.checkStreak(players)){
                 defaultNumQuestions = game.getNumberOfQuestions();
             }
-            questionNumber();
             timer3.stop();
+            questionNumber();
+
         });
 
         timer3.start();
@@ -1572,17 +1577,25 @@ public class UserInteraction  { //implements KeyListener
         playerFinalScore.setVerticalAlignment(JLabel.CENTER);
         playerFinalScorePanel.add(playerFinalScore);
 
+
+
         timer2 = new Timer(3000, e -> {
-            replay();
+            playerFinalScorePanel.setVisible(false);
+            playerFinalScoreTextPanel.setVisible(false);
             timer2.stop();
+            replay();
+
         });
         timer2.start();
+
 
 
     }
     public void winner(){
         RoundNumberPanel.setVisible(false);
         ROkayPanel.setVisible(false);
+
+
 
         String TheWinner = null;
 
@@ -1653,6 +1666,12 @@ public class UserInteraction  { //implements KeyListener
         finalRightScorePanel.add(finaRightScore);
 
         timer3 = new Timer(3000, e -> {
+            FinalScoresPanel.setVisible(false);
+            winnerPanel.setVisible(false);
+            AndTheWinnerIsPanel.setVisible(false);
+            finalRightScorePanel.setVisible(false);
+            finalLeftScorePanel.setVisible(false);
+            finalRightScorePanel.setVisible(false);
             replay();
             timer3.stop();
         });
@@ -1660,19 +1679,26 @@ public class UserInteraction  { //implements KeyListener
     }
 
     public void replay(){
+
+        game.gameEnd(players);
+        players.clear();
+        questions = 1;
+        rounds = 1;
         game.initializePlayersScore(players);
         JDialog.setDefaultLookAndFeelDecorated(true);
         int response = JOptionPane.showConfirmDialog(null, "Would you like to play again?", "Replay", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.NO_OPTION) {
             System.exit(0);
+            frame.dispose();
         }
         else if (response == JOptionPane.YES_OPTION) {
             basicDisplay();
         }
         else if (response == JOptionPane.CLOSED_OPTION) {
             System.exit(0);
+            frame.dispose();
         }
-        frame.dispose();
+
     }
 
 

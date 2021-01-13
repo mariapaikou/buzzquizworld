@@ -17,8 +17,8 @@ import java.util.Scanner;
 public class Game {
     //    private ArrayList <Player> playerList;
     private ArrayList<Questions> allQuestions;
-    private static int howManyRounds = 3;
-    private int numberOfQuestions = 5; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
+    private static int howManyRounds = 1;
+    private int numberOfQuestions = 2; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
     // private final UserInteraction display;
     private Round round; // einai swsto to final???
     private ReadQuestionsFile readQuestionsFile;
@@ -26,44 +26,7 @@ public class Game {
     private int questionPosition = 0;
 
 
-    //    /**
-//     * Method setPlayerList sets the playerList and loads the files by calling the gameStarted method
-//     * @param playerList the arrayList that contains the players for this game
-//     */
-//    public void setPlayerList(ArrayList<Player> playerList){
-//        this.playerList = playerList;
-//        scores.gameStarted();
-//    }
-//    public ArrayList <Player> getPlayerList(){
-//        return playerList;
-//    }
-    public int getHowManyRounds() {
-        return howManyRounds;
-    }
 
-    public int getNumberOfQuestions() {
-        return numberOfQuestions;
-    }
-
-    public void readHighScores() {
-        scores.gameStarted();
-    }
-
-    public void setHowManyRounds(int howManyRounds) {
-        this.howManyRounds = howManyRounds;
-    }
-
-    public void setNumberOfQuestions(int numberOfQuestions) {
-        this.numberOfQuestions = numberOfQuestions;
-    }
-
-    public String[] getHighScores() {
-        return scores.getHighestScores();
-    }
-
-    public String[] getTotalWins() {
-        return scores.getTotalWins();
-    }
 
     /**
      * The constructor initializes the UserInteraction object and the two ArrayLists, one for the
@@ -86,12 +49,33 @@ public class Game {
 
     }
 
+    public int getHowManyRounds() {
+        return howManyRounds;
+    }
+
+    public int getNumberOfQuestions() {
+        return numberOfQuestions;
+    }
+
+    public void readScores() {
+        scores.gameStarted();
+    }
+
+
+
+
+    public String[] getHighScores() {
+        return scores.getHighestScores();
+    }
+
+    public String[] getTotalWins() {
+        return scores.getTotalWins();
+    }
     /**
      * Method getRandomType returns a random type of game
      *
      * @return Type
      */
-
 
     public Type getRandomType(ArrayList<Player> playerList) {
         Type type;
@@ -223,6 +207,11 @@ public class Game {
      */
     public void randomizeQuestions() {
         Collections.shuffle(allQuestions);
+    }
+
+
+    public void gameEnd(ArrayList<Player> playerList){
+        scores.gameEnded(playerList);
     }
 
 }

@@ -26,6 +26,8 @@ public class HighScore {
 //        }else if(players.size() == 1){
 //            loadHighestScoresFromFile(onePlayerModeFile);
 //        }
+        System.out.println(totalWins.size()+ " totalwinsSize");
+        System.out.println(highestScores.size() + "highscoressize");
 
     }
 
@@ -113,6 +115,7 @@ public class HighScore {
     }
 
     public void loadHighestScoresFromFile(String file2)  {
+
                     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file2))) {
                         highestScores = (LinkedList<Player>) ois.readObject();
                     } catch (IOException | ClassNotFoundException e) {
@@ -132,7 +135,7 @@ public class HighScore {
         if (totalWins.size() == 0) {
             list = new String[]{"There are no total wins yet!"};
         } else {
-            list = new String[(totalWins.size() - 1) / 2];
+            list = new String[(totalWins.size())];
             for (int i = 0; i < list.length; i += 2) {
                 list[i] = (totalWins.get(i).getNickname() + " " + totalWins.get(i).getScore() + " " + totalWins.get(i + 1).getNickname() + " " + totalWins.get(i + 1).getScore());
             }
@@ -150,7 +153,7 @@ public class HighScore {
         if(highestScores.size() == 0){
             list = new String[]{"There are no high scores yet!"};
         }else{
-            list= new String[highestScores.size()-1];
+            list= new String[highestScores.size()];
             for(int i=0; i<highestScores.size();i++){
                 list[i] = (highestScores.get(i).getNickname() + " " + highestScores.get(i).getScore());
             }

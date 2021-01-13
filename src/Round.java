@@ -21,7 +21,7 @@ public class Round {
     public Type towPlayerMode() {
 
         Type type;
-        type = new Thermometer();
+        type = new QuickAnswer();
 //        int r = random.nextInt(5);
 //
 //        if (r == 1) {

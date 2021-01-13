@@ -39,38 +39,24 @@ public class Thermometer extends Type {
 
         if (reachedFive.size() == 1){
             reachedFive.get(0).increaseScoreBy(points);
-        }else if(reachedFive.size() == 2){
-            if (reachedFive.get(0).getClickTime() > reachedFive.get(1).getClickTime()){
+            defaultifyStreaks();
+        }else if(reachedFive.size() == 2) {
+            if (reachedFive.get(0).getClickTime() > reachedFive.get(1).getClickTime()) {
                 reachedFive.get(0).increaseScoreBy(points);
-            }else{
+            } else {
                 reachedFive.get(1).increaseScoreBy(points);
             }
-        }else{
+            defaultifyStreaks();
         }
 
-//        ArrayList pos = new ArrayList();
-//
-//        for(int i=0; i<players.size(); i++){
-//            if((players.get(i).getStreak() == 5) && players.get(i).getStatus()){
-//                System.out.println("players streak " + players.get(i).getStreak());
-//                System.out.println("elegxos ths thermometer");
-//                pos.add(i);
-//            }
-//        }
-//
-//
-//        if(pos.size() == 1){
-//            players.get((int) pos.get(0)).increaseScoreBy(points);
-//        }else if(pos.size() > 1){
-//            int max = (int) pos.get(0);
-//            for(int i=1; i<pos.size();i++){
-//                if(players.get((int)pos.get(i)).getClickTime() > max){
-//                    max = i;
-//                }
-//            }
-//            players.get(max).increaseScoreBy(points);
-//        }
 
+    }
+
+
+    private void defaultifyStreaks(){
+        for (Player player : players){
+            player.defautifyStreak();
+        }
     }
 
     /**

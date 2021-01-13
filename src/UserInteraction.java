@@ -1443,7 +1443,7 @@ public class UserInteraction  { //implements KeyListener
             answered1 = players.get(0).getNickname() + ", you guessed correctly!";
         }
         if(status2){
-            answered1 = players.get(1).getNickname() + ", you guessed correctly!";
+            answered2 = players.get(1).getNickname() + ", you guessed correctly!";
         }
 
         showStatusPanel1 = new JPanel();

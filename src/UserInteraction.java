@@ -1516,7 +1516,7 @@ public class UserInteraction  { //implements KeyListener
             showScorePanel2.setVisible(false);
         }
 
-        timer3 = new Timer(2000, e -> {
+        timer3 = new Timer(4000, e -> {
             System.out.println("inside timer3");
             game.defaultifyPlayers(players, type);
             showStatusPanel1.setVisible(false);
@@ -1528,6 +1528,8 @@ public class UserInteraction  { //implements KeyListener
             questions++;
             if(type instanceof Thermometer && !game.checkStreak(players)){
                 defaultNumQuestions++;
+            }else if(type instanceof Thermometer && game.checkStreak(players)){
+                defaultNumQuestions = game.getNumberOfQuestions();
             }
             questionNumber();
             timer3.stop();

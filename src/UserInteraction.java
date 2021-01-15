@@ -531,7 +531,7 @@ public class UserInteraction  {
         });
         timer1.start();
     }
-
+    //Four same labels in LetsGo
     private void setLabelFeatures(JLabel text) {
         text.setBounds(0, 100, 800, 400);
         text.setBackground(Color.black);
@@ -542,7 +542,9 @@ public class UserInteraction  {
         letsGoPanel.add(text);
     }
 
-    //Class to limit the number of characters in a JText
+    /**
+     * Class to limit the number of characters in a JText.
+     */
     public static class JTextFieldLimit extends PlainDocument {
         private final int limit;
 
@@ -560,7 +562,7 @@ public class UserInteraction  {
     }
 
     /**
-     * ROUND i
+     * Shows to the user which round is the round that is about to start.
      */
     public void roundNumber(){
         //Turn off previous panel
@@ -611,8 +613,7 @@ public class UserInteraction  {
     }
 
     /**
-     * Function announcingTheType accepts a Type object and prints a message that announces the type name
-     * through the getName method. Then it explains the way you play the game depending on the type.
+     * Selects a random type and announces it to the users.
      */
     public void announcingTheType(){
 
@@ -671,7 +672,8 @@ public class UserInteraction  {
     }
 
     /**
-     * QUESTION j
+     * Displays the number of the question will be asked (there is a default number in a round) and selects a question
+     * from the randomized database.
      */
     public void questionNumber(){
         TypePanel.setVisible(false);
@@ -723,8 +725,7 @@ public class UserInteraction  {
     }
 
     /**
-     * Function announcingCategory accepts a Questions type object and announces the category of the question
-     * to the player.
+     * Informs the player what the category of the upcoming question is.
      */
     public void announcingCategory(){
         QuestionNumberPanel.setVisible(false);
@@ -767,9 +768,8 @@ public class UserInteraction  {
     }
 
     /**
-     * BetPoints function, asks the player to bet and saves the amount in an int variable.
-     *
-     * @return the betPoints variable, which contains the points bet by the player.
+     * If the type for the round is Bet, then before asking the question and after announcing the category, this method
+     * requests the player to make a bet, choosing between 250, 500, 750 and 1000 points.
      */
     public void betPoints() {
         //turn off previous panels
@@ -902,6 +902,10 @@ public class UserInteraction  {
         });
         bet1000.add(bet1000Button);
     }
+
+    /**
+     * In case there are two players, this method is used to accept the second player's bet.
+     */
     public void betPoints2() {
         betPointsPanel.setVisible(false);
 
@@ -1003,9 +1007,9 @@ public class UserInteraction  {
         bet1000.add(bet1000Button);
     }
 
-
     /**
-     * This void function accepts a Questions type object and prints the question and the four possible answers.
+     * This method displays the question accompanied by the four possible answers and an image if necessary.
+     * It also implements a key listener in order to receive the answer of the user(s).
      */
     public void askTheQuestion(){
         announcingCategoryPanel.setVisible(false);
@@ -1156,6 +1160,11 @@ public class UserInteraction  {
 
     }
 
+    /**
+     * KeyListener stores the answer(s) from the keyboard and after checking their validness sets changes the status
+     * of the player(s) if needed. It also stores the amount of time that passed until an answer was given for each
+     * player, if the type of round requests it.
+     */
     class MyKeyListener extends KeyAdapter {
 
         public void keyPressed(KeyEvent event){
@@ -1300,6 +1309,9 @@ public class UserInteraction  {
         timer1.start();
     }
 
+    /**
+     * This method informs the player(s) about the accuracy of their answer and displays the current score situation.
+     */
     public void showScores(){
         correctAnswerPanel.setVisible(false);
         correctAnswerTextPanel.setVisible(false);
@@ -1421,7 +1433,7 @@ public class UserInteraction  {
     }
 
     /**
-     * finalScores prints the scores of each player at the end of the game
+     * finalScores shows the score that the player in one-player mode has when the game ends.
      */
     public void finalScore(){
         RoundNumberPanel.setVisible(false);
@@ -1461,6 +1473,9 @@ public class UserInteraction  {
         timer2.start();
     }
 
+    /**
+     * Announces the winner of the two-player game accompanied by the final score.
+     */
     public void winner(){
         RoundNumberPanel.setVisible(false);
         ROkayPanel.setVisible(false);
@@ -1546,6 +1561,10 @@ public class UserInteraction  {
         timer3.start();
     }
 
+    /**
+     * Asks the user if they want to play again and initializes all the objects used in the game in order to prepare
+     * for a new game.
+     */
     public void replay(){
 
         game.gameEnd(players);
@@ -1568,6 +1587,10 @@ public class UserInteraction  {
         }
     }
 
+    /**
+     * The main method creates a UserInteraction object, which contains all the graphics for the game and calls the first
+     * method.
+     */
     public static void main(String [] args){
         UserInteraction userInteraction = new UserInteraction();
         userInteraction.basicDisplay();

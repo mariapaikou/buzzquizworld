@@ -23,7 +23,6 @@ public class Thermometer extends Type {
     public void changePoints(){
 
         ArrayList<Player> reachedFive = new ArrayList<>();
-
         for (Player player : players) {
             if (player.getStatus()) {
                 player.increaseStreak();
@@ -37,7 +36,7 @@ public class Thermometer extends Type {
             reachedFive.get(0).increaseScoreBy(points);
             defaultifyStreaks();
         }else if(reachedFive.size() == 2) {
-            if (reachedFive.get(0).getClickTime() > reachedFive.get(1).getClickTime()) {
+            if (reachedFive.get(0).getClickTime() < reachedFive.get(1).getClickTime()) {
                 reachedFive.get(0).increaseScoreBy(points);
             } else {
                 reachedFive.get(1).increaseScoreBy(points);

@@ -117,7 +117,10 @@ public class Game {
     }
 
     /**
-     *
+     * This method sets the clickTime for the players depending on the type of game they are playing. StopTheTimer
+     * needs to save the time that was left after the player's click and QuickAnswer and Thermometer need to save the
+     * milliseconds that passed until the player's click in order to gather the needed information for updating the
+     * scores later.
      * @param clickTimes an array of long variables that stores the system time in milliseconds of the moment that the
      *                   player answered the question.
      * @param startTime is the moment that the question appeared on the screen in milliseconds.
@@ -141,11 +144,19 @@ public class Game {
         }
     }
 
+    /**
+     * Changes the score of all the players depending on the type of round they are currently playing.
+     * @param type the type of the round for the last question.
+     */
     public void changePoints(Type type) {
         type.changePoints();
-
     }
 
+    /**
+     * Returns all the variables in a player that were changed after each question temporarily to their default state.
+     * @param playerList the list of all the players
+     * @param type the type of round the question the players just answered belonged to
+     */
     public void defaultifyPlayers(ArrayList<Player> playerList, Type type){
         for (Player player: playerList){
             player.setStatus(false);
@@ -155,6 +166,11 @@ public class Game {
         }
     }
 
+    /**
+     * This method checks
+     * @param playerList
+     * @return
+     */
     public boolean checkStreak(ArrayList<Player> playerList){
         boolean someoneWon = false;
         for(Player player : playerList){

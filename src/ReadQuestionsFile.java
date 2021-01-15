@@ -21,7 +21,7 @@ public class ReadQuestionsFile {
      * time stores this data inside new Questions objects and returns an ArrayList that contains all the questions
      * red from file
      * @param file String
-     * @return ArrayList<Questions>
+     * @return ArrayList of Questions
      */
     public ArrayList<Questions> loadQuestions(String file){
 

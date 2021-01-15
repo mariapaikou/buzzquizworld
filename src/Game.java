@@ -17,6 +17,8 @@ public class Game {
     /**
      * The constructor initializes the variables for the two files that store the scores and reads the file that
      * contains the questions.
+     * @param onePlayerMode name of file for the one player mode
+     * @param towPlayerMode name of file for the tow player mode
      */
     public Game(String onePlayerMode, String towPlayerMode) {
         ReadQuestionsFile readQuestionsFile = new ReadQuestionsFile();
@@ -70,6 +72,7 @@ public class Game {
     /**
      * @return selects an acceptable random type, depending on the game mode (1-player, 2-player), for the round
      * creates and returns the analogue object.
+     * @param playerList an array list of players
      */
     public Type getRandomType(ArrayList<Player> playerList) {
         Type type;

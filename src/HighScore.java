@@ -37,7 +37,7 @@ public class HighScore {
     /**
      * Method gameEnded accepts an arrayList of players. If we are at the one player mode it changes the
      * onePlayerModeFile accordingly. If we are at the tow player mode it stores the players to the towPlayerModeFile.
-     * @param players ArrayList<Players>
+     * @param players ArrayList of Players
      */
     public void gameEnded(ArrayList<Player> players){
         boolean added = false;

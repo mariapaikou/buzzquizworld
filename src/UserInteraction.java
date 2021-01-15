@@ -312,6 +312,7 @@ public class UserInteraction  {
 
     /**
      * Function God asks the user to insert a nickname and then creates a player object with that input.
+     * @param numberOfPlayers the number of players in this game
      */
     public void God(int numberOfPlayers){
 
@@ -1547,6 +1548,7 @@ public class UserInteraction  {
     /**
      * The main method creates a UserInteraction object, which contains all the graphics for the game and calls the first
      * method.
+     * @param args arguments for the main method
      */
     public static void main(String [] args){
         UserInteraction userInteraction = new UserInteraction();

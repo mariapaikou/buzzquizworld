@@ -7,15 +7,12 @@ public class QuickAnswer extends Type {
     public QuickAnswer(){
         super();
         points = 500;
-
-
     }
 
     /**
-     * Function changePoints checks the players ArrayList and increases the points of the first player who answers
+     * ChangePoints checks the players ArrayList and increases the points of the first player who answers
      * correctly by 1000. For every other player that answered correctly the function adds to the players score
      * 500 points.
-     *
      */
     public void changePoints(){
         ArrayList<Player> correctMan = new ArrayList<>();
@@ -41,18 +38,25 @@ public class QuickAnswer extends Type {
         defaultifyClickTime();
     }
 
-
+    /**
+     * Sets each player's clickTime back to zero.
+     */
     private void defaultifyClickTime(){
         for(Player player : players){
             player.setClickTime(0);
         }
     }
 
+    /**
+     * @return the name of the class in the form of a String.
+     */
     public String getName(){return "QuickAnswer";}
 
+    /**
+     * @return a String with a brief explanation of this type of round.
+     */
     public String getExplanation(){
-        String explanation = "The first player to answer correctly earns 1000 points and the second player 500 points";
-        return explanation;
+        return "The first player to answer correctly earns 1000 points and the second player 500 points";
     }
 
 }

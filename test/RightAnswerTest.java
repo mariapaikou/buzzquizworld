@@ -22,8 +22,6 @@ class RightAnswerTest {
         rightAnswer.setPlayersList(players);
     }
 
-
-
     @Test
     void changePoints() {
         players.get(0).setStatus(true);

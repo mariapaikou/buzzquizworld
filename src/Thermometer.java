@@ -1,39 +1,35 @@
 import java.util.ArrayList;
 
+/**
+ * Thermometer extends Type, and it stores the information needed for scoring this type of round. The first player to
+ * answer five questions correctly wins 5000 points.
+ */
 
 public class Thermometer extends Type {
 
     private final int points;
-//    private ArrayList<Player> nameOfWinner;
 
-    /**
-     *
-     */
     public Thermometer(){
 
         super();
         points = 5000;
-//        nameOfWinner = new ArrayList<>();
 
     }
 
-
-
     /**
-     *
+     * ChangePoints increases the streak for every player that answered correctly until at least one of them gets a
+     * streak of five correct answers. The first one to reach a streak of five has their score increased by 5000.
      */
     public void changePoints(){
 
         ArrayList<Player> reachedFive = new ArrayList<>();
 
-        for(int i=0; i<players.size(); i++){
-            if (players.get(i).getStatus()){
-                players.get(i).increaseStreak();
-                System.out.println("streak " + players.get(i). getNickname() + " " + players.get(i).getStreak());
+        for (Player player : players) {
+            if (player.getStatus()) {
+                player.increaseStreak();
             }
-            if (players.get(i).getStreak() == 5){
-                reachedFive.add(players.get(i));
-                System.out.println("add player to reachedFive");
+            if (player.getStreak() == 5) {
+                reachedFive.add(player);
             }
         }
 
@@ -49,28 +45,26 @@ public class Thermometer extends Type {
             defaultifyStreaks();
         }
 
-
     }
 
-
+    /**
+     * Goes through the list of the players and sets their streak to default.
+     */
     private void defaultifyStreaks(){
         for (Player player : players){
-            player.defautifyStreak();
+            player.defaultifyStreak();
         }
     }
 
     /**
-     *
-     * @return
+     * @return the name of the class in the form of a String.
      */
     public String getName(){return "Thermometer";}
 
     /**
-     *
-     * @return
+     * @return a String with a brief explanation of this type of round.
      */
     public String getExplanation(){
-        String explanation = "The first player to answer 5 questions correctly earns 5000 points.";
-        return explanation;
+        return "The first player to answer 5 questions correctly earns 5000 points.";
     }
 }

@@ -8,7 +8,7 @@ class PlayerTest {
         player = new Player();
     }
 
-    @Test //ok!
+    @Test
     void setNickname() {
 
         String nickname = "";
@@ -23,7 +23,7 @@ class PlayerTest {
 
     }
 
-    @Test //ok!
+    @Test
     void getNickname() {
 
         String nickname = "someone";
@@ -34,7 +34,7 @@ class PlayerTest {
     }
 
 
-    @Test //ok!
+    @Test
     void getScore() {
 
         assertEquals(0,player.getScore());
@@ -46,7 +46,7 @@ class PlayerTest {
 
     }
 
-    @Test //ok!
+    @Test
     void setStatus() {
 
         player.setStatus(true);
@@ -57,14 +57,14 @@ class PlayerTest {
 
     }
 
-    @Test //ok!
+    @Test
     void getStatus() {
 
         assertEquals(false,player.getStatus());
 
     }
 
-    @Test //ok!
+    @Test
     void increaseScoreBy() {
 
         int score = -600;
@@ -73,18 +73,7 @@ class PlayerTest {
 
     }
 
-    @Test //ok!
-    void initializeScore() {
-
-        int score = 600;
-        player.increaseScoreBy(score);
-        player.initializeScore();
-        assertEquals(0,player.getScore());
-
-
-    }
-
-    @Test //ok!
+    @Test
     void defaultfyStatus() {
 
         player.setStatus(true);

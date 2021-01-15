@@ -199,19 +199,6 @@ public class Game {
 
 
     /**
-     * Function initializePlayersScore is a void function that sets every players score back to 0 by calling Player's
-     * method initializePlayersScore.
-     */
-    public void initializePlayersScore(ArrayList<Player> playerList) {
-
-        for (Player player : playerList) {
-            player.initializeScore();
-        }
-
-    }
-
-
-    /**
      * Method randomizeQuestions  shuffles the allQuestions ArrayList.
      *
      * @value allQuestions is the ArrayList that contains all the Questions objects available.

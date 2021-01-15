@@ -9,11 +9,10 @@ import java.util.ArrayList;
 
 
 /**
- * This class contains all the interactions with the user, asks all the questions, prints all
- * the messages and collects the data that we need from the users.
+ * UserInteraction class represent the interaction with the user, accepts all the inputs to manage the actions the program has to do
+ * and implements the GUI.
  */
-
-public class UserInteraction  { //implements KeyListener
+public class UserInteraction  {
     private final JFrame frame;
     private Questions question;
     private final Game game;
@@ -76,7 +75,7 @@ public class UserInteraction  { //implements KeyListener
         //Label with the text
         JLabel startText = new JLabel("Buzz Quiz!");
         //Look & Layout
-        startText.setFont(new Font("Carlito", Font.PLAIN, 90));
+        startText.setFont(new Font("Carlita", Font.PLAIN, 90));
         startText.setForeground(Color.WHITE);
         startText.setHorizontalAlignment(JLabel.CENTER);
         startTextPanel.add(startText);
@@ -94,7 +93,7 @@ public class UserInteraction  { //implements KeyListener
         startButton.setBackground(Color.PINK);
         startButton.setForeground(Color.WHITE);
         startButton.setSize(200, 80);
-        startButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        startButton.setFont(new Font("Carlita", Font.PLAIN, 30));
         //Action
         startButton.addActionListener(e -> {
             startTextPanel.setVisible(false);
@@ -115,7 +114,7 @@ public class UserInteraction  { //implements KeyListener
         highScoreButton.setBackground(Color.PINK);
         highScoreButton.setForeground(Color.WHITE);
         highScoreButton.setSize(200,80);
-        highScoreButton.setFont(new Font("Carlito", Font.PLAIN,30));
+        highScoreButton.setFont(new Font("Carlita", Font.PLAIN,30));
         //action listener!
         highScoreButton.addActionListener(e -> {
             startTextPanel.setVisible(false);
@@ -135,7 +134,7 @@ public class UserInteraction  { //implements KeyListener
         totalWinsButton.setBackground(Color.PINK);
         totalWinsButton.setForeground(Color.WHITE);
         totalWinsButton.setSize(200,80);
-        totalWinsButton.setFont(new Font("Carlito", Font.PLAIN,30));
+        totalWinsButton.setFont(new Font("Carlita", Font.PLAIN,30));
         //action listener
         totalWinsButton.addActionListener(e -> {
             startTextPanel.setVisible(false);
@@ -160,7 +159,7 @@ public class UserInteraction  { //implements KeyListener
         }
         JList<String> list = new JList<>(listModel);
         list.setBounds(100,50,600,400);
-        list.setFont(new Font("Carlito", Font.PLAIN, 30));
+        list.setFont(new Font("Carlita", Font.PLAIN, 30));
         list.setBackground(Color.PINK);
         JPanel pane = new JPanel();
         pane.setBounds(0,0,800,400);
@@ -176,7 +175,7 @@ public class UserInteraction  { //implements KeyListener
         backButton.setBackground(Color.BLACK);
         backButton.setForeground(Color.WHITE);
         backButton.setSize(100,100);
-        backButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        backButton.setFont(new Font("Carlita", Font.PLAIN, 30));
         //Action Listener
         backButton.addActionListener(e -> {
             pane.setVisible(false);
@@ -208,7 +207,7 @@ public class UserInteraction  { //implements KeyListener
 
         JList<String> list = new JList<>(listModel);
         //list.setBounds(200,50,500,400);
-        list.setFont(new Font("Carlito", Font.PLAIN, 30));
+        list.setFont(new Font("Carlita", Font.PLAIN, 30));
         list.setBackground(Color.PINK);
       //  list.setVisibleRowCount(5);
         JPanel pane = new JPanel();
@@ -274,7 +273,7 @@ public class UserInteraction  { //implements KeyListener
         HMPText.setBounds(100,100,500,250);
         HMPText.setBackground(Color.black);
         HMPText.setForeground(Color.WHITE);
-        HMPText.setFont(new Font("Carlito", Font.PLAIN, 30));
+        HMPText.setFont(new Font("Carlita", Font.PLAIN, 30));
         HMPText.setLineWrap(true);
         HMPText.setEditable(false);
         HMPPanel.add(HMPText);
@@ -299,7 +298,7 @@ public class UserInteraction  { //implements KeyListener
         onePlayer.setBackground(Color.BLACK);
         onePlayer.setForeground(Color.WHITE);
         onePlayer.setSize(400, 150);
-        onePlayer.setFont(new Font("Carlito", Font.PLAIN, 30));
+        onePlayer.setFont(new Font("Carlita", Font.PLAIN, 30));
         //Action
         onePlayer.addActionListener(e -> {
             HMPPanel.setVisible(false);
@@ -316,7 +315,7 @@ public class UserInteraction  { //implements KeyListener
         twoPlayers.setBackground(Color.BLACK);
         twoPlayers.setForeground(Color.WHITE);
         twoPlayers.setSize(400, 150);
-        twoPlayers.setFont(new Font("Carlito", Font.PLAIN, 30));
+        twoPlayers.setFont(new Font("Carlita", Font.PLAIN, 30));
         //Action
         twoPlayers.addActionListener(e -> {
             HMPPanel.setVisible(false);
@@ -349,7 +348,7 @@ public class UserInteraction  { //implements KeyListener
         NameText.setBounds(100,100,500,100);
         NameText.setBackground(Color.black);
         NameText.setForeground(Color.WHITE);
-        NameText.setFont(new Font("Carlito", Font.PLAIN, 30));
+        NameText.setFont(new Font("Carlita", Font.PLAIN, 30));
         NameText.setLineWrap(true);
         NameText.setEditable(false);
         NamePanelText.add(NameText);
@@ -370,7 +369,7 @@ public class UserInteraction  { //implements KeyListener
         nickname.setColumns(7);
         nickname.setBackground(Color.white);
         nickname.setForeground(Color.black);
-        nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
+        nickname.setFont(new Font("Carlita", Font.PLAIN, 30));
         nickname.setDocument(new JTextFieldLimit(10));
 
         //Panel for the button
@@ -385,7 +384,7 @@ public class UserInteraction  { //implements KeyListener
         readyButton.setBackground(Color.BLACK);
         readyButton.setForeground(Color.WHITE);
         readyButton.setSize(100, 100);
-        readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        readyButton.setFont(new Font("Carlita", Font.PLAIN, 30));
         readyPanel.add(readyButton);
         readyButton.addActionListener(e -> {
             Player playerOne = new Player();
@@ -434,7 +433,7 @@ public class UserInteraction  { //implements KeyListener
         NameText.setBounds(100,100,500,100);
         NameText.setBackground(Color.black);
         NameText.setForeground(Color.WHITE);
-        NameText.setFont(new Font("Carlito", Font.PLAIN, 30));
+        NameText.setFont(new Font("Carlita", Font.PLAIN, 30));
         NameText.setLineWrap(true);
         NameText.setEditable(false);
         NamePanelText.add(NameText);
@@ -455,7 +454,7 @@ public class UserInteraction  { //implements KeyListener
         nickname.setColumns(7);
         nickname.setBackground(Color.white);
         nickname.setForeground(Color.black);
-        nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
+        nickname.setFont(new Font("Carlita", Font.PLAIN, 30));
         nickname.setDocument(new JTextFieldLimit(10));
 
         //Panel for the button
@@ -470,7 +469,7 @@ public class UserInteraction  { //implements KeyListener
         readyButton.setBackground(Color.BLACK);
         readyButton.setForeground(Color.WHITE);
         readyButton.setSize(100, 100);
-        readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        readyButton.setFont(new Font("Carlita", Font.PLAIN, 30));
         readyPanel.add(readyButton);
 
         System.out.println("inside god2!");
@@ -573,7 +572,7 @@ public class UserInteraction  { //implements KeyListener
         text.setBounds(0, 100, 800, 400);
         text.setBackground(Color.black);
         text.setForeground(Color.WHITE);
-        text.setFont(new Font("Carlito", Font.PLAIN, 300));
+        text.setFont(new Font("Carlita", Font.PLAIN, 300));
         text.setHorizontalAlignment(JLabel.CENTER);
         text.setVerticalAlignment(JLabel.CENTER);
         letsGoPanel.add(text);
@@ -619,7 +618,7 @@ public class UserInteraction  { //implements KeyListener
             roundLabel.setBounds(0, 50, 800, 200);
             roundLabel.setBackground(Color.PINK);
             roundLabel.setForeground(Color.WHITE);
-            roundLabel.setFont(new Font("Carlito", Font.PLAIN, 200));
+            roundLabel.setFont(new Font("Carlita", Font.PLAIN, 200));
             roundLabel.setHorizontalAlignment(JLabel.CENTER);
             roundLabel.setVerticalAlignment(JLabel.CENTER);
             RoundNumberPanel.add(roundLabel);
@@ -634,7 +633,7 @@ public class UserInteraction  { //implements KeyListener
             okayButton.setBackground(Color.PINK);
             okayButton.setForeground(Color.WHITE);
             okayButton.setSize(50, 50);
-            okayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+            okayButton.setFont(new Font("Carlita", Font.PLAIN, 30));
             ROkayPanel.add(okayButton);
             con.add(ROkayPanel);
             okayButton.addActionListener(e -> announcingTheType());
@@ -672,7 +671,7 @@ public class UserInteraction  { //implements KeyListener
         typeLabel.setBounds(50, 50, 700, 50);
         typeLabel.setBackground(Color.black);
         typeLabel.setForeground(Color.WHITE);
-        typeLabel.setFont(new Font("Carlito", Font.PLAIN, 30));
+        typeLabel.setFont(new Font("Carlita", Font.PLAIN, 30));
         typeLabel.setHorizontalAlignment(JLabel.CENTER);
         typeLabel.setVerticalAlignment(JLabel.CENTER);
         TypePanel.add(typeLabel);
@@ -689,7 +688,7 @@ public class UserInteraction  { //implements KeyListener
         typeExplanationArea.setBounds(50, 100, 700, 300);
         typeExplanationArea.setBackground(Color.black);
         typeExplanationArea.setForeground(Color.WHITE);
-        typeExplanationArea.setFont(new Font("Carlito", Font.PLAIN, 30));
+        typeExplanationArea.setFont(new Font("Carlita", Font.PLAIN, 30));
         typeExplanationArea.setLineWrap(true);
 
         TypeExplanationPanel.add(typeExplanationArea);
@@ -705,7 +704,7 @@ public class UserInteraction  { //implements KeyListener
         okay.setBackground(Color.BLACK);
         okay.setForeground(Color.WHITE);
         okay.setSize(50, 50);
-        okay.setFont(new Font("Carlito", Font.PLAIN, 30));
+        okay.setFont(new Font("Carlita", Font.PLAIN, 30));
         okay.addActionListener(e -> questionNumber());
         typeOkayPanel.add(okay);
 
@@ -733,7 +732,7 @@ public class UserInteraction  { //implements KeyListener
             questionLabel.setBounds(0, 50, 800, 200);
             questionLabel.setBackground(Color.black);
             questionLabel.setForeground(Color.WHITE);
-            questionLabel.setFont(new Font("Carlito", Font.PLAIN, 150));
+            questionLabel.setFont(new Font("Carlita", Font.PLAIN, 150));
             questionLabel.setHorizontalAlignment(JLabel.CENTER);
             questionLabel.setVerticalAlignment(JLabel.CENTER);
             QuestionNumberPanel.add(questionLabel);
@@ -744,14 +743,14 @@ public class UserInteraction  { //implements KeyListener
             QOkayPanel.setBackground(Color.YELLOW);
 
             //next method button
-            JButton qokayButton = new JButton("Okay");
-            qokayButton.setBackground(Color.PINK);
-            qokayButton.setForeground(Color.WHITE);
-            qokayButton.setSize(50, 50);
-            qokayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
-            QOkayPanel.add(qokayButton);
+            JButton okayButton = new JButton("Okay");
+            okayButton.setBackground(Color.PINK);
+            okayButton.setForeground(Color.WHITE);
+            okayButton.setSize(50, 50);
+            okayButton.setFont(new Font("Carlita", Font.PLAIN, 30));
+            QOkayPanel.add(okayButton);
             con.add(QOkayPanel);
-            qokayButton.addActionListener(e -> {
+            okayButton.addActionListener(e -> {
                 QuestionNumberPanel.setVisible(false);
                 QOkayPanel.setVisible(false);
                 con.remove(QOkayPanel);
@@ -787,7 +786,7 @@ public class UserInteraction  { //implements KeyListener
         category.setBounds(100, 100, 600, 100);
         category.setBackground(Color.black);
         category.setForeground(Color.WHITE);
-        category.setFont(new Font("Carlito", Font.PLAIN, 100));
+        category.setFont(new Font("Carlita", Font.PLAIN, 100));
         category.setHorizontalAlignment(JLabel.CENTER);
         category.setVerticalAlignment(JLabel.CENTER);
         announcingCategoryPanel.add(category);
@@ -796,7 +795,7 @@ public class UserInteraction  { //implements KeyListener
         goButton.setBackground(Color.PINK);
         goButton.setForeground(Color.WHITE);
         goButton.setSize(100, 100);
-        goButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        goButton.setFont(new Font("Carlita", Font.PLAIN, 30));
         goButton.addActionListener(e -> {
             if(type instanceof Bet){
                 betPoints();
@@ -861,7 +860,7 @@ public class UserInteraction  { //implements KeyListener
         betPoints.setBounds(100, 100, 600, 200);
         betPoints.setBackground(Color.black);
         betPoints.setForeground(Color.WHITE);
-        betPoints.setFont(new Font("Carlito", Font.PLAIN, 50));
+        betPoints.setFont(new Font("Carlita", Font.PLAIN, 50));
         betPoints.setHorizontalAlignment(JLabel.CENTER);
         betPoints.setVerticalAlignment(JLabel.CENTER);
         betPointsPanel.add(betPoints);
@@ -871,7 +870,7 @@ public class UserInteraction  { //implements KeyListener
         bet250Button.setBackground(Color.BLACK);
         bet250Button.setForeground(Color.WHITE);
         bet250Button.setSize(100, 100);
-        bet250Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet250Button.setFont(new Font("Carlita", Font.PLAIN, 40));
         bet250Button.addActionListener(e -> {
             player.setBet(250);
             if(players.size() == 2){
@@ -892,7 +891,7 @@ public class UserInteraction  { //implements KeyListener
         bet500Button.setBackground(Color.BLACK);
         bet500Button.setForeground(Color.WHITE);
         bet500Button.setSize(100, 100);
-        bet500Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet500Button.setFont(new Font("Carlita", Font.PLAIN, 40));
         bet500Button.addActionListener(e -> {
             player.setBet(500);
 //                System.out.println(player.getNickname() + " " + player.getBet());
@@ -914,7 +913,7 @@ public class UserInteraction  { //implements KeyListener
         bet750Button.setBackground(Color.BLACK);
         bet750Button.setForeground(Color.WHITE);
         bet750Button.setSize(100, 100);
-        bet750Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet750Button.setFont(new Font("Carlita", Font.PLAIN, 40));
         bet750Button.addActionListener(e -> {
             player.setBet(750);
 //                System.out.println(player.getNickname() + " " + player.getBet());
@@ -936,7 +935,7 @@ public class UserInteraction  { //implements KeyListener
         bet1000Button.setBackground(Color.BLACK);
         bet1000Button.setForeground(Color.WHITE);
         bet1000Button.setSize(100, 100);
-        bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet1000Button.setFont(new Font("Carlita", Font.PLAIN, 40));
         bet1000Button.addActionListener(e -> {
             player.setBet(1000);
 //                System.out.println(player.getNickname() + " " + player.getBet());
@@ -980,7 +979,7 @@ public class UserInteraction  { //implements KeyListener
         betPoints2.setBounds(100, 100, 600, 200);
         betPoints2.setBackground(Color.black);
         betPoints2.setForeground(Color.WHITE);
-        betPoints2.setFont(new Font("Carlito", Font.PLAIN, 50));
+        betPoints2.setFont(new Font("Carlita", Font.PLAIN, 50));
         betPoints2.setHorizontalAlignment(JLabel.CENTER);
         betPoints2.setVerticalAlignment(JLabel.CENTER);
         betPointsPanel2.add(betPoints2);
@@ -990,7 +989,7 @@ public class UserInteraction  { //implements KeyListener
         bet250Button.setBackground(Color.BLACK);
         bet250Button.setForeground(Color.WHITE);
         bet250Button.setSize(100, 100);
-        bet250Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet250Button.setFont(new Font("Carlita", Font.PLAIN, 40));
         bet250Button.addActionListener(e -> {
             players.get(1).setBet(250);
             betPointsPanel2.setVisible(false);
@@ -1007,7 +1006,7 @@ public class UserInteraction  { //implements KeyListener
         bet500Button.setBackground(Color.BLACK);
         bet500Button.setForeground(Color.WHITE);
         bet500Button.setSize(100, 100);
-        bet500Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet500Button.setFont(new Font("Carlita", Font.PLAIN, 40));
         bet500Button.addActionListener(e -> {
             players.get(1).setBet(500);
 //                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
@@ -1025,7 +1024,7 @@ public class UserInteraction  { //implements KeyListener
         bet750Button.setBackground(Color.BLACK);
         bet750Button.setForeground(Color.WHITE);
         bet750Button.setSize(100, 100);
-        bet750Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet750Button.setFont(new Font("Carlita", Font.PLAIN, 40));
         bet750Button.addActionListener(e -> {
             players.get(1).setBet(750);
             System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
@@ -1043,7 +1042,7 @@ public class UserInteraction  { //implements KeyListener
         bet1000Button.setBackground(Color.BLACK);
         bet1000Button.setForeground(Color.WHITE);
         bet1000Button.setSize(100, 100);
-        bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 40));
+        bet1000Button.setFont(new Font("Carlita", Font.PLAIN, 40));
         bet1000Button.addActionListener(e -> {
             players.get(1).setBet(1000);
             System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
@@ -1076,7 +1075,6 @@ public class UserInteraction  { //implements KeyListener
         JLabel label = new JLabel();
 
         label.setLayout(new FlowLayout(FlowLayout.CENTER));
-        // elegxow gia to an h eikona einai yparkth
         if(!(questionImageName.equals("null"))){
             label.setIcon(new ImageIcon(questionImageName));
         }
@@ -1098,7 +1096,7 @@ public class UserInteraction  { //implements KeyListener
         labelQ.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelQ.setHorizontalAlignment(JLabel.LEFT);
         labelQ.setText(question.getQuestion());
-        labelQ.setFont(new Font("Carlito",Font.PLAIN,30));
+        labelQ.setFont(new Font("Carlita",Font.PLAIN,30));
         labelQ.setSize(800,50 );
         labelQ.setVisible(true);
         questionPanel.add(labelQ);
@@ -1109,7 +1107,7 @@ public class UserInteraction  { //implements KeyListener
         labelA.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelA.setHorizontalAlignment(JLabel.LEFT);
         labelA.setText("A: " + answers.get(0));
-        labelA.setFont(new Font("Carlito",Font.PLAIN,20));
+        labelA.setFont(new Font("Carlita",Font.PLAIN,20));
         labelA.setVisible(true);
 
         answerPanelA = new JPanel();
@@ -1124,7 +1122,7 @@ public class UserInteraction  { //implements KeyListener
         labelB.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelB.setHorizontalAlignment(JLabel.RIGHT);
         labelB.setText("B: " + answers.get(1));
-        labelB.setFont(new Font("Carlito",Font.PLAIN,20));
+        labelB.setFont(new Font("Carlita",Font.PLAIN,20));
         labelB.setVisible(true);
 
         answerPanelB = new JPanel();
@@ -1139,7 +1137,7 @@ public class UserInteraction  { //implements KeyListener
         labelC.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelC.setHorizontalAlignment(JLabel.LEFT);
         labelC.setText("C: " + answers.get(2));
-        labelC.setFont(new Font("Carlito",Font.PLAIN,20));
+        labelC.setFont(new Font("Carlita",Font.PLAIN,20));
         labelC.setVisible(true);
 
         answerPanelC = new JPanel();
@@ -1153,7 +1151,7 @@ public class UserInteraction  { //implements KeyListener
         labelD.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelD.setHorizontalAlignment(JLabel.RIGHT);
         labelD.setText("D: " + answers.get(3));
-        labelD.setFont(new Font("Carlito",Font.PLAIN,20));
+        labelD.setFont(new Font("Carlita",Font.PLAIN,20));
         labelD.setVisible(true);
 
         answerPanelD = new JPanel();
@@ -1167,7 +1165,7 @@ public class UserInteraction  { //implements KeyListener
         JLabel instructionLabel = new JLabel("BUTTONS FOR Player 1: A->Q,B->W,C->E,D->R BUTTONS FOR Player 2: A->U,B->I,C->O,D->P");
         instructionLabel.setSize(800,110);
         instructionLabel.setBackground(Color.BLACK);
-        instructionLabel.setFont(new Font("Carlito",Font.PLAIN,20));
+        instructionLabel.setFont(new Font("Carlita",Font.PLAIN,20));
         instructionLabel.setForeground(Color.WHITE);
 
         bottomPanel = new JPanel();
@@ -1205,7 +1203,6 @@ public class UserInteraction  { //implements KeyListener
 
         public void keyPressed(KeyEvent event){
 
-//            .out.println("inside acrion listener!");System
             int key = event.getKeyCode();
              if(numberOfPlayers ==1){
                  if(key == KeyEvent.VK_Q){
@@ -1273,8 +1270,6 @@ public class UserInteraction  { //implements KeyListener
                 times[1] = endTime2;
                 answers.add(answer1);
                 answers.add(answer2);
-                System.out.println("ansewer1" + answer1);
-                System.out.println("answer2" + answer2);
                 game.setStatuses(answers,question.getCorrectAnswer(),players);
                 answer1 = null;
                 answer2 = null;
@@ -1301,7 +1296,7 @@ public class UserInteraction  { //implements KeyListener
      * This function prints the correct answer to the question asked previously.
      */
     public void correctAnswer(){
-        System.out.println("inside correct Aswer");
+//        System.out.println("inside correct Answer");
         //Turn off previous panels
         bottomPanel.setVisible(false);
         answerPanelA.setVisible(false);
@@ -1325,7 +1320,7 @@ public class UserInteraction  { //implements KeyListener
         theCorrectAnswer.setBounds(50, 50, 700, 200);
         theCorrectAnswer.setBackground(Color.black);
         theCorrectAnswer.setForeground(Color.WHITE);
-        theCorrectAnswer.setFont(new Font("Carlito", Font.PLAIN, 70));
+        theCorrectAnswer.setFont(new Font("Carlita", Font.PLAIN, 70));
         theCorrectAnswer.setHorizontalAlignment(JLabel.CENTER);
         theCorrectAnswer.setVerticalAlignment(JLabel.CENTER);
         correctAnswerTextPanel.add(theCorrectAnswer);
@@ -1334,7 +1329,7 @@ public class UserInteraction  { //implements KeyListener
         is.setBounds(50, 250, 700, 200);
         is.setBackground(Color.pink);
         is.setForeground(Color.WHITE);
-        is.setFont(new Font("Carlito", Font.PLAIN, 30));
+        is.setFont(new Font("Carlita", Font.PLAIN, 30));
         is.setHorizontalAlignment(JLabel.CENTER);
         is.setVerticalAlignment(JLabel.CENTER);
         correctAnswerPanel.add(is);
@@ -1420,35 +1415,35 @@ public class UserInteraction  { //implements KeyListener
         con.add(showScorePanel2);
 
         JLabel showStatus1 = new JLabel(answered1);
-        showStatus1.setFont(new Font("Carlito", Font.PLAIN, 30));
+        showStatus1.setFont(new Font("Carlita", Font.PLAIN, 30));
         showStatus1.setForeground(Color.WHITE);
         showStatus1.setHorizontalAlignment(JLabel.CENTER);
         showStatus1.setVerticalAlignment(JLabel.CENTER);
         showStatusPanel1.add(showStatus1);
 
         JLabel showStatus2 = new JLabel(answered2);
-        showStatus2.setFont(new Font("Carlito", Font.PLAIN, 30));
+        showStatus2.setFont(new Font("Carlita", Font.PLAIN, 30));
         showStatus2.setForeground(Color.WHITE);
         showStatus2.setHorizontalAlignment(JLabel.CENTER);
         showStatus2.setVerticalAlignment(JLabel.CENTER);
         showStatusPanel2.add(showStatus2);
 
         JLabel showScoreText = new JLabel("The score is:");
-        showScoreText.setFont(new Font("Carlito", Font.PLAIN, 50));
+        showScoreText.setFont(new Font("Carlita", Font.PLAIN, 50));
         showScoreText.setForeground(Color.WHITE);
         showScoreText.setHorizontalAlignment(JLabel.CENTER);
         showScoreText.setVerticalAlignment(JLabel.CENTER);
         showScoreTextPanel.add(showScoreText);
 
         JLabel showScore1 = new JLabel(score1);
-        showScore1.setFont(new Font("Carlito", Font.PLAIN, 30));
+        showScore1.setFont(new Font("Carlita", Font.PLAIN, 30));
         showScore1.setForeground(Color.WHITE);
         showScore1.setHorizontalAlignment(JLabel.CENTER);
         showScoreText.setVerticalAlignment(JLabel.CENTER);
         showScorePanel1.add(showScore1);
 
         JLabel showScore2 = new JLabel(score2);
-        showScore2.setFont(new Font("Carlito", Font.PLAIN, 30));
+        showScore2.setFont(new Font("Carlita", Font.PLAIN, 30));
         showScore2.setForeground(Color.WHITE);
         showScore2.setHorizontalAlignment(JLabel.CENTER);
         showScoreText.setVerticalAlignment(JLabel.CENTER);
@@ -1504,13 +1499,13 @@ public class UserInteraction  { //implements KeyListener
         con.add(playerFinalScorePanel);
 
         JLabel playerFinalScoreText = new JLabel(players.get(0).getNickname() + ", your final score is:");
-        playerFinalScoreText.setFont(new Font("Carlito", Font.PLAIN, 50));
+        playerFinalScoreText.setFont(new Font("Carlita", Font.PLAIN, 50));
         playerFinalScoreText.setForeground(Color.WHITE);
         playerFinalScoreText.setHorizontalAlignment(JLabel.CENTER);
         playerFinalScoreTextPanel.add(playerFinalScoreText);
 
         JLabel playerFinalScore = new JLabel(String.valueOf(players.get(0).getScore()));
-        playerFinalScore.setFont(new Font("Carlito", Font.PLAIN, 80));
+        playerFinalScore.setFont(new Font("Carlita", Font.PLAIN, 80));
         playerFinalScore.setForeground(Color.WHITE);
         playerFinalScore.setHorizontalAlignment(JLabel.CENTER);
         playerFinalScore.setVerticalAlignment(JLabel.CENTER);
@@ -1551,7 +1546,7 @@ public class UserInteraction  { //implements KeyListener
         frame.add(AndTheWinnerIsPanel);
 
         JLabel andTheWinnerIs = new JLabel("And the winner is . . .");
-        andTheWinnerIs.setFont(new Font("Carlito", Font.PLAIN, 50));
+        andTheWinnerIs.setFont(new Font("Carlita", Font.PLAIN, 50));
         andTheWinnerIs.setForeground(Color.WHITE);
         andTheWinnerIs.setHorizontalAlignment(JLabel.CENTER);
         AndTheWinnerIsPanel.add(andTheWinnerIs);
@@ -1563,7 +1558,7 @@ public class UserInteraction  { //implements KeyListener
         frame.add(winnerPanel);
 
         JLabel winner = new JLabel(TheWinner);
-        winner.setFont(new Font("Carlito", Font.PLAIN, 30));
+        winner.setFont(new Font("Carlita", Font.PLAIN, 30));
         winner.setForeground(Color.WHITE);
         winner.setHorizontalAlignment(JLabel.CENTER);
         winnerPanel.add(winner);
@@ -1575,7 +1570,7 @@ public class UserInteraction  { //implements KeyListener
         frame.add(FinalScoresPanel);
 
         JLabel finalScores = new JLabel("Your final scores were:");
-        finalScores.setFont(new Font("Carlito", Font.PLAIN, 50));
+        finalScores.setFont(new Font("Carlita", Font.PLAIN, 50));
         finalScores.setForeground(Color.WHITE);
         finalScores.setHorizontalAlignment(JLabel.CENTER);
         FinalScoresPanel.add(finalScores);
@@ -1587,7 +1582,7 @@ public class UserInteraction  { //implements KeyListener
         frame.add(finalLeftScorePanel);
 
         JLabel finaLeftScore = new JLabel(players.get(0).getNickname() + ": " + players.get(0).getScore());
-        finaLeftScore.setFont(new Font("Carlito", Font.PLAIN, 30));
+        finaLeftScore.setFont(new Font("Carlita", Font.PLAIN, 30));
         finaLeftScore.setForeground(Color.WHITE);
         finaLeftScore.setHorizontalAlignment(JLabel.CENTER);
         finalLeftScorePanel.add(finaLeftScore);
@@ -1599,7 +1594,7 @@ public class UserInteraction  { //implements KeyListener
         frame.add(finalRightScorePanel);
 
         JLabel finaRightScore = new JLabel(players.get(1).getNickname() + ": " + players.get(1).getScore());
-        finaRightScore.setFont(new Font("Carlito", Font.PLAIN, 30));
+        finaRightScore.setFont(new Font("Carlita", Font.PLAIN, 30));
         finaRightScore.setForeground(Color.WHITE);
         finaRightScore.setHorizontalAlignment(JLabel.CENTER);
         finalRightScorePanel.add(finaRightScore);

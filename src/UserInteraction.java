@@ -62,11 +62,12 @@ public class UserInteraction  {
 
         //The panel that contains the text
         startTextPanel = new JPanel();
-        //Look & Layout
-        startTextPanel.setBounds(100, 100, 600, 140);
-        startTextPanel.setLayout(new BorderLayout());
-        startTextPanel.setBackground(Color.black);
-        con.add(startTextPanel);
+
+//        //Look & Layout
+//        startTextPanel.setBounds(100, 100, 600, 140);
+//        startTextPanel.setLayout(new BorderLayout());
+//        startTextPanel.setBackground(Color.black);
+//        con.add(startTextPanel);
 
         //Label with the text
         JLabel startText = new JLabel("Buzz Quiz!");
@@ -74,7 +75,8 @@ public class UserInteraction  {
         startText.setFont(new Font("Carlito", Font.PLAIN, 90));
         startText.setForeground(Color.WHITE);
         startText.setHorizontalAlignment(JLabel.CENTER);
-        startTextPanel.add(startText);
+     //   startTextPanel.add(startText);
+        panelCharacteristics(startTextPanel,100,100,600,140,startText,Color.BLACK);
 
         //The panel that contains the button
         startButtonPanel = new JPanel();
@@ -955,10 +957,6 @@ public class UserInteraction  {
         String questionImageName= question.getImageName();
 
         centerPanel = new JPanel();
-        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        centerPanel.setBackground(Color.BLACK);
-        centerPanel.setBounds(100,10,600,250);
-
         JLabel label = new JLabel();
 
         label.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -967,14 +965,9 @@ public class UserInteraction  {
         }
         label.setVisible(true);
 
-        centerPanel.add(label);
-        centerPanel.setVisible(true);
-        con.add(centerPanel, BorderLayout.CENTER);
+        panelCharacteristics(centerPanel, 100,10,600,250,label,Color.BLACK);
 
         questionPanel = new JPanel();
-        questionPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        questionPanel.setBounds(0,260,800,80);
-        questionPanel.setBackground(Color.pink);
 
         answers = question.getAnswers();
 
@@ -987,9 +980,8 @@ public class UserInteraction  {
         labelQ.setFont(new Font("Carlito",Font.PLAIN,25));
         labelQ.setSize(800,50 );
         labelQ.setVisible(true);
-        questionPanel.add(labelQ);
 
-        con.add(questionPanel);
+        panelCharacteristics(questionPanel,0,260,800,80,labelQ,Color.PINK);
 
         JLabel labelA = new JLabel();
         labelA.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -999,11 +991,7 @@ public class UserInteraction  {
         labelA.setVisible(true);
 
         answerPanelA = new JPanel();
-        answerPanelA.setLayout(new FlowLayout(FlowLayout.CENTER));
-        answerPanelA.setBounds(100,340,300,40);
-        answerPanelA.setBackground(Color.PINK);
-        answerPanelA.add(labelA);
-        con.add(answerPanelA);
+        panelCharacteristics(answerPanelA,100,340,300,40,labelA,Color.PINK);
 
         JLabel labelB = new JLabel();
         labelB.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -1013,11 +1001,7 @@ public class UserInteraction  {
         labelB.setVisible(true);
 
         answerPanelB = new JPanel();
-        answerPanelB.setLayout(new FlowLayout(FlowLayout.CENTER));
-        answerPanelB.setBounds(400,340,300,40);
-        answerPanelB.setBackground(Color.PINK);
-        answerPanelB.add(labelB);
-        con.add(answerPanelB);
+        panelCharacteristics(answerPanelB,400,340,300,40,labelB, Color.PINK);
 
 
         JLabel labelC = new JLabel();
@@ -1028,11 +1012,7 @@ public class UserInteraction  {
         labelC.setVisible(true);
 
         answerPanelC = new JPanel();
-        answerPanelC.setLayout(new FlowLayout(FlowLayout.CENTER));
-        answerPanelC.setBounds(100,380,300,40);
-        answerPanelC.setBackground(Color.PINK);
-        answerPanelC.add(labelC);
-        con.add(answerPanelC);
+        panelCharacteristics(answerPanelC,100,380,300,40,labelC,Color.PINK);
 
         JLabel labelD = new JLabel();
         labelD.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -1042,11 +1022,7 @@ public class UserInteraction  {
         labelD.setVisible(true);
 
         answerPanelD = new JPanel();
-        answerPanelD.setLayout(new FlowLayout(FlowLayout.CENTER));
-        answerPanelD.setBounds(400,380,300,40);
-        answerPanelD.setBackground(Color.PINK);
-        answerPanelD.add(labelD);
-        con.add(answerPanelD);
+        panelCharacteristics(answerPanelD,400,380,300,40,labelD,Color.PINK);
 
         JLabel instructionLabel = new JLabel("BUTTONS FOR Player 1: A->Q,B->W,C->E,D->R    BUTTONS FOR Player 2: A->U,B->I,C->O,D->P");
         instructionLabel.setSize(800,110);
@@ -1055,17 +1031,29 @@ public class UserInteraction  {
         instructionLabel.setForeground(Color.WHITE);
 
         bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.setBounds(0,425,800,50);
-        bottomPanel.setBackground(Color.black);
-        bottomPanel.add(instructionLabel);
-        con.add(bottomPanel);
+        panelCharacteristics(bottomPanel,0,425,800,50,instructionLabel,Color.black);
 
         frame.addKeyListener(new MyKeyListener());
         frame.setVisible(false);
         frame.setVisible(true);
         startTime = System.currentTimeMillis();
 
+    }
+
+    private void panelCharacteristics(JPanel panel, int x, int y, int width, int height, JLabel label, Color color){
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panel.setBounds(x,y,width,height);
+        panel.setBackground(color);
+        panel.add(label);
+        con.add(panel);
+    }
+
+    public void buttonCharacteristics(JButton button, int width, int height, int size, JPanel panel, Color background, Color foreground){
+        button.setBackground(background);
+        button.setForeground(foreground);
+        button.setSize(width, height);
+        button.setFont(new Font("Carlito", Font.PLAIN, size));
+        panel.add(button);
     }
 
     /**
@@ -1481,7 +1469,6 @@ public class UserInteraction  {
         players.clear();
         questions = 1;
         rounds = 1;
-        //game.initializePlayersScore(players);
         JDialog.setDefaultLookAndFeelDecorated(true);
         int response = JOptionPane.showConfirmDialog(null, "Would you like to play again?", "Replay", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.NO_OPTION) {

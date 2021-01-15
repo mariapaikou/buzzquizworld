@@ -22,7 +22,6 @@ public class Player implements Serializable {
     private boolean status;
     private long clickTime;
     private int bet;
-    transient private Thread myThread;
     private int streak;
 
     /**
@@ -35,7 +34,6 @@ public class Player implements Serializable {
         score = 0;
         status = false;
         clickTime = -1;
-        this.myThread = new Thread();
         bet = 0;
         streak = 0;
     }

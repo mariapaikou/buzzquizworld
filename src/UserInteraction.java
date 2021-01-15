@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * program has to do and implements the GUI.
  * @author Theodora-Sofia Tsochataridou
  * @author Maria Paikou
- * @version 1.0
+ * @version 2.0
  * @since 05 - December - 2020
  */
 public class UserInteraction  {

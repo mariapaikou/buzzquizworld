@@ -7,12 +7,17 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-
 /**
  * UserInteraction class represent the interaction with the user, accepts all the inputs to manage the actions the program has to do
  * and implements the GUI.
+ * @author Theodora-Sofia Tsochataridou
+ * @author Maria Paikou
+ * @version 1.0
+ * @since 05 - December - 2020
+ *
  */
 public class UserInteraction  {
+
     private final JFrame frame;
     private Questions question;
     private final Game game;
@@ -31,15 +36,15 @@ public class UserInteraction  {
     private JPanel betPointsPanel, betPointsPanel2, bet250, bet500, bet750, bet1000;
     private JPanel centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
     private JPanel showStatusPanel1, showStatusPanel2, showScoreTextPanel, showScorePanel1, showScorePanel2, ROkayPanel, QOkayPanel;
-    private JPanel correctAnswerTextPanel, correctAnswerPanel;
+    private JPanel correctAnswerTextPanel, correctAnswerPanel, playerFinalScoreTextPanel, playerFinalScorePanel;
+    private JPanel AndTheWinnerIsPanel, winnerPanel, FinalScoresPanel, finalLeftScorePanel, finalRightScorePanel;
+    private JPanel highScoresButtonPanel, totalWinsButtonPanel, goButtonPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
-    private JPanel highScoresButtonPanel, totalWinsButtonPanel, goButtonPanel;
     private JTextField nickname;
     private Timer timer1, timer2,timer3,timer4,timer5;
     private long startTime , endTime1, endTime2;
-    private JPanel AndTheWinnerIsPanel, winnerPanel, FinalScoresPanel, finalLeftScorePanel, finalRightScorePanel, playerFinalScoreTextPanel, playerFinalScorePanel;
-    private int defaultNumQuestions;
+        private int defaultNumQuestions;
 
     public UserInteraction(){
         answer1 = null;
@@ -75,7 +80,7 @@ public class UserInteraction  {
         //Label with the text
         JLabel startText = new JLabel("Buzz Quiz!");
         //Look & Layout
-        startText.setFont(new Font("Carlita", Font.PLAIN, 90));
+        startText.setFont(new Font("Carlito", Font.PLAIN, 90));
         startText.setForeground(Color.WHITE);
         startText.setHorizontalAlignment(JLabel.CENTER);
         startTextPanel.add(startText);
@@ -93,7 +98,7 @@ public class UserInteraction  {
         startButton.setBackground(Color.PINK);
         startButton.setForeground(Color.WHITE);
         startButton.setSize(200, 80);
-        startButton.setFont(new Font("Carlita", Font.PLAIN, 30));
+        startButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action
         startButton.addActionListener(e -> {
             startTextPanel.setVisible(false);
@@ -114,7 +119,7 @@ public class UserInteraction  {
         highScoreButton.setBackground(Color.PINK);
         highScoreButton.setForeground(Color.WHITE);
         highScoreButton.setSize(200,80);
-        highScoreButton.setFont(new Font("Carlita", Font.PLAIN,30));
+        highScoreButton.setFont(new Font("Carlito", Font.PLAIN,30));
         //action listener!
         highScoreButton.addActionListener(e -> {
             startTextPanel.setVisible(false);
@@ -134,7 +139,7 @@ public class UserInteraction  {
         totalWinsButton.setBackground(Color.PINK);
         totalWinsButton.setForeground(Color.WHITE);
         totalWinsButton.setSize(200,80);
-        totalWinsButton.setFont(new Font("Carlita", Font.PLAIN,30));
+        totalWinsButton.setFont(new Font("Carlito", Font.PLAIN,30));
         //action listener
         totalWinsButton.addActionListener(e -> {
             startTextPanel.setVisible(false);
@@ -152,14 +157,13 @@ public class UserInteraction  {
      */
     private void showHighScores(){
         String [] data = game.getHighScores();
-        System.out.println(data.length + "data.length");
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for(String sting: data){
             listModel.addElement(sting);
         }
         JList<String> list = new JList<>(listModel);
         list.setBounds(100,50,600,400);
-        list.setFont(new Font("Carlita", Font.PLAIN, 30));
+        list.setFont(new Font("Carlito", Font.PLAIN, 30));
         list.setBackground(Color.PINK);
         JPanel pane = new JPanel();
         pane.setBounds(0,0,800,400);
@@ -175,7 +179,7 @@ public class UserInteraction  {
         backButton.setBackground(Color.BLACK);
         backButton.setForeground(Color.WHITE);
         backButton.setSize(100,100);
-        backButton.setFont(new Font("Carlita", Font.PLAIN, 30));
+        backButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action Listener
         backButton.addActionListener(e -> {
             pane.setVisible(false);
@@ -207,7 +211,7 @@ public class UserInteraction  {
 
         JList<String> list = new JList<>(listModel);
         //list.setBounds(200,50,500,400);
-        list.setFont(new Font("Carlita", Font.PLAIN, 30));
+        list.setFont(new Font("Carlito", Font.PLAIN, 30));
         list.setBackground(Color.PINK);
       //  list.setVisibleRowCount(5);
         JPanel pane = new JPanel();
@@ -233,7 +237,7 @@ public class UserInteraction  {
         backButton.setBackground(Color.BLACK);
         backButton.setForeground(Color.WHITE);
         backButton.setSize(100,100);
-        backButton.setFont(new Font("Carlita", Font.PLAIN, 30));
+        backButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action Listener
         backButton.addActionListener(e -> {
             //list.setVisible(false);
@@ -268,13 +272,14 @@ public class UserInteraction  {
         con.add(HMPPanel);
 
         //The area that holds the text
-        JTextArea HMPText = new JTextArea("Choose the number of players for this game:");
+        JTextArea HMPText = new JTextArea("How many players will be playing?");
         //Look & Layout
         HMPText.setBounds(100,100,500,250);
         HMPText.setBackground(Color.black);
         HMPText.setForeground(Color.WHITE);
-        HMPText.setFont(new Font("Carlita", Font.PLAIN, 30));
+        HMPText.setFont(new Font("Carlito", Font.PLAIN, 30));
         HMPText.setLineWrap(true);
+        HMPText.setWrapStyleWord(true);
         HMPText.setEditable(false);
         HMPPanel.add(HMPText);
 
@@ -298,7 +303,7 @@ public class UserInteraction  {
         onePlayer.setBackground(Color.BLACK);
         onePlayer.setForeground(Color.WHITE);
         onePlayer.setSize(400, 150);
-        onePlayer.setFont(new Font("Carlita", Font.PLAIN, 30));
+        onePlayer.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action
         onePlayer.addActionListener(e -> {
             HMPPanel.setVisible(false);
@@ -315,7 +320,7 @@ public class UserInteraction  {
         twoPlayers.setBackground(Color.BLACK);
         twoPlayers.setForeground(Color.WHITE);
         twoPlayers.setSize(400, 150);
-        twoPlayers.setFont(new Font("Carlita", Font.PLAIN, 30));
+        twoPlayers.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action
         twoPlayers.addActionListener(e -> {
             HMPPanel.setVisible(false);
@@ -348,8 +353,9 @@ public class UserInteraction  {
         NameText.setBounds(100,100,500,100);
         NameText.setBackground(Color.black);
         NameText.setForeground(Color.WHITE);
-        NameText.setFont(new Font("Carlita", Font.PLAIN, 30));
+        NameText.setFont(new Font("Carlito", Font.PLAIN, 30));
         NameText.setLineWrap(true);
+        NameText.setWrapStyleWord(true);
         NameText.setEditable(false);
         NamePanelText.add(NameText);
 
@@ -369,7 +375,7 @@ public class UserInteraction  {
         nickname.setColumns(7);
         nickname.setBackground(Color.white);
         nickname.setForeground(Color.black);
-        nickname.setFont(new Font("Carlita", Font.PLAIN, 30));
+        nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
         nickname.setDocument(new JTextFieldLimit(10));
 
         //Panel for the button
@@ -384,7 +390,7 @@ public class UserInteraction  {
         readyButton.setBackground(Color.BLACK);
         readyButton.setForeground(Color.WHITE);
         readyButton.setSize(100, 100);
-        readyButton.setFont(new Font("Carlita", Font.PLAIN, 30));
+        readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         readyPanel.add(readyButton);
         readyButton.addActionListener(e -> {
             Player playerOne = new Player();
@@ -398,13 +404,7 @@ public class UserInteraction  {
                 nickname.setText("");
                 God2();
             }else{
-                try{
-                    LetsGo();
-                }catch(InterruptedException ie) {
-
-                    System.out.println("got interrupted!");
-
-                }
+                LetsGo();
             }
 
         });
@@ -433,8 +433,9 @@ public class UserInteraction  {
         NameText.setBounds(100,100,500,100);
         NameText.setBackground(Color.black);
         NameText.setForeground(Color.WHITE);
-        NameText.setFont(new Font("Carlita", Font.PLAIN, 30));
+        NameText.setFont(new Font("Carlito", Font.PLAIN, 30));
         NameText.setLineWrap(true);
+        NameText.setWrapStyleWord(true);
         NameText.setEditable(false);
         NamePanelText.add(NameText);
 
@@ -454,7 +455,7 @@ public class UserInteraction  {
         nickname.setColumns(7);
         nickname.setBackground(Color.white);
         nickname.setForeground(Color.black);
-        nickname.setFont(new Font("Carlita", Font.PLAIN, 30));
+        nickname.setFont(new Font("Carlito", Font.PLAIN, 30));
         nickname.setDocument(new JTextFieldLimit(10));
 
         //Panel for the button
@@ -469,27 +470,19 @@ public class UserInteraction  {
         readyButton.setBackground(Color.BLACK);
         readyButton.setForeground(Color.WHITE);
         readyButton.setSize(100, 100);
-        readyButton.setFont(new Font("Carlita", Font.PLAIN, 30));
+        readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         readyPanel.add(readyButton);
-
-        System.out.println("inside god2!");
 
             readyButton.addActionListener(e -> {
                 Player playerOne = new Player();
                 playerOne.setNickname(nickname.getText());
                 players.add(playerOne);
-                try {
-                    NamePanelText.setVisible(false);
-                    NamePanel.setVisible(false);
-                    readyPanel.removeAll();
-                    con.remove(readyPanel);
-                    readyPanel.setVisible(false);
-                    LetsGo();
-                } catch (InterruptedException ie) {
-
-                    System.out.println("got interrupted!");
-
-                }
+                NamePanelText.setVisible(false);
+                NamePanel.setVisible(false);
+                readyPanel.removeAll();
+                con.remove(readyPanel);
+                readyPanel.setVisible(false);
+                LetsGo();
 
 
             });
@@ -498,7 +491,7 @@ public class UserInteraction  {
 
 
 
-    public void LetsGo() throws InterruptedException {
+    public void LetsGo() {
         NamePanelText.setVisible(false);
         NamePanel.setVisible(false);
         readyPanel.setVisible(false);
@@ -572,7 +565,7 @@ public class UserInteraction  {
         text.setBounds(0, 100, 800, 400);
         text.setBackground(Color.black);
         text.setForeground(Color.WHITE);
-        text.setFont(new Font("Carlita", Font.PLAIN, 300));
+        text.setFont(new Font("Carlito", Font.PLAIN, 300));
         text.setHorizontalAlignment(JLabel.CENTER);
         text.setVerticalAlignment(JLabel.CENTER);
         letsGoPanel.add(text);
@@ -618,7 +611,7 @@ public class UserInteraction  {
             roundLabel.setBounds(0, 50, 800, 200);
             roundLabel.setBackground(Color.PINK);
             roundLabel.setForeground(Color.WHITE);
-            roundLabel.setFont(new Font("Carlita", Font.PLAIN, 200));
+            roundLabel.setFont(new Font("Carlito", Font.PLAIN, 200));
             roundLabel.setHorizontalAlignment(JLabel.CENTER);
             roundLabel.setVerticalAlignment(JLabel.CENTER);
             RoundNumberPanel.add(roundLabel);
@@ -633,7 +626,7 @@ public class UserInteraction  {
             okayButton.setBackground(Color.PINK);
             okayButton.setForeground(Color.WHITE);
             okayButton.setSize(50, 50);
-            okayButton.setFont(new Font("Carlita", Font.PLAIN, 30));
+            okayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
             ROkayPanel.add(okayButton);
             con.add(ROkayPanel);
             okayButton.addActionListener(e -> announcingTheType());
@@ -671,7 +664,7 @@ public class UserInteraction  {
         typeLabel.setBounds(50, 50, 700, 50);
         typeLabel.setBackground(Color.black);
         typeLabel.setForeground(Color.WHITE);
-        typeLabel.setFont(new Font("Carlita", Font.PLAIN, 30));
+        typeLabel.setFont(new Font("Carlito", Font.PLAIN, 30));
         typeLabel.setHorizontalAlignment(JLabel.CENTER);
         typeLabel.setVerticalAlignment(JLabel.CENTER);
         TypePanel.add(typeLabel);
@@ -688,7 +681,7 @@ public class UserInteraction  {
         typeExplanationArea.setBounds(50, 100, 700, 300);
         typeExplanationArea.setBackground(Color.black);
         typeExplanationArea.setForeground(Color.WHITE);
-        typeExplanationArea.setFont(new Font("Carlita", Font.PLAIN, 30));
+        typeExplanationArea.setFont(new Font("Carlito", Font.PLAIN, 30));
         typeExplanationArea.setLineWrap(true);
 
         TypeExplanationPanel.add(typeExplanationArea);
@@ -704,7 +697,7 @@ public class UserInteraction  {
         okay.setBackground(Color.BLACK);
         okay.setForeground(Color.WHITE);
         okay.setSize(50, 50);
-        okay.setFont(new Font("Carlita", Font.PLAIN, 30));
+        okay.setFont(new Font("Carlito", Font.PLAIN, 30));
         okay.addActionListener(e -> questionNumber());
         typeOkayPanel.add(okay);
 
@@ -715,7 +708,6 @@ public class UserInteraction  {
      */
 
     public void questionNumber(){
-        System.out.println("inside question number!");
         TypePanel.setVisible(false);
         TypeExplanationPanel.setVisible(false);
         typeOkayPanel.setVisible(false);
@@ -732,7 +724,7 @@ public class UserInteraction  {
             questionLabel.setBounds(0, 50, 800, 200);
             questionLabel.setBackground(Color.black);
             questionLabel.setForeground(Color.WHITE);
-            questionLabel.setFont(new Font("Carlita", Font.PLAIN, 150));
+            questionLabel.setFont(new Font("Carlito", Font.PLAIN, 150));
             questionLabel.setHorizontalAlignment(JLabel.CENTER);
             questionLabel.setVerticalAlignment(JLabel.CENTER);
             QuestionNumberPanel.add(questionLabel);
@@ -747,7 +739,7 @@ public class UserInteraction  {
             okayButton.setBackground(Color.PINK);
             okayButton.setForeground(Color.WHITE);
             okayButton.setSize(50, 50);
-            okayButton.setFont(new Font("Carlita", Font.PLAIN, 30));
+            okayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
             QOkayPanel.add(okayButton);
             con.add(QOkayPanel);
             okayButton.addActionListener(e -> {
@@ -771,7 +763,6 @@ public class UserInteraction  {
      * to the player.
      */
     public void announcingCategory(){
-        System.out.println("inside category");
         QuestionNumberPanel.setVisible(false);
         QOkayPanel.setVisible(false);
 
@@ -786,7 +777,7 @@ public class UserInteraction  {
         category.setBounds(100, 100, 600, 100);
         category.setBackground(Color.black);
         category.setForeground(Color.WHITE);
-        category.setFont(new Font("Carlita", Font.PLAIN, 100));
+        category.setFont(new Font("Carlito", Font.PLAIN, 100));
         category.setHorizontalAlignment(JLabel.CENTER);
         category.setVerticalAlignment(JLabel.CENTER);
         announcingCategoryPanel.add(category);
@@ -795,7 +786,7 @@ public class UserInteraction  {
         goButton.setBackground(Color.PINK);
         goButton.setForeground(Color.WHITE);
         goButton.setSize(100, 100);
-        goButton.setFont(new Font("Carlita", Font.PLAIN, 30));
+        goButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         goButton.addActionListener(e -> {
             if(type instanceof Bet){
                 betPoints();
@@ -860,7 +851,7 @@ public class UserInteraction  {
         betPoints.setBounds(100, 100, 600, 200);
         betPoints.setBackground(Color.black);
         betPoints.setForeground(Color.WHITE);
-        betPoints.setFont(new Font("Carlita", Font.PLAIN, 50));
+        betPoints.setFont(new Font("Carlito", Font.PLAIN, 50));
         betPoints.setHorizontalAlignment(JLabel.CENTER);
         betPoints.setVerticalAlignment(JLabel.CENTER);
         betPointsPanel.add(betPoints);
@@ -870,7 +861,7 @@ public class UserInteraction  {
         bet250Button.setBackground(Color.BLACK);
         bet250Button.setForeground(Color.WHITE);
         bet250Button.setSize(100, 100);
-        bet250Button.setFont(new Font("Carlita", Font.PLAIN, 40));
+        bet250Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet250Button.addActionListener(e -> {
             player.setBet(250);
             if(players.size() == 2){
@@ -891,10 +882,9 @@ public class UserInteraction  {
         bet500Button.setBackground(Color.BLACK);
         bet500Button.setForeground(Color.WHITE);
         bet500Button.setSize(100, 100);
-        bet500Button.setFont(new Font("Carlita", Font.PLAIN, 40));
+        bet500Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet500Button.addActionListener(e -> {
             player.setBet(500);
-//                System.out.println(player.getNickname() + " " + player.getBet());
             if(players.size() == 2){
                 betPoints2();
             }else{
@@ -913,10 +903,9 @@ public class UserInteraction  {
         bet750Button.setBackground(Color.BLACK);
         bet750Button.setForeground(Color.WHITE);
         bet750Button.setSize(100, 100);
-        bet750Button.setFont(new Font("Carlita", Font.PLAIN, 40));
+        bet750Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet750Button.addActionListener(e -> {
             player.setBet(750);
-//                System.out.println(player.getNickname() + " " + player.getBet());
             if(players.size() == 2){
                 betPoints2();
             }else{
@@ -935,10 +924,9 @@ public class UserInteraction  {
         bet1000Button.setBackground(Color.BLACK);
         bet1000Button.setForeground(Color.WHITE);
         bet1000Button.setSize(100, 100);
-        bet1000Button.setFont(new Font("Carlita", Font.PLAIN, 40));
+        bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet1000Button.addActionListener(e -> {
             player.setBet(1000);
-//                System.out.println(player.getNickname() + " " + player.getBet());
             if(players.size() == 2){
                 betPoints2();
             }else{
@@ -979,7 +967,7 @@ public class UserInteraction  {
         betPoints2.setBounds(100, 100, 600, 200);
         betPoints2.setBackground(Color.black);
         betPoints2.setForeground(Color.WHITE);
-        betPoints2.setFont(new Font("Carlita", Font.PLAIN, 50));
+        betPoints2.setFont(new Font("Carlito", Font.PLAIN, 50));
         betPoints2.setHorizontalAlignment(JLabel.CENTER);
         betPoints2.setVerticalAlignment(JLabel.CENTER);
         betPointsPanel2.add(betPoints2);
@@ -989,7 +977,7 @@ public class UserInteraction  {
         bet250Button.setBackground(Color.BLACK);
         bet250Button.setForeground(Color.WHITE);
         bet250Button.setSize(100, 100);
-        bet250Button.setFont(new Font("Carlita", Font.PLAIN, 40));
+        bet250Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet250Button.addActionListener(e -> {
             players.get(1).setBet(250);
             betPointsPanel2.setVisible(false);
@@ -1006,10 +994,9 @@ public class UserInteraction  {
         bet500Button.setBackground(Color.BLACK);
         bet500Button.setForeground(Color.WHITE);
         bet500Button.setSize(100, 100);
-        bet500Button.setFont(new Font("Carlita", Font.PLAIN, 40));
+        bet500Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet500Button.addActionListener(e -> {
             players.get(1).setBet(500);
-//                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
             betPointsPanel2.setVisible(false);
             bet250.setVisible(false);
             bet500.setVisible(false);
@@ -1024,10 +1011,9 @@ public class UserInteraction  {
         bet750Button.setBackground(Color.BLACK);
         bet750Button.setForeground(Color.WHITE);
         bet750Button.setSize(100, 100);
-        bet750Button.setFont(new Font("Carlita", Font.PLAIN, 40));
+        bet750Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet750Button.addActionListener(e -> {
             players.get(1).setBet(750);
-            System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
             betPointsPanel2.setVisible(false);
             bet250.setVisible(false);
             bet500.setVisible(false);
@@ -1042,10 +1028,9 @@ public class UserInteraction  {
         bet1000Button.setBackground(Color.BLACK);
         bet1000Button.setForeground(Color.WHITE);
         bet1000Button.setSize(100, 100);
-        bet1000Button.setFont(new Font("Carlita", Font.PLAIN, 40));
+        bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet1000Button.addActionListener(e -> {
             players.get(1).setBet(1000);
-            System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
             betPointsPanel2.setVisible(false);
             bet250.setVisible(false);
             bet500.setVisible(false);
@@ -1061,7 +1046,6 @@ public class UserInteraction  {
      * This void function accepts a Questions type object and prints the question and the four possible answers.
      */
     public void askTheQuestion(){
-        System.out.println("inside ask the question");
         announcingCategoryPanel.setVisible(false);
         goButtonPanel.setVisible(false);
 
@@ -1087,16 +1071,30 @@ public class UserInteraction  {
 
         questionPanel = new JPanel();
         questionPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        questionPanel.setBounds(0,260,800,50);
+        questionPanel.setBounds(0,260,800,80);
         questionPanel.setBackground(Color.pink);
 
         answers = question.getAnswers();
+
+//        //The area that holds the text
+//        JTextArea textAreaQ = new JTextArea("");
+//        textAreaQ.setText(question.getQuestion());
+//        //Look & Layout
+//        textAreaQ.setBounds(0,260,700,80);
+//        textAreaQ.setBackground(Color.pink);
+//        textAreaQ.setForeground(Color.black);
+//        textAreaQ.setFont(new Font("Carlito", Font.PLAIN, 25));
+//        textAreaQ.setLineWrap(true);
+//        textAreaQ.setWrapStyleWord(true);
+//        textAreaQ.setEditable(false);
+//        textAreaQ.setHighlighter(null);
+//        questionPanel.add(textAreaQ);
 
         JLabel labelQ = new JLabel();
         labelQ.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelQ.setHorizontalAlignment(JLabel.LEFT);
         labelQ.setText(question.getQuestion());
-        labelQ.setFont(new Font("Carlita",Font.PLAIN,30));
+        labelQ.setFont(new Font("Carlito",Font.PLAIN,25));
         labelQ.setSize(800,50 );
         labelQ.setVisible(true);
         questionPanel.add(labelQ);
@@ -1107,12 +1105,12 @@ public class UserInteraction  {
         labelA.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelA.setHorizontalAlignment(JLabel.LEFT);
         labelA.setText("A: " + answers.get(0));
-        labelA.setFont(new Font("Carlita",Font.PLAIN,20));
+        labelA.setFont(new Font("Carlito",Font.PLAIN,20));
         labelA.setVisible(true);
 
         answerPanelA = new JPanel();
         answerPanelA.setLayout(new FlowLayout(FlowLayout.CENTER));
-        answerPanelA.setBounds(100,310,300,40);
+        answerPanelA.setBounds(100,340,300,40);
         answerPanelA.setBackground(Color.PINK);
         answerPanelA.add(labelA);
         con.add(answerPanelA);
@@ -1122,12 +1120,12 @@ public class UserInteraction  {
         labelB.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelB.setHorizontalAlignment(JLabel.RIGHT);
         labelB.setText("B: " + answers.get(1));
-        labelB.setFont(new Font("Carlita",Font.PLAIN,20));
+        labelB.setFont(new Font("Carlito",Font.PLAIN,20));
         labelB.setVisible(true);
 
         answerPanelB = new JPanel();
         answerPanelB.setLayout(new FlowLayout(FlowLayout.CENTER));
-        answerPanelB.setBounds(400,310,300,40);
+        answerPanelB.setBounds(400,340,300,40);
         answerPanelB.setBackground(Color.PINK);
         answerPanelB.add(labelB);
         con.add(answerPanelB);
@@ -1137,12 +1135,12 @@ public class UserInteraction  {
         labelC.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelC.setHorizontalAlignment(JLabel.LEFT);
         labelC.setText("C: " + answers.get(2));
-        labelC.setFont(new Font("Carlita",Font.PLAIN,20));
+        labelC.setFont(new Font("Carlito",Font.PLAIN,20));
         labelC.setVisible(true);
 
         answerPanelC = new JPanel();
         answerPanelC.setLayout(new FlowLayout(FlowLayout.CENTER));
-        answerPanelC.setBounds(100,350,300,40);
+        answerPanelC.setBounds(100,380,300,40);
         answerPanelC.setBackground(Color.PINK);
         answerPanelC.add(labelC);
         con.add(answerPanelC);
@@ -1151,26 +1149,26 @@ public class UserInteraction  {
         labelD.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelD.setHorizontalAlignment(JLabel.RIGHT);
         labelD.setText("D: " + answers.get(3));
-        labelD.setFont(new Font("Carlita",Font.PLAIN,20));
+        labelD.setFont(new Font("Carlito",Font.PLAIN,20));
         labelD.setVisible(true);
 
         answerPanelD = new JPanel();
         answerPanelD.setLayout(new FlowLayout(FlowLayout.CENTER));
-        answerPanelD.setBounds(400,350,300,40);
+        answerPanelD.setBounds(400,380,300,40);
         answerPanelD.setBackground(Color.PINK);
         answerPanelD.add(labelD);
         con.add(answerPanelD);
 
 
-        JLabel instructionLabel = new JLabel("BUTTONS FOR Player 1: A->Q,B->W,C->E,D->R BUTTONS FOR Player 2: A->U,B->I,C->O,D->P");
+        JLabel instructionLabel = new JLabel("BUTTONS FOR Player 1: A->Q,B->W,C->E,D->R    BUTTONS FOR Player 2: A->U,B->I,C->O,D->P");
         instructionLabel.setSize(800,110);
         instructionLabel.setBackground(Color.BLACK);
-        instructionLabel.setFont(new Font("Carlita",Font.PLAIN,20));
+        instructionLabel.setFont(new Font("Carlito",Font.PLAIN,20));
         instructionLabel.setForeground(Color.WHITE);
 
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.setBounds(0,390,800,110);
+        bottomPanel.setBounds(0,425,800,50);
         bottomPanel.setBackground(Color.black);
         bottomPanel.add(instructionLabel);
         con.add(bottomPanel);
@@ -1296,7 +1294,6 @@ public class UserInteraction  {
      * This function prints the correct answer to the question asked previously.
      */
     public void correctAnswer(){
-//        System.out.println("inside correct Answer");
         //Turn off previous panels
         bottomPanel.setVisible(false);
         answerPanelA.setVisible(false);
@@ -1320,7 +1317,7 @@ public class UserInteraction  {
         theCorrectAnswer.setBounds(50, 50, 700, 200);
         theCorrectAnswer.setBackground(Color.black);
         theCorrectAnswer.setForeground(Color.WHITE);
-        theCorrectAnswer.setFont(new Font("Carlita", Font.PLAIN, 70));
+        theCorrectAnswer.setFont(new Font("Carlito", Font.PLAIN, 70));
         theCorrectAnswer.setHorizontalAlignment(JLabel.CENTER);
         theCorrectAnswer.setVerticalAlignment(JLabel.CENTER);
         correctAnswerTextPanel.add(theCorrectAnswer);
@@ -1329,7 +1326,7 @@ public class UserInteraction  {
         is.setBounds(50, 250, 700, 200);
         is.setBackground(Color.pink);
         is.setForeground(Color.WHITE);
-        is.setFont(new Font("Carlita", Font.PLAIN, 30));
+        is.setFont(new Font("Carlito", Font.PLAIN, 30));
         is.setHorizontalAlignment(JLabel.CENTER);
         is.setVerticalAlignment(JLabel.CENTER);
         correctAnswerPanel.add(is);
@@ -1337,7 +1334,6 @@ public class UserInteraction  {
         correctAnswerPanel.setVisible(false);
 
         timer2 = new Timer(2000, e -> {
-            System.out.println("inside timer2");
             correctAnswerPanel.setVisible(false);
             correctAnswerTextPanel.setVisible(false);
             timer1.stop();
@@ -1345,7 +1341,6 @@ public class UserInteraction  {
             showScores();
         });
         timer1 = new Timer(2000, e -> {
-            System.out.println("inside timer1");
             correctAnswerPanel.setVisible(true);
             timer1.stop();
             timer2.start();
@@ -1356,7 +1351,6 @@ public class UserInteraction  {
     }
 
     public void showScores(){
-        System.out.println("inside show scores");
         correctAnswerPanel.setVisible(false);
         correctAnswerTextPanel.setVisible(false);
 
@@ -1369,8 +1363,6 @@ public class UserInteraction  {
 
         score1 = players.get(0).getNickname() + ": " + players.get(0).getScore();
         status1 = players.get(0).getStatus();
-
-        System.out.println(status1);
 
         if(numberOfPlayers == 2){
             score2 = players.get(1).getNickname() + ": " + players.get(1).getScore();
@@ -1415,35 +1407,35 @@ public class UserInteraction  {
         con.add(showScorePanel2);
 
         JLabel showStatus1 = new JLabel(answered1);
-        showStatus1.setFont(new Font("Carlita", Font.PLAIN, 30));
+        showStatus1.setFont(new Font("Carlito", Font.PLAIN, 30));
         showStatus1.setForeground(Color.WHITE);
         showStatus1.setHorizontalAlignment(JLabel.CENTER);
         showStatus1.setVerticalAlignment(JLabel.CENTER);
         showStatusPanel1.add(showStatus1);
 
         JLabel showStatus2 = new JLabel(answered2);
-        showStatus2.setFont(new Font("Carlita", Font.PLAIN, 30));
+        showStatus2.setFont(new Font("Carlito", Font.PLAIN, 30));
         showStatus2.setForeground(Color.WHITE);
         showStatus2.setHorizontalAlignment(JLabel.CENTER);
         showStatus2.setVerticalAlignment(JLabel.CENTER);
         showStatusPanel2.add(showStatus2);
 
         JLabel showScoreText = new JLabel("The score is:");
-        showScoreText.setFont(new Font("Carlita", Font.PLAIN, 50));
+        showScoreText.setFont(new Font("Carlito", Font.PLAIN, 50));
         showScoreText.setForeground(Color.WHITE);
         showScoreText.setHorizontalAlignment(JLabel.CENTER);
         showScoreText.setVerticalAlignment(JLabel.CENTER);
         showScoreTextPanel.add(showScoreText);
 
         JLabel showScore1 = new JLabel(score1);
-        showScore1.setFont(new Font("Carlita", Font.PLAIN, 30));
+        showScore1.setFont(new Font("Carlito", Font.PLAIN, 30));
         showScore1.setForeground(Color.WHITE);
         showScore1.setHorizontalAlignment(JLabel.CENTER);
         showScoreText.setVerticalAlignment(JLabel.CENTER);
         showScorePanel1.add(showScore1);
 
         JLabel showScore2 = new JLabel(score2);
-        showScore2.setFont(new Font("Carlita", Font.PLAIN, 30));
+        showScore2.setFont(new Font("Carlito", Font.PLAIN, 30));
         showScore2.setForeground(Color.WHITE);
         showScore2.setHorizontalAlignment(JLabel.CENTER);
         showScoreText.setVerticalAlignment(JLabel.CENTER);
@@ -1455,27 +1447,29 @@ public class UserInteraction  {
         }
 
         timer3 = new Timer(4000, e -> {
-            System.out.println("inside timer3+ show scores");
+            questions++;
+
+            if(type instanceof Thermometer && !((Thermometer) type).getSomeoneWon()){
+                defaultNumQuestions++;
+            }else if(type instanceof Thermometer && ((Thermometer) type).getSomeoneWon()){
+                ((Thermometer) type).initializeSomeoneWon();
+                defaultNumQuestions = game.getNumberOfQuestions();
+            }
+
             game.defaultifyPlayers(players, type);
+
             showStatusPanel1.setVisible(false);
             showStatusPanel2.setVisible(false);
             showScoreTextPanel.setVisible(false);
             showScorePanel1.setVisible(false);
             showScorePanel2.setVisible(false);
 
-            questions++;
-            if(type instanceof Thermometer && !game.checkStreak(players)){
-                defaultNumQuestions++;
-            }else if(type instanceof Thermometer && game.checkStreak(players)){
-                defaultNumQuestions = game.getNumberOfQuestions();
-            }
             timer3.stop();
             questionNumber();
 
         });
 
         timer3.start();
-
 
     }
 
@@ -1499,13 +1493,13 @@ public class UserInteraction  {
         con.add(playerFinalScorePanel);
 
         JLabel playerFinalScoreText = new JLabel(players.get(0).getNickname() + ", your final score is:");
-        playerFinalScoreText.setFont(new Font("Carlita", Font.PLAIN, 50));
+        playerFinalScoreText.setFont(new Font("Carlito", Font.PLAIN, 50));
         playerFinalScoreText.setForeground(Color.WHITE);
         playerFinalScoreText.setHorizontalAlignment(JLabel.CENTER);
         playerFinalScoreTextPanel.add(playerFinalScoreText);
 
         JLabel playerFinalScore = new JLabel(String.valueOf(players.get(0).getScore()));
-        playerFinalScore.setFont(new Font("Carlita", Font.PLAIN, 80));
+        playerFinalScore.setFont(new Font("Carlito", Font.PLAIN, 80));
         playerFinalScore.setForeground(Color.WHITE);
         playerFinalScore.setHorizontalAlignment(JLabel.CENTER);
         playerFinalScore.setVerticalAlignment(JLabel.CENTER);
@@ -1546,7 +1540,7 @@ public class UserInteraction  {
         frame.add(AndTheWinnerIsPanel);
 
         JLabel andTheWinnerIs = new JLabel("And the winner is . . .");
-        andTheWinnerIs.setFont(new Font("Carlita", Font.PLAIN, 50));
+        andTheWinnerIs.setFont(new Font("Carlito", Font.PLAIN, 50));
         andTheWinnerIs.setForeground(Color.WHITE);
         andTheWinnerIs.setHorizontalAlignment(JLabel.CENTER);
         AndTheWinnerIsPanel.add(andTheWinnerIs);
@@ -1558,7 +1552,7 @@ public class UserInteraction  {
         frame.add(winnerPanel);
 
         JLabel winner = new JLabel(TheWinner);
-        winner.setFont(new Font("Carlita", Font.PLAIN, 30));
+        winner.setFont(new Font("Carlito", Font.PLAIN, 30));
         winner.setForeground(Color.WHITE);
         winner.setHorizontalAlignment(JLabel.CENTER);
         winnerPanel.add(winner);
@@ -1570,7 +1564,7 @@ public class UserInteraction  {
         frame.add(FinalScoresPanel);
 
         JLabel finalScores = new JLabel("Your final scores were:");
-        finalScores.setFont(new Font("Carlita", Font.PLAIN, 50));
+        finalScores.setFont(new Font("Carlito", Font.PLAIN, 50));
         finalScores.setForeground(Color.WHITE);
         finalScores.setHorizontalAlignment(JLabel.CENTER);
         FinalScoresPanel.add(finalScores);
@@ -1582,7 +1576,7 @@ public class UserInteraction  {
         frame.add(finalLeftScorePanel);
 
         JLabel finaLeftScore = new JLabel(players.get(0).getNickname() + ": " + players.get(0).getScore());
-        finaLeftScore.setFont(new Font("Carlita", Font.PLAIN, 30));
+        finaLeftScore.setFont(new Font("Carlito", Font.PLAIN, 30));
         finaLeftScore.setForeground(Color.WHITE);
         finaLeftScore.setHorizontalAlignment(JLabel.CENTER);
         finalLeftScorePanel.add(finaLeftScore);
@@ -1594,7 +1588,7 @@ public class UserInteraction  {
         frame.add(finalRightScorePanel);
 
         JLabel finaRightScore = new JLabel(players.get(1).getNickname() + ": " + players.get(1).getScore());
-        finaRightScore.setFont(new Font("Carlita", Font.PLAIN, 30));
+        finaRightScore.setFont(new Font("Carlito", Font.PLAIN, 30));
         finaRightScore.setForeground(Color.WHITE);
         finaRightScore.setHorizontalAlignment(JLabel.CENTER);
         finalRightScorePanel.add(finaRightScore);
@@ -1632,15 +1626,10 @@ public class UserInteraction  {
             System.exit(0);
             frame.dispose();
         }
-
     }
-
-
 
     public static void main(String [] args){
         UserInteraction userInteraction = new UserInteraction();
         userInteraction.basicDisplay();
     }
-
-
 }

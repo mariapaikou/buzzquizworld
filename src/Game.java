@@ -1,82 +1,76 @@
-import java.awt.image.AreaAveragingScaleFilter;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
 
 /**
- * This class stores the list with the players, the questions and controls the whole game.
- * @author Theodora-Sofia Tsochataridou
- * @author Maria Paikou
- * @version 1.0
- * @since 05 - December - 2020
+ * Game is the class that controls the logical aspects of the game.
  */
 
-
 public class Game {
-    //    private ArrayList <Player> playerList;
-    private ArrayList<Questions> allQuestions;
-    private static int howManyRounds = 1;
-    private int numberOfQuestions = 2; //edw tha prepei na problepoyme gia thn thermometer! mhpws na to baloyme mesa sthn type?
-    // private final UserInteraction display;
-    private Round round; // einai swsto to final???
-    private ReadQuestionsFile readQuestionsFile;
-    private HighScore scores;
+
+    private final ArrayList<Questions> allQuestions;
+    private final static int howManyRounds = 1;
+    private final static int numberOfQuestions = 2;
+    private final Round round;
+    private final HighScore scores;
     private int questionPosition = 0;
 
-
-
-
     /**
-     * The constructor initializes the UserInteraction object and the two ArrayLists, one for the
-     * players and one for the questions. For the players, it calls the God method from UserInteraction.
-     *
-     * @value playerList is an ArrayList that stores Player objects.
-     * @value randomQuestions is an Arraylist that stores the (three) Questions objects that are
-     * randomly selected by a Round method.
-     * @value allQuestions is an ArrayList that contains all of the questions read from the file.
-     * @value howManyRounds is a static int that indicates the preferable number of rounds.
-     * @value numberOfQuestions is a static int that indicates the number of questions for each round.
-     * @value display is a UserInteraction object that is used to display messages to the user and receive information from him.
+     * The constructor initializes the variables for the two files that store the scores and reads the file that
+     * contains the questions.
      */
-
     public Game() {
-        readQuestionsFile = new ReadQuestionsFile();
+        ReadQuestionsFile readQuestionsFile = new ReadQuestionsFile();
         allQuestions = readQuestionsFile.loadQuestions("questions.text.txt");
         scores = new HighScore("highscores.dat", "totalwins.dat");
         round = new Round();
-
     }
 
-    public int getHowManyRounds() {
-        return howManyRounds;
-    }
-
-    public int getNumberOfQuestions() {
-        return numberOfQuestions;
-    }
-
+    /**
+     * The information from the files that store the scores get loaded and ready to be accessed.
+     */
     public void readScores() {
         scores.gameStarted();
     }
 
-
-
-
+    /**
+     * @return a String array with all the saved high scores from the file.
+     */
     public String[] getHighScores() {
         return scores.getHighestScores();
     }
 
+    /**
+     * @return a String array with all of the two-player game scores.
+     */
     public String[] getTotalWins() {
         return scores.getTotalWins();
     }
-    /**
-     * Method getRandomType returns a random type of game
-     *
-     * @return Type
-     */
 
+    /**
+     * The questions are rearranged in a random order.
+     */
+    public void randomizeQuestions() {
+        Collections.shuffle(allQuestions);
+    }
+
+    /**
+     * @return the fixed number of questions for each round.
+     */
+    public int getNumberOfQuestions() {
+        return numberOfQuestions;
+    }
+
+    /**
+     * @return the fixed number of rounds for the game.
+     */
+    public int getHowManyRounds() {
+        return howManyRounds;
+    }
+
+    /**
+     * @return selects an acceptable random type, depending on the game mode (1-player, 2-player), for the round
+     * creates and returns the analogue object.
+     */
     public Type getRandomType(ArrayList<Player> playerList) {
         Type type;
 
@@ -91,9 +85,7 @@ public class Game {
     }
 
     /**
-     * Method getNewQuestion returns the question located at the questionPosition position of the allQuestions array
-     *
-     * @return Question
+     * @return the next question from the arrayList of random questions
      */
     public Questions getNewQuestion() {
         questionPosition++;
@@ -101,12 +93,13 @@ public class Game {
     }
 
     /**
-     * @param answers
-     * @param correctAnswer
-     * @param playerList
-     * @return
+     * This method accepts the list of the playing users, the list with their answers and the correct answer for the
+     * question that was asked and set the status of the players that answered correctly to true.
+     * @param answers an arrayList of Strings which are the answers that were clicked by the players.
+     * @param correctAnswer the String with the right answer for the question that was asked.
+     * @param playerList the list of the players that are currently playing.
+     * @return the list of the players with the updated statuses.
      */
-
     public ArrayList<Player> setStatuses(ArrayList<String> answers, String correctAnswer, ArrayList<Player> playerList) {
         if (playerList.size() == 1) {
             if (answers.get(0).equals(correctAnswer)) {
@@ -123,54 +116,45 @@ public class Game {
     }
 
     /**
-     * @param clickTimes
-     * @param startTime
-     * @param type
+     * This method sets the clickTime for the players depending on the type of game they are playing. StopTheTimer
+     * needs to save the time that was left after the player's click and QuickAnswer and Thermometer need to save the
+     * milliseconds that passed until the player's click in order to gather the needed information for updating the
+     * scores later.
+     * @param clickTimes an array of long variables that stores the system time in milliseconds of the moment that the
+     *                   player answered the question.
+     * @param startTime is the moment that the question appeared on the screen in milliseconds.
+     * @param type the type of round that the players are currently playing.
+     * @param playerList the list of the players.
      */
-
     public void setTime(long[] clickTimes, long startTime, Type type, ArrayList<Player> playerList) {
         if(type  instanceof StopTheTimer){
             for (int i = 0; i < playerList.size(); i++) {
                 long timeLeft = startTime+10000 - clickTimes[i] ;
-                System.out.println("timeLeft is="+timeLeft);
                 playerList.get(i).setClickTime(timeLeft);
             }
 
         }
         if (playerList.size() > 1) {
-            if (type instanceof StopTheTimer) {
-//
-//                for (int i = 0; i < playerList.size(); i++) {
-//                    long timeLeft = (startTime +10000) - clickTimes[i];
-//                    System.out.println("timeLeft is="+timeLeft);
-//                    playerList.get(i).setClickTime(timeLeft);
-//                }
-
-
-            } else if (type instanceof QuickAnswer || type instanceof Thermometer) {
+            if (type instanceof QuickAnswer || type instanceof Thermometer) {
                 for (int i = 0; i < playerList.size(); i++) {
                     playerList.get(i).setClickTime(startTime - clickTimes[i]);
                 }
             }
-
         }
-
     }
 
     /**
-     * Method changePoints calls the right changePoints method in order to change Players points after every question
-     *
-     * @param type is te type that the changePoints is going to use
+     * Changes the score of all the players depending on the type of round they are currently playing.
+     * @param type the type of the round for the last question.
      */
     public void changePoints(Type type) {
         type.changePoints();
-
     }
 
     /**
-     *
-     * @param playerList
-     * @param type
+     * Returns all the variables in a player that were changed after each question temporarily to their default state.
+     * @param playerList the list of all the players
+     * @param type the type of round the question the players just answered belonged to
      */
     public void defaultifyPlayers(ArrayList<Player> playerList, Type type){
         for (Player player: playerList){
@@ -182,32 +166,9 @@ public class Game {
     }
 
     /**
-     *
-     * @param playerList
-     * @return
+     * When the game ends, this method gets the list of the players and saves their scores in the file if needed.
+     * @param playerList the list of the players that played the game.
      */
-    public boolean checkStreak(ArrayList<Player> playerList){
-        boolean someoneWon = false;
-        for(Player player : playerList){
-            if(player.getStreak() == 5){
-                someoneWon = true;
-                break;
-            }
-        }
-        return someoneWon;
-    }
-
-
-    /**
-     * Method randomizeQuestions  shuffles the allQuestions ArrayList.
-     *
-     * @value allQuestions is the ArrayList that contains all the Questions objects available.
-     */
-    public void randomizeQuestions() {
-        Collections.shuffle(allQuestions);
-    }
-
-
     public void gameEnd(ArrayList<Player> playerList){
         scores.gameEnded(playerList);
     }

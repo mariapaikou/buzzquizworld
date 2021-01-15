@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Thermometer extends Type {
 
     private final int points;
+    private boolean someoneWon = false;
 
     public Thermometer(){
 
@@ -49,11 +50,22 @@ public class Thermometer extends Type {
     /**
      * Goes through the list of the players and sets their streak to default.
      */
-    private void defaultifyStreaks(){
+    public void defaultifyStreaks(){
         for (Player player : players){
             player.defaultifyStreak();
         }
+        someoneWon = true;
     }
+
+    /**
+     * @return a boolean variable that returns if the game should end or not.
+     */
+    public boolean getSomeoneWon(){return someoneWon;}
+
+    /**
+     * Sets the variable back to false because the round ended.
+     */
+    public void initializeSomeoneWon(){someoneWon = false;}
 
     /**
      * @return the name of the class in the form of a String.

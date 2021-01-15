@@ -63,19 +63,12 @@ public class UserInteraction  {
         //The panel that contains the text
         startTextPanel = new JPanel();
 
-//        //Look & Layout
-//        startTextPanel.setBounds(100, 100, 600, 140);
-//        startTextPanel.setLayout(new BorderLayout());
-//        startTextPanel.setBackground(Color.black);
-//        con.add(startTextPanel);
-
         //Label with the text
         JLabel startText = new JLabel("Buzz Quiz!");
         //Look & Layout
         startText.setFont(new Font("Carlito", Font.PLAIN, 90));
         startText.setForeground(Color.WHITE);
         startText.setHorizontalAlignment(JLabel.CENTER);
-     //   startTextPanel.add(startText);
         panelCharacteristics(startTextPanel,100,100,600,140,startText,Color.BLACK);
 
         //The panel that contains the button
@@ -1046,14 +1039,6 @@ public class UserInteraction  {
         panel.setBackground(color);
         panel.add(label);
         con.add(panel);
-    }
-
-    public void buttonCharacteristics(JButton button, int width, int height, int size, JPanel panel, Color background, Color foreground){
-        button.setBackground(background);
-        button.setForeground(foreground);
-        button.setSize(width, height);
-        button.setFont(new Font("Carlito", Font.PLAIN, size));
-        panel.add(button);
     }
 
     /**

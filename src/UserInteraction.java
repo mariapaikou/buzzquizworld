@@ -6,7 +6,6 @@ import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 /**
@@ -15,55 +14,35 @@ import java.util.Scanner;
  */
 
 public class UserInteraction  { //implements KeyListener
-    private JFrame frame;
+    private final JFrame frame;
     private Questions question;
-    private Game game;
-    private Type type; //= new Type() {
-//        @Override
-//        public void changePoints() {
-//
-//        }
-//
-//        @Override
-//        public String getName() {
-//            return null;
-//        }
-//
-//        @Override
-//        public String getExplanation() {
-//            return null;
-//        }
-//    };
+    private final Game game;
+    private Type type;
     private ArrayList<Player> players = new ArrayList<>();
     private int numberOfPlayers = 0;
     private int rounds = 1;
     private int questions = 1;
-    Scanner input = new Scanner(System.in);
     private Container con;
     private JPanel startTextPanel;
     private JPanel startButtonPanel;
     private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
     private JPanel NamePanelText, NamePanel, readyPanel, letsGoPanel;
-    private JPanel RoundNumberPanel, QuestionNumberPanel, RQOkayPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
+    private JPanel RoundNumberPanel, QuestionNumberPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
     private JPanel announcingCategoryPanel;
     private JPanel betPointsPanel, betPointsPanel2, bet250, bet500, bet750, bet1000;
     private JPanel centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
     private JPanel showStatusPanel1, showStatusPanel2, showScoreTextPanel, showScorePanel1, showScorePanel2, ROkayPanel, QOkayPanel;
-    private JPanel correctAnswerTextPanel, correctAnswerPanel, nextQuestion, scoresPanel;
+    private JPanel correctAnswerTextPanel, correctAnswerPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
     private JPanel highScoresButtonPanel, totalWinsButtonPanel, goButtonPanel;
     private JTextField nickname;
     private Timer timer1, timer2,timer3,timer4,timer5;
-    private JLabel label,labelA, labelB, labelC, labelD, labelQ;
     private long startTime , endTime1, endTime2;
     private JPanel AndTheWinnerIsPanel, winnerPanel, FinalScoresPanel, finalLeftScorePanel, finalRightScorePanel, playerFinalScoreTextPanel, playerFinalScorePanel;
     private int defaultNumQuestions;
 
     public UserInteraction(){
-        answer1 = new String();
-        answer2 = new String();
-
         answer1 = null;
         answer2 = null;
 
@@ -76,7 +55,7 @@ public class UserInteraction  { //implements KeyListener
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setLayout(null);
-        frame.setLocationRelativeTo(null); //bazei to frame sto kentro ths o8onhs
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
     }
@@ -92,7 +71,6 @@ public class UserInteraction  { //implements KeyListener
         startTextPanel.setBounds(100, 100, 600, 140);
         startTextPanel.setLayout(new BorderLayout());
         startTextPanel.setBackground(Color.black);
-        //startPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         con.add(startTextPanel);
 
         //Label with the text
@@ -118,15 +96,12 @@ public class UserInteraction  { //implements KeyListener
         startButton.setSize(200, 80);
         startButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                startTextPanel.setVisible(false);
-                startButtonPanel.setVisible(false);
-                highScoresButtonPanel.setVisible(false);
-                totalWinsButtonPanel.setVisible(false);
-                HowManyOfYou();
-            }
+        startButton.addActionListener(e -> {
+            startTextPanel.setVisible(false);
+            startButtonPanel.setVisible(false);
+            highScoresButtonPanel.setVisible(false);
+            totalWinsButtonPanel.setVisible(false);
+            HowManyOfYou();
         });
         startButtonPanel.add(startButton);
 
@@ -142,15 +117,12 @@ public class UserInteraction  { //implements KeyListener
         highScoreButton.setSize(200,80);
         highScoreButton.setFont(new Font("Carlito", Font.PLAIN,30));
         //action listener!
-        highScoreButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                startTextPanel.setVisible(false);
-                startButtonPanel.setVisible(false);
-                highScoresButtonPanel.setVisible(false);
-                totalWinsButtonPanel.setVisible(false);
-                showHighScores();
-            }
+        highScoreButton.addActionListener(e -> {
+            startTextPanel.setVisible(false);
+            startButtonPanel.setVisible(false);
+            highScoresButtonPanel.setVisible(false);
+            totalWinsButtonPanel.setVisible(false);
+            showHighScores();
         });
         highScoresButtonPanel.add(highScoreButton);
 
@@ -165,15 +137,12 @@ public class UserInteraction  { //implements KeyListener
         totalWinsButton.setSize(200,80);
         totalWinsButton.setFont(new Font("Carlito", Font.PLAIN,30));
         //action listener
-        totalWinsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                startTextPanel.setVisible(false);
-                startButtonPanel.setVisible(false);
-                highScoresButtonPanel.setVisible(false);
-                totalWinsButtonPanel.setVisible(false);
-                showTotalWins();
-            }
+        totalWinsButton.addActionListener(e -> {
+            startTextPanel.setVisible(false);
+            startButtonPanel.setVisible(false);
+            highScoresButtonPanel.setVisible(false);
+            totalWinsButtonPanel.setVisible(false);
+            showTotalWins();
         });
         totalWinsButtonPanel.add(totalWinsButton);
         game.readScores();
@@ -209,14 +178,10 @@ public class UserInteraction  { //implements KeyListener
         backButton.setSize(100,100);
         backButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action Listener
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //list.setVisible(false);
-                pane.setVisible(false);
-                panel.setVisible(false);
-                basicDisplay();
-            }
+        backButton.addActionListener(e -> {
+            pane.setVisible(false);
+            panel.setVisible(false);
+            basicDisplay();
         });
 
 
@@ -269,16 +234,13 @@ public class UserInteraction  { //implements KeyListener
         backButton.setBackground(Color.BLACK);
         backButton.setForeground(Color.WHITE);
         backButton.setSize(100,100);
-        backButton.setFont(new Font("Carlito", Font.PLAIN, 30));
+        backButton.setFont(new Font("Carlita", Font.PLAIN, 30));
         //Action Listener
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //list.setVisible(false);
-                pane.setVisible(false);
-                panel.setVisible(false);
-                basicDisplay();
-            }
+        backButton.addActionListener(e -> {
+            //list.setVisible(false);
+            pane.setVisible(false);
+            panel.setVisible(false);
+            basicDisplay();
         });
 
 
@@ -339,15 +301,12 @@ public class UserInteraction  { //implements KeyListener
         onePlayer.setSize(400, 150);
         onePlayer.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action
-        onePlayer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                HMPPanel.setVisible(false);
-                HMPLeftPanel.setVisible(false);
-                HMPRightPanel.setVisible(false);
-                numberOfPlayers = 1;
-                God(1);
-            }
+        onePlayer.addActionListener(e -> {
+            HMPPanel.setVisible(false);
+            HMPLeftPanel.setVisible(false);
+            HMPRightPanel.setVisible(false);
+            numberOfPlayers = 1;
+            God(1);
         });
         HMPLeftPanel.add(onePlayer);
 
@@ -359,15 +318,12 @@ public class UserInteraction  { //implements KeyListener
         twoPlayers.setSize(400, 150);
         twoPlayers.setFont(new Font("Carlito", Font.PLAIN, 30));
         //Action
-        twoPlayers.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                HMPPanel.setVisible(false);
-                HMPLeftPanel.setVisible(false);
-                HMPRightPanel.setVisible(false);
-                numberOfPlayers = 2;
-                God(2);
-            }
+        twoPlayers.addActionListener(e -> {
+            HMPPanel.setVisible(false);
+            HMPLeftPanel.setVisible(false);
+            HMPRightPanel.setVisible(false);
+            numberOfPlayers = 2;
+            God(2);
         });
         HMPRightPanel.add(twoPlayers);
     }
@@ -376,7 +332,7 @@ public class UserInteraction  { //implements KeyListener
      * Function God, creates the human beings of this game. Asks for the name
      * of the player, creates a Player object with that name that is going
      * to be added to the playerList.
-     * @return A Player object
+     *
      */
     public void God(int numberOfPlayers){
 
@@ -431,29 +387,27 @@ public class UserInteraction  { //implements KeyListener
         readyButton.setSize(100, 100);
         readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         readyPanel.add(readyButton);
-        readyButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                Player playerOne = new Player();
-                playerOne.setNickname(nickname.getText());
-                players.add(playerOne);
-                if(numberOfPlayers == 2){
-                    NamePanelText.setVisible(false);
-                    NamePanel.setVisible(false);
-                    readyPanel.setVisible(false);
-                    con.remove(readyPanel);
-                    nickname.setText("");
-                    God2();
-                }else{
-                    try{
-                        LetsGo();
-                    }catch(InterruptedException ie) {
+        readyButton.addActionListener(e -> {
+            Player playerOne = new Player();
+            playerOne.setNickname(nickname.getText());
+            players.add(playerOne);
+            if(numberOfPlayers == 2){
+                NamePanelText.setVisible(false);
+                NamePanel.setVisible(false);
+                readyPanel.setVisible(false);
+                con.remove(readyPanel);
+                nickname.setText("");
+                God2();
+            }else{
+                try{
+                    LetsGo();
+                }catch(InterruptedException ie) {
 
-                        System.out.println("got interrupted!");
+                    System.out.println("got interrupted!");
 
-                    }
                 }
-
             }
+
         });
 
     }
@@ -521,26 +475,24 @@ public class UserInteraction  { //implements KeyListener
 
         System.out.println("inside god2!");
 
-            readyButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Player playerOne = new Player();
-                    playerOne.setNickname(nickname.getText());
-                    players.add(playerOne);
-                    try {
-                        NamePanelText.setVisible(false);
-                        NamePanel.setVisible(false);
-                        readyPanel.removeAll();
-                        con.remove(readyPanel);
-                        readyPanel.setVisible(false);
-                        LetsGo();
-                    } catch (InterruptedException ie) {
+            readyButton.addActionListener(e -> {
+                Player playerOne = new Player();
+                playerOne.setNickname(nickname.getText());
+                players.add(playerOne);
+                try {
+                    NamePanelText.setVisible(false);
+                    NamePanel.setVisible(false);
+                    readyPanel.removeAll();
+                    con.remove(readyPanel);
+                    readyPanel.setVisible(false);
+                    LetsGo();
+                } catch (InterruptedException ie) {
 
-                        System.out.println("got interrupted!");
-
-                    }
-
+                    System.out.println("got interrupted!");
 
                 }
+
+
             });
 
     }
@@ -629,8 +581,8 @@ public class UserInteraction  { //implements KeyListener
 
 
     //Class to limit the number of characters in a JText
-    public class JTextFieldLimit extends PlainDocument {
-        private int limit;
+    public static class JTextFieldLimit extends PlainDocument {
+        private final int limit;
 
         JTextFieldLimit(int limit) {
             super();
@@ -685,12 +637,7 @@ public class UserInteraction  { //implements KeyListener
             okayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
             ROkayPanel.add(okayButton);
             con.add(ROkayPanel);
-            okayButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    announcingTheType();
-                }
-            });
+            okayButton.addActionListener(e -> announcingTheType());
 
         }else{
             if(numberOfPlayers == 1){
@@ -744,8 +691,6 @@ public class UserInteraction  { //implements KeyListener
         typeExplanationArea.setForeground(Color.WHITE);
         typeExplanationArea.setFont(new Font("Carlito", Font.PLAIN, 30));
         typeExplanationArea.setLineWrap(true);
-//        typeExplanationLabel.setHorizontalAlignment(JLabel.CENTER);
-//        typeExplanationLabel.setVerticalAlignment(JLabel.CENTER);
 
         TypeExplanationPanel.add(typeExplanationArea);
 
@@ -761,12 +706,7 @@ public class UserInteraction  { //implements KeyListener
         okay.setForeground(Color.WHITE);
         okay.setSize(50, 50);
         okay.setFont(new Font("Carlito", Font.PLAIN, 30));
-        okay.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                questionNumber();
-            }
-        });
+        okay.addActionListener(e -> questionNumber());
         typeOkayPanel.add(okay);
 
     }
@@ -811,15 +751,12 @@ public class UserInteraction  { //implements KeyListener
             qokayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
             QOkayPanel.add(qokayButton);
             con.add(QOkayPanel);
-            qokayButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    QuestionNumberPanel.setVisible(false);
-                    QOkayPanel.setVisible(false);
-                    con.remove(QOkayPanel);
-                    question = game.getNewQuestion();
-                    announcingCategory();
-                }
+            qokayButton.addActionListener(e -> {
+                QuestionNumberPanel.setVisible(false);
+                QOkayPanel.setVisible(false);
+                con.remove(QOkayPanel);
+                question = game.getNewQuestion();
+                announcingCategory();
             });
         }else{
             rounds++;
@@ -860,14 +797,11 @@ public class UserInteraction  { //implements KeyListener
         goButton.setForeground(Color.WHITE);
         goButton.setSize(100, 100);
         goButton.setFont(new Font("Carlito", Font.PLAIN, 30));
-        goButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(type instanceof Bet){
-                    betPoints();
-                }else {
-                    askTheQuestion();
-                }
+        goButton.addActionListener(e -> {
+            if(type instanceof Bet){
+                betPoints();
+            }else {
+                askTheQuestion();
             }
         });
         goButtonPanel = new JPanel();
@@ -938,20 +872,17 @@ public class UserInteraction  { //implements KeyListener
         bet250Button.setForeground(Color.WHITE);
         bet250Button.setSize(100, 100);
         bet250Button.setFont(new Font("Carlito", Font.PLAIN, 40));
-        bet250Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                player.setBet(250);
-                if(players.size() == 2){
-                    betPoints2();
-                }else{
-                    betPointsPanel.setVisible(false);
-                    bet250.setVisible(false);
-                    bet500.setVisible(false);
-                    bet750.setVisible(false);
-                    bet1000.setVisible(false);
-                    askTheQuestion();
-                }
+        bet250Button.addActionListener(e -> {
+            player.setBet(250);
+            if(players.size() == 2){
+                betPoints2();
+            }else{
+                betPointsPanel.setVisible(false);
+                bet250.setVisible(false);
+                bet500.setVisible(false);
+                bet750.setVisible(false);
+                bet1000.setVisible(false);
+                askTheQuestion();
             }
         });
         bet250.add(bet250Button);
@@ -962,21 +893,18 @@ public class UserInteraction  { //implements KeyListener
         bet500Button.setForeground(Color.WHITE);
         bet500Button.setSize(100, 100);
         bet500Button.setFont(new Font("Carlito", Font.PLAIN, 40));
-        bet500Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                player.setBet(500);
+        bet500Button.addActionListener(e -> {
+            player.setBet(500);
 //                System.out.println(player.getNickname() + " " + player.getBet());
-                if(players.size() == 2){
-                    betPoints2();
-                }else{
-                    betPointsPanel.setVisible(false);
-                    bet250.setVisible(false);
-                    bet500.setVisible(false);
-                    bet750.setVisible(false);
-                    bet1000.setVisible(false);
-                    askTheQuestion();
-                }
+            if(players.size() == 2){
+                betPoints2();
+            }else{
+                betPointsPanel.setVisible(false);
+                bet250.setVisible(false);
+                bet500.setVisible(false);
+                bet750.setVisible(false);
+                bet1000.setVisible(false);
+                askTheQuestion();
             }
         });
         bet500.add(bet500Button);
@@ -987,21 +915,18 @@ public class UserInteraction  { //implements KeyListener
         bet750Button.setForeground(Color.WHITE);
         bet750Button.setSize(100, 100);
         bet750Button.setFont(new Font("Carlito", Font.PLAIN, 40));
-        bet750Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                player.setBet(750);
+        bet750Button.addActionListener(e -> {
+            player.setBet(750);
 //                System.out.println(player.getNickname() + " " + player.getBet());
-                if(players.size() == 2){
-                    betPoints2();
-                }else{
-                    betPointsPanel.setVisible(false);
-                    bet250.setVisible(false);
-                    bet500.setVisible(false);
-                    bet750.setVisible(false);
-                    bet1000.setVisible(false);
-                    askTheQuestion();
-                }
+            if(players.size() == 2){
+                betPoints2();
+            }else{
+                betPointsPanel.setVisible(false);
+                bet250.setVisible(false);
+                bet500.setVisible(false);
+                bet750.setVisible(false);
+                bet1000.setVisible(false);
+                askTheQuestion();
             }
         });
         bet750.add(bet750Button);
@@ -1012,21 +937,18 @@ public class UserInteraction  { //implements KeyListener
         bet1000Button.setForeground(Color.WHITE);
         bet1000Button.setSize(100, 100);
         bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 40));
-        bet1000Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                player.setBet(1000);
+        bet1000Button.addActionListener(e -> {
+            player.setBet(1000);
 //                System.out.println(player.getNickname() + " " + player.getBet());
-                if(players.size() == 2){
-                    betPoints2();
-                }else{
-                    betPointsPanel.setVisible(false);
-                    bet250.setVisible(false);
-                    bet500.setVisible(false);
-                    bet750.setVisible(false);
-                    bet1000.setVisible(false);
-                    askTheQuestion();
-                }
+            if(players.size() == 2){
+                betPoints2();
+            }else{
+                betPointsPanel.setVisible(false);
+                bet250.setVisible(false);
+                bet500.setVisible(false);
+                bet750.setVisible(false);
+                bet1000.setVisible(false);
+                askTheQuestion();
             }
         });
         bet1000.add(bet1000Button);
@@ -1069,17 +991,14 @@ public class UserInteraction  { //implements KeyListener
         bet250Button.setForeground(Color.WHITE);
         bet250Button.setSize(100, 100);
         bet250Button.setFont(new Font("Carlito", Font.PLAIN, 40));
-        bet250Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                players.get(1).setBet(250);
-                betPointsPanel2.setVisible(false);
-                bet250.setVisible(false);
-                bet500.setVisible(false);
-                bet750.setVisible(false);
-                bet1000.setVisible(false);
-                askTheQuestion();
-            }
+        bet250Button.addActionListener(e -> {
+            players.get(1).setBet(250);
+            betPointsPanel2.setVisible(false);
+            bet250.setVisible(false);
+            bet500.setVisible(false);
+            bet750.setVisible(false);
+            bet1000.setVisible(false);
+            askTheQuestion();
         });
         bet250.add(bet250Button);
 
@@ -1089,18 +1008,15 @@ public class UserInteraction  { //implements KeyListener
         bet500Button.setForeground(Color.WHITE);
         bet500Button.setSize(100, 100);
         bet500Button.setFont(new Font("Carlito", Font.PLAIN, 40));
-        bet500Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                players.get(1).setBet(500);
+        bet500Button.addActionListener(e -> {
+            players.get(1).setBet(500);
 //                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
-                betPointsPanel2.setVisible(false);
-                bet250.setVisible(false);
-                bet500.setVisible(false);
-                bet750.setVisible(false);
-                bet1000.setVisible(false);
-                askTheQuestion();
-            }
+            betPointsPanel2.setVisible(false);
+            bet250.setVisible(false);
+            bet500.setVisible(false);
+            bet750.setVisible(false);
+            bet1000.setVisible(false);
+            askTheQuestion();
         });
         bet500.add(bet500Button);
 
@@ -1110,18 +1026,15 @@ public class UserInteraction  { //implements KeyListener
         bet750Button.setForeground(Color.WHITE);
         bet750Button.setSize(100, 100);
         bet750Button.setFont(new Font("Carlito", Font.PLAIN, 40));
-        bet750Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                players.get(1).setBet(750);
-                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
-                betPointsPanel2.setVisible(false);
-                bet250.setVisible(false);
-                bet500.setVisible(false);
-                bet750.setVisible(false);
-                bet1000.setVisible(false);
-                askTheQuestion();
-            }
+        bet750Button.addActionListener(e -> {
+            players.get(1).setBet(750);
+            System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
+            betPointsPanel2.setVisible(false);
+            bet250.setVisible(false);
+            bet500.setVisible(false);
+            bet750.setVisible(false);
+            bet1000.setVisible(false);
+            askTheQuestion();
         });
         bet750.add(bet750Button);
 
@@ -1131,18 +1044,15 @@ public class UserInteraction  { //implements KeyListener
         bet1000Button.setForeground(Color.WHITE);
         bet1000Button.setSize(100, 100);
         bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 40));
-        bet1000Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                players.get(1).setBet(1000);
-                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
-                betPointsPanel2.setVisible(false);
-                bet250.setVisible(false);
-                bet500.setVisible(false);
-                bet750.setVisible(false);
-                bet1000.setVisible(false);
-                askTheQuestion();
-            }
+        bet1000Button.addActionListener(e -> {
+            players.get(1).setBet(1000);
+            System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
+            betPointsPanel2.setVisible(false);
+            bet250.setVisible(false);
+            bet500.setVisible(false);
+            bet750.setVisible(false);
+            bet1000.setVisible(false);
+            askTheQuestion();
         });
         bet1000.add(bet1000Button);
     }
@@ -1163,7 +1073,7 @@ public class UserInteraction  { //implements KeyListener
         centerPanel.setBackground(Color.BLACK);
         centerPanel.setBounds(100,10,600,250);
 
-        label =new JLabel();
+        JLabel label = new JLabel();
 
         label.setLayout(new FlowLayout(FlowLayout.CENTER));
         // elegxow gia to an h eikona einai yparkth
@@ -1184,7 +1094,7 @@ public class UserInteraction  { //implements KeyListener
 
         answers = question.getAnswers();
 
-        labelQ = new JLabel();
+        JLabel labelQ = new JLabel();
         labelQ.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelQ.setHorizontalAlignment(JLabel.LEFT);
         labelQ.setText(question.getQuestion());
@@ -1195,7 +1105,7 @@ public class UserInteraction  { //implements KeyListener
 
         con.add(questionPanel);
 
-        labelA = new JLabel();
+        JLabel labelA = new JLabel();
         labelA.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelA.setHorizontalAlignment(JLabel.LEFT);
         labelA.setText("A: " + answers.get(0));
@@ -1210,7 +1120,7 @@ public class UserInteraction  { //implements KeyListener
         con.add(answerPanelA);
 
 
-        labelB = new JLabel();
+        JLabel labelB = new JLabel();
         labelB.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelB.setHorizontalAlignment(JLabel.RIGHT);
         labelB.setText("B: " + answers.get(1));
@@ -1225,7 +1135,7 @@ public class UserInteraction  { //implements KeyListener
         con.add(answerPanelB);
 
 
-        labelC = new JLabel();
+        JLabel labelC = new JLabel();
         labelC.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelC.setHorizontalAlignment(JLabel.LEFT);
         labelC.setText("C: " + answers.get(2));
@@ -1239,7 +1149,7 @@ public class UserInteraction  { //implements KeyListener
         answerPanelC.add(labelC);
         con.add(answerPanelC);
 
-        labelD = new JLabel();
+        JLabel labelD = new JLabel();
         labelD.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelD.setHorizontalAlignment(JLabel.RIGHT);
         labelD.setText("D: " + answers.get(3));
@@ -1626,7 +1536,7 @@ public class UserInteraction  { //implements KeyListener
 
 
 
-        String TheWinner = null;
+        String TheWinner;
 
         if(players.get(0).getScore() > players.get(1).getScore()){
             TheWinner = players.get(0).getNickname();

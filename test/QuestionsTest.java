@@ -1,22 +1,18 @@
-//import org.junit.jupiter.api.Test;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//class QuestionsTest {
-//    Questions question;
-//    String answer;
-//
-//    public QuestionsTest(){
-//        question = new Questions("What","a","b","c","d","d", "cat");
-//        answer = new String();
-//    }
-//
-//    @Test
-//    void acceptableAnswer() {
-//        assertEquals(false,question.acceptableAnswer("!"));
-//    }
-//
-//    @Test
-//    void getAnswers() {
-//    }
-//}
+import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
+
+class QuestionsTest {
+    Questions question;
+    ArrayList<String> answers;
+    public QuestionsTest(){
+        question = new Questions("Category","Question","AnswerA","AnswerB","AnswerC","AnswerD", "CorrectAnswer", "null");
+        answers = new ArrayList<>();
+    }
+
+    @Test
+    void getAnswers() {
+        answers = question.getAnswers();
+        assertNotSame(answers.get(0), question.getAnswers().get(0));
+    }
+}

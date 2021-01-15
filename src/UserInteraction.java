@@ -713,7 +713,7 @@ public class UserInteraction  {
      * If the type for the round is Bet, then before asking the question and after announcing the category, this method
      * requests the player to make a bet, choosing between 250, 500, 750 and 1000 points.
      */
-    public void betPoints() {
+    private void betPoints() {
         //turn off previous panels
         announcingCategoryPanel.setVisible(false);
 
@@ -767,16 +767,7 @@ public class UserInteraction  {
         bet250Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet250Button.addActionListener(e -> {
             player.getWallet().setBet(250);
-            if(players.size() == 2){
-                betPoints2();
-            }else{
-                betPointsPanel.setVisible(false);
-                bet250.setVisible(false);
-                bet500.setVisible(false);
-                bet750.setVisible(false);
-                bet1000.setVisible(false);
-                askTheQuestion();
-            }
+            betNextMethodCall();
         });
         bet250.add(bet250Button);
 
@@ -788,16 +779,7 @@ public class UserInteraction  {
         bet500Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet500Button.addActionListener(e -> {
             player.getWallet().setBet(500);
-            if(players.size() == 2){
-                betPoints2();
-            }else{
-                betPointsPanel.setVisible(false);
-                bet250.setVisible(false);
-                bet500.setVisible(false);
-                bet750.setVisible(false);
-                bet1000.setVisible(false);
-                askTheQuestion();
-            }
+            betNextMethodCall();
         });
         bet500.add(bet500Button);
 
@@ -809,16 +791,7 @@ public class UserInteraction  {
         bet750Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet750Button.addActionListener(e -> {
             player.getWallet().setBet(750);
-            if(players.size() == 2){
-                betPoints2();
-            }else{
-                betPointsPanel.setVisible(false);
-                bet250.setVisible(false);
-                bet500.setVisible(false);
-                bet750.setVisible(false);
-                bet1000.setVisible(false);
-                askTheQuestion();
-            }
+            betNextMethodCall();
         });
         bet750.add(bet750Button);
 
@@ -830,24 +803,32 @@ public class UserInteraction  {
         bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet1000Button.addActionListener(e -> {
             player.getWallet().setBet(1000);
-            if(players.size() == 2){
-                betPoints2();
-            }else{
-                betPointsPanel.setVisible(false);
-                bet250.setVisible(false);
-                bet500.setVisible(false);
-                bet750.setVisible(false);
-                bet1000.setVisible(false);
-                askTheQuestion();
-            }
+            betNextMethodCall();
         });
         bet1000.add(bet1000Button);
     }
 
     /**
+     * Method betNextMethodCall if a method that decides the next method call after a button was pressed in the
+     * betPoints method. If player is one we dispaly the question else we ask again for the bet of the second palyer
+     */
+    private void betNextMethodCall(){
+        if(players.size() == 2){
+            betPoints2();
+        }else{
+            betPointsPanel.setVisible(false);
+            bet250.setVisible(false);
+            bet500.setVisible(false);
+            bet750.setVisible(false);
+            bet1000.setVisible(false);
+            askTheQuestion();
+        }
+    }
+
+    /**
      * In case there are two players, this method is used to accept the second player's bet.
      */
-    public void betPoints2() {
+    private void betPoints2() {
         betPointsPanel.setVisible(false);
 
         //BetPoints panel

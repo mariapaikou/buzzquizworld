@@ -11,15 +11,13 @@ class TypeTest {
     private final StopTheTimer stopTheTimer;
     private final QuickAnswer quickAnswer;
     private final Thermometer thermometer;
-    private final Player player1;
-    private final Player player2;
     private final ArrayList<Player> array;
 
 
      public TypeTest() {
 
-        player1 = new Player();
-        player2 = new Player();
+         Player player1 = new Player();
+         Player player2 = new Player();
         array = new ArrayList<>();
         array.add(player1);
         array.add(player2);
@@ -33,9 +31,7 @@ class TypeTest {
 
     @Test
     void changePoints() {
-
-         //aythn thn tsekaroume ksexvrista gia kathe upoklash!
-
+         //this test if performed for every Type of game individually
     }
 
     @Test
@@ -74,28 +70,12 @@ class TypeTest {
 
     }
 
-//    @Test //ok!
-//    void defaultifyPlayers(){
-//         player1.setStatus(true);
-//         player2.setStatus(true);
-//
-//         bet.setPlayersList(array);
-//       //  bet.defaultifyPlayers();
-//
-//        assertFalse(player1.getStatus());
-//        assertFalse(player2.getStatus());
-//    }
-//
-//    @Test //ok!
-//    void defaultifyPlayers2(){
-//         player1.setClickTime(500);
-//         player2.setClickTime(600);
-//
-//         quickAnswer.setPlayersList(array);
-//         quickAnswer.defaultifyPlayers();
-//
-//         assertEquals(-1,player1.getClickTime());
-//         assertEquals(-1,player2.getClickTime());
-//
-//    }
+   @Test
+    void getExplanation(){
+         assertEquals("The question category appears first. The player can bet 250, 500, 750 and 1000 points. Then the question appears and if he answers correctly he gains the points he bet, otherwise he loses them.",bet.getExplanation());
+         assertEquals("The first player to answer correctly earns 1000 points and the second player 500 points",quickAnswer.getExplanation());
+         assertEquals("Each player who answers correctly earns 1000 points.", rightAnswer.getExplanation());
+         assertEquals("There is a timer that counts down 10 seconds and each player who answers correctly earns as many points as the milliseconds left when he answered, multiplied by 0.2." , stopTheTimer.getExplanation());
+         assertEquals("The first player to answer 5 questions correctly earns 5000 points.", thermometer.getExplanation());
+   }
 }

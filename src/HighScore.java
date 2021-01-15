@@ -168,7 +168,6 @@ public class HighScore {
     public String [] getHighestScores(){
         String [] list;
         if(highestScores.size() == 0){
-            System.out.println("in");
             list = new String[]{"There are no high scores yet!"};
         }else{
             list= new String[highestScores.size()];

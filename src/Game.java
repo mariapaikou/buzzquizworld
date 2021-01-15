@@ -8,8 +8,8 @@ import java.util.Collections;
 public class Game {
 
     private final ArrayList<Questions> allQuestions;
-    private final static int howManyRounds = 1;
-    private final static int numberOfQuestions = 2;
+    private final static int howManyRounds = 3;
+    private final static int numberOfQuestions = 3;
     private final Round round;
     private final HighScore scores;
     private int questionPosition = 0;
@@ -137,7 +137,7 @@ public class Game {
         if (playerList.size() > 1) {
             if (type instanceof QuickAnswer || type instanceof Thermometer) {
                 for (int i = 0; i < playerList.size(); i++) {
-                    playerList.get(i).setClickTime(startTime - clickTimes[i]);
+                    playerList.get(i).setClickTime(clickTimes[i] - startTime );
                 }
             }
         }

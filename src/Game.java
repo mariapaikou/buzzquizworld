@@ -49,6 +49,17 @@ public class Game {
     }
 
     /**
+     * Method createPlayer accepts a String that represents the name of the player, creates a new Player object and
+     * returns it.
+     * @param name String
+     * @return Player
+     */
+    public Player createPlayer(String name){
+        Player player = new Player();
+        player.setNickname(name);
+        return player;
+    }
+    /**
      * The questions are rearranged in a random order.
      */
     public void randomizeQuestions() {

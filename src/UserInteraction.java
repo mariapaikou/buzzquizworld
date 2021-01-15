@@ -369,9 +369,7 @@ public class UserInteraction  {
         readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         readyPanel.add(readyButton);
         readyButton.addActionListener(e -> {
-            Player playerOne = new Player();
-            playerOne.setNickname(nickname.getText());
-            players.add(playerOne);
+            players.add(game.createPlayer(nickname.getText()));
             if(numberOfPlayers == 2){
                 NamePanelText.setVisible(false);
                 NamePanel.setVisible(false);
@@ -450,9 +448,7 @@ public class UserInteraction  {
         readyPanel.add(readyButton);
 
         readyButton.addActionListener(e -> {
-            Player playerOne = new Player();
-            playerOne.setNickname(nickname.getText());
-            players.add(playerOne);
+            players.add(game.createPlayer(nickname.getText()));
             NamePanelText.setVisible(false);
             NamePanel.setVisible(false);
             readyPanel.removeAll();

@@ -245,7 +245,7 @@ public class UserInteraction  { //implements KeyListener
         //list.setBounds(200,50,500,400);
         list.setFont(new Font("Carlito", Font.PLAIN, 30));
         list.setBackground(Color.PINK);
-        list.setVisibleRowCount(5);
+      //  list.setVisibleRowCount(5);
         JPanel pane = new JPanel();
         pane.setBounds(200,50,500,400);
         pane.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -257,6 +257,7 @@ public class UserInteraction  { //implements KeyListener
         scrollPane.setViewportView(list);
         Dimension d = list.getPreferredSize();
         d.width = 400;
+        d.height = 400;
         scrollPane.setPreferredSize(d);
         list.setLayoutOrientation(JList.VERTICAL);
         pane.add(scrollPane);

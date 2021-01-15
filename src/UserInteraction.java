@@ -1005,19 +1005,17 @@ public class UserInteraction  {
 
         answers = question.getAnswers();
 
-//        //The area that holds the text
-//        JTextArea textAreaQ = new JTextArea("");
-//        textAreaQ.setText(question.getQuestion());
-//        //Look & Layout
-//        textAreaQ.setBounds(0,260,700,80);
-//        textAreaQ.setBackground(Color.pink);
-//        textAreaQ.setForeground(Color.black);
-//        textAreaQ.setFont(new Font("Carlito", Font.PLAIN, 25));
-//        textAreaQ.setLineWrap(true);
-//        textAreaQ.setWrapStyleWord(true);
-//        textAreaQ.setEditable(false);
-//        textAreaQ.setHighlighter(null);
-//        questionPanel.add(textAreaQ);
+        String q = question.getQuestion();
+        String tooLong = null;
+        if(q.length() > 60){
+            tooLong = "<html>";
+            for (String part: q.split("\\* ",2))
+            {
+                tooLong += part +"<br/>";
+            }
+            tooLong += "<html>";
+            q = tooLong;
+        }
 
         JLabel labelQ = new JLabel();
         labelQ.setLayout(new FlowLayout(FlowLayout.CENTER));

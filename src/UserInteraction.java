@@ -187,7 +187,6 @@ public class UserInteraction  { //implements KeyListener
         System.out.println(data.length + "data.length");
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for(String sting: data){
-            System.out.println("string is" + sting);
             listModel.addElement(sting);
         }
         JList<String> list = new JList<>(listModel);
@@ -237,19 +236,30 @@ public class UserInteraction  { //implements KeyListener
         String [] data = game.getTotalWins();
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for(String sting: data){
-            System.out.println(sting);
             listModel.addElement(sting);
         }
+
+
+
         JList<String> list = new JList<>(listModel);
-        list.setBounds(100,50,600,400);
+        //list.setBounds(200,50,500,400);
         list.setFont(new Font("Carlito", Font.PLAIN, 30));
         list.setBackground(Color.PINK);
+        list.setVisibleRowCount(5);
         JPanel pane = new JPanel();
-        pane.setBounds(0,0,800,400);
+        pane.setBounds(200,50,500,400);
         pane.setLayout(new FlowLayout(FlowLayout.CENTER));
-        pane.add(list);
+
+
         pane.setBackground(Color.PINK);
 
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(list);
+        Dimension d = list.getPreferredSize();
+        d.width = 400;
+        scrollPane.setPreferredSize(d);
+        list.setLayoutOrientation(JList.VERTICAL);
+        pane.add(scrollPane);
         con.add(pane);
 
         JPanel panel = new JPanel();
@@ -422,7 +432,6 @@ public class UserInteraction  { //implements KeyListener
         readyPanel.add(readyButton);
         readyButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                System.out.println("inside first if!");
                 Player playerOne = new Player();
                 playerOne.setNickname(nickname.getText());
                 players.add(playerOne);
@@ -678,7 +687,6 @@ public class UserInteraction  { //implements KeyListener
             okayButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // System.out.println("inside action listerner");
                     announcingTheType();
                 }
             });
@@ -805,7 +813,6 @@ public class UserInteraction  { //implements KeyListener
             qokayButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // System.out.println("inside action listerner");
                     QuestionNumberPanel.setVisible(false);
                     QOkayPanel.setVisible(false);
                     con.remove(QOkayPanel);
@@ -934,7 +941,6 @@ public class UserInteraction  { //implements KeyListener
             @Override
             public void actionPerformed(ActionEvent e) {
                 player.setBet(250);
-                System.out.println(player.getNickname() + " " + player.getBet());
                 if(players.size() == 2){
                     betPoints2();
                 }else{
@@ -959,7 +965,7 @@ public class UserInteraction  { //implements KeyListener
             @Override
             public void actionPerformed(ActionEvent e) {
                 player.setBet(500);
-                System.out.println(player.getNickname() + " " + player.getBet());
+//                System.out.println(player.getNickname() + " " + player.getBet());
                 if(players.size() == 2){
                     betPoints2();
                 }else{
@@ -984,7 +990,7 @@ public class UserInteraction  { //implements KeyListener
             @Override
             public void actionPerformed(ActionEvent e) {
                 player.setBet(750);
-                System.out.println(player.getNickname() + " " + player.getBet());
+//                System.out.println(player.getNickname() + " " + player.getBet());
                 if(players.size() == 2){
                     betPoints2();
                 }else{
@@ -1009,7 +1015,7 @@ public class UserInteraction  { //implements KeyListener
             @Override
             public void actionPerformed(ActionEvent e) {
                 player.setBet(1000);
-                System.out.println(player.getNickname() + " " + player.getBet());
+//                System.out.println(player.getNickname() + " " + player.getBet());
                 if(players.size() == 2){
                     betPoints2();
                 }else{
@@ -1066,7 +1072,6 @@ public class UserInteraction  { //implements KeyListener
             @Override
             public void actionPerformed(ActionEvent e) {
                 players.get(1).setBet(250);
-                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
                 betPointsPanel2.setVisible(false);
                 bet250.setVisible(false);
                 bet500.setVisible(false);
@@ -1087,7 +1092,7 @@ public class UserInteraction  { //implements KeyListener
             @Override
             public void actionPerformed(ActionEvent e) {
                 players.get(1).setBet(500);
-                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
+//                System.out.println(players.get(1).getNickname() + " " + players.get(1).getBet());
                 betPointsPanel2.setVisible(false);
                 bet250.setVisible(false);
                 bet500.setVisible(false);
@@ -1161,7 +1166,6 @@ public class UserInteraction  { //implements KeyListener
 
         label.setLayout(new FlowLayout(FlowLayout.CENTER));
         // elegxow gia to an h eikona einai yparkth
-        System.out.println(questionImageName.equals("null"));
         if(!(questionImageName.equals("null"))){
             label.setIcon(new ImageIcon(questionImageName));
         }
@@ -1267,13 +1271,30 @@ public class UserInteraction  { //implements KeyListener
         frame.setVisible(true);
         startTime = System.currentTimeMillis();
 
+        timer4 = new Timer(10000,e->{
+            bottomPanel.setVisible(false);
+            answerPanelA.setVisible(false);
+            answerPanelB.setVisible(false);
+            answerPanelC.setVisible(false);
+            answerPanelD.setVisible(false);
+            centerPanel.setVisible(false);
+            questionPanel.setVisible(false);
+            timer4.stop();
+            correctAnswer();
+
+
+        });
+        if(type instanceof StopTheTimer){
+            timer4.start();
+        }
+
     }
 
     class MyKeyListener extends KeyAdapter {
 
         public void keyPressed(KeyEvent event){
 
-            System.out.println("inside acrion listener!");
+//            .out.println("inside acrion listener!");System
             int key = event.getKeyCode();
              if(numberOfPlayers ==1){
                  if(key == KeyEvent.VK_Q){
@@ -1325,9 +1346,13 @@ public class UserInteraction  { //implements KeyListener
                 answers.add(answer1);
                 players = game.setStatuses(answers,question.getCorrectAnswer(), players);
                 answer1 = null;
-                game.changePoints(type);
                 game.setTime(times,startTime,type,players);
+                game.changePoints(type);
+
                 frame.removeKeyListener(this);
+                if(type instanceof StopTheTimer){
+                    timer4.stop();
+                }
                 correctAnswer();
             }else if(numberOfPlayers == 2 && answer1!= null && answer2 != null){
                 ArrayList<String> answers = new ArrayList<>();
@@ -1346,6 +1371,9 @@ public class UserInteraction  { //implements KeyListener
                 game.setTime(times,startTime,type, players);
                 game.changePoints(type);
                 frame.removeKeyListener(this);
+                if(type instanceof StopTheTimer){
+                    timer4.stop();
+                }
                 correctAnswer();
             }
         }
@@ -1521,7 +1549,7 @@ public class UserInteraction  { //implements KeyListener
         }
 
         timer3 = new Timer(4000, e -> {
-            System.out.println("inside timer3");
+            System.out.println("inside timer3+ show scores");
             game.defaultifyPlayers(players, type);
             showStatusPanel1.setVisible(false);
             showStatusPanel2.setVisible(false);
@@ -1684,7 +1712,7 @@ public class UserInteraction  { //implements KeyListener
         players.clear();
         questions = 1;
         rounds = 1;
-        game.initializePlayersScore(players);
+        //game.initializePlayersScore(players);
         JDialog.setDefaultLookAndFeelDecorated(true);
         int response = JOptionPane.showConfirmDialog(null, "Would you like to play again?", "Replay", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.NO_OPTION) {

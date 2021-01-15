@@ -129,12 +129,22 @@ public class Game {
      */
 
     public void setTime(long[] clickTimes, long startTime, Type type, ArrayList<Player> playerList) {
+        if(type  instanceof StopTheTimer){
+            for (int i = 0; i < playerList.size(); i++) {
+                long timeLeft = startTime+10000 - clickTimes[i] ;
+                System.out.println("timeLeft is="+timeLeft);
+                playerList.get(i).setClickTime(timeLeft);
+            }
+
+        }
         if (playerList.size() > 1) {
             if (type instanceof StopTheTimer) {
-                for (int i = 0; i < playerList.size(); i++) {
-                    long timeLeft = 5000 - clickTimes[i];
-                    playerList.get(i).setClickTime(timeLeft);
-                }
+//
+//                for (int i = 0; i < playerList.size(); i++) {
+//                    long timeLeft = (startTime +10000) - clickTimes[i];
+//                    System.out.println("timeLeft is="+timeLeft);
+//                    playerList.get(i).setClickTime(timeLeft);
+//                }
 
 
             } else if (type instanceof QuickAnswer || type instanceof Thermometer) {
@@ -154,6 +164,7 @@ public class Game {
      */
     public void changePoints(Type type) {
         type.changePoints();
+
     }
 
     /**

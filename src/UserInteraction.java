@@ -1298,6 +1298,13 @@ public class UserInteraction  {
             answered2 = players.get(1).getNickname() + ", you guessed correctly!";
         }
 
+        if(type instanceof Thermometer){
+            if(!((Thermometer) type).getSomeoneWon()) {
+                score1 = players.get(0).getNickname() + "'s streak: " + players.get(0).getStreak();
+                score2 = players.get(1).getNickname() + "'s streak: " + players.get(1).getStreak();
+            }
+        }
+
         showStatusPanel1 = new JPanel();
         showStatusPanel1.setBounds(50, 50, 700, 80);
         showStatusPanel1.setLayout(new BorderLayout());

@@ -2,30 +2,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Class Questions contains a question, the answers for the question and the right answer.
- * It also contains a boolean variable that stores either the question has already been asked or not.
- * this class will be used to create Questions objects with the data from the file that then will be stored
- * in an ArrayList, so that they can be randomly asked.
+ * This class represents a question that will be used in the game, it has four possible answers
+ * from which one is correct and belongs to a category.
  */
 
 public class Questions {
 
     private final String question;
-   /* private String answerA;
-    private String answerB;
-    private String answerC;
-    private String answerD; //sto mellon aftin tha thn svisoyme kai apla tha exoume thn correctAnswer
-    */
     private final String correctAnswer;
     private final String category;
     private final ArrayList<String> answers;
-    private String image;
-  //  private boolean used;
+    private final String image;
 
-  //  public Questions(){ }
-
+    /**
+     * When the object is created, it needs to have the following information.
+     * @param category the category of the question.
+     * @param question the question.
+     * @param answerA possible answer.
+     * @param answerB different possible answer.
+     * @param answerC different possible answer.
+     * @param answerD different possible answer.
+     * @param correctAnswer the correct answer out of the four possible.
+     * @param image the name of the image that accompanies the question if not null.
+     */
     public Questions(String category, String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String image) {
-
         this.question = question;
         this.correctAnswer = correctAnswer;
         this.category = category;
@@ -35,68 +35,20 @@ public class Questions {
         answers.add(answerB);
         answers.add(answerC);
         answers.add(answerD);
-      //  used = false;
-
     }
 
-    public String getQuestion(){
-        return question;
-    }
-
-   // public void setQuestion(String question) { this.question = question; }
-/*
-    public String getAnswerA() {
-        return answerA;
-    }
-    public void setAnswerA(String answerA) { this.answerA = answerA; }
-
-    public String getAnswerB() {
-        return answerB;
-    }
-    public void setAnswerB(String answerB) { this.answerB = answerB; }
-
-    public String getAnswerC() {
-        return answerC;
-    }
-    public void setAnswerC(String answerC) { this.answerC = answerC; }
-
-    public String getAnswerD(){ return answerD; }
-    public void setAnswerD(String answerD) { this.answerD = answerD; }
-
- */
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
-    }
-   // public void setCorrectAnswer(String correctAnswer){ this.correctAnswer = correctAnswer; }
-
+    public String getQuestion(){ return question; }
+    public String getCorrectAnswer(){ return correctAnswer; }
     public String getCategory(){ return category;}
-  //  public void setCategory(String category) { this.category = category; }
-/*
-    public boolean getUsed(){
-        return used;
-    }
-    public void setUsed(boolean used){ if(used){ this.used = used; } }
-    public void initializeUsed(){
-     used = false;
-    }
+    public String getImageName(){ return image; }
 
- */
-
-    public boolean acceptableAnswer(String givenAnswer){
-
-        return givenAnswer.equals(answers.get(0)) || givenAnswer.equals(answers.get(1)) || givenAnswer.equals(answers.get(2)) || givenAnswer.equals(answers.get(3));
-
-    }
-
+    /**
+     * @return an arrayList with the four possible answers in a random order.
+     */
     public ArrayList<String> getAnswers(){
 
         Collections.shuffle(answers);
         return answers;
 
-    }
-
-    public String getImageName(){
-        return image;
     }
 }

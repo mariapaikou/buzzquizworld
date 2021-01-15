@@ -8,13 +8,12 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
- * UserInteraction class represent the interaction with the user, accepts all the inputs to manage the actions the program has to do
- * and implements the GUI.
+ * UserInteraction class represent the interaction with the user, accepts all the inputs to manage the actions the
+ * program has to do and implements the GUI.
  * @author Theodora-Sofia Tsochataridou
  * @author Maria Paikou
  * @version 1.0
  * @since 05 - December - 2020
- *
  */
 public class UserInteraction  {
 
@@ -23,20 +22,14 @@ public class UserInteraction  {
     private final Game game;
     private Type type;
     private ArrayList<Player> players = new ArrayList<>();
-    private int numberOfPlayers = 0;
-    private int rounds = 1;
-    private int questions = 1;
+    private int numberOfPlayers = 0, rounds = 1, questions = 1, defaultNumQuestions;
     private Container con;
-    private JPanel startTextPanel;
-    private JPanel startButtonPanel;
-    private JPanel HMPPanel, HMPLeftPanel, HMPRightPanel;
-    private JPanel NamePanelText, NamePanel, readyPanel, letsGoPanel;
-    private JPanel RoundNumberPanel, QuestionNumberPanel, TypePanel, TypeExplanationPanel, typeOkayPanel;
-    private JPanel announcingCategoryPanel;
-    private JPanel betPointsPanel, betPointsPanel2, bet250, bet500, bet750, bet1000;
+    private JPanel startTextPanel, startButtonPanel, HMPPanel, HMPLeftPanel, HMPRightPanel, NamePanelText, NamePanel;
+    private JPanel readyPanel, letsGoPanel, RoundNumberPanel, QuestionNumberPanel, TypePanel, TypeExplanationPanel;
+    private JPanel announcingCategoryPanel, typeOkayPanel, betPointsPanel, betPointsPanel2, bet250, bet500, bet750, bet1000;
     private JPanel centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
-    private JPanel showStatusPanel1, showStatusPanel2, showScoreTextPanel, showScorePanel1, showScorePanel2, ROkayPanel, QOkayPanel;
-    private JPanel correctAnswerTextPanel, correctAnswerPanel, playerFinalScoreTextPanel, playerFinalScorePanel;
+    private JPanel showStatusPanel1, showStatusPanel2, showScoreTextPanel, showScorePanel1, showScorePanel2, ROkayPanel;
+    private JPanel correctAnswerTextPanel, correctAnswerPanel, playerFinalScoreTextPanel, playerFinalScorePanel, QOkayPanel;
     private JPanel AndTheWinnerIsPanel, winnerPanel, FinalScoresPanel, finalLeftScorePanel, finalRightScorePanel;
     private JPanel highScoresButtonPanel, totalWinsButtonPanel, goButtonPanel;
     private String answer1, answer2;
@@ -44,7 +37,6 @@ public class UserInteraction  {
     private JTextField nickname;
     private Timer timer1, timer2,timer3,timer4,timer5;
     private long startTime , endTime1, endTime2;
-        private int defaultNumQuestions;
 
     public UserInteraction(){
         answer1 = null;
@@ -61,13 +53,15 @@ public class UserInteraction  {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
     }
 
+    /**
+     * This is the first window to appear when the user starts the game. It displays the name of the game and has
+     * three buttons, a start button that starts the game and buttons for the saved scores and previous game scores.
+     */
     private void basicDisplay(){
         con = frame.getContentPane();
         con.setPreferredSize(new Dimension(800,500));
-
 
         //The panel that contains the text
         startTextPanel = new JPanel();
@@ -108,7 +102,6 @@ public class UserInteraction  {
             HowManyOfYou();
         });
         startButtonPanel.add(startButton);
-
 
         highScoresButtonPanel = new JPanel();
         highScoresButtonPanel.setBounds(300,320,200,80);
@@ -153,7 +146,7 @@ public class UserInteraction  {
     }
 
     /**
-     *
+     * Displays the contents of the high score file, which are the ten highest scores in one player mode.
      */
     private void showHighScores(){
         String [] data = game.getHighScores();
@@ -187,18 +180,15 @@ public class UserInteraction  {
             basicDisplay();
         });
 
-
         panel.setBounds(100,400,100,100);
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         panel.setBackground(Color.GRAY);
         panel.add(backButton);
         con.add(panel);
-
     }
 
-
     /**
-     *
+     * Displays the game scores of previous multiplayer games.
      */
     private void showTotalWins(){
         String [] data = game.getTotalWins();
@@ -207,17 +197,12 @@ public class UserInteraction  {
             listModel.addElement(sting);
         }
 
-
-
         JList<String> list = new JList<>(listModel);
-        //list.setBounds(200,50,500,400);
         list.setFont(new Font("Carlito", Font.PLAIN, 30));
         list.setBackground(Color.PINK);
-      //  list.setVisibleRowCount(5);
         JPanel pane = new JPanel();
         pane.setBounds(200,50,500,400);
         pane.setLayout(new FlowLayout(FlowLayout.CENTER));
-
 
         pane.setBackground(Color.PINK);
 
@@ -246,22 +231,15 @@ public class UserInteraction  {
             basicDisplay();
         });
 
-
         panel.setBounds(100,400,100,100);
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         panel.setBackground(Color.GRAY);
         panel.add(backButton);
         con.add(panel);
-
-
     }
 
-
-
-
-
     /**
-     *
+     * Asks the user to select the number of players. There are two choices: 1 Player and 2 Players.
      */
     public void HowManyOfYou(){
         //The panel for the text
@@ -333,10 +311,7 @@ public class UserInteraction  {
     }
 
     /**
-     * Function God, creates the human beings of this game. Asks for the name
-     * of the player, creates a Player object with that name that is going
-     * to be added to the playerList.
-     *
+     * Function God asks the user to insert a nickname and then creates a player object with that input.
      */
     public void God(int numberOfPlayers){
 
@@ -406,11 +381,12 @@ public class UserInteraction  {
             }else{
                 LetsGo();
             }
-
         });
-
     }
 
+    /**
+     * This method is used in two-player mode and has the same functionality as God.
+     */
     private void God2() {
         NamePanelText.setVisible(false);
         NamePanel.setVisible(false);
@@ -473,24 +449,23 @@ public class UserInteraction  {
         readyButton.setFont(new Font("Carlito", Font.PLAIN, 30));
         readyPanel.add(readyButton);
 
-            readyButton.addActionListener(e -> {
-                Player playerOne = new Player();
-                playerOne.setNickname(nickname.getText());
-                players.add(playerOne);
-                NamePanelText.setVisible(false);
-                NamePanel.setVisible(false);
-                readyPanel.removeAll();
-                con.remove(readyPanel);
-                readyPanel.setVisible(false);
-                LetsGo();
-
-
-            });
-
+        readyButton.addActionListener(e -> {
+            Player playerOne = new Player();
+            playerOne.setNickname(nickname.getText());
+            players.add(playerOne);
+            NamePanelText.setVisible(false);
+            NamePanel.setVisible(false);
+            readyPanel.removeAll();
+            con.remove(readyPanel);
+            readyPanel.setVisible(false);
+            LetsGo();
+        });
     }
 
-
-
+    /**
+     * Let's go was added for dramatic effect but is not useless as it randomizes the questions before the actual game
+     * begins.
+     */
     public void LetsGo() {
         NamePanelText.setVisible(false);
         NamePanel.setVisible(false);
@@ -498,8 +473,6 @@ public class UserInteraction  {
 
         //randomize questions
         game.randomizeQuestions();
-
-        //disable previous panels
 
         letsGoPanel = new JPanel();
         letsGoPanel.setBounds(0, 100, 800, 400);
@@ -532,7 +505,6 @@ public class UserInteraction  {
             timer4.stop();
             timer5.stop();
             roundNumber();
-
         });
 
         timer4 = new Timer(800, e -> {
@@ -545,7 +517,6 @@ public class UserInteraction  {
             text2.setVisible(false);
             text3.setVisible(true);
             timer4.start();
-
         });
 
         timer2 = new Timer(800, e -> {
@@ -570,7 +541,6 @@ public class UserInteraction  {
         text.setVerticalAlignment(JLabel.CENTER);
         letsGoPanel.add(text);
     }
-
 
     //Class to limit the number of characters in a JText
     public static class JTextFieldLimit extends PlainDocument {
@@ -640,7 +610,6 @@ public class UserInteraction  {
         }
     }
 
-
     /**
      * Function announcingTheType accepts a Type object and prints a message that announces the type name
      * through the getName method. Then it explains the way you play the game depending on the type.
@@ -668,7 +637,6 @@ public class UserInteraction  {
         typeLabel.setHorizontalAlignment(JLabel.CENTER);
         typeLabel.setVerticalAlignment(JLabel.CENTER);
         TypePanel.add(typeLabel);
-
 
         //Panel for the explanation
         TypeExplanationPanel = new JPanel();
@@ -700,13 +668,11 @@ public class UserInteraction  {
         okay.setFont(new Font("Carlito", Font.PLAIN, 30));
         okay.addActionListener(e -> questionNumber());
         typeOkayPanel.add(okay);
-
     }
 
     /**
      * QUESTION j
      */
-
     public void questionNumber(){
         TypePanel.setVisible(false);
         TypeExplanationPanel.setVisible(false);
@@ -754,8 +720,6 @@ public class UserInteraction  {
             questions = 1;
             roundNumber();
         }
-
-
     }
 
     /**
@@ -800,9 +764,7 @@ public class UserInteraction  {
         goButtonPanel.add(goButton);
 
         con.add(goButtonPanel);
-
     }
-
 
     /**
      * BetPoints function, asks the player to bet and saves the amount in an int variable.
@@ -1068,7 +1030,6 @@ public class UserInteraction  {
         centerPanel.setVisible(true);
         con.add(centerPanel, BorderLayout.CENTER);
 
-
         questionPanel = new JPanel();
         questionPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         questionPanel.setBounds(0,260,800,80);
@@ -1115,7 +1076,6 @@ public class UserInteraction  {
         answerPanelA.add(labelA);
         con.add(answerPanelA);
 
-
         JLabel labelB = new JLabel();
         labelB.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelB.setHorizontalAlignment(JLabel.RIGHT);
@@ -1158,7 +1118,6 @@ public class UserInteraction  {
         answerPanelD.setBackground(Color.PINK);
         answerPanelD.add(labelD);
         con.add(answerPanelD);
-
 
         JLabel instructionLabel = new JLabel("BUTTONS FOR Player 1: A->Q,B->W,C->E,D->R    BUTTONS FOR Player 2: A->U,B->I,C->O,D->P");
         instructionLabel.setSize(800,110);
@@ -1283,13 +1242,6 @@ public class UserInteraction  {
         }
     }
 
-
-
-
-
-
-
-
     /**
      * This function prints the correct answer to the question asked previously.
      */
@@ -1345,9 +1297,7 @@ public class UserInteraction  {
             timer1.stop();
             timer2.start();
         });
-
         timer1.start();
-
     }
 
     public void showScores(){
@@ -1466,11 +1416,8 @@ public class UserInteraction  {
 
             timer3.stop();
             questionNumber();
-
         });
-
         timer3.start();
-
     }
 
     /**
@@ -1505,25 +1452,18 @@ public class UserInteraction  {
         playerFinalScore.setVerticalAlignment(JLabel.CENTER);
         playerFinalScorePanel.add(playerFinalScore);
 
-
-
         timer2 = new Timer(3000, e -> {
             playerFinalScorePanel.setVisible(false);
             playerFinalScoreTextPanel.setVisible(false);
             timer2.stop();
             replay();
-
         });
         timer2.start();
-
-
-
     }
+
     public void winner(){
         RoundNumberPanel.setVisible(false);
         ROkayPanel.setVisible(false);
-
-
 
         String TheWinner;
 

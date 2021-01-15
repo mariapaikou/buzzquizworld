@@ -18,10 +18,10 @@ public class Game {
      * The constructor initializes the variables for the two files that store the scores and reads the file that
      * contains the questions.
      */
-    public Game() {
+    public Game(String onePlayerMode, String towPlayerMode) {
         ReadQuestionsFile readQuestionsFile = new ReadQuestionsFile();
         allQuestions = readQuestionsFile.loadQuestions("questions.text.txt");
-        scores = new HighScore("highscores.dat", "totalwins.dat");
+        scores = new HighScore(onePlayerMode, towPlayerMode);
         round = new Round();
     }
 

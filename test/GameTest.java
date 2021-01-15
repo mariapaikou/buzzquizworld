@@ -1,16 +1,11 @@
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
 
-
-
 class GameTest{
-
-
-
     private Game game;
     private Bet bet;
     private RightAnswer rightAnswer;
@@ -24,7 +19,7 @@ class GameTest{
 
     public GameTest(){
 
-        game = new Game();
+        game = new Game("onePlayerModeTest", "towPlayerModeTest");
         bet = new Bet();
         stopTheTimer = new StopTheTimer();
         rightAnswer = new RightAnswer();
@@ -38,65 +33,11 @@ class GameTest{
 
     }
 
-   // @TestFactory
-   // InputStream inputSteamTest(){
-        
-
-
     @Test
-    void getPlayersAnswer(){
-
-    }
-
-    @Test
-    void setTypesInitialBehaviour(){
-
-
-    }
-
-    @Test
-    void setTypeInitialStatus(){
-
-
-    }
-
-    @Test
-    void initializePlayersScore(){
-
-    }
-
-    @Test
-    void defaultfyPlayersStatus(){
-
-    }
-
-    @Test
-    void randomizeQuestions(){
-
-    }
-
-    @Test
-    void playTheGame() {
-        /*
-        InputOutput inputOutput = new InputOutput();
-        String input = "maria";
-
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-
-        assertEquals("maria", inputOutput.getInput());
-         */
-
-
-
-
-
-    }
-
-   // @Inject private Rule
-
-    public void MyTest(){
+    void readScore(){
+        game.readScores();
+        assertEquals("There are no high scores yet!",game.getHighScores()[0]);
+        assertEquals("There are no total wins yet!",game.getTotalWins()[0]);
 
     }
 }

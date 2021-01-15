@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
@@ -20,12 +21,10 @@ class BetTest {
 
     }
 
-    @Test //ok!
+    @Test
     void changePoints() {
 
         int points = 1000;
-//        bet.setPoints(points);
-//        bet.setPoints(points);
 
         player1.setStatus(true);
         player2.setStatus(true);
@@ -66,37 +65,46 @@ class BetTest {
         assertEquals(-1000,player1.getScore());
         assertEquals(-1000,player2.getScore());
 
+
+
     }
 
-//    @Test //ok!
-//    void setPoints(){
-//
-//        int points = -1020;
-//        bet.setPoints(points); // error message
-//        bet.setPoints(1000);
-//        bet.setPoints(1000);
-//        bet.setPoints(1000); // error message
-//
-//    }
+    @Test
+    void changePoints3(){
 
+        int points1 = 500;
+        int points2 = 250;
 
-//    @Test //ok!
-//    void initializePositions() {
-//
-//       int points = 500;
-//       bet.setPoints(points);
-//       player1.setStatus(true);
-//       bet.changePoints();
-//       bet.initializePositions();
-//       bet.setPoints(points);
-//       player1.setStatus(true);
-//       bet.changePoints();
-//
-//       assertEquals(1000,player1.getScore());
-//
-//    }
+        player1.increaseScoreBy(1000);
+        player2.increaseScoreBy(500);
 
-    @Test // ok!
+        player1.setBet(points1);
+        player2.setBet(points2);
+
+        player1.setStatus(true);
+        player2.setStatus(false);
+        bet.changePoints();
+
+        assertEquals(1500,player1.getScore());
+        assertEquals(250,player2.getScore());
+
+        player1.setStatus(true);
+        player2.setStatus(true);
+        bet.changePoints();
+
+        assertEquals(2000,player1.getScore());
+        assertEquals(500,player2.getScore());
+
+        player1.setStatus(false);
+        player2.setStatus(false);
+        bet.changePoints();
+
+        assertEquals(1500,player1.getScore());
+        assertEquals(250,player2.getScore());
+
+    }
+
+    @Test
     void getName() {
 
        String name = bet.getName();

@@ -27,11 +27,9 @@ public class Thermometer extends Type {
         for (Player player : players) {
             if (player.getStatus()) {
                 player.increaseStreak();
-                System.out.println("streak " + player.getNickname() + " " + player.getStreak());
             }
             if (player.getStreak() == 5) {
                 reachedFive.add(player);
-                System.out.println("add player to reachedFive");
             }
         }
 

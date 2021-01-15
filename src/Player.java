@@ -40,8 +40,6 @@ public class Player implements Serializable {
         streak = 0;
     }
 
-
-
     /**
      * Constructor with no given variable for damage control, it initializes the variables.
      */
@@ -97,10 +95,7 @@ public class Player implements Serializable {
      * @param newPoints an amount of points received
      */
     public void increaseScoreBy(int newPoints){
-
-            this.score+=newPoints;
-
-
+        this.score+=newPoints;
     }
 
     /**

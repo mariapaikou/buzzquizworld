@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class QuickAnswerTest {
@@ -17,14 +15,13 @@ class QuickAnswerTest {
         quickAnswer = new QuickAnswer();
     }
 
-    @Test //ok!
+    @Test
     void changePoints() {
         player1.setStatus(true);
         player2.setStatus(true);
 
         player1.setClickTime(500);
         player2.setClickTime(1000);
-
 
         array.add(player1);
         array.add(player2);
@@ -34,11 +31,9 @@ class QuickAnswerTest {
 
         assertEquals(1000,player1.getScore());
         assertEquals(500,player2.getScore());
-
-
     }
 
-    @Test //ok!
+    @Test
     void changePoints2(){
         player1.setStatus(false);
         player2.setStatus(true);
@@ -52,18 +47,17 @@ class QuickAnswerTest {
         quickAnswer.setPlayersList(array);
         quickAnswer.changePoints();
 
-
         assertEquals(0,player1.getScore());
         assertEquals(1000,player2.getScore());
     }
 
-    @Test //ok!
+    @Test
     void changePoints3(){
         player1.setStatus(false);
         player2.setStatus(false);
 
-        player1.setClickTime(50);
-        player2.setClickTime(50);
+        player1.setClickTime(500);
+        player2.setClickTime(500);
 
         array.add(player1);
         array.add(player2);
@@ -71,13 +65,29 @@ class QuickAnswerTest {
         quickAnswer.setPlayersList(array);
         quickAnswer.changePoints();
 
-
         assertEquals(0,player1.getScore());
         assertEquals(0,player2.getScore());
     }
 
+    @Test
+    void changePoints4(){
+        player1.setStatus(true);
+        player2.setStatus(true);
 
-    @Test //ok!
+        player1.setClickTime(500);
+        player2.setClickTime(501);
+
+        array.add(player1);
+        array.add(player2);
+
+        quickAnswer.setPlayersList(array);
+        quickAnswer.changePoints();
+
+        assertEquals(1000,player1.getScore());
+        assertEquals(500,player2.getScore());
+    }
+
+    @Test
     void getName() {
         assertEquals("QuickAnswer",quickAnswer.getName());
     }

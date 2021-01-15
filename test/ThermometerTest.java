@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -17,14 +15,14 @@ class ThermometerTest {
 
         player1 = new Player();
         player2 = new Player();
-        player1.setNickname("maxa");
-        player2.setNickname("bool");
+        player1.setNickname("Tom");
+        player2.setNickname("Jerry");
         array = new ArrayList<>();
         thermometer = new Thermometer();
 
     }
 
-    @Test //ok!
+    @Test
     void changePoints() {
 
         player1.setClickTime(500);
@@ -55,12 +53,8 @@ class ThermometerTest {
         assertEquals(0,player2.getScore());
     }
 
-
-    //  TODO KAINOYRIA CHANGEPOINTS GIA TIS YPOLOIPES PERIPTWSEIS!!
-
-    @Test //ok!
+    @Test
     void changePoints2(){
-
 
         array.add(player1);
         array.add(player2);
@@ -80,7 +74,6 @@ class ThermometerTest {
             thermometer.changePoints();
 
 
-
         assertEquals(0,player1.getScore());
         assertEquals(5000,player2.getScore());
 
@@ -97,12 +90,9 @@ class ThermometerTest {
         assertEquals(0,player1.getScore());
         assertEquals(10000,player2.getScore());
 
-
     }
 
-
-
-    @Test //ok!
+    @Test
     void changePoints3(){
         array.add(player1);
         array.add(player2);
@@ -122,17 +112,27 @@ class ThermometerTest {
 
     }
 
-    @Test //ok!
-    void setPlayersList(){
+    @Test
+    void defaultifyStreaks(){
+        player1.increaseStreak();
 
-        assertFalse(thermometer.setPlayersList(array));
-        array.add(player2);
-        assertFalse(thermometer.setPlayersList(array));
+        player1.setStatus(true);
+        player2.setStatus(true);
+
         array.add(player1);
-        assertTrue(thermometer.setPlayersList(array));
+        array.add(player2);
+
+        thermometer.changePoints();
+
+        assertEquals(2,player1.getStreak());
+        assertEquals(1,player2.getStreak());
+
+        thermometer.changePoints();
+
+        assertEquals(0,player1.getStreak());
+        assertEquals(0,player2.getStreak());
 
     }
-
 
     @Test
     void getName() {

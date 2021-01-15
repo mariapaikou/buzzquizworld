@@ -978,6 +978,23 @@ public class UserInteraction  {
      * It also implements a key listener in order to receive the answer of the user(s).
      */
     public void askTheQuestion(){
+        timer4 = new Timer(10000,e->{
+            System.out.println("inside timer 4");
+            bottomPanel.setVisible(false);
+            answerPanelA.setVisible(false);
+            answerPanelB.setVisible(false);
+            answerPanelC.setVisible(false);
+            answerPanelD.setVisible(false);
+            centerPanel.setVisible(false);
+            questionPanel.setVisible(false);
+            timer4.stop();
+            correctAnswer();
+        });
+
+        if(type instanceof StopTheTimer){
+            System.out.println("iside if");
+            timer4.start();
+        }
         announcingCategoryPanel.setVisible(false);
         String questionImageName= question.getImageName();
 
@@ -1006,21 +1023,21 @@ public class UserInteraction  {
         answers = question.getAnswers();
 
         String q = question.getQuestion();
-        String tooLong = null;
+        StringBuilder tooLong;
         if(q.length() > 60){
-            tooLong = "<html>";
+            tooLong = new StringBuilder("<html>");
             for (String part: q.split("\\* ",2))
             {
-                tooLong += part +"<br/>";
+                tooLong.append(part).append("<br/>");
             }
-            tooLong += "<html>";
-            q = tooLong;
+            tooLong.append("<html>");
+            q = tooLong.toString();
         }
 
         JLabel labelQ = new JLabel();
         labelQ.setLayout(new FlowLayout(FlowLayout.CENTER));
         labelQ.setHorizontalAlignment(JLabel.LEFT);
-        labelQ.setText(question.getQuestion());
+        labelQ.setText(q);
         labelQ.setFont(new Font("Carlito",Font.PLAIN,25));
         labelQ.setSize(800,50 );
         labelQ.setVisible(true);
@@ -1103,23 +1120,6 @@ public class UserInteraction  {
         frame.setVisible(true);
         startTime = System.currentTimeMillis();
 
-        timer4 = new Timer(10000,e->{
-            bottomPanel.setVisible(false);
-            answerPanelA.setVisible(false);
-            answerPanelB.setVisible(false);
-            answerPanelC.setVisible(false);
-            answerPanelD.setVisible(false);
-            centerPanel.setVisible(false);
-            questionPanel.setVisible(false);
-            timer4.stop();
-            correctAnswer();
-
-
-        });
-        if(type instanceof StopTheTimer){
-            timer4.start();
-        }
-
     }
 
     /**
@@ -1178,13 +1178,11 @@ public class UserInteraction  {
                 ArrayList<String> answers = new ArrayList<>();
                 long [] times = new long[1];
                 times[0] = endTime1;
-
                 answers.add(answer1);
                 players = game.setStatuses(answers,question.getCorrectAnswer(), players);
-                answer1 = null;
                 game.setTime(times,startTime,type,players);
                 game.changePoints(type);
-
+                answer1 = null;
                 frame.removeKeyListener(this);
                 if(type instanceof StopTheTimer){
                     timer4.stop();

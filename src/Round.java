@@ -1,22 +1,43 @@
 import java.util.Random;
 /**
- * Class Round symbolizes a round of the game, which consists of a number of questions. It selects a type of game
- * for the round.
+ * Round class selects Randomly one type of game from the following available choices (Thermometer, StopTheTimer
+ * RightAnswer, Bet, QuickAnswer)
  */
 public class Round {
 
     Random random;
 
+    /**
+     * Constructor
+     */
     public Round() {
         random = new Random();
     }
 
     /**
-     * Function getRandomType selects the type of game for the next round. Uses Random class to get randomly
-     * 0 for RightAnswer and 1 for Bet.
-     * Creates a Type object.
-     *
-     * @return Type object that contains the type chosen.
+     * Method onePlayerMode selects randomly and creates a type of game from the following list( StopTheTimer,
+     * RightAnswer, Bet).
+     * @return Type
+     */
+    public Type onePlayerMode() {
+        Type type ;
+        int r = random.nextInt(3);
+
+        if (r == 1) {
+            type = new RightAnswer();
+        } else if (r == 2) {
+            type = new Bet();
+        } else {
+            type = new StopTheTimer();
+        }
+
+        return type;
+    }
+
+    /**
+     * Method towPlayerMode selects randomly and creates a type of game from the following list(Thermometer, StopTheTimer
+     * RightAnswer, Bet, QuickAnswer).
+     * @return Type
      */
     public Type towPlayerMode() {
 
@@ -39,18 +60,5 @@ public class Round {
 
     }
 
-    public Type onePlayerMode() {
-        Type type ;
-        int r = random.nextInt(3);
 
-        if (r == 1) {
-            type = new RightAnswer();
-        } else if (r == 2) {
-            type = new Bet();
-        } else {
-            type = new StopTheTimer();
-        }
-
-        return type;
-    }
 }

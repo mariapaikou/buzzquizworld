@@ -5,19 +5,14 @@
  * else it is subtracted.
  */
 public class Bet extends Type {
-    /**
-     *
-     */
+
     public Bet(){
         super();
-
     }
 
-
-
     /**
-     * Function changePoints, adds or removes the bet points from the player's score depending on whether he has answered
-     * the question correctly or not. This can be determined by checking the status variable.
+     * Method changePoints, adds or removes the bet points from the player's score depending on whether he has answered
+     * the question correctly or not. This can be determined by checking their status.
      */
     @Override
     public void changePoints(){
@@ -33,20 +28,17 @@ public class Bet extends Type {
     }
 
     /**
-     *
-     * @return
+     * @return the name of the class in the form of a String.
      */
     public String getName(){
         return "Bet";
     }
 
     /**
-     *
-     * @return
+     * @return a String with a brief explanation of this type of round.
      */
     public String getExplanation(){
-        String explanation = "The question category appears first. The player can bet 250, 500, 750 and 1000 points. Then the question appears and if he answers correctly he gains the points he bet, otherwise he loses them.";
-        return explanation;
+        return "The question category appears first. The player can bet 250, 500, 750 and 1000 points. Then the question appears and if he answers correctly he gains the points he bet, otherwise he loses them.";
     }
 
 }

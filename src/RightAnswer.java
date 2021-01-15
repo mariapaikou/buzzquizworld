@@ -1,30 +1,19 @@
 /**
- * This class extends Type and  adds 1000 points to every player that answers correctly.
+ * This class extends Type and adds 1000 points to every player that answers correctly.
  */
 
 public class RightAnswer extends Type{
 
     int points;
+
     public RightAnswer(){
         super();
         points = 1000;
     }
 
-/*
-    public  RightAnswer(ArrayList<Player> players){
-        super(players);
-        points = 1000;
-    }
-     public void setPoints(int points){
-
-        points = 1000;
-    }
-
- */
-
     /**
-     * Function changePoints checks for winners in the current round and increases their points by 1000 by
-     * checking if their status is true.
+     * Function changePoints checks for winners after each question and increases their points by 1000 by checking
+     * if their status is true.
      */
     @Override
     public void changePoints(){
@@ -34,18 +23,21 @@ public class RightAnswer extends Type{
             if(a.getStatus()){
                 a.increaseScoreBy(points);
             }
-
         }
-
     }
 
+    /**
+     * @return the name of the class in the form of a String.
+     */
     public String getName(){
         return "RightAnswer";
     }
 
+    /**
+     * @return a String with a brief explanation of this type of round.
+     */
     public String getExplanation(){
-        String explanation = "Each player who answers correctly earns 1000 points.";
-        return explanation;
+        return "Each player who answers correctly earns 1000 points.";
     }
 
 }

@@ -7,12 +7,17 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-
 /**
  * UserInteraction class represent the interaction with the user, accepts all the inputs to manage the actions the program has to do
  * and implements the GUI.
+ * @author Theodora-Sofia Tsochataridou
+ * @author Maria Paikou
+ * @version 1.0
+ * @since 05 - December - 2020
+ *
  */
 public class UserInteraction  {
+
     private final JFrame frame;
     private Questions question;
     private final Game game;
@@ -31,15 +36,15 @@ public class UserInteraction  {
     private JPanel betPointsPanel, betPointsPanel2, bet250, bet500, bet750, bet1000;
     private JPanel centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
     private JPanel showStatusPanel1, showStatusPanel2, showScoreTextPanel, showScorePanel1, showScorePanel2, ROkayPanel, QOkayPanel;
-    private JPanel correctAnswerTextPanel, correctAnswerPanel;
+    private JPanel correctAnswerTextPanel, correctAnswerPanel, playerFinalScoreTextPanel, playerFinalScorePanel;
+    private JPanel AndTheWinnerIsPanel, winnerPanel, FinalScoresPanel, finalLeftScorePanel, finalRightScorePanel;
+    private JPanel highScoresButtonPanel, totalWinsButtonPanel, goButtonPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
-    private JPanel highScoresButtonPanel, totalWinsButtonPanel, goButtonPanel;
     private JTextField nickname;
     private Timer timer1, timer2,timer3,timer4,timer5;
     private long startTime , endTime1, endTime2;
-    private JPanel AndTheWinnerIsPanel, winnerPanel, FinalScoresPanel, finalLeftScorePanel, finalRightScorePanel, playerFinalScoreTextPanel, playerFinalScorePanel;
-    private int defaultNumQuestions;
+        private int defaultNumQuestions;
 
     public UserInteraction(){
         answer1 = null;

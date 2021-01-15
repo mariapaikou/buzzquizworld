@@ -1,16 +1,28 @@
 import java.io.*;
 import java.util.ArrayList;
 
-
+/**
+ * ReadQuestionsFile class reads a file that contains the questions data (category, question , the four answers, the
+ * correct answer, and the image name) and stores this information inside a new Question object.
+ */
 public class ReadQuestionsFile {
     private final ArrayList<Questions> questions;
 
-
+    /**
+     * Constructor
+     */
     public ReadQuestionsFile(){
         questions = new ArrayList<>();
 
     }
 
+    /**
+     * Method loadQuestions accepts a string that represents the file name and reads the data that file has. At the same
+     * time stores this data inside new Questions objects and returns an ArrayList that contains all the questions
+     * red from file
+     * @param file String
+     * @return ArrayList<Questions>
+     */
     public ArrayList<Questions> loadQuestions(String file){
 
         try(BufferedReader br = new BufferedReader(new FileReader(file))){

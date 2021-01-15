@@ -133,14 +133,14 @@ public class Game {
         if(type  instanceof StopTheTimer){
             for (int i = 0; i < playerList.size(); i++) {
                 long timeLeft = startTime+10000 - clickTimes[i] ;
-                playerList.get(i).setClickTime(timeLeft);
+                playerList.get(i).getWallet().setClickTime(timeLeft);
             }
 
         }
         if (playerList.size() > 1) {
             if (type instanceof QuickAnswer || type instanceof Thermometer) {
                 for (int i = 0; i < playerList.size(); i++) {
-                    playerList.get(i).setClickTime(clickTimes[i] - startTime );
+                    playerList.get(i).getWallet().setClickTime(clickTimes[i] - startTime );
                 }
             }
         }
@@ -163,7 +163,7 @@ public class Game {
         for (Player player: playerList){
             player.setStatus(false);
             if(type instanceof Bet){
-                player.defaultifyBet();
+                player.getWallet().defaultifyBet();
             }
         }
     }

@@ -29,8 +29,8 @@ class StopTheTimerTest {
         players.add(player1);
         players.add(player2);
 
-        player1.setClickTime(1000);
-        player2.setClickTime(500);
+        player1.getWallet().setClickTime(1000);
+        player2.getWallet().setClickTime(500);
 
 
         stopTheTimer.setPlayersList(players);
@@ -66,8 +66,8 @@ class StopTheTimerTest {
         players.add(player1);
         players.add(player2);
 
-        player1.setClickTime(3000);
-        player2.setClickTime(1000);
+        player1.getWallet().setClickTime(3000);
+        player2.getWallet().setClickTime(1000);
 
         stopTheTimer.setPlayersList(players);
         stopTheTimer.changePoints();

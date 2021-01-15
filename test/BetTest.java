@@ -29,8 +29,8 @@ class BetTest {
         player1.setStatus(true);
         player2.setStatus(true);
 
-        player1.setBet(points);
-        player2.setBet(points);
+        player1.getWallet().setBet(points);
+        player2.getWallet().setBet(points);
 
         bet.changePoints();
         assertEquals(points,player1.getScore());
@@ -55,8 +55,8 @@ class BetTest {
     void changePoints2(){
 
         int points = 1000;
-        player1.setBet(points);
-        player2.setBet(points);
+        player1.getWallet().setBet(points);
+        player2.getWallet().setBet(points);
 
         player1.setStatus(false);
         player2.setStatus(false);
@@ -78,8 +78,8 @@ class BetTest {
         player1.increaseScoreBy(1000);
         player2.increaseScoreBy(500);
 
-        player1.setBet(points1);
-        player2.setBet(points2);
+        player1.getWallet().setBet(points1);
+        player2.getWallet().setBet(points2);
 
         player1.setStatus(true);
         player2.setStatus(false);

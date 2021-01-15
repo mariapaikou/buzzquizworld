@@ -32,8 +32,8 @@ class ThermometerTest {
         thermometer.setPlayersList(array);
         thermometer.changePoints();
 
-        assertEquals(1,player1.getStreak());
-        assertEquals(1,player2.getStreak());
+        assertEquals(1,player1.getWallet().getStreak());
+        assertEquals(1,player2.getWallet().getStreak());
 
         assertEquals(0,player1.getScore());
         assertEquals(0,player2.getScore());
@@ -43,15 +43,15 @@ class ThermometerTest {
             thermometer.changePoints();
         }
 
-        assertEquals(4,player1.getStreak());
-        assertEquals(4,player2.getStreak());
+        assertEquals(4,player1.getWallet().getStreak());
+        assertEquals(4,player2.getWallet().getStreak());
 
-        player1.setClickTime(90);
-        player2.setClickTime(100);
+        player1.getWallet().setClickTime(90);
+        player2.getWallet().setClickTime(100);
         thermometer.changePoints();
 
-        assertEquals(0,player1.getStreak());
-        assertEquals(0,player2.getStreak());
+        assertEquals(0,player1.getWallet().getStreak());
+        assertEquals(0,player2.getWallet().getStreak());
 
         assertEquals(5000,player1.getScore());
         assertEquals(0,player2.getScore());
@@ -61,8 +61,8 @@ class ThermometerTest {
     void changePoints2(){
 
         thermometer.setPlayersList(array);
-        player1.setClickTime(500);
-        player2.setClickTime(10);
+        player1.getWallet().setClickTime(500);
+        player2.getWallet().setClickTime(10);
         player1.setStatus(true);
         player2.setStatus(true);
 
@@ -70,12 +70,12 @@ class ThermometerTest {
             thermometer.changePoints();
 
         }
-        assertEquals(4,player1.getStreak());
+        assertEquals(4,player1.getWallet().getStreak());
 
         player2.setStatus(false);
         thermometer.changePoints();
 
-        assertEquals(0,player1.getStreak());
+        assertEquals(0,player1.getWallet().getStreak());
 
         assertEquals(5000,player1.getScore());
         assertEquals(0,player2.getScore());
@@ -84,7 +84,7 @@ class ThermometerTest {
 
     @Test
     void defaultifyStreaks(){
-        player1.increaseStreak();
+        player1.getWallet().increaseStreak();
 
         player1.setStatus(true);
         player2.setStatus(true);
@@ -93,15 +93,15 @@ class ThermometerTest {
         thermometer.setPlayersList(array);
         thermometer.changePoints();
 
-        assertEquals(2,player1.getStreak());
-        assertEquals(1,player2.getStreak());
+        assertEquals(2,player1.getWallet().getStreak());
+        assertEquals(1,player2.getWallet().getStreak());
 
-        player1.increaseStreak();
-        player1.increaseStreak();
+        player1.getWallet().increaseStreak();
+        player1.getWallet().increaseStreak();
 
         thermometer.changePoints();
-        assertEquals(0,player1.getStreak());
-        assertEquals(0,player2.getStreak());
+        assertEquals(0,player1.getWallet().getStreak());
+        assertEquals(0,player2.getWallet().getStreak());
 
 
 

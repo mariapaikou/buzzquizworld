@@ -19,9 +19,9 @@ public class Bet extends Type {
 
         for(Player player : players){
             if(player.getStatus()){
-                player.increaseScoreBy(player.getBet());
+                player.increaseScoreBy(player.getWallet().getBet());
             }else if( !player.getStatus() ) {
-                player.increaseScoreBy(-player.getBet());
+                player.increaseScoreBy(-player.getWallet().getBet());
             }
         }
 

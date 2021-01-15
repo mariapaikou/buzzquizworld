@@ -792,7 +792,7 @@ public class UserInteraction  {
         bet250Button.setSize(100, 100);
         bet250Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet250Button.addActionListener(e -> {
-            player.setBet(250);
+            player.getWallet().setBet(250);
             if(players.size() == 2){
                 betPoints2();
             }else{
@@ -813,7 +813,7 @@ public class UserInteraction  {
         bet500Button.setSize(100, 100);
         bet500Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet500Button.addActionListener(e -> {
-            player.setBet(500);
+            player.getWallet().setBet(500);
             if(players.size() == 2){
                 betPoints2();
             }else{
@@ -834,7 +834,7 @@ public class UserInteraction  {
         bet750Button.setSize(100, 100);
         bet750Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet750Button.addActionListener(e -> {
-            player.setBet(750);
+            player.getWallet().setBet(750);
             if(players.size() == 2){
                 betPoints2();
             }else{
@@ -855,7 +855,7 @@ public class UserInteraction  {
         bet1000Button.setSize(100, 100);
         bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet1000Button.addActionListener(e -> {
-            player.setBet(1000);
+            player.getWallet().setBet(1000);
             if(players.size() == 2){
                 betPoints2();
             }else{
@@ -912,7 +912,7 @@ public class UserInteraction  {
         bet250Button.setSize(100, 100);
         bet250Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet250Button.addActionListener(e -> {
-            players.get(1).setBet(250);
+            players.get(1).getWallet().setBet(250);
             betPointsPanel2.setVisible(false);
             bet250.setVisible(false);
             bet500.setVisible(false);
@@ -929,7 +929,7 @@ public class UserInteraction  {
         bet500Button.setSize(100, 100);
         bet500Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet500Button.addActionListener(e -> {
-            players.get(1).setBet(500);
+            players.get(1).getWallet().setBet(500);
             betPointsPanel2.setVisible(false);
             bet250.setVisible(false);
             bet500.setVisible(false);
@@ -946,7 +946,7 @@ public class UserInteraction  {
         bet750Button.setSize(100, 100);
         bet750Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet750Button.addActionListener(e -> {
-            players.get(1).setBet(750);
+            players.get(1).getWallet().setBet(750);
             betPointsPanel2.setVisible(false);
             bet250.setVisible(false);
             bet500.setVisible(false);
@@ -963,7 +963,7 @@ public class UserInteraction  {
         bet1000Button.setSize(100, 100);
         bet1000Button.setFont(new Font("Carlito", Font.PLAIN, 40));
         bet1000Button.addActionListener(e -> {
-            players.get(1).setBet(1000);
+            players.get(1).getWallet().setBet(1000);
             betPointsPanel2.setVisible(false);
             bet250.setVisible(false);
             bet500.setVisible(false);
@@ -1301,8 +1301,8 @@ public class UserInteraction  {
 
         if(type instanceof Thermometer){
             if(!((Thermometer) type).getSomeoneWon()) {
-                score1 = players.get(0).getNickname() + "'s streak: " + players.get(0).getStreak();
-                score2 = players.get(1).getNickname() + "'s streak: " + players.get(1).getStreak();
+                score1 = players.get(0).getNickname() + "'s streak: " + players.get(0).getWallet().getStreak();
+                score2 = players.get(1).getNickname() + "'s streak: " + players.get(1).getWallet().getStreak();
             }
         }
 

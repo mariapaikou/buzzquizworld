@@ -128,31 +128,31 @@ class GameTest{
         times[0] = 9000;
         times[1] = 7000;
         game.setTime(times,0,rightAnswer, array);
-        assertEquals(0,player1.getClickTime());
-        assertEquals(0,player2.getClickTime());
+        assertEquals(0,player1.getWallet().getClickTime());
+        assertEquals(0,player2.getWallet().getClickTime());
 
         game.setTime(times, 0, bet, array);
-        assertEquals(0, player1.getClickTime());
-        assertEquals(0,player2.getClickTime());
+        assertEquals(0, player1.getWallet().getClickTime());
+        assertEquals(0,player2.getWallet().getClickTime());
 
         game.setTime(times,0,stopTheTimer, array);
-        assertEquals(1000, player1.getClickTime());
-        assertEquals(3000,player2.getClickTime());
+        assertEquals(1000, player1.getWallet().getClickTime());
+        assertEquals(3000,player2.getWallet().getClickTime());
 
         game.setTime(times,0,thermometer, array);
-        assertEquals(9000, player1.getClickTime());
-        assertEquals(7000,player2.getClickTime());
+        assertEquals(9000, player1.getWallet().getClickTime());
+        assertEquals(7000,player2.getWallet().getClickTime());
 
         game.setTime(times,0,quickAnswer, array);
-        assertEquals(9000, player1.getClickTime());
-        assertEquals(7000,player2.getClickTime());
+        assertEquals(9000, player1.getWallet().getClickTime());
+        assertEquals(7000,player2.getWallet().getClickTime());
     }
 
     @Test
     void changePoints1(){
         int score = player1.getScore();
         player1.setStatus(true);
-        player1.setBet(500);
+        player1.getWallet().setBet(500);
         game.changePoints(bet);
         assertTrue(score != player1.getScore());
     }
@@ -169,7 +169,7 @@ class GameTest{
     void changePoints3(){
         int score = player1.getScore();
         player1.setStatus(true);
-        player1.setClickTime(90);
+        player1.getWallet().setClickTime(90);
         game.changePoints(quickAnswer);
         assertTrue(score != player1.getScore());
     }
@@ -178,7 +178,7 @@ class GameTest{
     void changePoints4(){
         int score = player1.getScore();
         player1.setStatus(true);
-        player1.setClickTime(650);
+        player1.getWallet().setClickTime(650);
         game.changePoints(stopTheTimer);
         assertTrue(score != player1.getScore());
     }
@@ -188,7 +188,7 @@ class GameTest{
         int score = player1.getScore();
         player1.setStatus(true);
         for(int i=0; i<4; i++){
-            player1.increaseStreak();
+            player1.getWallet().increaseStreak();
         }
         game.changePoints(thermometer);
         assertTrue(score != player1.getScore());
@@ -198,12 +198,12 @@ class GameTest{
     void defaultifyPlayers(){
         player1.setStatus(true);
         player2.setStatus(true);
-        player2.setBet(500);
+        player2.getWallet().setBet(500);
 
         game.defaultifyPlayers(array,bet);
         assertFalse(player1.getStatus());
         assertFalse(player2.getStatus());
-        assertEquals(0,player2.getBet());
+        assertEquals(0,player2.getWallet().getBet());
     }
 
     @Test

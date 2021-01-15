@@ -27,7 +27,7 @@ public class QuickAnswer extends Type {
 
         int min = 999999999;
         for(int i = 0 ; i < correctMan.size(); i++){
-            if(correctMan.get(i).getClickTime() < min){
+            if(correctMan.get(i).getWallet().getClickTime() < min){
                 min = i;
             }
         }
@@ -43,7 +43,7 @@ public class QuickAnswer extends Type {
      */
     private void defaultifyClickTime(){
         for(Player player : players){
-            player.setClickTime(0);
+            player.getWallet().setClickTime(0);
         }
     }
 

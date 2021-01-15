@@ -19,7 +19,7 @@ public class StopTheTimer extends Type {
 
             if (player.getStatus()) {
 
-                long timeLeft = player.getClickTime();
+                long timeLeft = player.getWallet().getClickTime();
                 if (timeLeft != -1) {
                     player.increaseScoreBy((int) ( timeLeft * 0.2));
                 }

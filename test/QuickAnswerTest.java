@@ -20,8 +20,8 @@ class QuickAnswerTest {
         player1.setStatus(true);
         player2.setStatus(true);
 
-        player1.setClickTime(500);
-        player2.setClickTime(1000);
+        player1.getWallet().setClickTime(500);
+        player2.getWallet().setClickTime(1000);
 
         array.add(player1);
         array.add(player2);
@@ -38,8 +38,8 @@ class QuickAnswerTest {
         player1.setStatus(false);
         player2.setStatus(true);
 
-        player1.setClickTime(500);
-        player2.setClickTime(1000);
+        player1.getWallet().setClickTime(500);
+        player2.getWallet().setClickTime(1000);
 
         array.add(player1);
         array.add(player2);
@@ -56,8 +56,8 @@ class QuickAnswerTest {
         player1.setStatus(false);
         player2.setStatus(false);
 
-        player1.setClickTime(500);
-        player2.setClickTime(500);
+        player1.getWallet().setClickTime(500);
+        player2.getWallet().setClickTime(500);
 
         array.add(player1);
         array.add(player2);
@@ -74,8 +74,8 @@ class QuickAnswerTest {
         player1.setStatus(true);
         player2.setStatus(true);
 
-        player1.setClickTime(500);
-        player2.setClickTime(501);
+        player1.getWallet().setClickTime(500);
+        player2.getWallet().setClickTime(501);
 
         array.add(player1);
         array.add(player2);

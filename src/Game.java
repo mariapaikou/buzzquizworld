@@ -7,12 +7,11 @@ import java.util.Collections;
 
 public class Game {
 
-    private ArrayList<Questions> allQuestions;
-    private static int howManyRounds = 1;
-    private static int numberOfQuestions = 2;
-    private Round round;
-    private ReadQuestionsFile readQuestionsFile;
-    private HighScore scores;
+    private final ArrayList<Questions> allQuestions;
+    private final static int howManyRounds = 1;
+    private final static int numberOfQuestions = 2;
+    private final Round round;
+    private final HighScore scores;
     private int questionPosition = 0;
 
     /**
@@ -20,7 +19,7 @@ public class Game {
      * contains the questions.
      */
     public Game() {
-        readQuestionsFile = new ReadQuestionsFile();
+        ReadQuestionsFile readQuestionsFile = new ReadQuestionsFile();
         allQuestions = readQuestionsFile.loadQuestions("questions.text.txt");
         scores = new HighScore("highscores.dat", "totalwins.dat");
         round = new Round();
@@ -167,24 +166,9 @@ public class Game {
     }
 
     /**
-     * This method checks
-     * @param playerList
-     * @return
+     * When the game ends, this method gets the list of the players and saves their scores in the file if needed.
+     * @param playerList the list of the players that played the game.
      */
-    public boolean checkStreak(ArrayList<Player> playerList){
-        boolean someoneWon = false;
-        for(Player player : playerList){
-            if(player.getStreak() == 5){
-                someoneWon = true;
-                break;
-            }
-        }
-        return someoneWon;
-    }
-
-
-
-
     public void gameEnd(ArrayList<Player> playerList){
         scores.gameEnded(playerList);
     }

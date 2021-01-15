@@ -1460,27 +1460,29 @@ public class UserInteraction  {
         }
 
         timer3 = new Timer(4000, e -> {
-            System.out.println("inside timer3+ show scores");
+            questions++;
+
+            if(type instanceof Thermometer && !((Thermometer) type).getSomeoneWon()){
+                defaultNumQuestions++;
+            }else if(type instanceof Thermometer && ((Thermometer) type).getSomeoneWon()){
+                ((Thermometer) type).initializeSomeoneWon();
+                defaultNumQuestions = game.getNumberOfQuestions();
+            }
+
             game.defaultifyPlayers(players, type);
+
             showStatusPanel1.setVisible(false);
             showStatusPanel2.setVisible(false);
             showScoreTextPanel.setVisible(false);
             showScorePanel1.setVisible(false);
             showScorePanel2.setVisible(false);
 
-            questions++;
-            if(type instanceof Thermometer && !game.checkStreak(players)){
-                defaultNumQuestions++;
-            }else if(type instanceof Thermometer && game.checkStreak(players)){
-                defaultNumQuestions = game.getNumberOfQuestions();
-            }
             timer3.stop();
             questionNumber();
 
         });
 
         timer3.start();
-
 
     }
 

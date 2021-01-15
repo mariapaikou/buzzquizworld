@@ -135,8 +135,10 @@ public class HighScore {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file2))) {
             highestScores = (LinkedList<Player>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+              e.printStackTrace();
         }
+
+
     }
 
 
@@ -165,8 +167,8 @@ public class HighScore {
      */
     public String [] getHighestScores(){
         String [] list;
-
         if(highestScores.size() == 0){
+            System.out.println("in");
             list = new String[]{"There are no high scores yet!"};
         }else{
             list= new String[highestScores.size()];

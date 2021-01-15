@@ -42,7 +42,7 @@ public class UserInteraction  {
         answer1 = null;
         answer2 = null;
 
-        game = new Game();
+        game = new Game("highscores.dat","totalwins.dat");
 
         //The basic frame
         frame = new JFrame("Buzz Quiz");

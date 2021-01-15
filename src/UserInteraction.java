@@ -978,17 +978,7 @@ public class UserInteraction  {
 
         answers = question.getAnswers();
 
-        String q = question.getQuestion();
-        StringBuilder tooLong;
-        if(q.length() > 60){
-            tooLong = new StringBuilder("<html>");
-            for (String part: q.split("\\* ",2))
-            {
-                tooLong.append(part).append("<br/>");
-            }
-            tooLong.append("<html>");
-            q = tooLong.toString();
-        }
+        String q = game.splitTheQuestion(question);
 
         JLabel labelQ = new JLabel();
         labelQ.setLayout(new FlowLayout(FlowLayout.CENTER));

@@ -107,6 +107,26 @@ public class Game {
     }
 
     /**
+     * This method accepts a question and if it is too long, splits it in two parts and adds a break point.
+     * @param question is the current question.
+     * @return String with the new split.
+     */
+    public String splitTheQuestion(Questions question){
+        StringBuilder tooLong;
+        String q = question.getQuestion();
+        if(q.length() > 60){
+            tooLong = new StringBuilder("<html>");
+            for (String part: q.split("\\* ",2))
+            {
+                tooLong.append(part).append("<br/>");
+            }
+            tooLong.append("<html>");
+            q = tooLong.toString();
+        }
+        return q;
+    }
+
+    /**
      * This method accepts the list of the playing users, the list with their answers and the correct answer for the
      * question that was asked and set the status of the players that answered correctly to true.
      * @param answers an arrayList of Strings which are the answers that were clicked by the players.

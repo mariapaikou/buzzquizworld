@@ -28,10 +28,10 @@ public class UserInteraction  {
     private JPanel readyPanel, letsGoPanel, RoundNumberPanel, QuestionNumberPanel, TypePanel, TypeExplanationPanel;
     private JPanel announcingCategoryPanel, typeOkayPanel, betPointsPanel, betPointsPanel2, bet250, bet500, bet750, bet1000;
     private JPanel centerPanel , bottomPanel, questionPanel, answerPanelA, answerPanelB, answerPanelC, answerPanelD;
-    private JPanel showStatusPanel1, showStatusPanel2, showScoreTextPanel, showScorePanel1, showScorePanel2, ROkayPanel;
-    private JPanel correctAnswerTextPanel, correctAnswerPanel, playerFinalScoreTextPanel, playerFinalScorePanel, QOkayPanel;
+    private JPanel showStatusPanel1, showStatusPanel2, showScoreTextPanel, showScorePanel1, showScorePanel2;
+    private JPanel correctAnswerTextPanel, correctAnswerPanel, playerFinalScoreTextPanel, playerFinalScorePanel;
     private JPanel AndTheWinnerIsPanel, winnerPanel, FinalScoresPanel, finalLeftScorePanel, finalRightScorePanel;
-    private JPanel highScoresButtonPanel, totalWinsButtonPanel, goButtonPanel;
+    private JPanel highScoresButtonPanel, totalWinsButtonPanel;
     private String answer1, answer2;
     private ArrayList<String> answers = new ArrayList<>();
     private JTextField nickname;
@@ -391,7 +391,6 @@ public class UserInteraction  {
         NamePanelText.setVisible(false);
         NamePanel.setVisible(false);
         readyPanel.setVisible(false);
-        //con.remove(readyPanel);
         NamePanelText.removeAll();
         readyPanel.removeAll();
         NamePanel.removeAll();
@@ -588,20 +587,11 @@ public class UserInteraction  {
             roundLabel.setVerticalAlignment(JLabel.CENTER);
             RoundNumberPanel.add(roundLabel);
 
-            //next method panel
-            ROkayPanel = new JPanel();
-            ROkayPanel.setBounds(550, 350, 100, 50);
-            ROkayPanel.setBackground(Color.YELLOW);
-
-            //next method button
-            JButton okayButton = new JButton("Okay");
-            okayButton.setBackground(Color.PINK);
-            okayButton.setForeground(Color.WHITE);
-            okayButton.setSize(50, 50);
-            okayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
-            ROkayPanel.add(okayButton);
-            con.add(ROkayPanel);
-            okayButton.addActionListener(e -> announcingTheType());
+            timer1 = new Timer(1500, e -> {
+                timer1.stop();
+                announcingTheType();
+            });
+            timer1.start();
 
         }else{
             if(numberOfPlayers == 1){
@@ -618,8 +608,6 @@ public class UserInteraction  {
     public void announcingTheType(){
 
         RoundNumberPanel.setVisible(false);
-        ROkayPanel.setVisible(false);
-
         //Get random type from game
         type = game.getRandomType(players);
 
@@ -697,26 +685,15 @@ public class UserInteraction  {
             questionLabel.setVerticalAlignment(JLabel.CENTER);
             QuestionNumberPanel.add(questionLabel);
 
-            //next method panel
-            QOkayPanel = new JPanel();
-            QOkayPanel.setBounds(550, 350, 100, 50);
-            QOkayPanel.setBackground(Color.YELLOW);
-
-            //next method button
-            JButton okayButton = new JButton("Okay");
-            okayButton.setBackground(Color.PINK);
-            okayButton.setForeground(Color.WHITE);
-            okayButton.setSize(50, 50);
-            okayButton.setFont(new Font("Carlito", Font.PLAIN, 30));
-            QOkayPanel.add(okayButton);
-            con.add(QOkayPanel);
-            okayButton.addActionListener(e -> {
+            timer1 = new Timer(1500, e -> {
+                timer1.stop();
                 QuestionNumberPanel.setVisible(false);
-                QOkayPanel.setVisible(false);
-                con.remove(QOkayPanel);
                 question = game.getNewQuestion();
                 announcingCategory();
+
             });
+            timer1.start();
+
         }else{
             rounds++;
             questions = 1;
@@ -729,7 +706,6 @@ public class UserInteraction  {
      */
     public void announcingCategory(){
         QuestionNumberPanel.setVisible(false);
-        QOkayPanel.setVisible(false);
 
         //New panel
         announcingCategoryPanel = new JPanel();
@@ -747,24 +723,15 @@ public class UserInteraction  {
         category.setVerticalAlignment(JLabel.CENTER);
         announcingCategoryPanel.add(category);
 
-        JButton goButton = new JButton("GO!");
-        goButton.setBackground(Color.PINK);
-        goButton.setForeground(Color.WHITE);
-        goButton.setSize(100, 100);
-        goButton.setFont(new Font("Carlito", Font.PLAIN, 30));
-        goButton.addActionListener(e -> {
+        timer1 = new Timer(1500,e -> {
+            timer1.stop();
             if(type instanceof Bet){
                 betPoints();
             }else {
                 askTheQuestion();
             }
         });
-        goButtonPanel = new JPanel();
-        goButtonPanel.setBounds(350,300,100,100);
-        goButtonPanel.setBackground(Color.BLACK);
-        goButtonPanel.add(goButton);
-
-        con.add(goButtonPanel);
+        timer1.start();
     }
 
     /**
@@ -774,7 +741,6 @@ public class UserInteraction  {
     public void betPoints() {
         //turn off previous panels
         announcingCategoryPanel.setVisible(false);
-        goButtonPanel.setVisible(false);
 
         Player player = players.get(0);
 
@@ -1013,8 +979,6 @@ public class UserInteraction  {
      */
     public void askTheQuestion(){
         announcingCategoryPanel.setVisible(false);
-        goButtonPanel.setVisible(false);
-
         String questionImageName= question.getImageName();
 
         centerPanel = new JPanel();
@@ -1437,7 +1401,6 @@ public class UserInteraction  {
      */
     public void finalScore(){
         RoundNumberPanel.setVisible(false);
-        ROkayPanel.setVisible(false);
 
         playerFinalScoreTextPanel = new JPanel();
         playerFinalScoreTextPanel.setBounds(50, 50, 700, 200);
@@ -1478,8 +1441,6 @@ public class UserInteraction  {
      */
     public void winner(){
         RoundNumberPanel.setVisible(false);
-        ROkayPanel.setVisible(false);
-
         String TheWinner;
 
         if(players.get(0).getScore() > players.get(1).getScore()){
